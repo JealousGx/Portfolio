@@ -1,0 +1,56 @@
+#jealous {
+color: lightblue;
+}
+body {
+font-family: sans-serif;
+color #777777
+line-height: 26px;
+}
+.left-side {
+float: left;
+width: 50%;
+}
+.right-side {
+float: right;
+width: 50%;
+}
+.image {
+width: 50%;
+padding-left: 25%;
+height: 300px;
+}
+.Gx {
+color: steelblue;
+background-color: lightblue;
+padding: 13px 42px 13px 42px;
+border-radius: 20px;
+text-decoration: none;
+}
+h1 {
+font-size: 2.5em;
+}
+h3 {
+font-size: 1.5em;
+}
+.sec {
+padding-left: 5%;
+display: inline-block;
+}
+.image2 {
+width: 50%;
+padding-right: 50%;
+height: 300px;
+}
+.xp {
+padding: 30px;
+margin: 30px;
+background-color: rgb(238, 251, 255);
+border-radius: 20px;
+}
+.xp-item {
+padding: 10px;
+border-left: 1px solid rgba(137, 130, 247, .2);
+}
+footer {
+font-size: 12px;
+}
