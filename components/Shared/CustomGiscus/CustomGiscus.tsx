@@ -8,10 +8,10 @@ const CustomGiscus = ({ term }: CustomGiscusProps) => {
   return (
     <Giscus
       id="comments"
-      repo="AnishDe12020/portfolio"
-      repoId="R_kgDOGfn4eQ"
+      repo="ealousGx/Portfolio"
+      repoId="MDEwOlJlcG9zaXRvcnkyOTE5MTkzOTc="
       category="Comments"
-      categoryId="DIC_kwDOGfn4ec4CO-cF"
+      categoryId="DIC_kwDOEWZWJc4CQmb0"
       mapping="specific"
       term={term}
       reactionsEnabled="1"
