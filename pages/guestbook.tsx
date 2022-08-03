@@ -6,7 +6,7 @@ const GuestBookPage: NextPage = () => {
   return (
     <>
       <NextSeo
-        title="Guestbook | Anish De"
+        title="Guestbook | Matt"
         description="Leave messages on my portfolio site's guestbook :)"
       />
       <h1 className="text-3xl font-bold">GuestBook</h1>
@@ -14,10 +14,10 @@ const GuestBookPage: NextPage = () => {
       <div className="mt-16">
         <Giscus
           id="comments"
-          repo="AnishDe12020/portfolio"
-          repoId="R_kgDOGfn4eQ"
+          repo="JealousGx/Portfolio"
+          repoId="MDEwOlJlcG9zaXRvcnkyOTE5MTkzOTc="
           category="Comments"
-          categoryId="DIC_kwDOGfn4ec4CO-cF"
+          categoryId="DIC_kwDOEWZWJc4CQmb0"
           mapping="specific"
           term="GuestBook"
           reactionsEnabled="1"

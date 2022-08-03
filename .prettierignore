@@ -7,4 +7,4 @@ static
 README.md
 .vercel
 
-data/**/*.json
+# data/**/*.json

@@ -26,11 +26,11 @@ const SkillPage: NextPage<ProjectPageProps> = ({
   return (
     <>
       <NextSeo
-        title={`${project.name} | Anish De`}
+        title={`${project.name} | Matt`}
         description={project.description}
         openGraph={{
-          url: `https://anishde.dev/projects/${project.slug}`,
-          title: `${project.name} | Anish De`,
+          url: `https://jealousdev.tech/projects/${project.slug}`,
+          title: `${project.name} | Matt`,
           description: project.description,
           images: [
             {
@@ -74,8 +74,8 @@ const SkillPage: NextPage<ProjectPageProps> = ({
           src={project.image.url}
           className="rounded-xl"
           placeholder="blur"
-					blurDataURL={projectImagePreview}
-					alt={project.name}
+          blurDataURL={projectImagePreview}
+          alt={project.name}
         />
       </div>
 
