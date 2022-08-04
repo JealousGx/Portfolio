@@ -101,7 +101,7 @@ const KProvider = ({ children }: KProviderProps): JSX.Element => {
     id: "source-code",
     name: "Source Code",
     keywords: "source code",
-    perform: () => window.open("https://github.com/AnishDe12020/portfolio"),
+    perform: () => window.open("https://github.com/JealousGx/Portfolio"),
     section: "Socials",
     icon: <Code />,
   });
