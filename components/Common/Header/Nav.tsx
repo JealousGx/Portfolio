@@ -52,7 +52,7 @@ const Nav = (): JSX.Element => {
 
   return (
     <>
-      <ul className="hiden list-none space-x-2 md:flex">
+      <ul className="hidden list-none space-x-2 md:flex">
         {navItems.map((item, index) => (
           <NavItem href={item.href} asPath={asPath} key={index}>
             {item.name}
