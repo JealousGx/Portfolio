@@ -6,7 +6,7 @@ import { useMDXComponent } from "next-contentlayer/hooks";
 import MDXComponents from "@/components/Common/MDXComponents";
 import CustomGiscus from "@/components/Shared/CustomGiscus";
 
-import AvatarJPG from "public/static/images/avatar.jpg";
+import AvatarJPG from "public/static/images/avatar.jpeg";
 import { NextSeo } from "next-seo";
 
 interface BlogPostPageProps {
