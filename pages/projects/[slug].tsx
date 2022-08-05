@@ -29,7 +29,7 @@ const SkillPage: NextPage<ProjectPageProps> = ({
         title={`${project.name} | Matt`}
         description={project.description}
         openGraph={{
-          url: `https://jealousdev.tech/projects/${project.slug}`,
+          url: `https://${process.env.NEXT_PUBLIC_WEBAPP_LINK}/projects/${project.slug}`,
           title: `${project.name} | Matt`,
           description: project.description,
           images: [

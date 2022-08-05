@@ -4,16 +4,16 @@ import { X } from "react-feather";
 import {
   NextJSLogo,
   TypescriptLogo,
-  XdoXLogo,
+  OttoLogo,
   ReactLogo,
   FigmaLogo,
   GoLogo,
   TailwindCSSLogo,
-  NotigerLogo,
-  TwNFTLogo,
-  SecliLogo,
+  ExpenseTrackerLogo,
+  PhoneStoreLogo,
+  NewsLogo,
 } from ".";
-import StorliLogo from "./Storli";
+import CovidLogo from "./Covid19";
 
 interface IconFactoryProps extends SVGProps<SVGSVGElement> {
   name: string;
@@ -28,8 +28,8 @@ const IconFactory = ({
       return <NextJSLogo {...otherProps} />;
     case "typescript":
       return <TypescriptLogo {...otherProps} />;
-    case "xdox":
-      return <XdoXLogo {...otherProps} />;
+    case "ottoLogo":
+      return <OttoLogo {...otherProps} />;
     case "figma":
       return <FigmaLogo {...otherProps} />;
     case "tailwindcss":
@@ -38,14 +38,14 @@ const IconFactory = ({
       return <GoLogo {...otherProps} />;
     case "react":
       return <ReactLogo {...otherProps} />;
-    case "notiger":
-      return <NotigerLogo {...otherProps} />;
-    case "twnft":
-      return <TwNFTLogo {...otherProps} />;
-    case "storli":
-      return <StorliLogo {...otherProps} />;
-    case "secli":
-      return <SecliLogo {...otherProps} />;
+    case "news":
+      return <NewsLogo {...otherProps} />;
+    case "expenseTracker":
+      return <ExpenseTrackerLogo {...otherProps} />;
+    case "covid19":
+      return <CovidLogo {...otherProps} />;
+    case "phoneStore":
+      return <PhoneStoreLogo {...otherProps} />;
     default:
       return <X />;
   }
