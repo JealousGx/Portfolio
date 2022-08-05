@@ -8,7 +8,7 @@ const CustomGiscus = ({ term }: CustomGiscusProps) => {
   return (
     <Giscus
       id="comments"
-      repo="ealousGx/Portfolio"
+      repo="JealousGx/Portfolio"
       repoId="MDEwOlJlcG9zaXRvcnkyOTE5MTkzOTc="
       category="Comments"
       categoryId="DIC_kwDOEWZWJc4CQmb0"
