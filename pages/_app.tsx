@@ -72,7 +72,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
           <Component {...pageProps} />
           <CustomToaster />
           {isEnabled && circlesAllowed && (
-            <div className="fixed top-20 left-32 -z-10">
+            <div className="fixed top-20 md:left-32 sm:left-0 sm:right-0 sm:top-10 -z-10">
               <div className="absolute left-8 top-16 -z-10 overflow-visible opacity-20">
                 <div className="circle-1 -z-10 h-[400px] w-[700px] rounded-full bg-red-700 mix-blend-multiply blur-[128px]" />
               </div>
