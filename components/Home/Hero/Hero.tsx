@@ -4,7 +4,7 @@ import AvatarJPG from "public/static/images/avatar.jpeg";
 
 const Hero = (): JSX.Element => {
   return (
-    <div className="my-20 flex flex-col-reverse md:flex-row md:justify-between md:space-y-0">
+    <div className="md:my-16 sm:mb-16 flex flex-col-reverse md:flex-row md:justify-between md:space-y-0">
       <div className="mt-8 flex flex-col justify-center space-y-4 md:mt-0 md:w-2/3">
         <h1 className="will-change-opacity text-5xl font-bold will-change-transform">
           Abdul Mateen Khilji
