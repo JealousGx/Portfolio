@@ -15,8 +15,7 @@ const Hero = (): JSX.Element => {
         </h2>
         <p className="text-md will-change-opacity text-lg text-gray-300 will-change-transform">
           I am a final year student, a frontend web developer, currently working
-          on backend skills to learn full stack web development. I like to play
-          soccer, badminton and video games.
+          on full stack web development. I like to play soccer, badminton and video games.
         </p>
         <Socials className="!mt-12" />
       </div>

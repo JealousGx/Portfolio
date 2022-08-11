@@ -15,3 +15,5 @@ export { default as DevToLogo } from "./DevTo";
 export { default as ExpenseTrackerLogo } from "./ExpenseTracker";
 export { default as CovidLogo } from "./Covid19";
 export { default as PhoneStoreLogo } from "./PhoneStore";
+export { default as SunLogo } from "./Sun";
+export { default as MoonLogo } from "./Moon";

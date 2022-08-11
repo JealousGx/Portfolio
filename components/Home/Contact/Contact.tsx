@@ -6,7 +6,7 @@ const Contact = (): JSX.Element => {
       <h2 className="mb-8 text-3xl font-bold">Contact</h2>
 
       <p className="text-lg font-normal text-gray-100">
-        Looking for project collaboration? Email me at{" "}
+        Looking for collaboration? Email me at{" "}
         <Link
           href={`mailto:${process.env.NEXT_PUBLIC_EMAIL}`}
           className="text-blue-400 hover:!text-blue-300"

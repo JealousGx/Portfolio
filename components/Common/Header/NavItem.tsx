@@ -14,9 +14,9 @@ const NavItem = ({ href, children, asPath }: NavItemProps): JSX.Element => {
       <Link
         href={href}
         className={cx(
-          "hidden rounded-lg px-3 py-1 text-base text-gray-500 transition duration-200 hover:bg-gray-600 hover:bg-opacity-30 md:inline-block",
+          "hidden rounded-lg px-3 py-1 text-base text-gray-600 transition duration-200 hover:bg-gray-600 hover:bg-opacity-30 dark:text-gray-500 md:inline-block",
           asPath.split("/")[1] === href.replace("/", "") &&
-            "bg-gray-600 bg-opacity-30 font-medium !text-accent hover:bg-opacity-40"
+            "bg-gray-600 bg-opacity-30 font-medium text-gray-900 hover:bg-opacity-40 dark:!text-accent"
         )}
         noGradientUnderline
       >
