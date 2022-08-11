@@ -21,7 +21,7 @@ a {
 @tailwind utilities;
 
 body {
-  @apply bg-primary text-accent;
+  @apply bg-white dark:bg-primary dark:text-accent;
 }
 
 ul {

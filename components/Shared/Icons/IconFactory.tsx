@@ -12,6 +12,8 @@ import {
   ExpenseTrackerLogo,
   PhoneStoreLogo,
   NewsLogo,
+  SunLogo,
+  MoonLogo,
 } from ".";
 import CovidLogo from "./Covid19";
 
@@ -46,6 +48,10 @@ const IconFactory = ({
       return <CovidLogo {...otherProps} />;
     case "phoneStore":
       return <PhoneStoreLogo {...otherProps} />;
+    case "dark":
+      return <MoonLogo {...otherProps} />;
+    case "light":
+      return <SunLogo {...otherProps} />;
     default:
       return <X />;
   }

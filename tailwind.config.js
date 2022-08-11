@@ -1,4 +1,5 @@
 module.exports = {
+  darkMode: "class",
   content: [
     "./pages/**/*.{js,ts,jsx,tsx}",
     "./components/**/*.{js,ts,jsx,tsx}",
@@ -56,16 +57,13 @@ module.exports = {
               marginBottom: theme("spacing.4"),
               marginTop: theme("spacing.4"),
             },
-             "--tw-prose-code": theme("colors.red[300]"),
+            "--tw-prose-code": theme("colors.red[300]"),
             "--tw-prose-bold": theme("colors.accent"),
             "--tw-prose-quotes": theme("colors.accent"),
           },
         },
       }),
-      
     },
   },
-  plugins: [
-    require("@tailwindcss/typography"),
-  ],
+  plugins: [require("@tailwindcss/typography")],
 };

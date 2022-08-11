@@ -3,6 +3,8 @@ import { Rotate as Hamburger } from "hamburger-react";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
+import ThemeToggler from "./ThemeToggler";
+
 import MobileNavItem from "./MobileNavItem";
 import NavItem from "./NavItem";
 
@@ -52,15 +54,17 @@ const Nav = (): JSX.Element => {
 
   return (
     <>
-      <ul className="hidden list-none space-x-2 md:flex">
+      <ul className="hidden list-none space-x-2 md:flex md:items-center">
         {navItems.map((item, index) => (
           <NavItem href={item.href} asPath={asPath} key={index}>
             {item.name}
           </NavItem>
         ))}
+        <ThemeToggler />
       </ul>
       <div className="md:hidden">
-        <div className="relative block md:hidden">
+        <div className="relative flex items-center space-x-2 md:hidden">
+          <ThemeToggler />
           <Hamburger
             toggled={isMobileNavOpen}
             toggle={setIsMobileNavOpen}
@@ -71,7 +75,7 @@ const Nav = (): JSX.Element => {
           />
         </div>
         <motion.ul
-          className="absolute left-0 z-50 flex h-screen w-full list-none flex-col space-y-6 bg-primary px-8 pt-8 md:hidden"
+          className="absolute left-10 z-50 flex h-screen w-full list-none flex-col space-y-6 bg-primary px-8 pt-8 md:hidden"
           variants={mobileMenuVariants}
           initial="closed"
           animate={isMobileNavOpen ? "open" : "closed"}

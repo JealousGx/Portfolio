@@ -6,7 +6,7 @@ const Footer = (): JSX.Element => {
     <footer className="mx-auto mb-16 flex max-w-3xl flex-col items-center space-y-4 px-8 text-center">
       <Socials small className="mb-8" />
       <p>
-        Made by{" "}
+        Managed by{" "}
         <Link href="https://github.com/JealousGx">JealousGx | Matt</Link>
       </p>
     </footer>

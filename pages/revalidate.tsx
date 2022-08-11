@@ -46,7 +46,7 @@ const Revalidate: NextPage = () => {
       password,
     });
     if (res.status === 200 && res.data.message === "Authorized") {
-      localStorage.setItem("password", password);
+      localStorage.setItem("password", process.env.ADMIN_PASSWORD_HASH);
       toast.success("Authorized");
       setAuthorized(true);
     } else {

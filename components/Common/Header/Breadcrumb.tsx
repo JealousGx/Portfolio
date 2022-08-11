@@ -38,7 +38,7 @@ const Breadcrumb = (): JSX.Element => {
   return (
     <ol aria-label="breadcrumb" className="flex space-x-2">
       <BreadcrumbItem href="/" isRoot>
-        ~
+        <span className="text-gray-800 dark:text-gray-200">~</span>
       </BreadcrumbItem>
       {breadcrumbs &&
         breadcrumbs.map(({ href, label, isCurrent }) => (
