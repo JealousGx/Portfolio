@@ -45,7 +45,7 @@ const SkillPage: NextPage<ProjectPageProps> = ({
       <div className="mt-8 flex space-x-8">
         <IconFactory
           name={project.iconName}
-          className="h-16 w-16 rounded-xl bg-gray-400 p-2 shadow-md dark:bg-tertiary"
+          className="h-12 w-16 rounded-xl bg-gray-400 p-2 shadow-md dark:bg-tertiary md:h-16"
         />
         <div className="flex flex-col space-y-2">
           <h1 className="text-2xl font-bold">{project.name}</h1>
@@ -59,7 +59,7 @@ const SkillPage: NextPage<ProjectPageProps> = ({
         {project.link && (
           <Link
             href={project.link}
-            className="text-gray-600 dark:text-gray-300"
+            className="text-gray-500 dark:text-gray-300"
             noHighlight
           >
             {project.link}
@@ -69,7 +69,7 @@ const SkillPage: NextPage<ProjectPageProps> = ({
         {project.githubLink && (
           <Link
             href={project.githubLink}
-            className="text-gray-600 dark:text-gray-300"
+            className="text-gray-500 dark:text-gray-300"
             icon={<GitHubLogo />}
             noHighlight
           >

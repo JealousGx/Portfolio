@@ -33,9 +33,9 @@ const MobileNavItem = ({
 }: MobileNavItemProps): JSX.Element => (
   <motion.li
     className={cx(
-      "border-b-[1px] border-b-tertiary py-1 pl-2 text-gray-400 transition duration-200 hover:text-gray-500",
+      "border-b-[1px] border-b-gray-300 py-1 pl-2 text-gray-400 transition duration-200 hover:text-gray-500 dark:border-b-tertiary",
       asPath.split("/")[1] === href.replace("/", "") &&
-        "font-medium !text-accent"
+        "font-medium text-gray-700 dark:!text-accent"
     )}
     variants={mobileNavItemVariants}
   >

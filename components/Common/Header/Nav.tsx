@@ -55,16 +55,18 @@ const Nav = (): JSX.Element => {
 
   return (
     <>
-      <ul className=" hidden list-none space-x-2 md:flex md:items-center">
-        {navItems.map((item, index) => (
-          <NavItem href={item.href} asPath={asPath} key={index}>
-            {item.name}
-          </NavItem>
-        ))}
+      <ul className="hidden w-full list-none space-x-2 md:flex md:items-center md:justify-end xl:justify-between">
+        <div className="flex flex-row space-x-2">
+          {navItems.map((item, index) => (
+            <NavItem href={item.href} asPath={asPath} key={index}>
+              {item.name}
+            </NavItem>
+          ))}
+        </div>
         <ThemeToggler />
       </ul>
-      <div className="md:hidden">
-        <div className="relative flex items-center space-x-2 md:hidden">
+      <div className="w-full md:hidden">
+        <div className="relative float-right flex items-center space-x-2 md:hidden">
           <ThemeToggler />
           <Hamburger
             toggled={isMobileNavOpen}
@@ -76,7 +78,7 @@ const Nav = (): JSX.Element => {
           />
         </div>
         <motion.ul
-          className="fixed left-0 z-50 flex h-screen w-full list-none flex-col space-y-6 bg-white px-8 pt-8 dark:bg-primary md:hidden"
+          className="fixed top-16 left-0 z-50 flex h-screen w-full list-none flex-col space-y-6 bg-white px-8 pt-8 dark:bg-primary md:hidden"
           variants={mobileMenuVariants}
           initial="closed"
           animate={isMobileNavOpen ? "open" : "closed"}
