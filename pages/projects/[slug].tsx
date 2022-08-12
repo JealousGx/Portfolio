@@ -45,29 +45,40 @@ const SkillPage: NextPage<ProjectPageProps> = ({
       <div className="mt-8 flex space-x-8">
         <IconFactory
           name={project.iconName}
-          className="h-16 w-16 rounded-xl bg-tertiary p-2 shadow-md"
+          className="h-16 w-16 rounded-xl bg-gray-400 p-2 shadow-md dark:bg-tertiary"
         />
         <div className="flex flex-col space-y-2">
           <h1 className="text-2xl font-bold">{project.name}</h1>
-          <p className="text-sm text-gray-300">{project.description}</p>
+          <p className="text-sm text-gray-600 dark:text-gray-300">
+            {project.description}
+          </p>
         </div>
       </div>
 
       <div className="mt-6 flex flex-col space-y-2 md:flex-row md:space-y-0 md:space-x-2">
         {project.link && (
-          <Link href={project.link} noHighlight>
+          <Link
+            href={project.link}
+            className="text-gray-600 dark:text-gray-300"
+            noHighlight
+          >
             {project.link}
           </Link>
         )}
 
         {project.githubLink && (
-          <Link href={project.githubLink} icon={<GitHubLogo />} noHighlight>
+          <Link
+            href={project.githubLink}
+            className="text-gray-600 dark:text-gray-300"
+            icon={<GitHubLogo />}
+            noHighlight
+          >
             {getGitHubOwnerAndRepoFromLink(project.githubLink)}
           </Link>
         )}
       </div>
 
-      <div className="mt-16 overflow-hidden rounded-xl border-[1px] border-tertiary p-2">
+      <div className="mt-16 overflow-hidden rounded-xl border-[1px] border-gray-300 p-2 dark:border-tertiary">
         <NextImage
           width={project.image.width}
           height={project.image.height}
@@ -80,10 +91,10 @@ const SkillPage: NextPage<ProjectPageProps> = ({
       </div>
 
       <article>
-        <div className="prose my-12 max-w-full leading-8">
+        <div className="prose my-12 max-w-full leading-8 text-black dark:text-gray-300">
           <ProjectMDX components={{ ...MDXComponents }} />
         </div>
-        <div className="rounded-xl border-[1px] border-tertiary p-8">
+        <div className="rounded-xl border-[1px] border-gray-300 p-8 dark:border-tertiary">
           <CustomGiscus term={`project: ${project.name}`} />
         </div>
       </article>

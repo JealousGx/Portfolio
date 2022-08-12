@@ -25,11 +25,10 @@ const Socials = ({
           >
             {cloneElement(social.icon as ReactElement, {
               className: cx(
-                "rounded-xl shadow-md border-[1px] border-tertiary bg-secondary",
+                "rounded-xl text-black dark:text-white shadow-md border-[1px] border-gray-300 dark:border-tertiary bg-gray-50 dark:bg-secondary",
                 small ? "h-8 w-8 px-1.5 py-1" : "h-10 w-10 px-2 py-1.5"
               ),
               "aria-label": social.name,
-              color: "#fff",
             })}
           </Link>
         </Tooltip>

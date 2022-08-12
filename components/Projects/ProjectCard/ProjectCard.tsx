@@ -31,7 +31,7 @@ const ProjectCard = forwardRef<HTMLDivElement, ProjectProps>(
   ): JSX.Element => {
     return (
       <div
-        className="flex flex-col space-y-8 rounded-lg border-[1px] border-tertiary bg-secondary p-4 md:h-48 md:flex-row md:space-y-0 md:space-x-8"
+        className="flex flex-col space-y-8 rounded-lg border-[1px] border-gray-300 bg-gray-50 p-4 dark:border-tertiary dark:bg-secondary md:h-48 md:flex-row md:space-y-0 md:space-x-8"
         ref={ref}
       >
         <div className="overflow-hidden rounded-lg md:w-72">
@@ -43,7 +43,7 @@ const ProjectCard = forwardRef<HTMLDivElement, ProjectProps>(
                 className="rounded-lg"
                 layout="fill"
                 placeholder="blur"
-								blurDataURL={placeholderImage}
+                blurDataURL={placeholderImage}
               />
             </div>
           </Link>
@@ -56,22 +56,33 @@ const ProjectCard = forwardRef<HTMLDivElement, ProjectProps>(
             >
               <h2 className="text-2xl font-bold">{name}</h2>
             </Link>
-            <p className="text-sm text-gray-300">{description}</p>
+            <p className="text-sm text-gray-600 dark:text-gray-300">
+              {description}
+            </p>
             <div className="flex flex-col space-y-2 md:flex-row md:items-center md:space-x-2 md:space-y-0">
               {link && (
-                <Link href={link} noHighlight>
+                <Link
+                  href={link}
+                  className="text-gray-600 dark:text-gray-300"
+                  noHighlight
+                >
                   {cleanLink(link)}
                 </Link>
               )}
               {githubLink && (
-                <Link href={githubLink} icon={<GitHubLogo />} noHighlight>
+                <Link
+                  href={githubLink}
+                  className="text-gray-600 dark:text-gray-300"
+                  icon={<GitHubLogo />}
+                  noHighlight
+                >
                   {getGitHubOwnerAndRepoFromLink(githubLink)}
                 </Link>
               )}
             </div>
           </div>
-					<Link href={`/projects/${slug}`} className="mt-4" gradientUnderline>
-						<p className="sr-only">Learn more about {name}</p>
+          <Link href={`/projects/${slug}`} className="mt-4" gradientUnderline>
+            <p className="sr-only">Learn more about {name}</p>
             Learn More
           </Link>
         </div>

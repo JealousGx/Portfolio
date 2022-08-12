@@ -42,7 +42,7 @@ const ProjectsPage: NextPage<ProjectsPageProps> = ({
       </div>
       <Link
         href="https://github.com/JealousGx"
-        className="group mt-8 flex flex-row items-center justify-start space-x-2 text-xl font-medium"
+        className="group mt-8 flex flex-row items-center justify-start space-x-2 text-xl font-medium text-black dark:text-gray-300"
         noExternalLinkIcon
       >
         <span>View more on GitHub</span>
