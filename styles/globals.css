@@ -16,6 +16,16 @@ a {
   box-sizing: border-box;
 }
 
+html.light {
+  --normal-gray: #9ca3af;
+  --hover-gray: #6b7280;
+}
+
+html.dark {
+  --normal-gray: #4b515b;
+  --hover-gray: #5c636e;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -31,11 +41,13 @@ ul {
 .circle-1 {
   will-change: transform;
   animation: circle-1-keyframes 13s ease-in-out infinite alternate;
+  -webkit-animation: circle-1-keyframes 13s ease-in-out infinite alternate;
 }
 
 .circle-2 {
   will-change: transform;
   animation: circle-2-keyframes 8s ease-in-out infinite alternate;
+  -webkit-animation: circle-2-keyframes 8s ease-in-out infinite alternate;
 }
 
 .circle-3 {
@@ -56,11 +68,11 @@ ul {
 
 ::-webkit-scrollbar-thumb {
   border-radius: 10px;
-  background: #4b515b;
+  background: var(--normal-gray);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #5c636e;
+  background: var(--hover-gray);
 }
 
 @keyframes circle-1-keyframes {

@@ -68,7 +68,7 @@ const ExternalLink = forwardRef<HTMLAnchorElement, ExternalLinkProps>(
               isGradientUnderline && "gradient-underline",
               isGradientUnderline &&
                 !noHighlight &&
-                "text-blue-400 hover:text-blue-300",
+                "text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300",
               className
             )}
             target="_blank"
