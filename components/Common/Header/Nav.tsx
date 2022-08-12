@@ -48,13 +48,14 @@ const Nav = (): JSX.Element => {
   const { asPath } = useRouter();
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
 
+  /* Closing the mobile nav when the user clicks on a link. */
   useEffect(() => {
     setIsMobileNavOpen(false);
   }, [asPath]);
 
   return (
     <>
-      <ul className="hidden list-none space-x-2 md:flex md:items-center">
+      <ul className=" hidden list-none space-x-2 md:flex md:items-center">
         {navItems.map((item, index) => (
           <NavItem href={item.href} asPath={asPath} key={index}>
             {item.name}
@@ -75,7 +76,7 @@ const Nav = (): JSX.Element => {
           />
         </div>
         <motion.ul
-          className="absolute left-10 z-50 flex h-screen w-full list-none flex-col space-y-6 bg-primary px-8 pt-8 md:hidden"
+          className="fixed left-0 z-50 flex h-screen w-full list-none flex-col space-y-6 bg-white px-8 pt-8 dark:bg-primary md:hidden"
           variants={mobileMenuVariants}
           initial="closed"
           animate={isMobileNavOpen ? "open" : "closed"}
