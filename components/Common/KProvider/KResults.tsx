@@ -25,7 +25,7 @@ const KResults = () => {
               {item.icon && (
                 <div className="mr-4">
                   {cloneElement(item.icon as ReactElement<any>, {
-                    className: "h-4 w-4",
+                    className: "h-4 w-4 text-black dark:text-black",
                   })}
                 </div>
               )}

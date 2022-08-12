@@ -27,7 +27,7 @@ const BreadcrumbItem = ({
         className={cx(
           isCurrent
             ? "bg-gradient-to-br from-[#9ebd13] to-[#008552] bg-clip-text font-bold text-transparent"
-            : "text-gray-300",
+            : "text-gray-400 dark:text-gray-300",
           "transition duration-200 hover:opacity-80"
         )}
         aria-current={isCurrent ? "page" : "false"}

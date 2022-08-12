@@ -14,6 +14,7 @@ module.exports = {
       },
       boxShadow: {
         commandButton: "0 0 0 3px hsl(0 0% 30%)",
+        lightCommandButton: "0 0 0 3px rgb(156 163 175)",
       },
       fontFamily: {
         web3: ["Syncopate", "sans-serif"],

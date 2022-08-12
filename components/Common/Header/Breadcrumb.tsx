@@ -36,7 +36,10 @@ const Breadcrumb = (): JSX.Element => {
   }, [asPath]);
 
   return (
-    <ol aria-label="breadcrumb" className="flex space-x-2">
+    <ol
+      aria-label="breadcrumb"
+      className="flex space-x-2 md:absolute md:left-4"
+    >
       <BreadcrumbItem href="/" isRoot>
         <span className="text-gray-800 dark:text-gray-200">~</span>
       </BreadcrumbItem>
