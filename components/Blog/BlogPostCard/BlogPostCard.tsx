@@ -23,14 +23,21 @@ const ProjectCard = ({
   excerpt,
 }: BlogPostCardProps): JSX.Element => {
   return (
-    <article className="flex max-w-lg flex-col-reverse rounded-xl border-[1px] border-tertiary bg-secondary py-4 px-6 transition duration-200 hover:border-accent md:hover:scale-[1.02]">
+    <article className="flex max-w-lg flex-col-reverse rounded-xl border-[1px] border-gray-300 bg-gray-50 py-4 px-6 transition duration-200 hover:border-gray-200 dark:border-tertiary dark:bg-secondary dark:hover:border-accent md:hover:scale-[1.02]">
       <Link href={url} noExternalLinkIcon noGradientUnderline>
         <div className="mt-8 flex-col space-y-4">
-          <h2 className="text-lg font-semibold text-gray-100 transition duration-200 hover:opacity-60">
+          <h2 className="text-lg font-semibold text-black transition duration-200 hover:opacity-60 dark:text-gray-100">
             {title}
           </h2>
-          {excerpt && <p style={{ wordBreak: "break-word" }}>{excerpt}</p>}
-          <p className="text-gray-300 transition duration-200 hover:opacity-60">
+          {excerpt && (
+            <p
+              style={{ wordBreak: "break-word" }}
+              className="text-gray-600 dark:text-gray-300"
+            >
+              {excerpt}
+            </p>
+          )}
+          <p className="text-gray-600 transition duration-200 hover:opacity-60 dark:text-gray-300">
             {format(parseISO(date), "PPP")} / {readingTime}
           </p>
         </div>

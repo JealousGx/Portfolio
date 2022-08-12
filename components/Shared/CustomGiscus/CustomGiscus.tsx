@@ -1,10 +1,12 @@
 import Giscus from "@giscus/react";
+import { useTheme } from "next-themes";
 
 interface CustomGiscusProps {
   term: string;
 }
 
 const CustomGiscus = ({ term }: CustomGiscusProps) => {
+  const { theme } = useTheme();
   return (
     <Giscus
       id="comments"
@@ -17,7 +19,7 @@ const CustomGiscus = ({ term }: CustomGiscusProps) => {
       reactionsEnabled="1"
       emitMetadata="0"
       inputPosition="top"
-      theme="dark"
+      theme={theme}
       lang="en"
       loading="lazy"
     />
