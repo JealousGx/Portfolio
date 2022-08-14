@@ -29,7 +29,7 @@
         "editor.fontLigatures": true,
         "editor.tabSize": 2,
         "files.autoSave": "onFocusChange",
-        "terminal.integrated.defaultProfile.linux": "/bin/bash"
+        "terminal.integrated.defaultProfile.linux": "zsh"
       },
       // Add the IDs of extensions you want installed when the container is created.
       "extensions": [
