@@ -8,29 +8,27 @@ interface SnippetsCardProps {
   title: string;
   image: CloudinaryImage;
   date: string;
-  readingTime: string;
 }
 
 const SnippetCard = ({
   slug,
   title,
   image,
-  date,
-  readingTime,
+  date
 }: SnippetsCardProps): JSX.Element => {
   return (
     <article className="flex max-w-lg flex-col-reverse rounded-xl border-[1px] border-gray-300 bg-gray-50 py-4 px-6 transition duration-200 hover:scale-105 hover:border-gray-200 dark:border-tertiary dark:bg-secondary dark:hover:border-accent">
       <div>
-        <Link href={`/blog/${slug}`} className="flex-col space-y-4">
+        <Link href={`/snippets/${slug}`} className="flex-col space-y-4">
           <h2 className="text-lg font-semibold transition duration-200 hover:opacity-60">
             {title}
           </h2>
           <p className="text-gray-600 transition duration-200 hover:opacity-60 dark:text-gray-300">
-            {date} / {readingTime}
+            {date} 
           </p>
         </Link>
       </div>
-      <Link href={`/blog/${slug}`} className="aspect-[16/9]">
+      <Link href={`/snippets/${slug}`} className="aspect-[16/9]">
         <NextImage
           src={image.url}
           height={image.height}

@@ -45,19 +45,17 @@ const SnippetPage: NextPage<SnippetPageProps> = ({ snippet }) => {
           <span aria-hidden>/</span>
           <p>{snippet.date}</p>
         </div>
-        <div className="flex items-center space-x-2">
-          <p>{snippet.wordCount} words</p>
-          <span aria-hidden>/</span>
-          <p>{snippet.readingTime.text}</p>
-        </div>
       </div>
 
       <article>
+      <p className="text-gray-600 dark:text-gray-300">
+            {snippet.description}
+          </p>
         <div className="prose leading-8">
           <ProjectMDX components={{ ...MDXComponents }} />
         </div>
         <div className="my-8 h-1 w-full rounded-full bg-gray-50 dark:bg-secondary" />
-        <div className="rounded-xl border-[1px] border-tertiary p-8">
+        <div className="rounded-xl border-[1px] p-8 dark:border-tertiary">
           <CustomGiscus term={`blog post: ${snippet.title}`} />
         </div>
       </article>

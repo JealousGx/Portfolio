@@ -21,7 +21,6 @@ const SnippetsPage: NextPage<SnippetsPageProps> = ({ snippets }) => {
             image={snippet.image}
             slug={snippet.slug}
             date={snippet.date}
-            readingTime={snippet.readingTime.text}
           />
         ))}
       </div>
