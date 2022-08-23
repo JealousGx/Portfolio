@@ -48,9 +48,9 @@ const SnippetPage: NextPage<SnippetPageProps> = ({ snippet }) => {
       </div>
 
       <article>
-      <p className="text-gray-600 dark:text-gray-300">
-            {snippet.description}
-          </p>
+        <p className="text-gray-600 dark:text-gray-300">
+          {snippet.description}
+        </p>
         <div className="prose leading-8">
           <ProjectMDX components={{ ...MDXComponents }} />
         </div>
