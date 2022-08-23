@@ -18,6 +18,10 @@ class MyDocument extends Document {
         <Head>
           <meta name="msapplication-TileColor" content="#010101" />
           <meta name="theme-color" content="#010101" />
+          <meta
+            name="google-site-verification"
+            content={process.env.NEXT_PUBLIC_GOOGLE_SITE_CONTENT}
+          />
           <link
             rel="apple-touch-icon"
             sizes="57x57"

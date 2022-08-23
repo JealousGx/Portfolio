@@ -3,7 +3,7 @@ import NextImage from "next/image";
 import Link from "@/components/Shared/Link";
 import { CloudinaryImage } from "contentlayer/generated";
 
-interface BlogPostCardProps {
+interface SnippetsCardProps {
   slug: string;
   title: string;
   image: CloudinaryImage;
@@ -11,21 +11,21 @@ interface BlogPostCardProps {
   readingTime: string;
 }
 
-const ProjectCard = ({
+const SnippetCard = ({
   slug,
   title,
   image,
   date,
   readingTime,
-}: BlogPostCardProps): JSX.Element => {
+}: SnippetsCardProps): JSX.Element => {
   return (
-    <article className="flex max-w-lg flex-col-reverse rounded-xl border-[1px] border-tertiary bg-secondary py-4 px-6 transition duration-200 hover:scale-105">
+    <article className="flex max-w-lg flex-col-reverse rounded-xl border-[1px] border-gray-300 bg-gray-50 py-4 px-6 transition duration-200 hover:scale-105 hover:border-gray-200 dark:border-tertiary dark:bg-secondary dark:hover:border-accent">
       <div>
         <Link href={`/blog/${slug}`} className="flex-col space-y-4">
           <h2 className="text-lg font-semibold transition duration-200 hover:opacity-60">
             {title}
           </h2>
-          <p className="text-gray-300 transition duration-200 hover:opacity-60">
+          <p className="text-gray-600 transition duration-200 hover:opacity-60 dark:text-gray-300">
             {date} / {readingTime}
           </p>
         </Link>
@@ -42,4 +42,4 @@ const ProjectCard = ({
   );
 };
 
-export default ProjectCard;
+export default SnippetCard;
