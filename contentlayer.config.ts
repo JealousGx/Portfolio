@@ -31,7 +31,6 @@ export const CloudinaryImage = defineNestedType(() => ({
   },
 }));
 
-
 export const Project = defineDocumentType(() => ({
   name: "Project",
   filePathPattern: "projects/**/*.mdx",
@@ -67,7 +66,6 @@ export const Project = defineDocumentType(() => ({
       description: "Image for the project",
       of: CloudinaryImage,
     },
-
   },
   computedFields: {
     slug: {
@@ -77,29 +75,29 @@ export const Project = defineDocumentType(() => ({
   },
 }));
 
-export const BlogPost = defineDocumentType(() => ({
-  name: "BlogPost",
-  filePathPattern: "blog/**/*.mdx",
+export const Snippet = defineDocumentType(() => ({
+  name: "Snippet",
+  filePathPattern: "snippets/**/*.mdx",
   contentType: "mdx",
   fields: {
     title: {
       type: "string",
-      description: "The title of the blog post",
+      description: "The title of the snippet",
       required: true,
     },
     date: {
       type: "string",
-      description: "The date of the blog post",
+      description: "The date of the snippet",
       required: true,
     },
     cannonicalURL: {
       type: "string",
-      description: "The link to the blog post",
+      description: "The link to the snippet",
       required: false,
     },
     image: {
       type: "nested",
-      description: "Image for the blog post",
+      description: "Image for the snippet",
       of: CloudinaryImage,
     },
   },
@@ -125,7 +123,7 @@ export const BlogPost = defineDocumentType(() => ({
 
 export default makeSource({
   contentDirPath: "data",
-  documentTypes: [Project, BlogPost],
+  documentTypes: [Project, Snippet],
   mdx: {
     rehypePlugins: [
       rehypeSlug,

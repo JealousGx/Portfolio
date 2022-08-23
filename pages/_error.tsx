@@ -22,7 +22,7 @@ function Error({ statusCode }) {
         noExternalLinkIcon
         noGradientUnderline
         href="/"
-        className="my-16 rounded-lg border-[1px] border-tertiary bg-secondary px-4 py-2"
+        className="my-16 rounded-lg border-[1px] border-gray-300 bg-gray-50 px-4 py-2 hover:border-gray-200 dark:border-tertiary dark:bg-secondary dark:hover:border-accent"
       >
         Go Home
       </Link>
