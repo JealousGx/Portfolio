@@ -1,10 +1,10 @@
 import cx from "classnames";
 import {
   AnchorHTMLAttributes,
-  cloneElement,
   forwardRef,
-  ReactElement,
   ReactNode,
+  cloneElement,
+  ReactElement,
 } from "react";
 import { ArrowUpRight } from "react-feather";
 import NextLink from "next/link";
@@ -18,6 +18,9 @@ interface ExternalLinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
   noExternalLinkIcon?: boolean;
   noHighlight?: boolean;
   icon?: ReactNode;
+  height?: string;
+  width?: string;
+  arrowColor?: boolean;
 }
 
 const ExternalLink = forwardRef<HTMLAnchorElement, ExternalLinkProps>(
@@ -31,6 +34,9 @@ const ExternalLink = forwardRef<HTMLAnchorElement, ExternalLinkProps>(
       noExternalLinkIcon,
       noHighlight = false,
       icon,
+      height,
+      width,
+      arrowColor,
       ...otherProps
     }: ExternalLinkProps,
     ref
@@ -43,6 +49,10 @@ const ExternalLink = forwardRef<HTMLAnchorElement, ExternalLinkProps>(
         !noGradientUnderline
       ? true
       : false;
+
+    const arrowBlack =
+      arrowColor &&
+      "text-gray-600 transition duration-200 hover:text-gray-400 dark:text-gray-300 dark:hover:text-gray-500";
 
     return (
       <>
@@ -77,9 +87,20 @@ const ExternalLink = forwardRef<HTMLAnchorElement, ExternalLinkProps>(
             {...otherProps}
           >
             {icon &&
-              cloneElement(icon as ReactElement, { className: "h-4 w-4 mr-1" })}
+              cloneElement(icon as ReactElement, {
+                className:
+                  width && height ? `${width} ${height} mr-1` : "h-4 w-4 mr-1",
+              })}
             {noExternalLinkIcon ? children : <span>{children}</span>}{" "}
-            {!noExternalLinkIcon && <ArrowUpRight className="h-4 w-4" />}
+            {!noExternalLinkIcon && (
+              <ArrowUpRight
+                className={
+                  height && width
+                    ? `${height} ${width} ${arrowBlack}`
+                    : `h-4 w-4 ${arrowBlack}`
+                }
+              />
+            )}
           </a>
         )}
         <style jsx>{`

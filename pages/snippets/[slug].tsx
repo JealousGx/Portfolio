@@ -5,6 +5,8 @@ import { allSnippets, Snippet } from "contentlayer/generated";
 import { useMDXComponent } from "next-contentlayer/hooks";
 import MDXComponents from "@/components/Common/MDXComponents";
 import CustomGiscus from "@/components/Shared/CustomGiscus";
+import Link from "@/components/Shared/Link";
+import { GitHubLogo } from "@/components/Shared/Icons";
 
 import AvatarJPG from "public/static/images/avatar.jpeg";
 import { NextSeo } from "next-seo";
@@ -41,9 +43,26 @@ const SnippetPage: NextPage<SnippetPageProps> = ({ snippet }) => {
               className="rounded-full"
             />
           </div>
-          <p>Matt</p>
+          <p>JealousGx</p>
           <span aria-hidden>/</span>
           <p>{snippet.date}</p>
+        </div>
+        <div className="flex items-center space-x-2">
+          <Link
+            height="8"
+            width="8"
+            href={snippet.sourceCode && snippet.sourceCode}
+            icon={<GitHubLogo color="black" />}
+            noHighlight
+            noExternalLinkIcon
+          />
+          <Link
+            height="8"
+            width="8"
+            arrowColor={true}
+            href={snippet.demo}
+            noHighlight
+          />
         </div>
       </div>
 
@@ -54,9 +73,22 @@ const SnippetPage: NextPage<SnippetPageProps> = ({ snippet }) => {
         <div className="prose leading-8">
           <ProjectMDX components={{ ...MDXComponents }} />
         </div>
+        <div className="flex w-full flex-col flex-wrap whitespace-nowrap">
+          <p className="mb-4 font-bold">Tags:</p>
+          <div>
+            {snippet.tags?.map((tag, index) => (
+              <span
+                key={index}
+                className="my-2 mr-2 cursor-pointer rounded-xl border-[1px] border-gray-300 bg-gray-50 p-2 text-[1rem] font-semibold text-gray-600 transition duration-200 hover:border-gray-200 dark:border-tertiary dark:bg-secondary dark:text-gray-300 dark:hover:border-accent"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+        </div>
         <div className="my-8 h-1 w-full rounded-full bg-gray-50 dark:bg-secondary" />
         <div className="rounded-xl border-[1px] p-8 dark:border-tertiary">
-          <CustomGiscus term={`blog post: ${snippet.title}`} />
+          <CustomGiscus term={`snippet: ${snippet.title}`} />
         </div>
       </article>
     </>
