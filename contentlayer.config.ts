@@ -95,6 +95,22 @@ export const Snippet = defineDocumentType(() => ({
       description: "The description of the snippet",
       required: true,
     },
+    tags: {
+      type: "list",
+      of: { type: "string" },
+      description: "The tags of the snippet",
+      required: true,
+    },
+    sourceCode: {
+      type: "string",
+      description: "The source code of the snippet",
+      required: false,
+    },
+    demo: {
+      type: "string",
+      description: "The live demo of the snippet",
+      required: true,
+    },
     cannonicalURL: {
       type: "string",
       description: "The link to the snippet",

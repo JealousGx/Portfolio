@@ -14,7 +14,7 @@ const SnippetCard = ({
   slug,
   title,
   image,
-  date
+  date,
 }: SnippetsCardProps): JSX.Element => {
   return (
     <article className="flex max-w-lg flex-col-reverse rounded-xl border-[1px] border-gray-300 bg-gray-50 py-4 px-6 transition duration-200 hover:scale-105 hover:border-gray-200 dark:border-tertiary dark:bg-secondary dark:hover:border-accent">
@@ -24,7 +24,7 @@ const SnippetCard = ({
             {title}
           </h2>
           <p className="text-gray-600 transition duration-200 hover:opacity-60 dark:text-gray-300">
-            {date} 
+            {date}
           </p>
         </Link>
       </div>
