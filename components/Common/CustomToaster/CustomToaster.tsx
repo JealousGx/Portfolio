@@ -12,7 +12,7 @@ const CustomToaster = (): JSX.Element => (
         <AnimatePresence>
           {t.visible && (
             <motion.div
-              className="flex rounded-lg bg-tertiary px-6 py-4 shadow-lg"
+              className="flex rounded-lg bg-gray-50 px-6 py-4 shadow-lg dark:bg-tertiary"
               initial={{ scale: 0.6, opacity: 0, y: 50 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.6, opacity: 0, y: 20 }}
