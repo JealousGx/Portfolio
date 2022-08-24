@@ -63,7 +63,7 @@ const ProjectCard = forwardRef<HTMLDivElement, ProjectProps>(
               {link && (
                 <Link
                   href={link}
-                  className="text-gray-600 dark:text-gray-300"
+                  className="text-sm text-gray-600 dark:text-gray-300"
                   noHighlight
                 >
                   {cleanLink(link)}
@@ -72,7 +72,7 @@ const ProjectCard = forwardRef<HTMLDivElement, ProjectProps>(
               {githubLink && (
                 <Link
                   href={githubLink}
-                  className="text-gray-600 dark:text-gray-300"
+                  className="text-sm text-gray-600 dark:text-gray-300"
                   icon={<GitHubLogo />}
                   noHighlight
                 >
