@@ -70,7 +70,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
                 strategy="lazyOnload"
               />
             )}
-          <main id="main" className="relative mx-auto mb-16 max-w-4xl px-8">
+          <main id="main" className="relative mx-auto mb-16 max-w-3xl px-8">
             <Component {...pageProps} />
             <CustomToaster />
             {isEnabled && circlesAllowed && (
