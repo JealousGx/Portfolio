@@ -52,7 +52,7 @@ const SnippetPage: NextPage<SnippetPageProps> = ({ snippet }) => {
             height="8"
             width="8"
             href={snippet.sourceCode && snippet.sourceCode}
-            icon={<GitHubLogo color="black" />}
+            icon={<GitHubLogo height={32} width={32} color="black" />}
             noHighlight
             noExternalLinkIcon
           />
@@ -79,7 +79,7 @@ const SnippetPage: NextPage<SnippetPageProps> = ({ snippet }) => {
             {snippet.tags?.map((tag, index) => (
               <span
                 key={index}
-                className="my-2 mr-2 cursor-pointer rounded-xl border-[1px] border-gray-300 bg-gray-50 p-2 text-[1rem] font-semibold text-gray-600 transition duration-200 hover:border-gray-200 dark:border-tertiary dark:bg-secondary dark:text-gray-300 dark:hover:border-accent"
+                className="my-2 mr-2 cursor-pointer rounded-xl border-[1px] border-gray-300 bg-gray-50 p-2 text-[0.9rem] font-semibold text-gray-600 transition duration-200 hover:border-gray-400 hover:bg-gray-300 dark:border-tertiary dark:bg-secondary dark:text-gray-300 dark:hover:border-accent"
               >
                 {tag}
               </span>
