@@ -20,7 +20,7 @@ class MyDocument extends Document {
           <meta name="theme-color" content="#010101" />
           <meta
             name="google-site-verification"
-            content={process.env.NEXT_PUBLIC_GOOGLE_SITE_CONTENT}
+            content="Blkf01ehDVV61jRQdIRexpQ1_bkOUAQKbmQMC6rrnqc"
           />
           <link
             rel="apple-touch-icon"
