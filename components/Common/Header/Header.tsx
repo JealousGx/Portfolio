@@ -3,7 +3,7 @@ import Nav from "./Nav";
 
 const Header = (): JSX.Element => {
   return (
-    <div className="my-4 mx-auto flex max-w-4xl items-center justify-between px-6">
+    <div className="my-4 mx-auto flex max-w-3xl items-center justify-between px-6">
       <Breadcrumb />
       <nav className="relative flex w-full items-center">
         <a
