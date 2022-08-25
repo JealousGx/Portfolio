@@ -1,5 +1,6 @@
-import Socials from "@/components/Shared/Socials";
 import NextImage from "next/image";
+import Link from "next/link";
+import Socials from "@/components/Shared/Socials";
 import AvatarJPG from "public/static/images/avatar.jpeg";
 
 const Hero = (): JSX.Element => {
@@ -18,7 +19,20 @@ const Hero = (): JSX.Element => {
           on full stack web development. I like to play soccer, badminton and
           video games.
         </p>
-        <Socials className="!mt-12" />
+        <div className="!mt-8 flex flex-col gap-4 sm:flex-row">
+          <button className="rounded-lg border-[1px] border-gray-300 bg-gray-50 px-4 py-2 capitalize hover:border-gray-200 dark:border-tertiary dark:bg-secondary dark:hover:border-accent">
+            download resume
+          </button>
+          <button className="rounded-lg border-[1px] border-gray-300 bg-gray-50 px-4 py-2 capitalize hover:border-gray-200 dark:border-tertiary dark:bg-secondary dark:hover:border-accent">
+            <Link
+              href={`mailto:${process.env.NEXT_PUBLIC_EMAIL}`}
+              className="rounded-lg border-[1px] border-gray-300 bg-gray-50 px-4 py-2 capitalize hover:border-gray-200 dark:border-tertiary dark:bg-secondary dark:hover:border-accent"
+            >
+              contact me
+            </Link>
+          </button>
+        </div>
+        <Socials className="!mt-8" />
       </div>
       <div className="will-change-opacity relative h-48 w-48 overflow-hidden rounded-full will-change-transform">
         <NextImage
