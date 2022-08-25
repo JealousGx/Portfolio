@@ -20,7 +20,10 @@ const SnippetPage: NextPage<SnippetPageProps> = ({ snippet }) => {
 
   return (
     <>
-      <NextSeo nofollow={true} noindex={true} />
+      <NextSeo
+        title={`${snippet.shortTitle} Code Snippet`}
+        description={snippet.description}
+      />
       <h1 className="mb-16 mt-8 text-4xl font-bold">{snippet.title}</h1>
 
       <div className="overflow-hidden rounded-xl">

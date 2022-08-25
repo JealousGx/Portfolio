@@ -32,6 +32,9 @@ export default function MyApp({ Component, pageProps }: AppProps) {
       "/guestbook",
       "/projects",
       "/blog",
+      "/snippets",
+      "/dashboard",
+      "/login",
     ];
     if (pathsCirclesAllowedIn.includes(asPath)) {
       setCirclesAllowed(true);

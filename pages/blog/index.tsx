@@ -13,7 +13,10 @@ interface BlogPostsPageProps {
 const BlogPostsPage: NextPage<BlogPostsPageProps> = ({ posts }) => {
   return (
     <>
-      <NextSeo title="Blog Posts | Matt" description="Blogs written by Matt" />
+      <NextSeo
+        title="Blog Posts"
+        description="Blogs written about tech, nature, my hobbies etc..."
+      />
       <h1 className="mb-8 text-2xl font-bold">Blog Posts</h1>
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
         {posts.map(post => (

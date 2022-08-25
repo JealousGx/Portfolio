@@ -80,6 +80,11 @@ export const Snippet = defineDocumentType(() => ({
   filePathPattern: "snippets/**/*.mdx",
   contentType: "mdx",
   fields: {
+    shortTitle: {
+      type: "string",
+      description: "The short title of the snippet",
+      required: true,
+    },
     title: {
       type: "string",
       description: "The title of the snippet",

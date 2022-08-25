@@ -8,7 +8,7 @@ const GuestBookPage: NextPage = () => {
   return (
     <>
       <NextSeo
-        title="Guestbook | Matt"
+        title="Guestbook"
         description="Leave messages on my portfolio site's guestbook :)"
       />
       <h1 className="text-3xl font-bold">GuestBook</h1>
