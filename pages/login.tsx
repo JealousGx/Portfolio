@@ -61,17 +61,19 @@ const Revalidate: NextPage = () => {
         title="Login"
         description="Authorized personnel allowed only. This page is used to login as administrator to control the website."
       />
-      <div className="flex flex-col items-center justify-center gap-4 text-center">
-        <h1 className="text-2xl font-bold">Admin Login</h1>
-        <p>
-          Only authorized personnel allowed here! If you are not one of them,
-          please leave this page immediately.
-        </p>
+      <div className="flex flex-col items-start justify-center sm:items-center sm:text-center">
+        <div className="flex max-w-sm flex-col gap-4">
+          <h1 className="text-3xl font-bold">Admin Panel</h1>
+          <p>
+            Only authorized personnel allowed here! If you are not one of them,
+            please leave this page immediately.
+          </p>
+        </div>
       </div>
       {isLoading ? (
         <p>Loading...</p>
       ) : (
-        <div className="mt-8 flex flex-col items-center justify-center">
+        <div className="mt-8 flex flex-col justify-center  sm:items-center">
           {authorized ? (
             <>
               <button>Revalidate home</button>

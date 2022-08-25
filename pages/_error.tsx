@@ -3,7 +3,7 @@ import { NextSeo } from "next-seo";
 
 function Error({ statusCode }) {
   return (
-    <div className="mt-16 mb-96 flex flex-col items-center justify-center">
+    <div className="my-16 flex flex-col items-center justify-center">
       <NextSeo
         title={
           statusCode && statusCode === 404
