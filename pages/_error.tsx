@@ -4,7 +4,13 @@ import { NextSeo } from "next-seo";
 function Error({ statusCode }) {
   return (
     <div className="mt-16 mb-96 flex flex-col items-center justify-center">
-      <NextSeo title="Page not found" />
+      <NextSeo
+        title={
+          statusCode && statusCode === 404
+            ? "404 - Page Not Found"
+            : "Server Error"
+        }
+      />
       {statusCode ? (
         <h1 className="text-center text-6xl font-bold">
           {statusCode}
