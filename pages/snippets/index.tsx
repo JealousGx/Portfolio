@@ -11,7 +11,10 @@ interface SnippetsPageProps {
 const SnippetsPage: NextPage<SnippetsPageProps> = ({ snippets }) => {
   return (
     <>
-      <NextSeo nofollow={true} noindex={true} />
+      <NextSeo
+        title="Code Snippets"
+        description="Code Snippets are a great way to share code that you have written and want to share with others. This is one of the platforms that I use to share code."
+      />
       <h1 className="mb-8 text-2xl font-bold">Code Snippets</h1>
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
         {snippets.map(snippet => (

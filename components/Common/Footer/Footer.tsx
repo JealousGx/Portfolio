@@ -7,7 +7,7 @@ const Footer = (): JSX.Element => {
   return (
     <footer className="mx-auto mb-16 flex max-w-3xl flex-col items-center space-y-2  px-8 text-center">
       <hr className="border-1 mb-8 w-full border-gray-200 dark:border-gray-800" />
-      <div className="flex w-full flex-col items-center justify-between sm:flex-row">
+      <div className="flex w-full flex-col items-start gap-4 sm:flex-row sm:items-center  sm:justify-between  sm:gap-0">
         <div className="flex flex-col items-start gap-4">
           <Link href="/" noGradientUnderline noHighlight>
             <span className={ITEM_CLASSNAMES}>home</span>

@@ -21,10 +21,7 @@ const ProjectsPage: NextPage<ProjectsPageProps> = ({
 }) => {
   return (
     <>
-      <NextSeo
-        title="Projects | Matt"
-        description="Projects worked upon by Matt"
-      />
+      <NextSeo title="Projects" description="Projects worked upon by Matt." />
       <h1 className="mb-8 text-2xl font-bold">Projects</h1>
       <div className="flex-col space-y-8">
         {allProjectsWithPlaceholderImages.map((project, index) => (
