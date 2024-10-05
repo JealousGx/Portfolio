@@ -1,15 +1,15 @@
 const defaultSEOConfig = {
-  title: "Matt | Front End Web Developer",
+  title: "Matt | Full Stack Web Developer",
   description:
-    "Final Year Engineering Student • Front End Web Developer • Gamer • Tech Enthusiast",
+    "Software Engineer • Wordpress Developer • AWS • Google Cloud Platform • Playwright • Docker • Gamer • Tech Enthusiast",
   cannonical: `https://${process.env.NEXT_PUBLIC_WEBAPP_LINK}/`,
   openGraph: {
     type: "website",
     url: `https://${process.env.NEXT_PUBLIC_WEBAPP_LINK}/`,
     site_name: "Matt",
-    title: "Matt | Front End Web Developer",
+    title: "Matt | Full Stack Web Developer",
     description:
-      "Final Year Engineering Student • Front End Web Developer • Gamer • Tech Enthusiast",
+      "Software Engineer • Wordpress Developer • AWS • Google Cloud Platform • Playwright • Docker • Gamer • Tech Enthusiast",
     images: [
       {
         url: "https://res.cloudinary.com/jealousgx/image/upload/v1659721245/portfolio-cover.png",
