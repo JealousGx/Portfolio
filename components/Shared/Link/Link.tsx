@@ -1,13 +1,13 @@
 import cx from "classnames";
-import {
+import NextLink from "next/link";
+import React, {
   AnchorHTMLAttributes,
-  forwardRef,
-  ReactNode,
   cloneElement,
+  forwardRef,
   ReactElement,
+  ReactNode,
 } from "react";
 import { ArrowUpRight } from "react-feather";
-import NextLink from "next/link";
 
 interface ExternalLinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
   href: string;
@@ -39,36 +39,35 @@ const ExternalLink = forwardRef<HTMLAnchorElement, ExternalLinkProps>(
       arrowColor,
       ...otherProps
     }: ExternalLinkProps,
-    ref
+    ref,
   ): JSX.Element => {
     const isInternalLink = href.startsWith("/") || href.startsWith("#");
 
     const isGradientUnderline = gradientUnderline
       ? true
       : (typeof children === "string" || typeof children === "undefined") &&
-        !noGradientUnderline
-      ? true
-      : false;
+          !noGradientUnderline
+        ? true
+        : false;
 
     const arrowBlack =
       arrowColor &&
       "text-gray-600 transition duration-200 hover:text-gray-400 dark:text-gray-300 dark:hover:text-gray-500";
 
     return (
-      <>
+      <React.Fragment>
         {isInternalLink ? (
-          <NextLink href={href}>
-            <a
-              className={cx(
-                "transition duration-200",
-                isGradientUnderline && "gradient-underline flex items-center",
-                className
-              )}
-              ref={ref}
-              {...otherProps}
-            >
-              {isGradientUnderline ? <span>{children ?? href}</span> : children}
-            </a>
+          <NextLink
+            href={href}
+            className={cx(
+              "transition duration-200",
+              isGradientUnderline && "gradient-underline flex items-center",
+              className,
+            )}
+            ref={ref}
+            {...otherProps}
+          >
+            {isGradientUnderline ? <span>{children ?? href}</span> : children}
           </NextLink>
         ) : (
           <a
@@ -79,7 +78,7 @@ const ExternalLink = forwardRef<HTMLAnchorElement, ExternalLinkProps>(
               isGradientUnderline &&
                 !noHighlight &&
                 "text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300",
-              className
+              className,
             )}
             target="_blank"
             rel="noopener noreferrer"
@@ -118,9 +117,9 @@ const ExternalLink = forwardRef<HTMLAnchorElement, ExternalLinkProps>(
             color: inherit;
           }
         `}</style>
-      </>
+      </React.Fragment>
     );
-  }
+  },
 );
 
 ExternalLink.displayName = "Link";

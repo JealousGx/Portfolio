@@ -13,7 +13,35 @@
         "words": 3126
       },
       "wordCount": 3127
+    },
+    {
+      "_id": "66af42483418c20229508064",
+      "title": "Streamlining Subscription Payments with Stripe: A Node.js Integration",
+      "slug": "streamlining-subscription-payments-with-stripe-a-nodejs-integration",
+      "brief": "In today's digital landscape, subscription-based models have become a cornerstone of many online businesses. For my recent client project, I had to opt for Stripe to manage recurring payments, thanks to its robust features and seamless integration ca...",
+      "coverImage": "https://cdn.hashnode.com/res/hashnode/image/upload/v1722938912449/e5ef44f2-1f03-4c2a-a825-8ab063594b1f.png",
+      "dateAdded": "2024-08-04T08:56:40.276Z",
+      "readingTime": {
+        "text": "9 min read",
+        "minutes": 9,
+        "words": 1909
+      },
+      "wordCount": 1910
+    },
+    {
+      "_id": "66d408a91dbdb439e268b1e8",
+      "title": "Building a Basic API in Go: A Beginner's Guide",
+      "slug": "building-a-basic-api-in-go-a-beginners-guide",
+      "brief": "Go (or Golang) is a statically typed, compiled language designed for simplicity and efficiency. It's particularly well-suited for building scalable and high-performance applications, including APIs. In this post, we'll walk through the basics of sett...",
+      "coverImage": "https://cdn.hashnode.com/res/hashnode/image/upload/v1725171533331/9041cedf-f79b-4280-9928-77ae90b2ccd6.png",
+      "dateAdded": "2024-09-01T06:24:41.596Z",
+      "readingTime": {
+        "text": "3 min read",
+        "minutes": 3,
+        "words": 650
+      },
+      "wordCount": 650
     }
   ],
-  "domain": "blog.jealousdev.tech"
+  "domain": "blog.jealous.dev"
 }

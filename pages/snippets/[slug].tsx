@@ -1,15 +1,15 @@
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import NextImage from "next/image";
 
-import { allSnippets, Snippet } from "contentlayer/generated";
-import { useMDXComponent } from "next-contentlayer/hooks";
 import MDXComponents from "@/components/Common/MDXComponents";
 import CustomGiscus from "@/components/Shared/CustomGiscus";
-import Link from "@/components/Shared/Link";
 import { GitHubLogo } from "@/components/Shared/Icons";
+import Link from "@/components/Shared/Link";
+import { allSnippets, Snippet } from "contentlayer/generated";
+import { useMDXComponent } from "next-contentlayer/hooks";
 
-import AvatarJPG from "public/static/images/avatar.jpeg";
 import { NextSeo } from "next-seo";
+import AvatarJPG from "public/static/images/avatar.webp";
 
 interface SnippetPageProps {
   snippet: Snippet;
@@ -31,6 +31,7 @@ const SnippetPage: NextPage<SnippetPageProps> = ({ snippet }) => {
           width={snippet.image.width}
           height={snippet.image.height}
           src={snippet.image.url}
+          alt={`Cover Image for ${snippet.title}`}
           className="rounded-xl drop-shadow-md"
         />
       </div>
@@ -40,6 +41,7 @@ const SnippetPage: NextPage<SnippetPageProps> = ({ snippet }) => {
           <div className="mr-1 mt-1">
             <NextImage
               src={AvatarJPG}
+              alt="Avatar"
               placeholder="blur"
               height={32}
               width={32}

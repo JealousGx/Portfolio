@@ -12,7 +12,7 @@ const defaultSEOConfig = {
       "Software Engineer • Wordpress Developer • AWS • Google Cloud Platform • Playwright • Docker • Gamer • Tech Enthusiast",
     images: [
       {
-        url: "https://res.cloudinary.com/jealousgx/image/upload/v1659721245/portfolio-cover.png",
+        url: "https://res.cloudinary.com/jealousgx/image/upload/v1728145204/cover-og.png",
         width: 1200,
         height: 630,
         alt: "Matt's Portfolio Cover Page",

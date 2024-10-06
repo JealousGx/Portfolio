@@ -13,31 +13,33 @@ const Tooltip = ({ children, content }: TooltipProps): JSX.Element => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <TooltipPrimitive.Root
-      open={isOpen}
-      onOpenChange={setIsOpen}
-      delayDuration={100}
-    >
-      <TooltipPrimitive.Trigger tabIndex={-1}>
-        {children}
-      </TooltipPrimitive.Trigger>
-      <AnimatePresence>
-        {isOpen && (
-          <MotionContent
-            side="top"
-            sideOffset={4}
-            className="rounded-md bg-gray-50 px-3 py-1 text-sm shadow-md dark:bg-tertiary"
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 8 }}
-            forceMount
-          >
-            {content}
-            <TooltipPrimitive.Arrow className="fill-current text-gray-50 dark:text-tertiary" />
-          </MotionContent>
-        )}
-      </AnimatePresence>
-    </TooltipPrimitive.Root>
+    <TooltipPrimitive.Provider>
+      <TooltipPrimitive.Root
+        open={isOpen}
+        onOpenChange={setIsOpen}
+        delayDuration={100}
+      >
+        <TooltipPrimitive.Trigger tabIndex={-1}>
+          {children}
+        </TooltipPrimitive.Trigger>
+        <AnimatePresence>
+          {isOpen && (
+            <MotionContent
+              side="top"
+              sideOffset={4}
+              className="rounded-md bg-gray-50 px-3 py-1 text-sm shadow-md dark:bg-tertiary"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 8 }}
+              forceMount
+            >
+              {content}
+              <TooltipPrimitive.Arrow className="fill-current text-gray-50 dark:text-tertiary" />
+            </MotionContent>
+          )}
+        </AnimatePresence>
+      </TooltipPrimitive.Root>
+    </TooltipPrimitive.Provider>
   );
 };
 

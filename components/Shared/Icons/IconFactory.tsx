@@ -2,18 +2,22 @@ import { SVGProps } from "react";
 import { X } from "react-feather";
 
 import {
-  NextJSLogo,
-  TypescriptLogo,
-  OttoLogo,
-  ReactLogo,
+  AILogo,
+  AirbnbLogo,
+  ExpenseTrackerLogo,
   FigmaLogo,
   GoLogo,
-  TailwindCSSLogo,
-  ExpenseTrackerLogo,
-  PhoneStoreLogo,
-  NewsLogo,
-  SunLogo,
+  MediumLogo,
   MoonLogo,
+  NewsLogo,
+  NextJSLogo,
+  OttoLogo,
+  PhoneStoreLogo,
+  ReactLogo,
+  SunLogo,
+  TailwindCSSLogo,
+  TypescriptLogo,
+  ValaLogo,
 } from ".";
 import CovidLogo from "./Covid19";
 
@@ -44,6 +48,14 @@ const IconFactory = ({
       return <NewsLogo {...otherProps} />;
     case "expenseTracker":
       return <ExpenseTrackerLogo {...otherProps} />;
+    case "airbnb":
+      return <AirbnbLogo {...otherProps} />;
+    case "ai":
+      return <AILogo {...otherProps} />;
+    case "medium":
+      return <MediumLogo {...otherProps} />;
+    case "vala":
+      return <ValaLogo {...otherProps} />;
     case "covid19":
       return <CovidLogo {...otherProps} />;
     case "phoneStore":

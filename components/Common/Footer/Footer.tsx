@@ -29,7 +29,7 @@ const Footer = (): JSX.Element => {
             <span className={ITEM_CLASSNAMES}>GitHub</span>
           </Link>
           <Link
-            href="https://twitter.com/JealousGx"
+            href="https://x.com/KhiljiMateenn"
             noGradientUnderline
             noHighlight
             noExternalLinkIcon

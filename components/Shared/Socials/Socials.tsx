@@ -1,6 +1,6 @@
 import socials from "@/data/socials";
-import { cloneElement, HTMLAttributes, ReactElement } from "react";
 import cx from "classnames";
+import { cloneElement, HTMLAttributes, ReactElement } from "react";
 import Link from "../Link";
 import Tooltip from "../Tooltip";
 
@@ -25,8 +25,8 @@ const Socials = ({
           >
             {cloneElement(social.icon as ReactElement, {
               className: cx(
-                "rounded-xl text-black dark:text-white shadow-md border-[1px] border-gray-300 dark:border-tertiary bg-gray-50 dark:bg-secondary",
-                small ? "h-8 w-8 px-1.5 py-1" : "h-10 w-10 px-2 py-1.5"
+                "rounded-xl text-black dark:text-white fill-dark dark:fill-white shadow-md border-[1px] border-gray-300 dark:border-tertiary bg-gray-50 dark:bg-secondary",
+                small ? "h-8 w-8 px-1.5 py-1" : "h-10 w-10 px-2 py-1.5",
               ),
               "aria-label": social.name,
             })}

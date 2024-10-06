@@ -13,11 +13,37 @@ module.exports = withContentlayer({
     return config;
   },
   images: {
-    domains: [
-      "media.graphassets.com",
-      "c5eq9h7e.directus.app",
-      "res.cloudinary.com",
-      "cdn.hashnode.com",
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "media.graphassets.com",
+        port: "",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "c5eq9h7e.directus.app",
+        port: "",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "res.cloudinary.com",
+        port: "",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "cdn.hashnode.com",
+        port: "",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "media.licdn.com",
+        port: "",
+        pathname: "/dms/image/v2/**",
+      },
     ],
   },
 });

@@ -1,0 +1,30 @@
+---
+name: "AskkkDoc"
+description: "Empower your documents to speak volumes!"
+link: "https://askkkdoc.vercel.app/"
+githubLink: "https://github.com/JealousGx/askkkdoc"
+iconName: "ai"
+image:
+  url: "https://media.licdn.com/dms/image/v2/D4E22AQFKbfLPqjpWAg/feedshare-shrink_2048_1536/feedshare-shrink_2048_1536/0/1720501740500?e=1730937600&v=beta&t=P-mYzk1HJGAgbqKOf49USqG4Lw47ip9n-mSPQvImARg"
+  height: 632
+  width: 1200
+---
+
+A web app designed to empower your documents to speak volumes! With AskkkDoc, you can seamlessly process a variety of file formats, including PDFs, Word documents, and images, to extract insightful information and answer your queries.
+
+### <span style={{ color: "black" }}>Key Features:</span>
+
+- Frontend & Backend: Built with NextJS 14 App Router (React), TypeScript & and React Markdown.
+- Styling: TailwindCSS and Shadcn UI.
+- File Handling: Utilizes React Dropzone.
+- Authentication & Database: Next Auth, Prisma ORM, and MySQL (TiDB).
+- Storage & AI: AWS S3, OpenAI API, Pinecone, and Vercel's AI.
+- File Processing: Langchain and Unstructured.
+
+Core Functionality:
+Inspired by the functionalities of ChatPDF, AskkkDoc goes beyond just PDFs, allowing users to upload various document types – including images and Word documents. The AI will attempt to answer questions based on these documents, but please note that the answers are not guaranteed to be 100% correct, so it's advisable to verify them.
+
+### <span style={{ color: "black" }}>Limitations:</span>
+
+- Due to OpenAI API constraints, each user can upload up to 3 documents and ask questions. Unfortunately, due to some restrictions, I could not integrate Stripe for payments to let users buy tokens.
+- After completing the whole website, I came to know that Unstructured is actually slow in processing file, which can have negatively affect the overall performance of a website in modern times, where most of the websites are blazingly fast. While the alternatives are cost real money, I chose to stay with this package since I did not want to make the most out of it.

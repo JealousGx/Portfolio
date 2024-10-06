@@ -18,7 +18,7 @@ const BlogPostsPage: NextPage<BlogPostsPageProps> = ({ posts }) => {
         description="Blogs written about tech, nature, my hobbies etc..."
       />
       <h1 className="mb-8 text-2xl font-bold">Blog Posts</h1>
-      <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+      <div className="grid grid-cols-1 gap-6">
         {posts.map(post => (
           <BlogPostCard
             key={post._id}

@@ -1,9 +1,9 @@
 import { ReactNode } from "react";
 
 import {
-  DevToLogo,
-  GitHubLogo,
-  HashnodeLogo,
+  GitHubIcon,
+  LinkedInLogo,
+  MediumLogo,
   Twitterlogo,
 } from "@/components/Shared/Icons";
 
@@ -16,28 +16,28 @@ interface Social {
 
 const socials: Social[] = [
   {
-    id: "twitter",
-    name: "Twitter",
-    url: "https://twitter.com/JealousGx",
-    icon: <Twitterlogo color="#1DA1F2" />,
+    id: "x",
+    name: "X",
+    url: "https://x.com/KhiljiMateenn",
+    icon: <Twitterlogo />,
   },
   {
     id: "github",
     name: "GitHub",
     url: "https://github.com/JealousGx",
-    icon: <GitHubLogo />,
+    icon: <GitHubIcon fill="#000" />,
   },
   {
-    id: "hashnode",
-    name: "Hashnode",
-    url: "https://hashnode.com/@JealousGx",
-    icon: <HashnodeLogo color="#2962ff" />,
+    id: "medium",
+    name: "Medium",
+    url: "https://medium.com/@JealousGx",
+    icon: <MediumLogo color="#fff" />,
   },
   {
-    id: "dev.to",
-    name: "Dev.to",
-    url: "https://dev.to/JealousGx",
-    icon: <DevToLogo color="#f0f0f0" />,
+    id: "linkedin",
+    name: "LinkedIn",
+    url: "https://www.linkedin.com/in/abdul-mateen-khilji-8a743217b/",
+    icon: <LinkedInLogo />,
   },
 ];
 
