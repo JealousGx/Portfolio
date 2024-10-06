@@ -9,7 +9,7 @@
     "prepare": "husky install",
     "dev": "next dev",
     "prebuild-test": "yarn gen:hashnode",
-    "build": "next build",
+    "build": "contentlayer build && next build",
     "start": "next start",
     "lint": "eslint '{components,pages,utils,data,layouts}/**/*.{js,jsx,ts,tsx}'",
     "lint:fix": "eslint --fix '{components,pages,utils,data,layouts}/**/*.{js,jsx,ts,tsx}'",
