@@ -1,6 +1,6 @@
+import { ThemeProvider } from "next-themes";
 import type { AppProps } from "next/app";
 import NextNProgress from "nextjs-progressbar";
-import { ThemeProvider } from "next-themes";
 
 import CommandBarInvoker from "@/components/Common/CommandBarInvoker";
 import CustomToaster from "@/components/Common/CustomToaster";
@@ -9,15 +9,15 @@ import KProvider from "@/components/Common/KProvider";
 
 import useCircles from "store/circles";
 
-import "../styles/globals.css";
-import { useEffect, useState } from "react";
+import { DefaultSeo, SocialProfileJsonLd } from "next-seo";
 import { useRouter } from "next/router";
 import Script from "next/script";
-import { DefaultSeo, SocialProfileJsonLd } from "next-seo";
+import { useEffect, useState } from "react";
+import "../styles/globals.css";
 
-import "@fontsource/syncopate";
-import "@fontsource/sen";
 import Footer from "@/components/Common/Footer";
+import "@fontsource/sen";
+import "@fontsource/syncopate";
 import SEO from "../next-seo.config";
 
 export default function MyApp({ Component, pageProps }: AppProps) {
@@ -49,7 +49,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
         <Header />
         <KProvider>
           <NextNProgress
-            color="#515151"
+            color="#858585"
             startPosition={0.3}
             stopDelayMs={200}
             height={3}
@@ -61,7 +61,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
             name="Matt"
             url="https://www.linkedin.com/in/abdul-mateen-khilji-8a743217b/"
             sameAs={[
-              "https://twitter.com/JealousGx",
+              "https://x.com/KhiljiMateen",
               "https://github.com/JealousGx",
             ]}
           />

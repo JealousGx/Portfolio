@@ -1,0 +1,34 @@
+{
+  "testimonials": [
+    {
+      "id": "d511c1ef-6d06-4db1-ac8f-5c4b46212ecf",
+      "name": "Elijah Scalere",
+      "role": "CEO @ Scalere Design",
+      "testimonial": "They were able to produce a product nearly identical to my design files. I would be working with them in the future due to their responsiveness and cooperation.",
+      "avatar": "https://media.licdn.com/dms/image/v2/C5603AQEYPI9dV1BAqg/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1653763887068?e=1733961600&v=beta&t=2PjKjJK1mvp6C9WAaEn25DgHakxaDqAPZ_vpYCMxzZA",
+      "dateAdded": "2024-09-23T06:43:49.826Z",
+      "rating": 5,
+      "project": "Vala - Scalere Design"
+    },
+    {
+      "id": "5ca6c2bc-8118-4d08-9145-ec501cdfc7ba",
+      "name": "Uzair Sultan",
+      "role": "UX Designer @ VentureDrive",
+      "testimonial": "I have had the pleasure of working closely with Mateen for more than a year, and I can confidently say that he is one of the most talented developers I have ever worked with. His technical expertise, problem-solving skills, and dedication to excellence are truly exceptional. \nAs a designer, I often rely on to bring my creative visions to life. He has an impressive ability to understand complex design concepts and translate them into seamless, functional code. His attention to detail ensures that the final product not only looks great but also performs flawlessly.",
+      "avatar": "https://media.licdn.com/dms/image/v2/D4E03AQFFCKnUsS-7ZQ/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1714733711902?e=1733961600&v=beta&t=4K88CET8wnicF4trusYmd3f6BjR-siCS-UxTiv1mgs8",
+      "dateAdded": "2024-06-28T06:43:49.826Z",
+      "rating": 4,
+      "project": "PennyCanny"
+    },
+    {
+      "id": "b5f59098-6167-42c9-8ce3-9b26af48ce7e",
+      "name": "Naqcho Ali Mehdi",
+      "role": "AI & ML Engineer",
+      "testimonial": "I’m super excited to work on my newly launched website , Abdul Mateen has shown marvelous professionalism and great deal of work seems in his attempts . The site is very responsive and aesthetically appealing which makes my requirements fulfilled.",
+      "avatar": "https://media.licdn.com/dms/image/v2/D4D03AQEBSDYEN2j-Tw/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1719973198926?e=1733961600&v=beta&t=zP4p4rgJtrk4tjhAZXccAI-6Pc8aoPAY3tOJofhQn0o",
+      "dateAdded": "2024-09-22T06:43:49.826Z",
+      "rating": 4.5,
+      "project": "Personal Portfolio"
+    }
+  ]
+}

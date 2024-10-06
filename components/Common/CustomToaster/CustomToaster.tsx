@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { ReactNode, cloneElement } from "react";
+import React, { ReactNode, cloneElement } from "react";
 import { X } from "react-feather";
 import { ToastIcon, Toaster, toast } from "react-hot-toast";
 
@@ -17,7 +17,7 @@ const CustomToaster = (): JSX.Element => (
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.6, opacity: 0, y: 20 }}
             >
-              <>
+              <React.Fragment>
                 {cloneElement(icon, { className: "w-4 h-4 !mr-2" })}
                 <span className="ml-2">{t.message as ReactNode}</span>
                 {t.type !== "loading" && (
@@ -28,7 +28,7 @@ const CustomToaster = (): JSX.Element => (
                     <X className="h-5 w-5" />
                   </button>
                 )}
-              </>
+              </React.Fragment>
             </motion.div>
           )}
         </AnimatePresence>

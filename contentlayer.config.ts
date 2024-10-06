@@ -4,10 +4,10 @@ import {
   makeSource,
 } from "contentlayer/source-files";
 
-import rehypeSlug from "rehype-slug";
-import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import readingTime from "reading-time";
+import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypePrettyCode from "rehype-pretty-code";
+import rehypeSlug from "rehype-slug";
 
 export const CloudinaryImage = defineNestedType(() => ({
   name: "CloudinaryImage",
@@ -142,7 +142,7 @@ export const Snippet = defineDocumentType(() => ({
     },
     wordCount: {
       type: "number",
-      resolve: doc => doc.body.raw.split(/\s+/gu).length,
+      resolve: doc => doc.body.raw.split(/\s+/g).length,
     },
   },
 }));
@@ -154,6 +154,7 @@ export default makeSource({
     rehypePlugins: [
       rehypeSlug,
       [
+        // @ts-expect-error
         rehypePrettyCode,
         {
           theme: "github-dark",

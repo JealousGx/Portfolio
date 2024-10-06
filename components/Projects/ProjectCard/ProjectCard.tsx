@@ -1,9 +1,9 @@
 import NextImage from "next/image";
 
-import { cleanLink, getGitHubOwnerAndRepoFromLink } from "@/utils/helpers";
-import Link from "@/components/Shared/Link";
-import { CloudinaryImage } from "contentlayer/generated";
 import { GitHubLogo } from "@/components/Shared/Icons";
+import Link from "@/components/Shared/Link";
+import { cleanLink, getGitHubOwnerAndRepoFromLink } from "@/utils/helpers";
+import { CloudinaryImage } from "contentlayer/generated";
 import { forwardRef } from "react";
 
 interface ProjectProps {
@@ -27,7 +27,7 @@ const ProjectCard = forwardRef<HTMLDivElement, ProjectProps>(
       githubLink,
       placeholderImage,
     }: ProjectProps,
-    ref
+    ref,
   ): JSX.Element => {
     return (
       <div
@@ -40,8 +40,9 @@ const ProjectCard = forwardRef<HTMLDivElement, ProjectProps>(
               <NextImage
                 src={image.url}
                 alt={name}
+                width={1000}
+                height={1000}
                 className="rounded-lg"
-                layout="fill"
                 placeholder="blur"
                 blurDataURL={placeholderImage}
               />
@@ -88,7 +89,7 @@ const ProjectCard = forwardRef<HTMLDivElement, ProjectProps>(
         </div>
       </div>
     );
-  }
+  },
 );
 
 ProjectCard.displayName = "ProjectCard";

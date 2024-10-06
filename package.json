@@ -2,10 +2,14 @@
   "name": "portfolio",
   "version": "0.0.1",
   "license": "GPL-3.0",
+  "engines": {
+    "node": ">=21.5.0",
+    "npm": ">=9.6.5"
+  },
   "scripts": {
     "prepare": "husky install",
     "dev": "next dev",
-    "prebuild": "yarn gen:hashnode",
+    "prebuild-test": "yarn gen:hashnode",
     "build": "next build",
     "start": "next start",
     "lint": "eslint '{components,pages,utils,data,layouts}/**/*.{js,jsx,ts,tsx}'",
@@ -72,6 +76,7 @@
     "rehype-pretty-code": "^0.14.0",
     "rehype-slug": "^6.0.0",
     "shiki": "^1.21.0",
+    "swiper": "^11.1.14",
     "zustand": "^5.0.0-rc.2"
   },
   "overrides": {
@@ -80,6 +85,9 @@
     },
     "eslint-config-next": {
       "eslint": "$eslint"
+    },
+    "react-virtual": {
+      "react": "$react"
     }
   }
 }

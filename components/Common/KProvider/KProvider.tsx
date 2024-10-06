@@ -12,14 +12,14 @@ import { Code, Search } from "react-feather";
 import toast from "react-hot-toast";
 
 import Kbd from "@/components/Shared/Kbd";
+import hashnodeData from "@/data/hashnode.json";
 import socials from "@/data/socials";
 import { allProjects } from "contentlayer/generated";
-import hashnodeData from "@/data/hashnode.json";
 
 import useCircles from "store/circles";
 
-import KResults from "./KResults";
 import IconFactory from "@/components/Shared/Icons/IconFactory";
+import KResults from "./KResults";
 
 interface KProviderProps {
   children: ReactNode;
@@ -95,15 +95,6 @@ const KProvider = ({ children }: KProviderProps): JSX.Element => {
       section: "Socials",
       icon: social.icon,
     });
-  });
-
-  actions.push({
-    id: "source-code",
-    name: "Source Code",
-    keywords: "source code",
-    perform: () => window.open("https://github.com/JealousGx/Portfolio"),
-    section: "Socials",
-    icon: <Code />,
   });
 
   allProjects.map(project => {
