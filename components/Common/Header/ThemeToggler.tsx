@@ -9,8 +9,8 @@ const CLASSNAMES =
 
 const ThemeToggler = (): JSX.Element => {
   const [mounted, setMounted] = useState(false);
-  const { theme, setTheme } = useTheme();
-  const isDarkTheme = theme === "dark";
+  const { systemTheme, theme, setTheme } = useTheme();
+  const currentTheme = theme === "system" ? systemTheme : theme;
 
   useEffect(() => {
     if (!mounted) {
@@ -20,7 +20,7 @@ const ThemeToggler = (): JSX.Element => {
 
   if (!mounted) return null;
 
-  if (isDarkTheme) {
+  if (currentTheme) {
     return (
       <Tooltip content="Toggle theme">
         <div

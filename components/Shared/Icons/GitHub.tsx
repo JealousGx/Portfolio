@@ -28,13 +28,13 @@ const GitHubLogo = (props: SVGProps<SVGSVGElement>): JSX.Element => (
       />
     </defs>
     <g transform="matrix(.198578 0 0 -.198578 -.187848 52.8501)">
-      <g clip-path="url(#C)">
+      <g clipPath="url(#C)">
         <use xlinkHref="#D" fill="#a0dcf2" />
       </g>
-      <g clip-path="url(#B)">
+      <g clipPath="url(#B)">
         <use xlinkHref="#D" fill="#82bde7" />
       </g>
-      <g clip-path="url(#A)">
+      <g clipPath="url(#A)">
         <path
           d="M50.7 106.8l-1.453-5.063s-.378-1.83 1.346-2.154c1.8.035 1.653 1.72 1.527 2.266l-1.42 4.95z"
           fill="#a0dcf2"

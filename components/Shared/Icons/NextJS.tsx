@@ -15,9 +15,9 @@ const NexJSLogo = (props: SVGProps<SVGSVGElement>): JSX.Element => (
     />
     <path
       fill="var(--geist-foreground)"
-      fill-rule="evenodd"
+      fillRule="evenodd"
       d="m29.069 42.262-17.838-22.15H6.48v22.141h3.8V24.845l14.014 17.417z"
-      clip-rule="evenodd"
+      clipRule="evenodd"
       style={{ strokeWidth: 0.279193 }}
     />
     <path
