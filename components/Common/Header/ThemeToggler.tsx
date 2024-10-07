@@ -20,7 +20,7 @@ const ThemeToggler = (): JSX.Element => {
 
   if (!mounted) return null;
 
-  if (currentTheme) {
+  if (currentTheme === "dark") {
     return (
       <Tooltip content="Toggle theme">
         <div
