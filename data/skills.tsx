@@ -8,12 +8,14 @@ import {
   MongodbLogo,
   MySQLLogo,
   NextJSLogo,
+  PHPLogo,
   PostgreSQLLogo,
   PythonLogo,
   ReactLogo,
   ServerlessLogo,
   TailwindCSSLogo,
   TypescriptLogo,
+  WordpressLogo,
 } from "@/components/Shared/Icons";
 import TravisCILogo from "@/components/Shared/Icons/TravisCI";
 
@@ -32,6 +34,11 @@ const skills = [
     id: "TravisCI",
     name: "TravisCI",
     Icon: TravisCILogo,
+  },
+  {
+    id: "Wordpress",
+    name: "Wordpress",
+    Icon: WordpressLogo,
   },
   {
     id: "Go",
@@ -67,6 +74,11 @@ const skills = [
     id: "AWS",
     name: "AWS",
     Icon: AWSLogo,
+  },
+  {
+    id: "PHP",
+    name: "PHP",
+    Icon: PHPLogo,
   },
   {
     id: "Serverless",
