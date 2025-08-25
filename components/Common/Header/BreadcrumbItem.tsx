@@ -1,6 +1,6 @@
 import Link from "@/components/Shared/Link";
 import cx from "classnames";
-import { Fragment, ReactNode } from "react";
+import { Fragment, ReactNode, type JSX } from "react";
 
 interface BreadcrumbItemProps {
   isRoot?: boolean;

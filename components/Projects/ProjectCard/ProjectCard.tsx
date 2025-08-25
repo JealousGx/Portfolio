@@ -4,7 +4,7 @@ import { GitHubLogo } from "@/components/Shared/Icons";
 import Link from "@/components/Shared/Link";
 import { cleanLink, getGitHubOwnerAndRepoFromLink } from "@/utils/helpers";
 import { CloudinaryImage } from "contentlayer/generated";
-import { forwardRef } from "react";
+import { forwardRef, type JSX } from "react";
 
 interface ProjectProps {
   slug: string;

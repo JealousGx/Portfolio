@@ -1,4 +1,4 @@
-import { SVGProps } from "react";
+import { SVGProps, type JSX } from "react";
 
 const PostgreSQLLogo = (props: SVGProps<SVGSVGElement>): JSX.Element => (
   <svg

@@ -1,4 +1,4 @@
-import { SVGProps } from "react";
+import { SVGProps, type JSX } from "react";
 
 const AILogo = (props: SVGProps<SVGSVGElement>): JSX.Element => (
   <svg

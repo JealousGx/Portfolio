@@ -1,5 +1,7 @@
 import Link from "@/components/Shared/Link";
 
+import type { JSX } from "react";
+
 const ITEM_CLASSNAMES =
   "cursor-pointer capitalize text-gray-600 transition hover:text-gray-700 dark:text-gray-500 dark:hover:text-gray-600";
 

@@ -1,5 +1,7 @@
 import Link from "@/components/Shared/Link";
 
+import type { JSX } from "react";
+
 interface SnippetsCardProps {
   slug: string;
   title: string;

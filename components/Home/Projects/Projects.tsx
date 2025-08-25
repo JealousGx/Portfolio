@@ -3,6 +3,8 @@ import IconFactory from "@/components/Shared/Icons/IconFactory";
 import Link from "@/components/Shared/Link";
 import { ArrowRight, ExternalLink } from "react-feather";
 
+import type { JSX } from "react";
+
 const Projects = (): JSX.Element => {
   return (
     <div className="my-16 flex flex-col">

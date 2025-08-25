@@ -8,7 +8,7 @@ const CodeBlock = props => {
   return (
     <div style={{ position: "relative", overflow: "auto" }}>
       <pre {...props}>
-        {cloneElement(props.children as React.ReactElement, { ref: codeRef })}
+        {cloneElement(props.children as React.ReactElement<any>, { ref: codeRef })}
       </pre>
     </div>
   );

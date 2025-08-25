@@ -1,4 +1,4 @@
-import { SVGProps } from "react";
+import { SVGProps, type JSX } from "react";
 
 const TypescriptLogo = (props: SVGProps<SVGSVGElement>): JSX.Element => (
   <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" {...props}>

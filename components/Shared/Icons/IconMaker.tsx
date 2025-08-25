@@ -1,4 +1,4 @@
-import { PropsWithoutRef } from "react";
+import { PropsWithoutRef, type JSX } from "react";
 
 interface IconMakerProps extends PropsWithoutRef<JSX.IntrinsicElements["div"]> {
   svgCode: string;

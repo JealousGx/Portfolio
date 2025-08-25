@@ -1,6 +1,6 @@
 import socials from "@/data/socials";
 import cx from "classnames";
-import { cloneElement, HTMLAttributes, ReactElement } from "react";
+import { cloneElement, HTMLAttributes, ReactElement, type JSX } from "react";
 import Link from "../Link";
 import Tooltip from "../Tooltip";
 
@@ -23,7 +23,7 @@ const Socials = ({
             noGradientUnderline
             aria-label={social.name}
           >
-            {cloneElement(social.icon as ReactElement, {
+            {cloneElement(social.icon as ReactElement<any>, {
               className: cx(
                 "rounded-xl text-black dark:text-white fill-dark dark:fill-white shadow-md border-[1px] border-gray-300 dark:border-tertiary bg-gray-50 dark:bg-secondary",
                 small ? "h-8 w-8 px-1.5 py-1" : "h-10 w-10 px-2 py-1.5",
