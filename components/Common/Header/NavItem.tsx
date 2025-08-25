@@ -1,6 +1,6 @@
 import Link from "@/components/Shared/Link";
 import cx from "classnames";
-import { ReactNode, type JSX } from "react";
+import { ReactNode } from "react";
 
 interface NavItemProps {
   href: string;
@@ -8,7 +8,7 @@ interface NavItemProps {
   asPath: string;
 }
 
-const NavItem = ({ href, children, asPath }: NavItemProps): JSX.Element => {
+const NavItem = ({ href, children, asPath }: NavItemProps)  => {
   return (
     <li>
       <Link

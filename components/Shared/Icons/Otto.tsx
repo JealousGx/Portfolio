@@ -1,6 +1,6 @@
-import { SVGProps, type JSX } from "react";
+import { SVGProps } from "react";
 
-const OttoLogo = (props: SVGProps<SVGSVGElement>): JSX.Element => (
+const OttoLogo = (props: SVGProps<SVGSVGElement>)  => (
   <svg xmlns="http://www.w3.org/2000/svg" xmlSpace="preserve" width="655.359" height="655.359" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 6.827 6.827" {...props}>
     <g id="Layer_x0020_1">
       <g id="_251231616">

@@ -1,6 +1,6 @@
-import { SVGProps, type JSX } from "react";
+import { SVGProps } from "react";
 
-const ServerlessLogo = (props: SVGProps<SVGSVGElement>): JSX.Element => (
+const ServerlessLogo = (props: SVGProps<SVGSVGElement>)  => (
   <svg
     version="1.2"
     baseProfile="tiny"

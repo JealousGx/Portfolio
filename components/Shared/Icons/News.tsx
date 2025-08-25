@@ -1,6 +1,6 @@
-import { SVGProps, type JSX } from "react";
+import { SVGProps } from "react";
 
-const NewsLogo = (props: SVGProps<SVGSVGElement>): JSX.Element => (
+const NewsLogo = (props: SVGProps<SVGSVGElement>)  => (
   <svg version="1.2" baseProfile="tiny" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg" width="256" height="256" xmlSpace="preserve" {...props}>
     <switch>
       <g>

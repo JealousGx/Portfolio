@@ -1,12 +1,12 @@
 import cx from "classnames";
-import { ReactNode, type JSX } from "react";
+import { ReactNode } from "react";
 
 interface KbdProps {
   children: ReactNode;
   className?: string;
 }
 
-const Kbd = ({ children, className }: KbdProps): JSX.Element => {
+const Kbd = ({ children, className }: KbdProps)  => {
   return (
     <>
       <kbd

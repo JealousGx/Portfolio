@@ -1,6 +1,6 @@
 import socials from "@/data/socials";
 import cx from "classnames";
-import { cloneElement, HTMLAttributes, ReactElement, type JSX } from "react";
+import { cloneElement, HTMLAttributes, ReactElement } from "react";
 import Link from "../Link";
 import Tooltip from "../Tooltip";
 
@@ -12,7 +12,7 @@ const Socials = ({
   className,
   small,
   ...otherProps
-}: SocialsProps): JSX.Element => {
+}: SocialsProps)  => {
   return (
     <div className={cx("flex space-x-4", className)} {...otherProps}>
       {socials.map(social => (

@@ -4,9 +4,8 @@ import Link from "next/link";
 
 import AvatarJPG from "public/static/images/avatar.webp";
 
-import type { JSX } from "react";
 
-const Hero = (): JSX.Element => {
+const Hero = ()  => {
   return (
     <div className="flex flex-col-reverse sm:mb-16 md:my-16 md:flex-row md:justify-between md:space-y-0">
       <div className="mt-8 flex flex-col justify-center space-y-4 md:mt-0 md:w-2/3">
@@ -17,13 +16,13 @@ const Hero = (): JSX.Element => {
           Software Engineer • Gamer • Tech Enthusiast
         </h2>
         <p className="text-md will-change-opacity text-lg text-black will-change-transform dark:text-gray-300">
-          Hello, I'm a highly skilled full stack web developer with over 2+
+          Hello, I'm a highly skilled full stack web developer with almost 3+
           years of professional experience with a rich background in creating
           and maintaining dynamic websites.
         </p>
         <div className="!mt-8 flex max-w-[14rem] flex-col gap-4 sm:max-w-full sm:flex-row">
           <button className="rounded-lg border-[1px] border-gray-300 bg-gray-50 px-4 py-2 capitalize hover:border-gray-200 dark:border-tertiary dark:bg-secondary dark:hover:border-accent">
-            <a href="https://drive.google.com/file/d/1y4LAS9nj1oGhp984XFiF_pe-rSdyDg8j/view?usp=drive_link" target="_blank" rel="noreferrer">
+            <a href={process.env.NEXT_PUBLIC_RESUME_LINK} target="_blank" rel="noreferrer">
               download resume
             </a>
           </button>

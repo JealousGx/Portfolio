@@ -1,6 +1,6 @@
-import { SVGProps, type JSX } from "react";
+import { SVGProps } from "react";
 
-const CommandIcon = (props: SVGProps<SVGSVGElement>): JSX.Element => (
+const CommandIcon = (props: SVGProps<SVGSVGElement>)  => (
   <svg
     className="feather feather-command"
     fill="none"

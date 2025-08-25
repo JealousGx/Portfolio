@@ -1,6 +1,6 @@
-import { SVGProps, type JSX } from "react";
+import { SVGProps } from "react";
 
-const WordpressLogo = (props: SVGProps<SVGSVGElement>): JSX.Element => (
+const WordpressLogo = (props: SVGProps<SVGSVGElement>)  => (
   <svg
     aria-hidden="true"
     data-prefix="fab"

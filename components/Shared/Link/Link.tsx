@@ -1,12 +1,11 @@
 import cx from "classnames";
 import NextLink from "next/link";
 import React, {
-  AnchorHTMLAttributes,
-  cloneElement,
-  forwardRef,
-  ReactElement,
-  ReactNode,
-  type JSX,
+    AnchorHTMLAttributes,
+    cloneElement,
+    forwardRef,
+    ReactElement,
+    ReactNode
 } from "react";
 import { ArrowUpRight } from "react-feather";
 
@@ -41,7 +40,7 @@ const ExternalLink = forwardRef<HTMLAnchorElement, ExternalLinkProps>(
       ...otherProps
     }: ExternalLinkProps,
     ref,
-  ): JSX.Element => {
+  )  => {
     const isInternalLink = href.startsWith("/") || href.startsWith("#");
 
     const isGradientUnderline = gradientUnderline

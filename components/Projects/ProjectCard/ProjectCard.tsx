@@ -4,7 +4,7 @@ import { GitHubLogo } from "@/components/Shared/Icons";
 import Link from "@/components/Shared/Link";
 import { cleanLink, getGitHubOwnerAndRepoFromLink } from "@/utils/helpers";
 import { CloudinaryImage } from "contentlayer/generated";
-import { forwardRef, type JSX } from "react";
+import { forwardRef } from "react";
 
 interface ProjectProps {
   slug: string;
@@ -28,7 +28,7 @@ const ProjectCard = forwardRef<HTMLDivElement, ProjectProps>(
       placeholderImage,
     }: ProjectProps,
     ref,
-  ): JSX.Element => {
+  )  => {
     return (
       <div
         className="flex flex-col space-y-8 rounded-lg border-[1px] border-gray-300 bg-gray-50 p-4 dark:border-tertiary dark:bg-secondary md:h-48 md:flex-row md:space-y-0 md:space-x-8"

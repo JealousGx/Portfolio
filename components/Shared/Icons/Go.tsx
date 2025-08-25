@@ -1,6 +1,6 @@
-import { SVGProps, type JSX } from "react";
+import { SVGProps } from "react";
 
-const GoLogo = (props: SVGProps<SVGSVGElement>): JSX.Element => (
+const GoLogo = (props: SVGProps<SVGSVGElement>)  => (
   <svg
     id="Layer_1"
     xmlns="http://www.w3.org/2000/svg"

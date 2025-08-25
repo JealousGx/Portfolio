@@ -3,14 +3,13 @@ import Link from "@/components/Shared/Link";
 import { ArrowRight } from "react-feather";
 import { HashnodePostWithPlaceHolderImage } from "types/hashnode";
 
-import type { JSX } from "react";
 
 interface BlogPostsProps {
   posts: HashnodePostWithPlaceHolderImage[];
   domain: string;
 }
 
-const BlogPosts = ({ posts, domain }: BlogPostsProps): JSX.Element => {
+const BlogPosts = ({ posts, domain }: BlogPostsProps)  => {
   return (
     <>
       <h2 className="mb-8 text-3xl font-bold">Blog Posts</h2>
@@ -31,7 +30,7 @@ const BlogPosts = ({ posts, domain }: BlogPostsProps): JSX.Element => {
         href="/blog"
         className="group mt-8 flex items-center justify-start space-x-2 text-xl font-medium"
       >
-        <span>View All Blog Posts</span>
+        <span>View More Blog Posts</span>
         <ArrowRight className="h-4 w-4 transition duration-200 group-hover:translate-x-1" />
       </Link>
     </>

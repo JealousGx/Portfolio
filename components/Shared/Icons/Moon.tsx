@@ -1,6 +1,6 @@
-import { SVGProps, type JSX } from "react";
+import { SVGProps } from "react";
 
-const MoonLogo = (props: SVGProps<SVGSVGElement>): JSX.Element => (
+const MoonLogo = (props: SVGProps<SVGSVGElement>)  => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     className="h-6 w-6"

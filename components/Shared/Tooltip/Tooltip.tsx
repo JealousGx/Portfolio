@@ -1,6 +1,6 @@
 import * as TooltipPrimitive from "@radix-ui/react-tooltip";
 import { AnimatePresence, motion } from "framer-motion";
-import { ReactNode, useState, type JSX } from "react";
+import { ReactNode, useState } from "react";
 
 const MotionContent = motion(TooltipPrimitive.Content);
 
@@ -9,7 +9,7 @@ interface TooltipProps {
   content: string;
 }
 
-const Tooltip = ({ children, content }: TooltipProps): JSX.Element => {
+const Tooltip = ({ children, content }: TooltipProps)  => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (

@@ -1,6 +1,6 @@
-import { SVGProps, type JSX } from "react";
+import { SVGProps } from "react";
 
-const YouTubeLogo = (props: SVGProps<SVGSVGElement>): JSX.Element => (
+const YouTubeLogo = (props: SVGProps<SVGSVGElement>)  => (
   <svg
     viewBox="0 0 24 24"
     xmlns="http://www.w3.org/2000/svg"

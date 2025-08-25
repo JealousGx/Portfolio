@@ -1,11 +1,10 @@
 import Link from "@/components/Shared/Link";
 
-import type { JSX } from "react";
 
 const ITEM_CLASSNAMES =
   "cursor-pointer capitalize text-gray-600 transition hover:text-gray-700 dark:text-gray-500 dark:hover:text-gray-600";
 
-const Footer = (): JSX.Element => {
+const Footer = () => {
   return (
     <footer className="mx-auto mb-16 flex max-w-3xl flex-col items-center space-y-2  px-8 text-center">
       <hr className="border-1 mb-8 w-full border-gray-200 dark:border-gray-800" />

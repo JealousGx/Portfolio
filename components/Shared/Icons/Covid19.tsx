@@ -1,6 +1,6 @@
-import { SVGProps, type JSX } from "react";
+import { SVGProps } from "react";
 
-const CovidLogo = (props: SVGProps<SVGSVGElement>): JSX.Element => (
+const CovidLogo = (props: SVGProps<SVGSVGElement>)  => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" {...props}>
       <g id="_03.Disease" data-name="03.Disease">
         <circle cx="32" cy="32" r="29" style={{ fill: "#b3b3b3" }} />
