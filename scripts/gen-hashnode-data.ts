@@ -2,30 +2,11 @@ import axios from "axios";
 import fs from "fs";
 import readingTime from "reading-time";
 
-const HASHNODE_DATA_FILE_PATH = "./data/hashnodev2.json";
+const HASHNODE_DATA_FILE_PATH = "./data/hashnode.json";
 const HASHNODE_API_URL = "https://gql.hashnode.com/";
 const HASHNODE_PUBLICATION = "blog.jealous.dev";
 
 const main = async () => {
-  //   const query = `
-  // query($username: String!, $page: Int!) {
-  // 	user(username: $username) {
-  //     publicationDomain
-  // 		publication {
-  // 			posts(page: $page) {
-  //         _id
-  // 				slug
-  // 				title
-  // 				brief
-  // 				coverImage
-  //         dateAdded
-  //       	contentMarkdown
-  // 			}
-  // 		}
-  // 	}
-  // }
-  // `;
-
   const query = `query Publication($host: String, $page: Int!, $pageSize: Int!) {
   publication(host: $host) {
     postsViaPage(pageSize: $pageSize, page: $page) {
@@ -52,7 +33,7 @@ const main = async () => {
   let domain: string;
   let didNotGetData = true;
 
-  for (let page = 0; didNotGetData; page++) {
+  for (let page = 1; didNotGetData; page++) {
     const res = await axios.post(
       HASHNODE_API_URL,
       JSON.stringify({
@@ -60,7 +41,7 @@ const main = async () => {
         variables: {
           host: HASHNODE_PUBLICATION,
           page,
-          pageSize: -10,
+          pageSize: 10,
         },
       }),
       {
@@ -74,7 +55,10 @@ const main = async () => {
       data: { data },
     } = res;
 
-    console.log(JSON.stringify(res.data.errors));
+    if (res.data.errors) {
+      console.log("response error: ", res.data.errors[0])
+      return;
+    }
 
     if (data.publication.postsViaPage.nodes.length === 0) {
       domain = HASHNODE_PUBLICATION;
@@ -91,6 +75,7 @@ const main = async () => {
     const wordCount = content.markdown.split(/\s+/g).length;
     return {
       ...postWithoutContent,
+      _id: postWithoutContent.id,
       readingTime: rTime,
       wordCount,
       coverImage: coverImage.url,

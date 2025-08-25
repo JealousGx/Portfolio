@@ -1,6 +1,6 @@
-import { SVGProps, type JSX } from "react";
+import { SVGProps } from "react";
 
-const GitHubLogo = (props: SVGProps<SVGSVGElement>): JSX.Element => (
+const GitHubLogo = (props: SVGProps<SVGSVGElement>)  => (
   <svg
     aria-hidden="true"
     data-prefix="fab"

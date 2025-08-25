@@ -1,6 +1,6 @@
-import { SVGProps, type JSX } from "react";
+import { SVGProps } from "react";
 
-const Twitterlogo = (props: SVGProps<SVGSVGElement>): JSX.Element => (
+const Twitterlogo = (props: SVGProps<SVGSVGElement>)  => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     x="0px"

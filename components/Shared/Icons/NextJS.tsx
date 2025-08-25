@@ -1,6 +1,6 @@
-import { SVGProps, type JSX } from "react";
+import { SVGProps } from "react";
 
-const NexJSLogo = (props: SVGProps<SVGSVGElement>): JSX.Element => (
+const NexJSLogo = (props: SVGProps<SVGSVGElement>)  => (
   <svg
     width="120px"
     height="60px"

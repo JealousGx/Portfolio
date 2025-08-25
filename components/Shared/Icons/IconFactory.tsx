@@ -1,23 +1,23 @@
-import { SVGProps, type JSX } from "react";
+import { SVGProps } from "react";
 import { X } from "react-feather";
 
 import {
-  AILogo,
-  AirbnbLogo,
-  ExpenseTrackerLogo,
-  FigmaLogo,
-  GoLogo,
-  MediumLogo,
-  MoonLogo,
-  NewsLogo,
-  NextJSLogo,
-  OttoLogo,
-  PhoneStoreLogo,
-  ReactLogo,
-  SunLogo,
-  TailwindCSSLogo,
-  TypescriptLogo,
-  ValaLogo,
+    AILogo,
+    AirbnbLogo,
+    ExpenseTrackerLogo,
+    FigmaLogo,
+    GoLogo,
+    MediumLogo,
+    MoonLogo,
+    NewsLogo,
+    NextJSLogo,
+    OttoLogo,
+    PhoneStoreLogo,
+    ReactLogo,
+    SunLogo,
+    TailwindCSSLogo,
+    TypescriptLogo,
+    ValaLogo,
 } from ".";
 import CovidLogo from "./Covid19";
 
@@ -28,7 +28,7 @@ interface IconFactoryProps extends SVGProps<SVGSVGElement> {
 const IconFactory = ({
   name,
   ...otherProps
-}: IconFactoryProps): JSX.Element => {
+}: IconFactoryProps)  => {
   switch (name) {
     case "nextjs":
       return <NextJSLogo {...otherProps} />;

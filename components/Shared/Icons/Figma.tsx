@@ -1,6 +1,6 @@
-import { SVGProps, type JSX } from "react";
+import { SVGProps } from "react";
 
-const FigmaLogo = (props: SVGProps<SVGSVGElement>): JSX.Element => (
+const FigmaLogo = (props: SVGProps<SVGSVGElement>)  => (
   <svg
     viewBox="0 0 288 432"
     fill="none"

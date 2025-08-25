@@ -1,6 +1,6 @@
 import Link from "@/components/Shared/Link";
 import cx from "classnames";
-import { Fragment, ReactNode, type JSX } from "react";
+import { Fragment, ReactNode } from "react";
 
 interface BreadcrumbItemProps {
   isRoot?: boolean;
@@ -14,7 +14,7 @@ const BreadcrumbItem = ({
   children,
   href,
   isCurrent,
-}: BreadcrumbItemProps): JSX.Element => (
+}: BreadcrumbItemProps)  => (
   <Fragment>
     {!isRoot && (
       <span aria-hidden="true" className="opacity-50">

@@ -1,7 +1,7 @@
 import { Variants, motion } from "framer-motion";
 import { Rotate as Hamburger } from "hamburger-react";
 import { useRouter } from "next/router";
-import { useEffect, useState, type JSX } from "react";
+import { useEffect, useState } from "react";
 
 import ThemeToggler from "./ThemeToggler";
 
@@ -44,7 +44,7 @@ const mobileMenuVariants: Variants = {
   },
 };
 
-const Nav = (): JSX.Element => {
+const Nav = ()  => {
   const { asPath } = useRouter();
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
 

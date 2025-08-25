@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { useEffect, useState, type JSX } from "react";
+import { useEffect, useState } from "react";
 
 import { capitalize } from "@/utils/helpers";
 
@@ -11,7 +11,7 @@ interface IBreadcrumb {
   isCurrent: boolean;
 }
 
-const Breadcrumb = (): JSX.Element => {
+const Breadcrumb = ()  => {
   const { asPath } = useRouter();
   const [breadcrumbs, setBreadcrumbs] = useState<IBreadcrumb[]>([]);
 

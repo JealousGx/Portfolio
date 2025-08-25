@@ -1,9 +1,9 @@
 import { AnimatePresence, motion } from "framer-motion";
-import React, { ReactNode, cloneElement, type JSX } from "react";
+import React, { ReactNode, cloneElement } from "react";
 import { X } from "react-feather";
 import { ToastIcon, Toaster, toast } from "react-hot-toast";
 
-const CustomToaster = (): JSX.Element => (
+const CustomToaster = () => (
   <Toaster position="bottom-right">
     {t => {
       const icon = <ToastIcon toast={t} />;
@@ -25,7 +25,7 @@ const CustomToaster = (): JSX.Element => (
                     className="ml-2 transition duration-200 hover:opacity-60"
                     onClick={() => toast.dismiss(t.id)}
                   >
-                    <X className="h-5 w-5" />
+                    <X  size={16} />
                   </button>
                 )}
               </React.Fragment>

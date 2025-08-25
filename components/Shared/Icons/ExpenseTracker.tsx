@@ -1,6 +1,6 @@
-import { SVGProps, type JSX } from "react";
+import { SVGProps } from "react";
 
-const ExpenseTrackerLogo = (props: SVGProps<SVGSVGElement>): JSX.Element => (
+const ExpenseTrackerLogo = (props: SVGProps<SVGSVGElement>)  => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" {...props}>
     <g id="Exchange">
       <path fill="#425b72" d="M44 5h-5l1.6-1.2a1 1 0 0 0-1.2-1.6C34.31 6 35.6 5 35.36 5.25a1 1 0 0 0-.26 1.17c.15.32.24.33 4.3 3.38a1 1 0 0 0 1.2-1.6L39 7h5a2 2 0 0 1 2 2v3a1 1 0 0 0 2 0V9a4 4 0 0 0-4-4zM8.6 38.2a1 1 0 0 0-1.2 1.6L9 41H4a2 2 0 0 1-2-2v-3a1 1 0 0 0-2 0v3a4 4 0 0 0 4 4h5l-1.6 1.2a1 1 0 0 0 1.2 1.6c5.9-4.43 5.88-3.19 0-7.6z"/>

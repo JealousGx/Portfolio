@@ -1,6 +1,6 @@
-import { SVGProps, type JSX } from "react";
+import type { SVGProps } from "react";
 
-const AirbnbLogo = (props: SVGProps<SVGSVGElement>): JSX.Element => (
+const AirbnbLogo = (props: SVGProps<SVGSVGElement>)  => (
   <svg
     version="1.2"
     baseProfile="tiny"

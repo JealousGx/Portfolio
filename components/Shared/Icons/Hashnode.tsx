@@ -1,6 +1,6 @@
-import { SVGProps, type JSX } from "react";
+import { SVGProps } from "react";
 
-const HashnodeLogo = (props: SVGProps<SVGSVGElement>): JSX.Element => (
+const HashnodeLogo = (props: SVGProps<SVGSVGElement>)  => (
   <svg viewBox="0 0 337 337" fill="none" {...props}>
     <path
       fillRule="evenodd"

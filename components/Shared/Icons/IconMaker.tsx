@@ -4,7 +4,7 @@ interface IconMakerProps extends PropsWithoutRef<JSX.IntrinsicElements["div"]> {
   svgCode: string;
 }
 
-const IconMaker = ({ svgCode, ...otherProps }: IconMakerProps): JSX.Element => {
+const IconMaker = ({ svgCode, ...otherProps }: IconMakerProps)  => {
   return <div dangerouslySetInnerHTML={{ __html: svgCode }} {...otherProps} />;
 };
 

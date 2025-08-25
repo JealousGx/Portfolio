@@ -1,10 +1,11 @@
 import { GetStaticProps, NextPage } from "next";
 
-import hashnodeData from "@/data/hashnode.json";
 import BlogPostCard from "@/components/Blog/BlogPostCard";
+import ExternalLink from "@/components/Shared/Link";
+import hashnodeData from "@/data/hashnode.json";
 import getPreviewImageUrl from "@/utils/getPreviewImageURL";
-import { HashnodePostWithPlaceHolderImage } from "types/hashnode";
 import { NextSeo } from "next-seo";
+import { HashnodePostWithPlaceHolderImage } from "types/hashnode";
 
 interface BlogPostsPageProps {
   posts: HashnodePostWithPlaceHolderImage[];
@@ -32,6 +33,13 @@ const BlogPostsPage: NextPage<BlogPostsPageProps> = ({ posts }) => {
           />
         ))}
       </div>
+
+      <ExternalLink
+        href="https://blog.jealous.dev"
+        className="group mt-8 flex items-center justify-start space-x-2 text-xl font-medium"
+      >
+        <span>View All Blog Posts</span>
+      </ExternalLink>
     </>
   );
 };

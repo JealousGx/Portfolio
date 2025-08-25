@@ -1,14 +1,14 @@
 import {
-  Action,
-  KBarAnimator,
-  KBarPortal,
-  KBarPositioner,
-  KBarProvider,
-  KBarSearch,
+    Action,
+    KBarAnimator,
+    KBarPortal,
+    KBarPositioner,
+    KBarProvider,
+    KBarSearch,
 } from "kbar";
 import { useRouter } from "next/router";
-import { ReactNode, type JSX } from "react";
-import { Code, Search } from "react-feather";
+import { ReactNode } from "react";
+import { Search } from "react-feather";
 import toast from "react-hot-toast";
 
 import Kbd from "@/components/Shared/Kbd";
@@ -25,7 +25,7 @@ interface KProviderProps {
   children: ReactNode;
 }
 
-const KProvider = ({ children }: KProviderProps): JSX.Element => {
+const KProvider = ({ children }: KProviderProps)  => {
   const { push } = useRouter();
   const { toggleCircles } = useCircles();
 

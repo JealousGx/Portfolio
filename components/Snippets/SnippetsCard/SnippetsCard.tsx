@@ -1,7 +1,5 @@
 import Link from "@/components/Shared/Link";
 
-import type { JSX } from "react";
-
 interface SnippetsCardProps {
   slug: string;
   title: string;
@@ -14,7 +12,7 @@ const SnippetCard = ({
   title,
   description,
   date,
-}: SnippetsCardProps): JSX.Element => {
+}: SnippetsCardProps) => {
   return (
     <article className="w-full">
       <Link href={`/snippets/${slug}`} className="flex-col space-y-2">
