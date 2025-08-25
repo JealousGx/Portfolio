@@ -1,5 +1,5 @@
 import { useTheme } from "next-themes";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, type JSX } from "react";
 
 import IconFactory from "@/components/Shared/Icons/IconFactory";
 import Tooltip from "@/components/Shared/Tooltip";

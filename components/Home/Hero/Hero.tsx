@@ -4,6 +4,8 @@ import Link from "next/link";
 
 import AvatarJPG from "public/static/images/avatar.webp";
 
+import type { JSX } from "react";
+
 const Hero = (): JSX.Element => {
   return (
     <div className="flex flex-col-reverse sm:mb-16 md:my-16 md:flex-row md:justify-between md:space-y-0">

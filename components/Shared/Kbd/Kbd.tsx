@@ -1,5 +1,5 @@
 import cx from "classnames";
-import { ReactNode } from "react";
+import { ReactNode, type JSX } from "react";
 
 interface KbdProps {
   children: ReactNode;

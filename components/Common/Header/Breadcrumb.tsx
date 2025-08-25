@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useEffect, useState, type JSX } from "react";
 
 import { capitalize } from "@/utils/helpers";
 

@@ -1,6 +1,8 @@
 import Breadcrumb from "./Breadcrumb";
 import Nav from "./Nav";
 
+import type { JSX } from "react";
+
 const Header = (): JSX.Element => {
   return (
     <div className="my-4 mx-auto flex max-w-3xl items-center justify-between px-6">

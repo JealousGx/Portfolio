@@ -3,11 +3,11 @@
   "version": "0.0.1",
   "license": "GPL-3.0",
   "engines": {
-    "node": ">=20.x"
+    "node": ">=23.x"
   },
   "scripts": {
     "prepare": "husky install",
-    "dev": "next dev",
+    "dev": "next dev --turbopack",
     "prebuild-test": "yarn gen:hashnode",
     "build": "contentlayer build && next build",
     "start": "next start",
@@ -21,15 +21,15 @@
   "devDependencies": {
     "@commitlint/cli": "^19.5.0",
     "@commitlint/config-conventional": "^19.5.0",
-    "@next/eslint-plugin-next": "^14.2.14",
+    "@next/eslint-plugin-next": "15.5.0",
     "@types/node": "^22.7.4",
-    "@types/react": "^18.3.11",
+    "@types/react": "19.1.11",
     "@typescript-eslint/eslint-plugin": "^8.8.0",
     "@typescript-eslint/parser": "^8.8.0",
     "autoprefixer": "^10.4.20",
     "eslint": "^9.12.0",
     "eslint-config-google": "^0.14.0",
-    "eslint-config-next": "^14.2.14",
+    "eslint-config-next": "15.5.0",
     "eslint-config-prettier": "^9.1.0",
     "husky": "^9.1.6",
     "postcss": "^8.4.47",
@@ -60,13 +60,13 @@
     "kbar": "^0.1.0-beta.45",
     "lqip-modern": "^2.1.0",
     "mdx-bundler": "^10.0.3",
-    "next": "^14.2.14",
+    "next": "15.5.0",
     "next-contentlayer": "^0.3.4",
     "next-seo": "^6.6.0",
     "next-themes": "^0.3.0",
     "nextjs-progressbar": "^0.0.16",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
+    "react": "19.1.1",
+    "react-dom": "19.1.1",
     "react-feather": "^2.0.10",
     "react-hook-form": "^7.53.0",
     "react-hot-toast": "^2.4.1",
@@ -87,6 +87,7 @@
     },
     "react-virtual": {
       "react": "$react"
-    }
+    },
+    "@types/react": "19.1.11"
   }
 }

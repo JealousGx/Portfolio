@@ -7,7 +7,7 @@ import {
   KBarSearch,
 } from "kbar";
 import { useRouter } from "next/router";
-import { ReactNode } from "react";
+import { ReactNode, type JSX } from "react";
 import { Code, Search } from "react-feather";
 import toast from "react-hot-toast";
 

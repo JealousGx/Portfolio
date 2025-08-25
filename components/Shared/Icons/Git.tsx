@@ -1,4 +1,4 @@
-import { SVGProps } from "react";
+import { SVGProps, type JSX } from "react";
 
 const GitLogo = (props: SVGProps<SVGSVGElement>): JSX.Element => (
   <svg

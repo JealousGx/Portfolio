@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from "framer-motion";
-import React, { ReactNode, cloneElement } from "react";
+import React, { ReactNode, cloneElement, type JSX } from "react";
 import { X } from "react-feather";
 import { ToastIcon, Toaster, toast } from "react-hot-toast";
 

@@ -6,6 +6,7 @@ import React, {
   forwardRef,
   ReactElement,
   ReactNode,
+  type JSX,
 } from "react";
 import { ArrowUpRight } from "react-feather";
 
@@ -86,7 +87,7 @@ const ExternalLink = forwardRef<HTMLAnchorElement, ExternalLinkProps>(
             {...otherProps}
           >
             {icon &&
-              cloneElement(icon as ReactElement, {
+              cloneElement(icon as ReactElement<any>, {
                 className:
                   width && height ? `${width} ${height} mr-1` : "h-4 w-4 mr-1",
               })}

@@ -3,6 +3,8 @@ import Link from "@/components/Shared/Link";
 import { ArrowRight } from "react-feather";
 import { HashnodePostWithPlaceHolderImage } from "types/hashnode";
 
+import type { JSX } from "react";
+
 interface BlogPostsProps {
   posts: HashnodePostWithPlaceHolderImage[];
   domain: string;

@@ -1,6 +1,6 @@
 import Link from "@/components/Shared/Link";
 import cx from "classnames";
-import { ReactNode } from "react";
+import { ReactNode, type JSX } from "react";
 
 interface NavItemProps {
   href: string;

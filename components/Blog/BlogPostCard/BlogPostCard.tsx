@@ -1,5 +1,6 @@
 import Link from "@/components/Shared/Link";
 import { format, parseISO } from "date-fns";
+import type { JSX } from "react";
 interface BlogPostCardProps {
   url: string;
   title: string;
