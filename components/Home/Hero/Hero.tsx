@@ -3,7 +3,6 @@ import NextImage from "next/image";
 import Link from "next/link";
 
 import AvatarJPG from "public/static/images/avatar.webp";
-import Resume from "public/static/resume.pdf";
 
 const Hero = (): JSX.Element => {
   return (
@@ -22,7 +21,7 @@ const Hero = (): JSX.Element => {
         </p>
         <div className="!mt-8 flex max-w-[14rem] flex-col gap-4 sm:max-w-full sm:flex-row">
           <button className="rounded-lg border-[1px] border-gray-300 bg-gray-50 px-4 py-2 capitalize hover:border-gray-200 dark:border-tertiary dark:bg-secondary dark:hover:border-accent">
-            <a href={Resume} target="_blank" rel="noreferrer">
+            <a href="https://drive.google.com/file/d/1y4LAS9nj1oGhp984XFiF_pe-rSdyDg8j/view?usp=drive_link" target="_blank" rel="noreferrer">
               download resume
             </a>
           </button>
