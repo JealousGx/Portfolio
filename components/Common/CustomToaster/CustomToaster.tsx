@@ -1,3 +1,5 @@
+"use client";
+
 import { AnimatePresence, motion } from "framer-motion";
 import React, { ReactNode, cloneElement } from "react";
 import { X } from "react-feather";
@@ -25,7 +27,7 @@ const CustomToaster = () => (
                     className="ml-2 transition duration-200 hover:opacity-60"
                     onClick={() => toast.dismiss(t.id)}
                   >
-                    <X  size={16} />
+                    <X size={16} />
                   </button>
                 )}
               </React.Fragment>

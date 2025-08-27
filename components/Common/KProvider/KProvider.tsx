@@ -1,10 +1,10 @@
 import {
-    Action,
-    KBarAnimator,
-    KBarPortal,
-    KBarPositioner,
-    KBarProvider,
-    KBarSearch,
+  Action,
+  KBarAnimator,
+  KBarPortal,
+  KBarPositioner,
+  KBarProvider,
+  KBarSearch,
 } from "kbar";
 import { useRouter } from "next/router";
 import { ReactNode } from "react";
@@ -25,7 +25,7 @@ interface KProviderProps {
   children: ReactNode;
 }
 
-const KProvider = ({ children }: KProviderProps)  => {
+const KProvider = ({ children }: KProviderProps) => {
   const { push } = useRouter();
   const { toggleCircles } = useCircles();
 

@@ -1,12 +1,11 @@
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import NextImage from "next/image";
 
-import MDXComponents from "@/components/Common/MDXComponents";
 import CustomGiscus from "@/components/Shared/CustomGiscus";
 import { GitHubLogo } from "@/components/Shared/Icons";
 import Link from "@/components/Shared/Link";
+import { MDXComponent } from "@/components/Shared/MDXComponent";
 import { allSnippets, Snippet } from "contentlayer/generated";
-import { useMDXComponent } from "next-contentlayer/hooks";
 
 import { NextSeo } from "next-seo";
 import AvatarJPG from "public/static/images/avatar.webp";
@@ -16,8 +15,6 @@ interface SnippetPageProps {
 }
 
 const SnippetPage: NextPage<SnippetPageProps> = ({ snippet }) => {
-  const ProjectMDX = useMDXComponent(snippet.body.code);
-
   return (
     <>
       <NextSeo
@@ -76,7 +73,7 @@ const SnippetPage: NextPage<SnippetPageProps> = ({ snippet }) => {
           {snippet.description}
         </p>
         <div className="prose leading-8">
-          <ProjectMDX components={{ ...MDXComponents }} />
+          <MDXComponent code={snippet.body.code} />
         </div>
         <div className="flex w-full flex-col flex-wrap whitespace-nowrap">
           <p className="mb-4 font-bold">Tags:</p>

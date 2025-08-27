@@ -5,7 +5,7 @@ import Link from "next/link";
 import AvatarJPG from "public/static/images/avatar.webp";
 
 
-const Hero = ()  => {
+const Hero = () => {
   return (
     <div className="flex flex-col-reverse sm:mb-16 md:my-16 md:flex-row md:justify-between md:space-y-0">
       <div className="mt-8 flex flex-col justify-center space-y-4 md:mt-0 md:w-2/3">
@@ -16,7 +16,7 @@ const Hero = ()  => {
           Software Engineer • Gamer • Tech Enthusiast
         </h2>
         <p className="text-md will-change-opacity text-lg text-black will-change-transform dark:text-gray-300">
-          Hello, I'm a highly skilled full stack web developer with almost 3+
+          Hello, I&apos;m a highly skilled full stack web developer with almost 3+
           years of professional experience with a rich background in creating
           and maintaining dynamic websites.
         </p>
