@@ -1,15 +1,14 @@
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import NextImage from "next/image";
 
-import Link from "@/components/Shared/Link";
-import { allProjects, Project } from "contentlayer/generated";
-import IconFactory from "@/components/Shared/Icons/IconFactory";
-import { useMDXComponent } from "next-contentlayer/hooks";
-import MDXComponents from "@/components/Common/MDXComponents";
 import CustomGiscus from "@/components/Shared/CustomGiscus";
-import { getGitHubOwnerAndRepoFromLink } from "@/utils/helpers";
 import { GitHubLogo } from "@/components/Shared/Icons";
+import IconFactory from "@/components/Shared/Icons/IconFactory";
+import Link from "@/components/Shared/Link";
+import { MDXComponent } from "@/components/Shared/MDXComponent";
 import getPreviewImageUrl from "@/utils/getPreviewImageURL";
+import { getGitHubOwnerAndRepoFromLink } from "@/utils/helpers";
+import { allProjects, Project } from "contentlayer/generated";
 import { NextSeo } from "next-seo";
 
 interface ProjectPageProps {
@@ -21,7 +20,6 @@ const SkillPage: NextPage<ProjectPageProps> = ({
   project,
   projectImagePreview,
 }) => {
-  const ProjectMDX = useMDXComponent(project.body.code);
 
   return (
     <>
@@ -92,7 +90,7 @@ const SkillPage: NextPage<ProjectPageProps> = ({
 
       <article>
         <div className="prose my-12 max-w-full leading-8 text-black dark:text-gray-300">
-          <ProjectMDX components={{ ...MDXComponents }} />
+          <MDXComponent code={project.body.code} />
         </div>
         <div className="rounded-xl border-[1px] border-gray-300 p-8 dark:border-tertiary">
           <CustomGiscus term={`project: ${project.name}`} />

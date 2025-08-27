@@ -1,11 +1,11 @@
 import cx from "classnames";
 import NextLink from "next/link";
 import React, {
-    AnchorHTMLAttributes,
-    cloneElement,
-    forwardRef,
-    ReactElement,
-    ReactNode
+  AnchorHTMLAttributes,
+  cloneElement,
+  forwardRef,
+  ReactElement,
+  ReactNode
 } from "react";
 import { ArrowUpRight } from "react-feather";
 
@@ -40,13 +40,13 @@ const ExternalLink = forwardRef<HTMLAnchorElement, ExternalLinkProps>(
       ...otherProps
     }: ExternalLinkProps,
     ref,
-  )  => {
+  ) => {
     const isInternalLink = href.startsWith("/") || href.startsWith("#");
 
     const isGradientUnderline = gradientUnderline
       ? true
       : (typeof children === "string" || typeof children === "undefined") &&
-          !noGradientUnderline
+        !noGradientUnderline
         ? true
         : false;
 
@@ -76,8 +76,8 @@ const ExternalLink = forwardRef<HTMLAnchorElement, ExternalLinkProps>(
               "mr-1 inline-flex items-center space-x-1 text-gray-600 transition duration-200 dark:text-gray-300",
               isGradientUnderline && "gradient-underline",
               isGradientUnderline &&
-                !noHighlight &&
-                "text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300",
+              !noHighlight &&
+              "text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300",
               className,
             )}
             target="_blank"
@@ -102,6 +102,7 @@ const ExternalLink = forwardRef<HTMLAnchorElement, ExternalLinkProps>(
             )}
           </a>
         )}
+        {/* eslint-disable-next-line react/no-unknown-property */}
         <style jsx>{`
           .gradient-underline :not(.anchor) {
             text-decoration: none;

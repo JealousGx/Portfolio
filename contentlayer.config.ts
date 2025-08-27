@@ -2,11 +2,10 @@ import {
   defineDocumentType,
   defineNestedType,
   makeSource,
-} from "contentlayer/source-files";
+} from "contentlayer2/source-files";
 
 import readingTime from "reading-time";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
-import rehypePrettyCode from "rehype-pretty-code";
 import rehypeSlug from "rehype-slug";
 
 export const CloudinaryImage = defineNestedType(() => ({
@@ -70,7 +69,7 @@ export const Project = defineDocumentType(() => ({
   computedFields: {
     slug: {
       type: "string",
-      resolve: doc => doc._raw.sourceFileName.replace(/\.mdx$/, ""),
+      resolve: (doc) => doc._raw.sourceFileName.replace(/\.mdx$/, ""),
     },
   },
 }));
@@ -130,7 +129,7 @@ export const Snippet = defineDocumentType(() => ({
   computedFields: {
     slug: {
       type: "string",
-      resolve: doc => doc._raw.sourceFileName.replace(/\.mdx$/, ""),
+      resolve: (doc) => doc._raw.sourceFileName.replace(/\.mdx$/, ""),
     },
     dateUpdated: {
       type: "string",
@@ -138,35 +137,132 @@ export const Snippet = defineDocumentType(() => ({
     },
     readingTime: {
       type: "json",
-      resolve: doc => readingTime(doc.body.raw),
+      resolve: (doc) => readingTime(doc.body.raw),
     },
     wordCount: {
       type: "number",
-      resolve: doc => doc.body.raw.split(/\s+/g).length,
+      resolve: (doc) => doc.body.raw.split(/\s+/g).length,
+    },
+  },
+}));
+
+const Testimonial = defineNestedType(() => ({
+  name: "Testimonial",
+  fields: {
+    id: { type: "string", required: true },
+    name: { type: "string", required: true },
+    role: { type: "string", required: true },
+    testimonial: { type: "string", required: true },
+    avatar: { type: "string", required: true },
+    dateAdded: { type: "string", required: true },
+    rating: { type: "number", required: true },
+    project: { type: "string", required: true },
+  },
+}));
+
+export const Testimonials = defineDocumentType(() => ({
+  name: "Testimonials",
+  filePathPattern: "testimonial.json",
+  contentType: "data",
+  isSingleton: true,
+  fields: {
+    testimonials: {
+      type: "list",
+      of: Testimonial,
+      required: true,
+    },
+  },
+}));
+
+const Skill = defineNestedType(() => ({
+  name: "Skill",
+  fields: {
+    id: { type: "number", required: true },
+    name: { type: "string", required: true },
+    slug: { type: "string", required: true },
+    iconSVG: { type: "string", required: true },
+  },
+}));
+
+const ProjectProvider = defineNestedType(() => ({
+  name: "ProjectProvider",
+  fields: {
+    id: { type: "number", required: true },
+    name: { type: "string", required: true },
+    slug: { type: "string", required: true },
+  },
+}));
+
+export const KProvider = defineDocumentType(() => ({
+  name: "KProvider",
+  filePathPattern: "kprovider.json",
+  contentType: "data",
+  isSingleton: true,
+  fields: {
+    skills: {
+      type: "list",
+      of: Skill,
+      required: true,
+    },
+    projects: {
+      type: "list",
+      of: ProjectProvider,
+      required: true,
+    },
+  },
+}));
+
+const ReadingTime = defineNestedType(() => ({
+  name: "ReadingTime",
+  fields: {
+    text: { type: "string", required: true },
+    minutes: { type: "number", required: true },
+    time: { type: "number", required: true },
+    words: { type: "number", required: true },
+  },
+}));
+
+export const HashnodePost = defineDocumentType(() => ({
+  name: "HashnodePost",
+  filePathPattern: "hashnode.json",
+  contentType: "data",
+  isSingleton: true,
+  fields: {
+    domain: { type: "string", required: true },
+    posts: {
+      type: "list",
+      of: defineNestedType(() => ({
+        name: "Post",
+        fields: {
+          id: { type: "string", required: true },
+          title: { type: "string", required: true },
+          slug: { type: "string", required: true },
+          brief: { type: "string", required: true },
+          readTimeInMinutes: { type: "number", required: true },
+          _id: { type: "string", required: true },
+          readingTime: { type: "nested", of: ReadingTime, required: true },
+          wordCount: { type: "number", required: true },
+          coverImage: { type: "string", required: true },
+          dateAdded: { type: "string", required: true },
+        },
+      })),
+      required: true,
     },
   },
 }));
 
 export default makeSource({
   contentDirPath: "data",
-  documentTypes: [Project, Snippet],
+  documentTypes: [
+    Project,
+    Snippet,
+    Testimonials,
+    KProvider,
+    HashnodePost,
+  ],
   mdx: {
     rehypePlugins: [
       rehypeSlug,
-      [
-        // @ts-expect-error
-        rehypePrettyCode,
-        {
-          theme: "github-dark",
-          onVisitLine(node) {
-            // Prevent lines from collapsing in `display: grid` mode, and
-            // allow empty lines to be copy/pasted
-            if (node.children.length === 0) {
-              node.children = [{ type: "text", value: " " }];
-            }
-          },
-        },
-      ],
       [
         rehypeAutolinkHeadings,
         {

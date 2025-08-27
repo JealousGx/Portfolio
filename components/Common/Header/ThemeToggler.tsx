@@ -7,7 +7,7 @@ import Tooltip from "@/components/Shared/Tooltip";
 const CLASSNAMES =
   "rounded-lg transition cursor-pointer linear duration-200 p-2 hover:ring-2 hover:ring-gray-300";
 
-const ThemeToggler = ()  => {
+const ThemeToggler = () => {
   const [mounted, setMounted] = useState(false);
   const { systemTheme, theme, setTheme } = useTheme();
   const currentTheme = theme === "system" ? systemTheme : theme;
@@ -16,6 +16,7 @@ const ThemeToggler = ()  => {
     if (!mounted) {
       setMounted(true);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (!mounted) return null;

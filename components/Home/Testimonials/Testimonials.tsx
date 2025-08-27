@@ -1,5 +1,4 @@
 import NextImage from "next/image";
-import React from "react";
 
 import "swiper/css";
 import { Autoplay } from "swiper/modules";
@@ -55,13 +54,13 @@ const TestimonialCard = ({
       id={id}
       className="w-full flex flex-col items-center justify-center gap-4"
     >
-      <h2 className="text-xl">"{testimonial}"</h2>
+      <h2 className="text-xl">&quot;{testimonial}&quot;</h2>
 
       <div className="mt-1 flex items-center space-x-2">
         <div className="mr-1 mt-1">
           <NextImage
             src={avatar}
-            alt={`${name}'s Avatar`}
+            alt={`${name}&apos;s Avatar`}
             height={32}
             width={32}
             className="rounded-full filter grayscale"

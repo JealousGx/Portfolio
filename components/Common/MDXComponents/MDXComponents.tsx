@@ -1,6 +1,7 @@
-import { MDXComponents } from "mdx/types";
 import Link from "@/components/Shared/Link";
-import { cloneElement, useRef } from "react";
+import { MDXComponents } from "mdx/types";
+import Image from "next/image";
+import React, { cloneElement, useRef } from "react";
 
 const CodeBlock = props => {
   const codeRef = useRef<HTMLElement>(null);
@@ -8,14 +9,16 @@ const CodeBlock = props => {
   return (
     <div style={{ position: "relative", overflow: "auto" }}>
       <pre {...props}>
-        {cloneElement(props.children as React.ReactElement<any>, { ref: codeRef })}
+        {React.isValidElement(props.children)
+          ? cloneElement(props.children, { ref: codeRef })
+          : props.children}
       </pre>
     </div>
   );
 };
 
 const BlogImage = props => {
-  return <img {...props} className="my-8 rounded-md" />;
+  return <Image {...props} alt="Blog post image" className="my-8 rounded-md" />;
 };
 
 const BlogLink = props => {

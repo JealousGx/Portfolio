@@ -24,11 +24,11 @@ export const getServerSideProps = async ({ res }) => {
       <changefreq>daily</changefreq>
      </url>
       ${allProjects.map(project => {
-        return `<url>
+    return `<url>
         <loc>https://${process.env.NEXT_PUBLIC_WEBAPP_LINK}/projects/${project.slug}</loc>
         <changefreq>weekly</changefreq>
         </url>`;
-      })}
+  })}
    </urlset>
    </xml>
   `;

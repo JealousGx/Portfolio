@@ -28,7 +28,7 @@ const ProjectCard = forwardRef<HTMLDivElement, ProjectProps>(
       placeholderImage,
     }: ProjectProps,
     ref,
-  )  => {
+  ) => {
     return (
       <div
         className="flex flex-col space-y-8 rounded-lg border-[1px] border-gray-300 bg-gray-50 p-4 dark:border-tertiary dark:bg-secondary md:h-48 md:flex-row md:space-y-0 md:space-x-8"

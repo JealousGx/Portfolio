@@ -14,12 +14,10 @@ interface BlogPostCardProps {
 const ProjectCard = ({
   url,
   title,
-  image,
-  placeholderImage,
   date,
   readingTime,
   excerpt,
-}: BlogPostCardProps)=> {
+}: BlogPostCardProps) => {
   return (
     <article className="flex flex-col-reverse rounded-xl border-[1px] border-gray-300 bg-gray-50 py-4 px-6 transition duration-200 hover:border-gray-200 dark:border-tertiary dark:bg-secondary dark:hover:border-accent md:hover:scale-[1.02]">
       <Link href={url} noExternalLinkIcon noGradientUnderline>

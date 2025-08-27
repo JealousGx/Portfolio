@@ -2,11 +2,11 @@ import { GetStaticProps, NextPage } from "next";
 
 import ProjectCard from "@/components/Projects/ProjectCard";
 
-import { allProjects, Project } from "contentlayer/generated";
 import Link from "@/components/Shared/Link";
-import { ArrowRight } from "react-feather";
 import getPreviewImageUrl from "@/utils/getPreviewImageURL";
+import { allProjects, Project } from "contentlayer/generated";
 import { NextSeo } from "next-seo";
+import { ArrowRight } from "react-feather";
 
 export interface ProjectWithPlaceholderImage extends Project {
   placeholderImage: string;
@@ -24,7 +24,7 @@ const ProjectsPage: NextPage<ProjectsPageProps> = ({
       <NextSeo title="Projects" description="Projects worked upon by Matt." />
       <h1 className="mb-8 text-2xl font-bold">Projects</h1>
       <div className="flex-col space-y-8">
-        {allProjectsWithPlaceholderImages.map((project, index) => (
+        {allProjectsWithPlaceholderImages.map((project) => (
           <ProjectCard
             key={project._id}
             name={project.name}
