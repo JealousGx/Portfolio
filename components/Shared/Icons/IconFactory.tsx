@@ -2,24 +2,25 @@ import { SVGProps } from "react";
 import { X } from "react-feather";
 
 import {
-    AILogo,
-    AirbnbLogo,
-    ExpenseTrackerLogo,
-    FigmaLogo,
-    GoLogo,
-    MediumLogo,
-    MoonLogo,
-    NewsLogo,
-    NextJSLogo,
-    OttoLogo,
-    PhoneStoreLogo,
-    ReactLogo,
-    SunLogo,
-    TailwindCSSLogo,
-    TypescriptLogo,
-    ValaLogo,
+  AILogo,
+  AirbnbLogo,
+  ExpenseTrackerLogo,
+  FigmaLogo,
+  GoLogo,
+  MediumLogo,
+  MoonLogo,
+  NewsLogo,
+  NextJSLogo,
+  OttoLogo,
+  PhoneStoreLogo,
+  ReactLogo,
+  SunLogo,
+  TailwindCSSLogo,
+  TypescriptLogo,
+  ValaLogo,
 } from ".";
 import CovidLogo from "./Covid19";
+import FounderSignalLogo from "./FounderSignal";
 
 interface IconFactoryProps extends SVGProps<SVGSVGElement> {
   name: string;
@@ -28,7 +29,7 @@ interface IconFactoryProps extends SVGProps<SVGSVGElement> {
 const IconFactory = ({
   name,
   ...otherProps
-}: IconFactoryProps)  => {
+}: IconFactoryProps) => {
   switch (name) {
     case "nextjs":
       return <NextJSLogo {...otherProps} />;
@@ -48,6 +49,8 @@ const IconFactory = ({
       return <NewsLogo {...otherProps} />;
     case "expenseTracker":
       return <ExpenseTrackerLogo {...otherProps} />;
+    case "foundersignal":
+      return <FounderSignalLogo {...otherProps} />;
     case "airbnb":
       return <AirbnbLogo {...otherProps} />;
     case "ai":

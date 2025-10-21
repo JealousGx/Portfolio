@@ -44,6 +44,12 @@ module.exports = withContentlayer({
         port: "",
         pathname: "/dms/image/v2/**",
       },
+      {
+        protocol: "https",
+        hostname: "raw.githubusercontent.com",
+        port: "",
+        pathname: "/JealousGx/**",
+      },
     ],
   },
 });

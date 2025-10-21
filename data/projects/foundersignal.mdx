@@ -1,0 +1,32 @@
+---
+name: "FounderSignal"
+description: "Validate Ideas. Build Smarter. Stop building products no one wants."
+link: "https://foundersignal.app/"
+githubLink: "https://github.com/JealousGx/FounderSignal"
+iconName: "foundersignal"
+image:
+  url: "https://raw.githubusercontent.com/JealousGx/FounderSignal/refs/heads/main/web/public/assets/og-image.png"
+  height: 632
+  width: 1200
+---
+
+A B2B SaaS tool designed to de-risk the initial stages of product development. FounderSignal automatically analyzes real-time, community-driven data from platforms like Reddit to give founders, product managers, and indie hackers the Voice of Customer (VoC) insights needed to achieve product-market fit faster.
+
+### <span style={{ color: "black" }}>Key Features:</span>
+
+- **Frontend:** Next.js (App Router), TypeScript, and React.
+- **Backend/API:** High-performance **Golang** server leveraging **GORM** for robust database interaction.
+- **Styling:** Tailwind CSS and common component libraries (such as Shadcn) for a clean, professional UX.
+- **Database:** PostgreSQL for reliable, structured storage of user data and report metadata.
+- **Data Acquisition:** Custom **Reddit API Client** and a dedicated **web scraper** for targeted data ingestion.
+- **Analysis:** **AI/LLM** (e.g., via Gemini API) for semantic analysis, summarization, and structuring of raw community data.
+- **Deployment:** Vercel for the frontend and Railway for scalable Golang backend services.
+
+Core Functionality:
+Inspired by the common failure point of unvalidated startup ideas, FounderSignal allows users to input a startup concept or niche keyword. The system then analyzes thousands of relevant community discussions to provide a structured **Validation Report**. This report includes a **Market Assessment** (pain points, desire), a **Competitive Landscape** (existing solutions), and direct **VoC Quotes**, significantly reducing research time.
+
+### <span style={{ color: "black" }}>Limitations:</span>
+
+- **Data Scope:** In its current phase, the primary data source is limited to **Reddit**. While rich, this may not represent all market segments.
+- **LLM Costs:** The detailed AI analysis is resource-intensive; this necessitates a firm cap on free tier usage and requires the eventual implementation of a robust paid subscription or credit system.
+- **Processing Time:** While Go is fast, initial data fetching and the subsequent external LLM API calls can lead to report generation times of 30-60 seconds, which is a key area for future optimization (caching/asynchronous reporting).

@@ -3,13 +3,16 @@ import IconFactory from "@/components/Shared/Icons/IconFactory";
 import Link from "@/components/Shared/Link";
 import { ArrowRight, ExternalLink } from "react-feather";
 
+// match these slugs
+const PROJECTS_SHOWCASE = ["foundersignal", "askkkdoc", "airbnb",];
+
 
 const Projects = () => {
   return (
     <div className="my-16 flex flex-col">
       <h2 className="mb-8 text-3xl font-bold">Projects</h2>
       <div className="flex flex-col space-y-8">
-        {allProjects.slice(0, 3).map((project) => (
+        {allProjects.filter((p) => PROJECTS_SHOWCASE.includes(p.slug)).map((project) => (
           <div
             key={project._id}
             className="group relative rounded-lg border-[1px] border-gray-300  bg-gray-50 p-4 transition duration-200 hover:border-gray-200 dark:border-tertiary dark:bg-secondary dark:hover:border-accent md:hover:scale-[1.02]"
