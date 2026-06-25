@@ -1,0 +1,447 @@
+import { Icons } from "@/components/icons";
+import { BookOpenIcon, CodeIcon, HomeIcon, NotebookIcon } from "lucide-react";
+
+import { Docker } from "@/components/ui/svgs/docker";
+import { NextjsIconDark } from "@/components/ui/svgs/nextjsIconDark";
+import { Nodejs } from "@/components/ui/svgs/nodejs";
+import { Postgresql } from "@/components/ui/svgs/postgresql";
+import { ReactLight } from "@/components/ui/svgs/reactLight";
+import { Typescript } from "@/components/ui/svgs/typescript";
+
+export const DATA = {
+    name: "Abdul Mateen Khilji",
+    initials: "AM",
+    url: "https://jealous.dev",
+    location: "Pakistan",
+    locationLink: "https://www.google.com/maps/place/Pakistan",
+    description:
+        "Full Stack Web Developer. I build fast, clean websites and web apps for businesses and founders.",
+    summary:
+        "I'm a full stack web developer with 3+ years of experience building dynamic, scalable web applications. I've worked with startups and businesses to bring their ideas to life — from landing pages and e-commerce stores to full SaaS products. I specialize in [Next.js](https://nextjs.org), TypeScript, and Node.js, and I'm available for freelance projects.",
+    avatarUrl: "/me.png",
+    skills: [
+        { name: "React", icon: ReactLight },
+        { name: "Next.js", icon: NextjsIconDark },
+        { name: "TypeScript", icon: Typescript },
+        { name: "Node.js", icon: Nodejs },
+        { name: "PostgreSQL", icon: Postgresql },
+        { name: "MongoDB", icon: Docker }, // replace with MongoDB icon if available
+        { name: "Docker", icon: Docker },
+        // Add WordPress icon manually if needed
+    ],
+    navbar: [
+        { href: "/", icon: HomeIcon, label: "Home" },
+        { href: "/projects", icon: CodeIcon, label: "Projects" },
+        { href: "/blog", icon: NotebookIcon, label: "Blog" },
+        { href: "/guestbook", icon: BookOpenIcon, label: "Guestbook" },
+    ],
+    contact: {
+        email: "contact@jealous.dev",
+        tel: "", // add your number if you want it public
+        social: {
+            GitHub: {
+                name: "GitHub",
+                url: "https://github.com/JealousGx",
+                icon: Icons.github,
+                navbar: true,
+            },
+            LinkedIn: {
+                name: "LinkedIn",
+                url: "https://www.linkedin.com/in/jealous/",
+                icon: Icons.linkedin,
+                navbar: true,
+            },
+            X: {
+                name: "X",
+                url: "https://x.com/jealousgx",
+                icon: Icons.x,
+                navbar: true,
+            },
+            email: {
+                name: "Send Email",
+                url: "mailto:contact@jealous.dev",
+                icon: Icons.email,
+                navbar: false,
+            },
+        },
+    },
+
+    work: [
+        {
+            company: "Zami Dev",
+            href: "https://pennycanny.com",
+            badges: ["Remote"],
+            location: "Remote",
+            title: "Software Engineer",
+            logoUrl: "/zamidev.png", // add logo to /public if available
+            start: "Nov 2022",
+            end: "Present",
+            description:
+                "Managing the entire codebase across multiple client engagements. Architected and delivered scalable backend systems using Node.js (TypeScript), DynamoDB, and MongoDB — reducing system latency by 20%. Led a TypeScript migration across a shared monorepo spanning multiple client projects, improving reliability and reducing critical issues by 15%. Designed and deployed cloud solutions on AWS and GCP, cutting load times by 20%. Enhanced testing and QA processes, reducing critical production issues by 40%.",
+        },
+    ],
+
+    education: [
+        {
+            school: "Sukkur IBA University",
+            href: "https://iba-suk.edu.pk",
+            degree: "Bachelor of Engineering",
+            logoUrl: "/sukkur-iba.png", // add logo to /public if available
+            start: "2019",
+            end: "2023",
+        },
+    ],
+
+    // FEATURED projects — shown on homepage (keep to 3-4)
+    featuredProjects: [
+        {
+            title: "FounderSignal",
+            href: "https://github.com/JealousGx/FounderSignal",
+            dates: "2024",
+            active: true,
+            description:
+                "Validate ideas. Build smarter. Helps founders stop building products no one wants by validating ideas with real signals before writing a single line of code.",
+            technologies: ["Next.js", "TypeScript", "PostgreSQL", "TailwindCSS"],
+            links: [
+                {
+                    type: "Website",
+                    href: "https://foundersignal.app",
+                    icon: <Icons.globe className="size-3" />,
+                },
+                {
+                    type: "Source",
+                    href: "https://github.com/JealousGx/FounderSignal",
+                    icon: <Icons.github className="size-3" />,
+                },
+            ],
+            image: "", // add screenshot if you have one
+            video: "",
+        },
+        {
+            title: "Vala",
+            href: "http://vala.scaleredesign.com",
+            dates: "2023",
+            active: true,
+            description:
+                "An asset management solution built for Scalere Design. Pixel-perfect implementation from Figma designs with full responsiveness.",
+            technologies: ["Next.js", "TypeScript", "TailwindCSS"],
+            links: [
+                {
+                    type: "Website",
+                    href: "http://vala.scaleredesign.com",
+                    icon: <Icons.globe className="size-3" />,
+                },
+            ],
+            image: "",
+            video: "",
+            badges: ["Client Work"],
+        },
+        {
+            title: "Airbnb Clone",
+            href: "https://jealous-airbnb-clone.vercel.app",
+            dates: "2023",
+            active: true,
+            description:
+                "Full-featured Airbnb clone — search, view, book, and manage accommodations. Built to demonstrate full-stack capability with authentication, database integration, and real-time features.",
+            technologies: ["Next.js", "TypeScript", "MongoDB", "TailwindCSS"],
+            links: [
+                {
+                    type: "Website",
+                    href: "https://jealous-airbnb-clone.vercel.app",
+                    icon: <Icons.globe className="size-3" />,
+                },
+                {
+                    type: "Source",
+                    href: "https://github.com/JealousGx/airbnb-clone",
+                    icon: <Icons.github className="size-3" />,
+                },
+            ],
+            image: "",
+            video: "",
+        },
+        {
+            title: "eCommerce Phone Store",
+            href: "https://jealous-phone-store.netlify.app",
+            dates: "2021",
+            active: true,
+            description:
+                "An e-commerce storefront for buying and selling second-hand smartphones. Product listings, filtering, and cart functionality.",
+            technologies: ["React", "JavaScript", "CSS"],
+            links: [
+                {
+                    type: "Website",
+                    href: "https://jealous-phone-store.netlify.app",
+                    icon: <Icons.globe className="size-3" />,
+                },
+                {
+                    type: "Source",
+                    href: "https://github.com/JealousGx/react-phone-store",
+                    icon: <Icons.github className="size-3" />,
+                },
+            ],
+            image: "",
+            video: "",
+        },
+    ],
+
+    // ALL projects — shown on /projects page
+    projects: [
+        {
+            title: "FounderSignal",
+            href: "https://foundersignal.app",
+            dates: "2024",
+            active: true,
+            description:
+                "Validate ideas. Build smarter. Helps founders stop building products no one wants.",
+            technologies: ["Next.js", "TypeScript", "PostgreSQL", "TailwindCSS"],
+            links: [
+                {
+                    type: "Website",
+                    href: "https://foundersignal.app",
+                    icon: <Icons.globe className="size-3" />,
+                },
+                {
+                    type: "Source",
+                    href: "https://github.com/JealousGx/FounderSignal",
+                    icon: <Icons.github className="size-3" />,
+                },
+            ],
+            image: "",
+            video: "",
+        },
+        {
+            title: "AskkkDoc",
+            href: "https://askkkdoc.vercel.app",
+            dates: "2024",
+            active: true,
+            description:
+                "Empower your documents to speak volumes. Upload a document and ask questions — AI-powered answers from your own files.",
+            technologies: ["Next.js", "TypeScript", "OpenAI", "TailwindCSS"],
+            links: [
+                {
+                    type: "Website",
+                    href: "https://askkkdoc.vercel.app",
+                    icon: <Icons.globe className="size-3" />,
+                },
+                {
+                    type: "Source",
+                    href: "https://github.com/JealousGx/askkkdoc",
+                    icon: <Icons.github className="size-3" />,
+                },
+            ],
+            image: "",
+            video: "",
+        },
+        {
+            title: "Vala",
+            href: "http://vala.scaleredesign.com",
+            dates: "2023",
+            active: true,
+            description:
+                "Asset management solution built for Scalere Design. Pixel-perfect Figma implementation.",
+            technologies: ["Next.js", "TypeScript", "TailwindCSS"],
+            links: [
+                {
+                    type: "Website",
+                    href: "http://vala.scaleredesign.com",
+                    icon: <Icons.globe className="size-3" />,
+                },
+            ],
+            image: "",
+            video: "",
+            badges: ["Client Work"],
+        },
+        {
+            title: "Airbnb Clone",
+            href: "https://jealous-airbnb-clone.vercel.app",
+            dates: "2023",
+            active: true,
+            description:
+                "Full-featured Airbnb clone with search, booking, and accommodation management.",
+            technologies: ["Next.js", "TypeScript", "MongoDB", "TailwindCSS"],
+            links: [
+                {
+                    type: "Website",
+                    href: "https://jealous-airbnb-clone.vercel.app",
+                    icon: <Icons.globe className="size-3" />,
+                },
+                {
+                    type: "Source",
+                    href: "https://github.com/JealousGx/airbnb-clone",
+                    icon: <Icons.github className="size-3" />,
+                },
+            ],
+            image: "",
+            video: "",
+        },
+        {
+            title: "eCommerce Phone Store",
+            href: "https://jealous-phone-store.netlify.app",
+            dates: "2021",
+            active: true,
+            description:
+                "E-commerce storefront for buying and selling second-hand smartphones.",
+            technologies: ["React", "JavaScript", "CSS"],
+            links: [
+                {
+                    type: "Website",
+                    href: "https://jealous-phone-store.netlify.app",
+                    icon: <Icons.globe className="size-3" />,
+                },
+                {
+                    type: "Source",
+                    href: "https://github.com/JealousGx/react-phone-store",
+                    icon: <Icons.github className="size-3" />,
+                },
+            ],
+            image: "",
+            video: "",
+        },
+        {
+            title: "COVID-19 Tracker",
+            href: "https://jealous-covid19.netlify.app",
+            dates: "2021",
+            active: true,
+            description:
+                "Real-time COVID-19 case tracker — worldwide and country-wise statistics with charts.",
+            technologies: ["React", "JavaScript", "Chart.js"],
+            links: [
+                {
+                    type: "Website",
+                    href: "https://jealous-covid19.netlify.app",
+                    icon: <Icons.globe className="size-3" />,
+                },
+                {
+                    type: "Source",
+                    href: "https://github.com/JealousGx/covid19-tracker",
+                    icon: <Icons.github className="size-3" />,
+                },
+            ],
+            image: "",
+            video: "",
+        },
+        {
+            title: "Advanced Expense Tracker",
+            href: "https://jealous-exp-tracker.netlify.app",
+            dates: "2021",
+            active: true,
+            description:
+                "Voice-powered expense tracker — add incomes and expenses using your voice.",
+            technologies: ["React", "JavaScript", "Web Speech API"],
+            links: [
+                {
+                    type: "Website",
+                    href: "https://jealous-exp-tracker.netlify.app",
+                    icon: <Icons.globe className="size-3" />,
+                },
+                {
+                    type: "Source",
+                    href: "https://github.com/JealousGx/advanced-exp-tracker",
+                    icon: <Icons.github className="size-3" />,
+                },
+            ],
+            image: "",
+            video: "",
+        },
+        {
+            title: "Voice Powered News",
+            href: "https://jealous-ai-news.netlify.app",
+            dates: "2021",
+            active: true,
+            description: "Get the latest news just by using your voice.",
+            technologies: ["React", "JavaScript", "News API", "Web Speech API"],
+            links: [
+                {
+                    type: "Website",
+                    href: "https://jealous-ai-news.netlify.app",
+                    icon: <Icons.globe className="size-3" />,
+                },
+                {
+                    type: "Source",
+                    href: "https://github.com/JealousGx/react-ai-news",
+                    icon: <Icons.github className="size-3" />,
+                },
+            ],
+            image: "",
+            video: "",
+        },
+        {
+            title: "Rent a Vehicle — Landing Page",
+            href: "https://jealous-otto-page.netlify.app",
+            dates: "2021",
+            active: true,
+            description: "Fully responsive landing page for a vehicle rental service.",
+            technologies: ["HTML", "CSS", "JavaScript"],
+            links: [
+                {
+                    type: "Website",
+                    href: "https://jealous-otto-page.netlify.app",
+                    icon: <Icons.globe className="size-3" />,
+                },
+                {
+                    type: "Source",
+                    href: "https://github.com/JealousGx/responsive-sites",
+                    icon: <Icons.github className="size-3" />,
+                },
+            ],
+            image: "",
+            video: "",
+        },
+    ],
+
+    testimonials: [
+        {
+            name: "Elijah Scalere",
+            role: "CEO @ Scalere Design",
+            avatarUrl:
+                "https://media.licdn.com/dms/image/v2/D4E03AQFqtaJjSC4CZA/profile-displayphoto-shrink_800_800/B4EZcOZMhfHsAc-/0/1748293176352",
+            body: "They were able to produce a product nearly identical to my design files. I would be working with them in the future due to their responsiveness and cooperation.",
+        },
+        {
+            name: "Uzair Sultan",
+            role: "UX Designer @ VentureDrive",
+            avatarUrl:
+                "https://media.licdn.com/dms/image/v2/D4D03AQGzDHGH9vr_wQ/profile-displayphoto-shrink_800_800/B4DZfo1qqrGYAg-/0/1751958073581",
+            body: "I have had the pleasure of working closely with Mateen for more than a year, and I can confidently say that he is one of the most talented developers I have ever worked with. His technical expertise, problem-solving skills, and dedication to excellence are truly exceptional.",
+        },
+        {
+            name: "Naqcho Ali Mehdi",
+            role: "AI & ML Engineer",
+            avatarUrl:
+                "https://media.licdn.com/dms/image/v2/D4D03AQFVcsDlrfb6MQ/profile-displayphoto-crop_800_800/B4DZjPUqysHwAM-/0/1755824982996",
+            body: "I'm super excited to work on my newly launched website. Abdul Mateen has shown marvelous professionalism and great deal of work. The site is very responsive and aesthetically appealing which makes my requirements fulfilled.",
+        },
+    ],
+
+    // Services — custom section (not in original template, needs a custom component)
+    services: [
+        {
+            title: "Business Website",
+            description:
+                "A clean, fast, mobile-first website for your business. Built to rank on Google and convert visitors into customers.",
+            icon: "globe", // use a lucide icon name
+            cta: "Get a website",
+        },
+        {
+            title: "E-commerce Store",
+            description:
+                "A full online store with product listings, cart, checkout, and payment integration. Start selling online in days, not months.",
+            icon: "shoppingCart",
+            cta: "Build my store",
+        },
+        {
+            title: "Web App / MVP",
+            description:
+                "Have a startup idea? I'll build your MVP fast — full-stack, production-ready, and scalable from day one.",
+            icon: "code",
+            cta: "Start building",
+        },
+        {
+            title: "Landing Page",
+            description:
+                "A high-converting landing page for your product, campaign, or service. Fast, SEO-optimized, and designed to convert.",
+            icon: "layout",
+            cta: "Get a landing page",
+        },
+    ],
+} as const;
