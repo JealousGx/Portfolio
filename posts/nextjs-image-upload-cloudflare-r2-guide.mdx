@@ -4,6 +4,26 @@ publishedAt: "2025-07-10"
 brief: "In modern web applications, handling file uploads efficiently and securely is crucial. For project, FounderSignal, I needed a robust solution for user-uploaded images. I chose Cloudflare R2 for its S3-compatible API, generous free tier, and zero egre..."
 coverImage: "https://cdn.hashnode.com/res/hashnode/image/stock/unsplash/xrVDYZRGdw4/upload/77e38bd23502209514ae38870e35811c.jpeg"
 readTimeInMinutes: 7
+summary: "Use Cloudflare R2 with Next.js Server Actions and presigned URLs to handle image uploads securely. The server generates a short-lived upload URL, credentials never reach the client, and R2's zero-egress-fee model keeps costs low — ideal for user-generated content at scale."
+keyStats:
+  - stat: "Cloudflare R2 charges $0.015 per GB stored with zero egress fees, compared to AWS S3's $0.09 per GB egress."
+    source: "Cloudflare"
+    sourceUrl: "https://developers.cloudflare.com/r2/pricing/"
+  - stat: "Presigned URLs are the AWS-recommended pattern for secure browser-to-storage uploads, avoiding credential exposure."
+    source: "AWS Documentation"
+    sourceUrl: "https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-presigned-url.html"
+  - stat: "Next.js Server Actions became stable in Next.js 14, enabling direct server-side logic without a separate API route."
+    source: "Next.js Blog"
+    sourceUrl: "https://nextjs.org/blog/next-14"
+faqs:
+  - question: "How to upload images to Cloudflare R2 from Next.js?"
+    answer: "Create a Server Action that generates a presigned URL using the AWS S3 SDK pointed at your R2 endpoint, then use that URL to PUT the file directly from the browser. This keeps your R2 credentials on the server."
+  - question: "Is Cloudflare R2 compatible with the AWS S3 SDK?"
+    answer: "Yes. R2 implements the S3-compatible API, so you can use @aws-sdk/client-s3 by setting the endpoint to your R2 account URL (https://<ACCOUNT_ID>.r2.cloudflarestorage.com) and region to 'auto'."
+  - question: "What is a presigned URL and why use it for file uploads?"
+    answer: "A presigned URL is a time-limited, pre-authenticated URL that grants temporary write access to a specific storage object. It lets the client upload directly to storage without ever seeing your credentials."
+  - question: "How do I make R2 objects publicly accessible?"
+    answer: "Set ACL: 'public-read' on the PutObjectCommand, or enable a public bucket domain in the R2 dashboard. The public URL follows the pattern https://pub-<hash>.r2.dev/<key>."
 ---
 
 In modern web applications, handling file uploads efficiently and securely is crucial. For project, [FounderSignal](https://foundersignal.app), I needed a robust solution for user-uploaded images. I chose Cloudflare R2 for its S3-compatible API, generous free tier, and zero egress fees, making it a cost-effective and powerful choice for object storage.

@@ -4,6 +4,28 @@ publishedAt: "2025-01-15"
 brief: "Debugging is a critical skill for any developer, and mastering advanced debugging techniques is especially important when working with complex systems. In Golang, a statically-typed and compiled language known for its efficiency and concurrency, debu..."
 coverImage: "https://cdn.hashnode.com/res/hashnode/image/stock/unsplash/fd9mIBluHkA/upload/f93a0dffdbea329be712b0608c183fe9.jpeg"
 readTimeInMinutes: 6
+summary: "Go debugging goes beyond print statements. Use Delve for breakpoint-based inspection, pprof for heap and CPU profiling, flamegraphs for visualizing bottlenecks, and the built-in race detector for concurrency bugs. These tools cover memory leaks, goroutine deadlocks, and distributed tracing in production systems."
+keyStats:
+  - stat: "Go's built-in race detector can identify data races with less than 10x CPU overhead and around 10x memory overhead."
+    source: "Go Blog"
+    sourceUrl: "https://go.dev/blog/race-detector"
+  - stat: "pprof is included in the Go standard library and can profile CPU, memory, goroutines, and blocking events without external dependencies."
+    source: "Go Documentation"
+    sourceUrl: "https://pkg.go.dev/net/http/pprof"
+  - stat: "Delve is the officially recommended debugger for Go, maintained under the Go project organization on GitHub."
+    source: "GitHub - go-delve/delve"
+    sourceUrl: "https://github.com/go-delve/delve"
+faqs:
+  - question: "What is the best debugger for Golang?"
+    answer: "Delve (dlv) is the standard debugger for Go. It supports breakpoints, variable inspection, stack traces, and remote debugging. It integrates with VS Code, GoLand, and IntelliJ, and can also be used from the terminal."
+  - question: "How do I find memory leaks in Go?"
+    answer: "Use Go's pprof package to generate heap profiles and identify allocations that are not being released. You can expose a profiling endpoint via net/http/pprof and analyze the output with go tool pprof or visualize it as a flamegraph."
+  - question: "How do I detect goroutine leaks in Go?"
+    answer: "Run your application with the -race flag to detect data races. For goroutine leaks specifically, use pprof's goroutine profile (runtime/pprof) or a library like goleak in tests to assert all goroutines are cleaned up."
+  - question: "How do I use flamegraphs in Go?"
+    answer: "Capture a CPU profile with pprof, then use go tool pprof with the -http flag to open an interactive browser UI that includes a flamegraph view. Tools like Brendan Gregg's FlameGraph scripts also work with pprof output."
+  - question: "How do I debug a Go app running in production?"
+    answer: "Start Delve in headless mode with dlv debug --headless --listen=:2345 on the remote server, then connect your local IDE or Delve client to that port. For lower-impact profiling, use the pprof HTTP endpoint instead."
 ---
 
 Debugging is a critical skill for any developer, and mastering advanced debugging techniques is especially important when working with complex systems. In Golang, a statically-typed and compiled language known for its efficiency and concurrency, debugging takes on unique challenges and opportunities. This post explores powerful debugging tools and techniques, focusing on advanced strategies like using the Delve debugger, diagnosing memory leaks, profiling performance bottlenecks, and troubleshooting distributed systems. We'll also delve into sophisticated tools like flamegraphs and tracing to uncover deeper insights into application behavior.

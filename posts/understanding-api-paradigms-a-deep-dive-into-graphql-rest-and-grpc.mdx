@@ -4,6 +4,28 @@ publishedAt: "2024-10-31"
 brief: "In today's software development landscape, APIs (Application Programming Interfaces) play a crucial role in enabling communication between different systems. Among the various types of APIs available, GraphQL, REST, and gRPC are three of the most pop..."
 coverImage: "https://cdn.hashnode.com/res/hashnode/image/upload/v1730348865904/f9565d51-a60c-421c-9235-49f8b15f44a2.webp"
 readTimeInMinutes: 7
+summary: "REST is the default for simple CRUD APIs, GraphQL shines when clients need flexible, nested data queries without over-fetching, and gRPC is the best choice for high-performance internal microservice communication using binary serialization over HTTP/2. Choose based on client flexibility needs, performance requirements, and team familiarity."
+keyStats:
+  - stat: "Over 50% of public APIs use REST architecture as of 2023."
+    source: "RapidAPI"
+    sourceUrl: "https://rapidapi.com/blog/api-glossary/rest/"
+  - stat: "GraphQL was open-sourced by Facebook in 2015 and is now used by companies including GitHub, Twitter, and Shopify."
+    source: "GraphQL Foundation"
+    sourceUrl: "https://graphql.org/foundation/"
+  - stat: "gRPC can be up to 7–10x faster than REST for internal service communication due to Protocol Buffers binary serialization."
+    source: "Google"
+    sourceUrl: "https://grpc.io/"
+faqs:
+  - question: "When should I use GraphQL instead of REST?"
+    answer: "Use GraphQL when your clients need to fetch deeply nested or highly variable data shapes, and over-fetching or under-fetching is a real problem. REST is simpler for straightforward CRUD operations."
+  - question: "What is gRPC used for?"
+    answer: "gRPC is primarily used for high-performance, low-latency communication between internal microservices. It uses Protocol Buffers for binary serialization and runs over HTTP/2, making it significantly faster than REST for server-to-server calls."
+  - question: "Is GraphQL replacing REST?"
+    answer: "No. REST remains the dominant pattern for public APIs due to its simplicity and broad tooling support. GraphQL complements REST and excels in specific scenarios like complex client-driven queries."
+  - question: "What are the downsides of gRPC?"
+    answer: "gRPC requires Protocol Buffer schema definitions, is harder to debug than REST (binary protocol), and has limited browser support without a proxy layer like gRPC-Web."
+  - question: "Can I use REST and GraphQL together?"
+    answer: "Yes. Many systems expose a REST API publicly while using GraphQL or gRPC internally. The two paradigms are not mutually exclusive and can coexist in the same architecture."
 ---
 
 In today's software development landscape, APIs (Application Programming Interfaces) play a crucial role in enabling communication between different systems. Among the various types of APIs available, GraphQL, REST, and gRPC are three of the most popular. Each has its strengths and weaknesses, making them suitable for different use cases. In this post, we’ll explore each of these API paradigms, provide basic examples, and discuss when to choose one over the others.

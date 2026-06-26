@@ -4,6 +4,26 @@ publishedAt: "2024-12-22"
 brief: "WordPress is one of the most popular content management systems (CMS) in the world. Setting it up traditionally can sometimes involve manual installation steps like configuring the database, installing plugins, and setting up themes. However, with Do..."
 coverImage: "https://cdn.hashnode.com/res/hashnode/image/stock/unsplash/CzShzocZtW0/upload/6380a97becb6ac0b0373b6e2d8514a79.jpeg"
 readTimeInMinutes: 5
+summary: "Use Docker Compose with a MySQL container, a WordPress container, and an entrypoint.sh script to fully automate WordPress installation — including WP-CLI, plugins, themes, and sample data — giving you a reproducible local environment that spins up with a single command."
+keyStats:
+  - stat: "WordPress powers over 43% of all websites on the internet."
+    source: "W3Techs"
+    sourceUrl: "https://w3techs.com/technologies/details/cm-wordpress"
+  - stat: "Docker Hub's WordPress image has been pulled over 1 billion times."
+    source: "Docker Hub"
+    sourceUrl: "https://hub.docker.com/_/wordpress"
+  - stat: "Over 60,000 WordPress plugins are available in the official directory."
+    source: "WordPress.org"
+    sourceUrl: "https://wordpress.org/plugins/"
+faqs:
+  - question: "How do I run WordPress locally with Docker?"
+    answer: "Create a docker-compose.yml file that defines a MySQL service and a WordPress service, then run `docker compose up -d`. WordPress will be available at localhost:8000 within seconds."
+  - question: "What is WP-CLI and why use it with Docker?"
+    answer: "WP-CLI is a command-line interface for WordPress that lets you install plugins, manage themes, import data, and run updates without using the admin UI. Inside Docker it enables fully automated, scriptable WordPress setup via an entrypoint script."
+  - question: "Do I need phpMyAdmin with a Docker WordPress setup?"
+    answer: "No, phpMyAdmin is optional. It provides a browser-based GUI for managing your MySQL database, which is convenient during development but not required for WordPress to function."
+  - question: "How do I persist WordPress data between Docker container restarts?"
+    answer: "Mount named volumes for the MySQL data directory and the WordPress wp-content folder in your docker-compose.yml. Without volumes, data is lost every time containers are removed."
 ---
 
 WordPress is one of the most popular content management systems (CMS) in the world. Setting it up traditionally can sometimes involve manual installation steps like configuring the database, installing plugins, and setting up themes. However, with Docker, you can automate the entire process and create a reproducible, isolated environment that ensures consistency across different setups.

@@ -4,6 +4,27 @@ publishedAt: "2024-12-05"
 brief: "In modern web development, cookies play a pivotal role in managing user sessions, preferences, and state across web applications. This guide dives deep into cookies' advanced usage in Node.js and Go, providing practical examples, best practices, and ..."
 coverImage: "https://cdn.hashnode.com/res/hashnode/image/stock/unsplash/VG8EzXkDkdw/upload/27b6dcda11be8cd013d8f4387a1300d8.jpeg"
 readTimeInMinutes: 4
+summary: "Secure, scalable cookie management in Node.js and Go requires combining HttpOnly and Secure flags to block XSS, SameSite to prevent CSRF, short expiry with refresh rotation, and signed or encrypted cookies for sensitive tokens. Both ecosystems offer idiomatic libraries that make these patterns straightforward."
+keyStats:
+  - stat: "XSS attacks, which cookie HttpOnly flags directly mitigate, account for around 40% of all web application attacks."
+    source: "OWASP"
+    sourceUrl: "https://owasp.org/www-community/attacks/xss/"
+  - stat: "Cookie theft is among the top causes of session hijacking, responsible for a significant share of account takeover incidents."
+    source: "Verizon Data Breach Investigations Report"
+  - stat: "The SameSite=Strict cookie attribute reduces CSRF attack surface to near zero for same-origin flows."
+    source: "OWASP"
+    sourceUrl: "https://owasp.org/www-community/SameSite"
+faqs:
+  - question: "What is the HttpOnly flag in cookies and why does it matter?"
+    answer: "HttpOnly prevents JavaScript from accessing a cookie, meaning even if your site has an XSS vulnerability, an attacker's script cannot steal the session cookie. It is one of the most important flags to always set on session and auth cookies."
+  - question: "What is the difference between Secure and HttpOnly cookie flags?"
+    answer: "Secure ensures the cookie is only sent over HTTPS connections, protecting it from network interception. HttpOnly prevents client-side JavaScript from reading the cookie. You should set both on any sensitive cookie."
+  - question: "How do you set cookies in Go (Golang)?"
+    answer: "Use the net/http package's http.SetCookie function, passing an *http.Cookie struct with your desired Name, Value, HttpOnly, Secure, and SameSite fields. The gorilla/sessions package provides higher-level session management on top of this."
+  - question: "How do you handle cookie expiration and refresh tokens securely?"
+    answer: "Set short MaxAge values on access-token cookies and use a separate long-lived HttpOnly refresh-token cookie. On expiry, the server validates the refresh token and issues a new access token, revoking the old refresh token to limit replay attacks."
+  - question: "What is cookie signing and when should you use it?"
+    answer: "Cookie signing appends an HMAC to the cookie value so the server can verify it has not been tampered with. Use it whenever you store any user-controlled data or identifiers in cookies, as it prevents forgery without full encryption overhead."
 ---
 
 In modern web development, cookies play a pivotal role in managing user sessions, preferences, and state across web applications. This guide dives deep into cookies' advanced usage in **Node.js** and **Go**, providing practical examples, best practices, and pro-level tips to handle cookies securely and efficiently.

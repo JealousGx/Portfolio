@@ -4,6 +4,25 @@ publishedAt: "2022-08-23"
 brief: "Navigation is the most easiest way to go through the website. The navigation links can be displayed either in Sidebar or Navbar. Both services are widely used by most of the websites."
 coverImage: "https://cdn.hashnode.com/res/hashnode/image/upload/v1661175274534/IT7XBenAm.png"
 readTimeInMinutes: 14
+summary: "Build a fully responsive sidebar in React using styled-components and React Router DOM. The sidebar toggles open and closed on mobile, uses CSS transitions for smooth animation, and maps navigation links from a data array. Styled-components scopes styles per component, eliminating class name conflicts."
+keyStats:
+  - stat: "styled-components has over 35 million weekly downloads on npm, making it one of the most widely used CSS-in-JS libraries."
+    source: "npm"
+    sourceUrl: "https://www.npmjs.com/package/styled-components"
+  - stat: "React Router is the most popular routing library for React, with over 10 million weekly downloads on npm."
+    source: "npm"
+    sourceUrl: "https://www.npmjs.com/package/react-router-dom"
+  - stat: "Mobile devices account for approximately 60% of global web traffic, making responsive navigation a critical UI requirement."
+    source: "Statista"
+faqs:
+  - question: "How do I make a responsive sidebar in React?"
+    answer: "Use a state variable to track open/closed status and toggle it via a hamburger button visible on mobile. Apply a CSS transform (translateX) to slide the sidebar in and out, and use a media query to keep it always visible on desktop."
+  - question: "What is styled-components and why use it?"
+    answer: "styled-components is a CSS-in-JS library that lets you write actual CSS inside JavaScript using tagged template literals. It automatically scopes styles to the component, generates unique class names, and supports dynamic styles based on props."
+  - question: "How do I use React Router DOM with a sidebar?"
+    answer: "Wrap your app in a BrowserRouter, then use Link or NavLink components inside the sidebar for navigation items. NavLink has an activeClassName prop that automatically applies a style to the currently active route."
+  - question: "How do I highlight the active link in a React sidebar?"
+    answer: "Use NavLink from react-router-dom instead of Link. Pass an isActive callback or use the default active class, then style it in your styled-component using the &.active selector."
 ---
 
 ## Why does Sidebar / Navbar exist?

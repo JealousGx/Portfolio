@@ -4,6 +4,24 @@ publishedAt: "2025-02-04"
 brief: "The Problem: Lambda@Edge's Response Size Limit Strikes. Our team was racing against the clock to fix a critical API endpoint that suddenly started failing. The culprit? Lambda@Edge's 1 MB response payload limit. Our endpoint's dataset had grown expone..."
 coverImage: "https://cdn.hashnode.com/res/hashnode/image/stock/unsplash/XJXWbfSo2f0/upload/4ac47a09e35f375434331978c45bb58a.jpeg"
 readTimeInMinutes: 3
+summary: "A Lambda@Edge function was forwarding the wrong Host header to S3, causing CloudFront to return 403 and 404 errors despite correct bucket permissions. The fix was a three-line override in the Lambda handler to replace the API domain with the S3 bucket domain before forwarding requests."
+keyStats:
+  - stat: "Lambda@Edge enforces a 1 MB response payload limit for viewer and origin response events."
+    source: "AWS Documentation"
+    sourceUrl: "https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/edge-functions-restrictions.html"
+  - stat: "CloudFront can serve content from S3 origins with sub-10ms cache hit latency at global edge locations."
+    source: "AWS"
+  - stat: "Misconfigured HTTP headers are among the top causes of 403 errors in CloudFront-to-S3 integrations."
+    source: "AWS re:Post Community"
+faqs:
+  - question: "Why is CloudFront returning 403 Access Denied from S3?"
+    answer: "The most common cause is a mismatched Host header. If your Lambda@Edge function forwards a request with your API domain in the Host header instead of the S3 bucket domain, S3 will reject it with a 403. Override the Host header in your Lambda handler to the correct S3 endpoint."
+  - question: "What is Lambda@Edge response size limit?"
+    answer: "Lambda@Edge has a 1 MB limit for viewer response and origin response event payloads. For larger payloads, redirect clients to an S3 object via CloudFront instead of returning data directly from Lambda."
+  - question: "How do you debug CloudFront 404 errors with no logs?"
+    answer: "Enable CloudFront access logging to an S3 bucket, and use Lambda@Edge console logging (CloudWatch Logs in the edge region). Inspect the raw request object in your Lambda handler — check headers, URI, and origin config for mismatches."
+  - question: "How do I route CloudFront requests to S3 for specific paths?"
+    answer: "Create a CloudFront cache behavior for a path pattern like /data/* and set the origin to your S3 bucket. This lets you bypass Lambda size limits by serving large files directly from S3 through CloudFront."
 ---
 
 ### The Problem: Lambda@Edge’s Response Size Limit Strikes

@@ -4,6 +4,28 @@ publishedAt: "2025-01-07"
 brief: "As a developer, you might be well-versed in the nuances of writing performant, scalable APIs. But in today's world, it's just as critical to ensure those APIs are secure. With the increase in cyber threats, you can't afford to overlook the fundamenta..."
 coverImage: "https://cdn.hashnode.com/res/hashnode/image/stock/unsplash/OqtafYT5kTw/upload/d972f7486f2de8c3c7562dd5d51c2643.jpeg"
 readTimeInMinutes: 6
+summary: "Secure Go APIs require layered defenses: whitelist input validation to block injection attacks, JWT or OAuth2 for authentication, HTTPS-only transport, strict CORS policies, rate limiting to prevent abuse, and parameterized queries to eliminate SQL injection — Go's standard library and ecosystem make all of these straightforward to implement."
+keyStats:
+  - stat: "Injection attacks, including SQL injection, remained in the OWASP Top 10 vulnerabilities for over a decade."
+    source: "OWASP"
+    sourceUrl: "https://owasp.org/www-project-top-ten/"
+  - stat: "94% of web applications were tested for some form of injection vulnerability according to OWASP data."
+    source: "OWASP"
+    sourceUrl: "https://owasp.org/www-project-top-ten/"
+  - stat: "Go is used in production by companies including Google, Uber, Dropbox, and Docker for backend services."
+    source: "Go.dev"
+    sourceUrl: "https://go.dev/solutions/case-studies"
+faqs:
+  - question: "How do you secure a REST API in Golang?"
+    answer: "Start with input validation on all user-supplied data, use JWT or OAuth2 for authentication, enforce HTTPS, configure CORS to allow only trusted origins, and add rate limiting middleware to prevent abuse."
+  - question: "What is the best authentication method for Go APIs?"
+    answer: "JWT (JSON Web Tokens) is the most common choice for stateless APIs — the golang-jwt/jwt library is widely used. For delegated authorization, OAuth2 with the golang.org/x/oauth2 package is the standard."
+  - question: "How do you prevent SQL injection in Go?"
+    answer: "Always use parameterized queries via the database/sql package's Prepare and Exec methods, never interpolate user input directly into query strings."
+  - question: "What Go library should I use for rate limiting?"
+    answer: "golang.org/x/time/rate provides a token bucket rate limiter from the Go team. For HTTP middleware, tollbooth and go-redis/redis_rate are popular choices that integrate well with standard handlers."
+  - question: "How do you handle CORS in a Go API?"
+    answer: "Use the rs/cors library to configure allowed origins, methods, and headers as middleware. Avoid using a wildcard origin (*) in production — specify your exact frontend domains instead."
 ---
 
 As a developer, you might be well-versed in the nuances of writing performant, scalable APIs. But in today’s world, it’s just as critical to ensure those APIs are **secure**. With the increase in cyber threats, you can't afford to overlook the fundamental principles of API security. Thankfully, **Golang (Go)** provides an elegant way to build secure, efficient APIs.

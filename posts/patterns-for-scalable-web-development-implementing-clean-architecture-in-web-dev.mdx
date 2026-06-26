@@ -4,6 +4,23 @@ publishedAt: "2024-12-14"
 brief: "In the world of web development, scalability and maintainability are critical concerns. As projects grow in size and complexity, managing dependencies, ensuring testability, and maintaining modularity become increasingly challenging. Clean Architectu..."
 coverImage: "https://cdn.hashnode.com/res/hashnode/image/stock/unsplash/5VM5SHrs_E8/upload/1bff46f98d4ffa02b62f7ee5ed210d86.jpeg"
 readTimeInMinutes: 3
+summary: "Clean Architecture divides software into concentric layers — entities, use cases, interface adapters, and frameworks — where dependencies only point inward. Applied to web development, it decouples business logic from HTTP frameworks and databases, making systems easier to test, extend, and maintain."
+keyStats:
+  - stat: "According to a CISQ report, poor software quality cost US organizations approximately $2.41 trillion in 2022, much of it attributed to technical debt from tightly coupled architectures."
+    source: "CISQ"
+    sourceUrl: "https://www.it-cisq.org/the-cost-of-poor-software-quality-in-the-us-a-2022-report/"
+  - stat: "Robert C. Martin introduced Clean Architecture in 2012 as a unification of Hexagonal, Onion, and similar layered architecture patterns."
+    source: "Robert C. Martin (Uncle Bob)"
+    sourceUrl: "https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html"
+faqs:
+  - question: "What is Clean Architecture in web development?"
+    answer: "Clean Architecture organizes code into layers where inner layers (entities, use cases) contain business logic and outer layers (frameworks, databases) handle infrastructure. Dependencies only flow inward, so business rules never depend on web frameworks or databases."
+  - question: "What is the difference between Clean Architecture and MVC?"
+    answer: "MVC separates presentation concerns but doesn't enforce independence of business logic from frameworks. Clean Architecture goes further by isolating use cases from all external dependencies, making them independently testable without spinning up a server or database."
+  - question: "How do you implement dependency injection in Go?"
+    answer: "Pass interface types into structs rather than instantiating concrete dependencies inside them. Define a repository interface, implement it in an infrastructure layer, and inject it into service structs at startup."
+  - question: "Does Clean Architecture work for small projects?"
+    answer: "It adds upfront overhead that may not pay off for small scripts or prototypes. Its benefits — testability, replaceability of infrastructure, parallel team development — become significant once a codebase grows beyond a single developer or a few thousand lines."
 ---
 
 In the world of web development, scalability and maintainability are critical concerns. As projects grow in size and complexity, managing dependencies, ensuring testability, and maintaining modularity become increasingly challenging. Clean Architecture offers a set of principles that guide developers to build robust, scalable systems. This article delves into how Clean Architecture principles can be applied to web development, using Go as the practical language for demonstration.

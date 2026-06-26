@@ -4,6 +4,23 @@ publishedAt: "2025-07-13"
 brief: "When building FounderSignal, a platform for startup idea validation, I ran into a subtle but critical issue with Next.js's fetch revalidation that every developer should know about. This post will walk you through the problem, the debugging journey, ..."
 coverImage: "https://cdn.hashnode.com/res/hashnode/image/stock/unsplash/imgCpfIMoRw/upload/54f456e8ec13c86c0f77b1bc312e4626.jpeg"
 readTimeInMinutes: 3
+summary: "Setting Next.js fetch revalidation to very large values like 31536000 (1 year) or Infinity on Vercel causes the server to serve a broken cached response with wrong headers and no data after the first deploy. The fix is to cap revalidate at a reasonable value, typically 3600 seconds or less."
+keyStats:
+  - stat: "Next.js is used by over 800,000 websites worldwide as of 2024."
+    source: "BuiltWith"
+    sourceUrl: "https://trends.builtwith.com/framework/Next.js"
+  - stat: "Vercel's edge network serves over 100 billion requests per month."
+    source: "Vercel"
+    sourceUrl: "https://vercel.com"
+faqs:
+  - question: "Why is Next.js fetch revalidation returning empty data on Vercel?"
+    answer: "Setting revalidate to an extremely large number (like 31536000) or Infinity can cause Vercel's Next.js server to cache and re-serve a broken response after the initial fetch. Cap the revalidate value to avoid this bug."
+  - question: "What is the maximum safe value for Next.js fetch revalidate?"
+    answer: "There is no official maximum, but in practice values beyond a few hours (e.g. 3600 seconds) can trigger caching edge cases on Vercel. Use revalidatePath or revalidateTag for long-lived data instead."
+  - question: "What does content-type text/xml with empty body mean in Next.js?"
+    answer: "It usually means the fetch cache returned a corrupted or empty cached entry. This can happen when extremely long revalidation windows are set and the underlying cache entry is malformed."
+  - question: "How do I debug Next.js fetch caching issues?"
+    answer: "Check the x-nextjs-cache response header (HIT, MISS, STALE) and add logging around your fetch calls. Compare local and deployed behavior to identify cache-related discrepancies."
 ---
 
 When building [FounderSignal](https://foundersignal.app), a platform for startup idea validation, I ran into a subtle but critical issue with Next.js’s fetch revalidation that every developer should know about. This post will walk you through the problem, the debugging journey, and the solution, with practical code snippets and lessons learned.

@@ -4,6 +4,28 @@ publishedAt: "2024-12-17"
 brief: "In the world of modern software architecture, microservices have emerged as a game-changer. The need to break away from monolithic applications has never been more pressing. But as we embrace microservices, the question becomes: How do we build them right..."
 coverImage: "https://cdn.hashnode.com/res/hashnode/image/upload/v1734412515236/42e8f9e5-67de-4f50-9ac4-3ce39790f81e.webp"
 readTimeInMinutes: 6
+summary: "Go's goroutines, channels, and fast compile times make it well-suited for microservices. Apply the Single Responsibility Principle per service, choose between REST and gRPC based on communication needs, implement circuit breakers and retries for resilience, and use Docker and Kubernetes for deployment."
+keyStats:
+  - stat: "Go goroutines are multiplexed onto OS threads by the runtime scheduler and have an initial stack size of only 2–8 KB, enabling tens of thousands of concurrent goroutines."
+    source: "Go Runtime Documentation"
+    sourceUrl: "https://go.dev/doc/faq#goroutines"
+  - stat: "gRPC uses HTTP/2 and Protocol Buffers, which can reduce payload size by up to 7x and improve throughput compared to JSON over HTTP/1.1."
+    source: "gRPC Documentation"
+    sourceUrl: "https://grpc.io/docs/what-is-grpc/introduction/"
+  - stat: "Go was adopted by Docker and Kubernetes, two of the most widely deployed containerization and orchestration platforms in the industry."
+    source: "CNCF"
+    sourceUrl: "https://www.cncf.io/projects/kubernetes/"
+faqs:
+  - question: "Why use Go for microservices?"
+    answer: "Go offers fast startup times, a small memory footprint, built-in concurrency with goroutines, and compiles to a single static binary. These traits align well with microservice requirements: low resource usage, fast scaling, and simple deployment."
+  - question: "How do microservices communicate in Go?"
+    answer: "Synchronous communication is typically done via REST (net/http) or gRPC. Asynchronous communication uses message brokers like Kafka or RabbitMQ. gRPC is preferred for internal service-to-service calls due to its efficiency and strong typing via Protocol Buffers."
+  - question: "How do I handle failures between microservices in Go?"
+    answer: "Implement timeouts on all outbound HTTP/gRPC calls, add retry logic with exponential backoff, and use a circuit breaker pattern to stop cascading failures. Libraries like sony/gobreaker or go-kit provide circuit breaker implementations for Go."
+  - question: "What is the Single Responsibility Principle in microservices?"
+    answer: "Each microservice should own exactly one bounded context or business capability — for example, user authentication, order processing, or payment. This makes services independently deployable, testable, and scalable without affecting others."
+  - question: "How do I deploy Go microservices with Docker?"
+    answer: "Build a minimal Docker image using a multi-stage Dockerfile: compile the Go binary in a builder stage and copy only the binary into a scratch or alpine base image. The resulting image is typically under 20 MB, which makes it fast to push and pull."
 ---
 
 In the world of modern software architecture, microservices have emerged as a game-changer. The need to break away from monolithic, monolithic applications has never been more pressing. But as we embrace microservices, the question becomes: **How do we build microservices that are efficient, scalable, and maintainable?**

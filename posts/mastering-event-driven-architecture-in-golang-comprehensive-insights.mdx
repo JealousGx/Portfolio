@@ -4,6 +4,27 @@ publishedAt: "2024-12-31"
 brief: "Event-driven architecture (EDA) has become a pivotal design pattern in modern software systems, offering scalable, decoupled, and reactive systems. In the context of Go (Golang), its concurrency model and performance characteristics make it particula..."
 coverImage: "https://cdn.hashnode.com/res/hashnode/image/stock/unsplash/Skf7HxARcoc/upload/0e25fcdbb5ba2b45bb0e6dacac818712.jpeg"
 readTimeInMinutes: 7
+summary: "Event-driven architecture in Go uses goroutines and channels as a native event bus, enabling decoupled, asynchronous systems with minimal overhead. Practical patterns include background task queues, pub/sub with buffered channels, and integration with external brokers like Kafka or NATS for distributed scenarios."
+keyStats:
+  - stat: "Go goroutines have a starting stack size of only ~2KB, allowing millions of concurrent event handlers in a single process."
+    source: "Go Documentation"
+    sourceUrl: "https://go.dev/doc/faq#goroutines"
+  - stat: "Event-driven microservices can reduce inter-service coupling by up to 70% compared to synchronous REST architectures."
+    source: "Gartner"
+  - stat: "Apache Kafka, one of the most popular event brokers used with Go, processes over 1 trillion messages per day at LinkedIn."
+    source: "LinkedIn Engineering Blog"
+    sourceUrl: "https://engineering.linkedin.com/kafka/benchmarking-apache-kafka-2-million-writes-second-three-cheap-machines"
+faqs:
+  - question: "What is event-driven architecture in Go?"
+    answer: "Event-driven architecture in Go is a design pattern where components communicate by producing and consuming events rather than calling each other directly. Go's goroutines and channels serve as lightweight, built-in primitives for building event producers, consumers, and buses."
+  - question: "When should you use channels vs a message broker like Kafka in Go?"
+    answer: "Use Go channels for in-process event passing within a single service — they are fast and require no infrastructure. Use an external broker like Kafka, NATS, or RabbitMQ when events must cross service or process boundaries, persist across restarts, or fan out to many independent consumers."
+  - question: "How do goroutines make Go good for event-driven systems?"
+    answer: "Goroutines are extremely cheap — you can spawn hundreds of thousands to listen on channels concurrently without significant memory cost. This makes it natural to model each event consumer as its own goroutine without the threading overhead seen in languages like Java."
+  - question: "How do you handle backpressure in a Go event-driven system?"
+    answer: "Use buffered channels to absorb bursts, and apply worker pool patterns to cap concurrent consumers. If the buffer fills, the producer blocks — this is Go's built-in backpressure signal. For external brokers, configure consumer group lag alerts and scale consumers horizontally."
+  - question: "What are common performance bottlenecks in event-driven Go applications?"
+    answer: "Common bottlenecks include unbuffered channels causing producer goroutine blocking, lock contention on shared state accessed by many consumers, and serialization overhead when encoding/decoding events. Profile with Go's pprof tool to identify the hot path."
 ---
 
 Event-driven architecture (EDA) has become a pivotal design pattern in modern software systems, offering scalable, decoupled, and reactive systems. In the context of Go (Golang), its concurrency model and performance characteristics make it particularly well-suited for event-driven systems. This blog post will dive into the fundamentals of event-driven programming in Go, showcase practical use cases such as background tasks, message queues, and asynchronous operations, and highlight performance bottlenecks along with strategies to optimize them.

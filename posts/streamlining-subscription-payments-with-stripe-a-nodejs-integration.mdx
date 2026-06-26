@@ -4,6 +4,27 @@ publishedAt: "2024-08-04"
 brief: "In today's digital landscape, subscription-based models have become a cornerstone of many online businesses. For my recent client project, I had to opt for Stripe to manage recurring payments, thanks to its robust features and seamless integration ca..."
 coverImage: "https://cdn.hashnode.com/res/hashnode/image/upload/v1722938912449/e5ef44f2-1f03-4c2a-a825-8ab063594b1f.png"
 readTimeInMinutes: 9
+summary: "Integrate Stripe subscriptions into a Node.js backend by creating a checkout session, handling webhooks to track lifecycle events, and syncing subscription state to your database. Webhook signature verification and idempotent event handling are the two most critical production concerns."
+keyStats:
+  - stat: "Stripe processes hundreds of billions of dollars in payments annually and is used by millions of businesses worldwide."
+    source: "Stripe"
+    sourceUrl: "https://stripe.com/about"
+  - stat: "Subscription and recurring revenue models accounted for over 53% of software company revenue in 2023, up from 21% in 2010."
+    source: "Zuora Subscribed Institute"
+  - stat: "Stripe's webhook system delivers events with at-least-once semantics, meaning duplicate events can occur and handlers must be idempotent."
+    source: "Stripe Documentation"
+    sourceUrl: "https://stripe.com/docs/webhooks#best-practices"
+faqs:
+  - question: "How do I integrate Stripe subscriptions with Node.js?"
+    answer: "Install the stripe npm package, create a checkout session in subscription mode with a valid price ID, redirect the user to session.url, then listen for webhook events like customer.subscription.created and invoice.payment_succeeded to track subscription state."
+  - question: "What is a Stripe webhook and why do I need one?"
+    answer: "A webhook is an HTTP POST Stripe sends to your server when events occur (payment succeeded, subscription cancelled, etc.). You need it because subscription lifecycle changes happen asynchronously — the checkout redirect alone doesn't tell you if payment ultimately succeeded."
+  - question: "How do I verify Stripe webhook signatures in Node.js?"
+    answer: "Use stripe.webhooks.constructEvent(rawBody, sig, process.env.STRIPE_WEBHOOK_SECRET) where rawBody is the unparsed request buffer. If it throws, the signature is invalid and you should return a 400."
+  - question: "What is the difference between Stripe test mode and live mode keys?"
+    answer: "Test mode keys (sk_test_, pk_test_) and webhook secrets (whsec_ from local CLI) simulate payments without real charges. Live mode keys (sk_live_, pk_live_) process real transactions. The webhook secret for local testing via the Stripe CLI differs from the one you set in the dashboard for production."
+  - question: "How do I handle duplicate Stripe webhook events?"
+    answer: "Store the event ID in your database and check for it before processing. Stripe guarantees at-least-once delivery, so the same event can arrive more than once; idempotent handlers prevent double-crediting or double-provisioning."
 ---
 
 ***

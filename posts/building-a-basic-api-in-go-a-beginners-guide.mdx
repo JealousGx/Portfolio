@@ -4,6 +4,26 @@ publishedAt: "2024-09-01"
 brief: "Go (or Golang) is a statically typed, compiled language designed for simplicity and efficiency. It's particularly well-suited for building scalable and high-performance applications, including APIs. In this post, we'll walk through the basics of sett..."
 coverImage: "https://cdn.hashnode.com/res/hashnode/image/upload/v1725171533331/9041cedf-f79b-4280-9928-77ae90b2ccd6.png"
 readTimeInMinutes: 3
+summary: "Go's net/http standard library is all you need to build a working REST API. Define handler functions, register routes with http.HandleFunc, and start a server with http.ListenAndServe. No framework required — Go's built-in tooling handles routing, JSON encoding, and HTTP lifecycle out of the box."
+keyStats:
+  - stat: "Go consistently ranks among the top 10 most-used programming languages in Stack Overflow's annual Developer Survey."
+    source: "Stack Overflow Developer Survey 2024"
+    sourceUrl: "https://survey.stackoverflow.co/2024/"
+  - stat: "Go's net/http package is part of the standard library and requires no third-party dependencies to build a production HTTP server."
+    source: "Go Standard Library Documentation"
+    sourceUrl: "https://pkg.go.dev/net/http"
+  - stat: "Go compiles to a single static binary, which simplifies deployment and reduces container image sizes compared to interpreted runtimes."
+    source: "Go Documentation"
+    sourceUrl: "https://go.dev/doc/faq#Why_is_my_binary_so_large"
+faqs:
+  - question: "How do I build a REST API in Go?"
+    answer: "Use the net/http package from Go's standard library. Define handler functions with the signature func(w http.ResponseWriter, r *http.Request), register them with http.HandleFunc, and start the server using http.ListenAndServe. For larger projects, consider a router like chi or gorilla/mux."
+  - question: "Do I need a framework to build an API in Go?"
+    answer: "No. Go's standard library net/http is sufficient for building a fully functional HTTP API. Frameworks like Gin or Echo add routing conveniences and middleware, but are optional — many production APIs run on net/http alone."
+  - question: "How do I return JSON from a Go API handler?"
+    answer: "Set the Content-Type header to application/json, then use json.NewEncoder(w).Encode(yourStruct) to write a JSON response. The encoding/json package is part of the standard library."
+  - question: "What is go.mod used for?"
+    answer: "go.mod defines your module's name and its dependency requirements. Create it by running go mod init <module-name> in your project root. Go uses it to resolve and version external packages."
 ---
 
 Go (or Golang) is a statically typed, compiled language designed for simplicity and efficiency. It’s particularly well-suited for building scalable and high-performance applications, including APIs. In this post, we’ll walk through the basics of setting up a simple API in Go, covering essential concepts, file structure, and code.

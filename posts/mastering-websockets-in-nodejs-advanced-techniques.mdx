@@ -4,6 +4,27 @@ publishedAt: "2024-11-26"
 brief: "WebSockets have emerged as a key technology for real-time web applications, enabling bidirectional communication between clients and servers over a single, persistent connection. While WebSockets are not new, their potential is still vastly underutil..."
 coverImage: "https://cdn.hashnode.com/res/hashnode/image/stock/unsplash/M5tzZtFCOfs/upload/c6a443e25688e0e361a517f8ba9daee8.jpeg"
 readTimeInMinutes: 7
+summary: "WebSockets in Node.js enable full-duplex, persistent connections ideal for chat, live dashboards, and multiplayer games. Advanced techniques include rooms and namespaces with Socket.IO, horizontal scaling with Redis pub/sub, heartbeat-based reconnection logic, and binary message framing for high-throughput data streams."
+keyStats:
+  - stat: "WebSockets reduce HTTP overhead by eliminating repeated handshakes, achieving latency as low as 50ms versus 200-300ms for long-polling."
+    source: "Mozilla Developer Network"
+    sourceUrl: "https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API"
+  - stat: "Node.js can handle over 1 million concurrent WebSocket connections on a single server with the right configuration and the 'ws' library."
+    source: "ws library benchmarks (GitHub)"
+    sourceUrl: "https://github.com/websockets/ws#benchmarks"
+  - stat: "Real-time features are now expected by 73% of users in collaborative and communication applications."
+    source: "Twilio State of Customer Engagement Report"
+faqs:
+  - question: "How do WebSockets work in Node.js?"
+    answer: "Node.js WebSocket servers use the 'ws' library or Socket.IO to upgrade an initial HTTP request to a persistent TCP connection. Once established, both the client and server can push messages at any time without a new HTTP request, making it ideal for real-time features."
+  - question: "What is the difference between WebSockets and HTTP long-polling?"
+    answer: "Long-polling simulates real-time by having the client hold an HTTP request open until the server has data to send, then immediately reconnect. WebSockets establish a single persistent connection that both sides can write to at any time, with far lower latency and overhead."
+  - question: "How do you scale WebSockets across multiple Node.js servers?"
+    answer: "Because WebSocket connections are stateful and tied to a specific server, you need a shared pub/sub layer — typically Redis — so that a message received by one server can be broadcast to clients connected to other servers. Socket.IO's Redis adapter implements this pattern out of the box."
+  - question: "How do you handle WebSocket reconnection in Node.js?"
+    answer: "Implement a heartbeat (ping/pong) mechanism where the server sends a ping every N seconds and terminates connections that do not pong back. Clients should use exponential back-off reconnection logic to avoid thundering-herd reconnect storms after a server restart."
+  - question: "When should you use Socket.IO vs the raw ws library?"
+    answer: "Use the raw 'ws' library when you need maximum performance and full control over the protocol, and when all your clients are modern browsers or Node.js. Use Socket.IO when you need rooms, namespaces, automatic reconnection, and a fallback to polling for environments where WebSocket is blocked."
 ---
 
 WebSockets have emerged as a key technology for real-time web applications, enabling bidirectional communication between clients and servers over a single, persistent connection. While WebSockets are not new, their potential is still vastly underutilized. In this blog post, we’ll explore the advanced usage of WebSockets in Node.js, why WebSockets are beneficial for certain types of applications, and how you can leverage their power to build scalable, real-time systems.

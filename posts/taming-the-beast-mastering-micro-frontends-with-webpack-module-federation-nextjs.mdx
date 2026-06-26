@@ -4,6 +4,28 @@ publishedAt: "2025-01-28"
 brief: "Modern web apps are evolving into sprawling ecosystems. Monolithic React codebases buckle under the weight of feature creep, conflicting team priorities, and deployment bottlenecks. Enter micro-frontends—a..."
 coverImage: "https://cdn.hashnode.com/res/hashnode/image/stock/unsplash/npxXWgQ33ZQ/upload/c401077a872ceb9d6b927a52e83931bb.jpeg"
 readTimeInMinutes: 4
+summary: "Webpack Module Federation lets independent teams deploy separate frontend apps that share code and compose into one UI at runtime. Use Next.js as the host for routing and auth, expose specific components from remote apps, and share React as a singleton to avoid version conflicts."
+keyStats:
+  - stat: "Webpack Module Federation was introduced in Webpack 5, released in October 2020, as a first-class feature for sharing code between separately deployed builds."
+    source: "Webpack"
+    sourceUrl: "https://webpack.js.org/concepts/module-federation/"
+  - stat: "Zalando, IKEA, and Spotify are among large enterprises publicly documented as using micro-frontend architectures to enable independent team deployments."
+    source: "Micro Frontends (martinfowler.com)"
+    sourceUrl: "https://martinfowler.com/articles/micro-frontends.html"
+  - stat: "The @module-federation/nextjs-mf package enables Module Federation support in Next.js, which does not include it by default."
+    source: "Module Federation GitHub"
+    sourceUrl: "https://github.com/module-federation/universe"
+faqs:
+  - question: "What is Webpack Module Federation?"
+    answer: "Module Federation is a Webpack 5 feature that allows a JavaScript application to dynamically load code from another separately deployed build at runtime. It enables true independent deployment of frontend modules without a shared build step."
+  - question: "How do micro-frontends work with Next.js?"
+    answer: "Next.js acts as the host application handling routing, auth, and global layout. Remote apps expose components via Module Federation, and the host dynamically imports them. The @module-federation/nextjs-mf package adds the necessary webpack plugin support."
+  - question: "How do I avoid loading React twice with Module Federation?"
+    answer: "Add react and react-dom to the shared array in ModuleFederationPlugin and set singleton: true. This forces all federated modules to use a single shared React instance, preventing hook errors and bundle bloat."
+  - question: "What is the difference between micro-frontends and monorepos?"
+    answer: "A monorepo colocates code but still produces one build artifact per deployment. Micro-frontends go further — each app is deployed and versioned independently, with integration happening at runtime in the browser rather than at build time."
+  - question: "When should I not use micro-frontends?"
+    answer: "Avoid them for small teams or applications, as the operational complexity (multiple deployments, version coordination, shared dependency management) outweighs the autonomy benefits. They pay off at organizations with multiple teams owning distinct product areas."
 ---
 
 ### **Introduction: Why Micro-Frontends Matter Now**

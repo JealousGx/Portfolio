@@ -4,6 +4,29 @@ publishedAt: "2025-01-20"
 brief: "In the age of big data and constant connectivity, real-time analytics has become crucial for businesses to make data-driven decisions quickly. Whether you're tracking user behavior, monitoring systems, or analyzing financial data, real-time analytics..."
 coverImage: "https://cdn.hashnode.com/res/hashnode/image/stock/unsplash/Ata9YsB2Qu8/upload/2f4f910c3550f69808bb7e11cba8928b.jpeg"
 readTimeInMinutes: 5
+summary: "Go's goroutine-based concurrency and low memory overhead make it well-suited for real-time analytics pipelines. Pair WebSockets for live client updates with Kafka for durable event streaming, and use ClickHouse or TimescaleDB for fast time-series storage to handle millions of events per second with sub-millisecond latency."
+keyStats:
+  - stat: "Go can handle over 1 million concurrent connections on a single server using goroutines."
+    source: "Go Blog"
+    sourceUrl: "https://go.dev/blog/concurrency-is-not-parallelism"
+  - stat: "Apache Kafka can process more than 1 million messages per second on modest hardware."
+    source: "Apache Kafka Documentation"
+    sourceUrl: "https://kafka.apache.org/documentation/"
+  - stat: "ClickHouse can query billions of rows per second on a single server."
+    source: "ClickHouse"
+    sourceUrl: "https://clickhouse.com/docs/en/introduction/performance"
+  - stat: "Go is consistently ranked among the top 10 most-used programming languages by professional developers."
+    source: "Stack Overflow Developer Survey 2024"
+    sourceUrl: "https://survey.stackoverflow.co/2024/"
+faqs:
+  - question: "Why use Golang for real-time analytics?"
+    answer: "Go's goroutines allow thousands of concurrent connections with minimal memory usage, its compiled binaries start fast, and its standard library includes solid HTTP and networking primitives — all ideal for low-latency analytics pipelines."
+  - question: "What is the difference between Kafka and WebSockets for real-time data?"
+    answer: "WebSockets are a persistent bidirectional connection between server and browser client, used to push live updates to the UI. Kafka is a distributed message broker used between backend services for durable, high-throughput event streaming. They serve different layers of the same pipeline."
+  - question: "Which database should I use for real-time analytics with Go?"
+    answer: "ClickHouse is best for analytical queries over large event datasets, TimescaleDB suits time-series data with SQL familiarity, and MongoDB works well for flexible document storage. Choose based on your query patterns and data shape."
+  - question: "How do goroutines help with high-concurrency analytics?"
+    answer: "Each goroutine uses only a few kilobytes of stack memory and is scheduled by the Go runtime rather than the OS, so you can run tens of thousands of concurrent data-processing routines without the overhead of OS threads."
 ---
 
 In the age of big data and constant connectivity, real-time analytics has become crucial for businesses to make data-driven decisions quickly. Whether you're tracking user behavior, monitoring systems, or analyzing financial data, real-time analytics helps teams react promptly to new information. In this post, we’ll explore how to build a powerful real-time analytics dashboard using Golang with WebSockets, Kafka, and Pub/Sub systems. We’ll also dive into integrating databases like ClickHouse, MongoDB, and TimescaleDB.

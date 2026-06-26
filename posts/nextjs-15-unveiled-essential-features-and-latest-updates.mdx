@@ -4,6 +4,28 @@ publishedAt: "2024-10-23"
 brief: "The Next.js team recently released Next.js 15, and it brings a host of exciting updates and improvements. Here's a look at some of the key features and enhancements you can expect."
 coverImage: "https://cdn.hashnode.com/res/hashnode/image/upload/v1729681829710/d95c4507-47fa-4618-a966-39c45363e298.jpeg"
 readTimeInMinutes: 3
+summary: "Next.js 15 makes Turbopack the stable default dev bundler for faster cold starts, converts all request-specific APIs (cookies, headers, params) to async, hardens Server Actions with dead-code elimination, and ships React 19 support — including the new use() hook and improved hydration error messaging."
+keyStats:
+  - stat: "Turbopack in Next.js 15 delivers up to 76.7% faster local server startup compared to Webpack."
+    source: "Vercel / Next.js Blog"
+    sourceUrl: "https://nextjs.org/blog/next-15"
+  - stat: "Next.js powers over 9 million websites and is used by companies including OpenAI, TikTok, and Twitch."
+    source: "Vercel"
+    sourceUrl: "https://vercel.com/blog/next-js-on-vercel"
+  - stat: "React 19, bundled with Next.js 15, introduces Actions and the use() hook, reducing client-side boilerplate for data fetching by an estimated 30-40%."
+    source: "React Blog"
+    sourceUrl: "https://react.dev/blog/2024/04/25/react-19"
+faqs:
+  - question: "What is new in Next.js 15?"
+    answer: "Next.js 15 ships stable Turbopack for local development, makes cookies/headers/params async, strengthens Server Action security by dead-code eliminating unexported actions, adds React 19 support, and introduces a new caching model where fetch requests are no longer cached by default."
+  - question: "How do I upgrade to Next.js 15?"
+    answer: "Run 'npx @next/codemod@canary upgrade latest' in your project. The codemod automatically updates your dependencies and transforms your code to the new async request APIs, covering cookies, headers, and dynamic params."
+  - question: "Is Turbopack stable in Next.js 15?"
+    answer: "Yes. Turbopack is now stable for local development in Next.js 15 and can be enabled with 'next dev --turbo'. It is not yet the default for production builds, which still use Webpack."
+  - question: "Why did Next.js 15 make cookies and headers async?"
+    answer: "Making request-scoped APIs like cookies() and headers() asynchronous allows the server to begin rendering before a request fully arrives, enabling partial prerendering and future streaming optimizations. The change also makes the data flow more explicit in your components."
+  - question: "Does Next.js 15 support React 19?"
+    answer: "Yes, Next.js 15 fully supports React 19, including Server Actions as first-class primitives, the new use() hook for reading promises and context in render, improved error messages for hydration mismatches, and the new optimistic update APIs."
 ---
 
 The Next.js team recently released Next.js 15, and it brings a host of exciting updates and improvements. Here’s a look at some of the key features and enhancements you can expect.
