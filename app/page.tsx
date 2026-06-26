@@ -5,6 +5,7 @@ import Markdown from "react-markdown";
 import BlurFade from "@/components/magicui/blur-fade";
 import BlurFadeText from "@/components/magicui/blur-fade-text";
 import ContactSection from "@/components/section/contact-section";
+import FeaturedBlogSection from "@/components/section/featured-blog-section";
 import ProjectsSection from "@/components/section/projects-section";
 import ServicesSection from "@/components/section/services-section";
 import TestimonialsSection from "@/components/section/testimonials-section";
@@ -140,6 +141,11 @@ export default function Page() {
       <section id="projects">
         <BlurFade delay={BLUR_FADE_DELAY * 13}>
           <ProjectsSection projects={DATA.featuredProjects} showViewAll />
+        </BlurFade>
+      </section>
+      <section id="blog">
+        <BlurFade delay={BLUR_FADE_DELAY * 14}>
+          <FeaturedBlogSection />
         </BlurFade>
       </section>
       <section id="testimonials">
