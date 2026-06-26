@@ -1,0 +1,121 @@
+---
+title: "NextJS 15 Unveiled: Essential Features and Latest Updates"
+publishedAt: "2024-10-23"
+brief: "The Next.js team recently released Next.js 15, and it brings a host of exciting updates and improvements. Here's a look at some of the key features and enhancements you can expect."
+coverImage: "https://cdn.hashnode.com/res/hashnode/image/upload/v1729681829710/d95c4507-47fa-4618-a966-39c45363e298.jpeg"
+readTimeInMinutes: 3
+---
+
+The Next.js team recently released Next.js 15, and it brings a host of exciting updates and improvements. Here’s a look at some of the key features and enhancements you can expect.
+
+### Enhanced Codemod CLI
+
+Upgrading to new versions of Next.js has never been easier. The enhanced codemod CLI automates the process, updating dependencies and guiding you through applying necessary changes. This tool ensures a smoother transition to the latest stable or prerelease versions.
+
+To upgrade your codebase using enhanced codemod CLI, run:
+
+```bash
+npx @next/codemod@canary upgrade rc
+```
+
+### Turbopack Stability
+
+Turbopack, the new bundler for local development, is now stable and opt-in. It promises faster cold compilation performance, thanks to significant optimizations. The team has resolved numerous issues, making Turbopack a reliable choice for developers.
+
+To run your project with turbopack, run:
+
+```bash
+next dev --turbo
+```
+
+### Asynchronous APIs
+
+To improve server-side rendering, Next.js is transitioning APIs that rely on request-specific data to be asynchronous. This change allows the server to prepare content before a request arrives, enhancing performance and setting the stage for future optimizations.
+
+Here is an example of using the new asynchronous API for handling cookies:
+
+```javascript
+import { cookies } from "next/headers";
+
+export async function AdminPanel() {
+  const cookieStore = await cookies();
+  const token = cookieStore.get("token");
+  // ...
+}
+```
+
+To upgrade all your request-specific APIs to asynchronous APIs, run the following bash cmd in your project.:
+
+```bash
+npx @next/codemod@canary next-async-request-api .
+```
+
+### Security Enhancements for Server Actions
+
+Server Actions, which allow server-side functions to be called from the client, now come with improved security measures. These enhancements help prevent unintentional exposure of functions, ensuring your applications remain secure.
+
+```javascript
+// app/actions.js
+"use server";
+
+// This action **is** used in our application, so Next.js
+// will create a secure ID to allow the client to reference
+// and call the Server Action.
+export async function updateUserAction(formData) {}
+
+// This action **is not** used in our application, so Next.js
+// will automatically remove this code during `next build`
+// and will not create a public endpoint.
+export async function deleteUserAction(formData) {}
+```
+
+### Static Route Indicator
+
+A new Static Route Indicator during development helps identify which routes are static or dynamic. This visual cue aids in optimizing performance by providing clear insights into how pages are rendered.
+
+### New \<Form\> Component
+
+The new `<Form>` component extends the HTML \<form\> element with prefetching, client-side navigation, and progressive enhancement. This component simplifies the creation of forms that navigate to new pages, reducing the need for manual boilerplate code.
+
+The new `<Form>` component simplifies form handling:
+
+```javascript
+import Form from "next/form";
+
+export default function Page() {
+  return (
+    <Form action="/search">
+      <input name="query" />
+      <button type="submit">Submit</button>
+    </Form>
+  );
+}
+```
+
+### TypeScript and ESLint 9 Support
+
+Next.js 15 introduces support for TypeScript next.config.ts files and provides a NextConfig type for type-safe options. Additionally, it supports ESLint 9, ensuring compatibility and easing the transition from ESLint 8.
+
+```typescript
+import type { NextConfig } from "next";
+
+const nextConfig: NextConfig = {
+  /* config options here */
+};
+
+export default nextConfig;
+```
+
+### Improved Static Generation
+
+Static generation has been optimized to improve build times, especially for pages with slow network requests. The process now reuses fetch responses, reducing workload and build times.
+
+### Self-Hosting Improvements
+
+For those self-hosting Next.js applications, there are new controls over Cache-Control directives and improved image optimization. These enhancements ensure better performance and compatibility with various CDN setups.
+
+### Conclusion
+
+Next.js 15 is a testament to the continuous efforts of the development community and the core team at Vercel. With these new features and improvements, we, as developers, can look forward to a more efficient, secure, and user-friendly experience.
+
+Read more about the release at [their blog post](https://nextjs.org/blog/next-15-rc2).

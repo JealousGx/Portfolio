@@ -1,0 +1,475 @@
+---
+title: "Streamlining Subscription Payments with Stripe: A Node.js Integration"
+publishedAt: "2024-08-04"
+brief: "In today's digital landscape, subscription-based models have become a cornerstone of many online businesses. For my recent client project, I had to opt for Stripe to manage recurring payments, thanks to its robust features and seamless integration ca..."
+coverImage: "https://cdn.hashnode.com/res/hashnode/image/upload/v1722938912449/e5ef44f2-1f03-4c2a-a825-8ab063594b1f.png"
+readTimeInMinutes: 9
+---
+
+***
+
+In today’s digital landscape, subscription-based models have become a cornerstone of many online businesses. For my recent client project, I had to opt for Stripe to manage recurring payments, thanks to its robust features and seamless integration capabilities. In this post, I’ll walk you through the integration process, share some key code snippets.
+
+_Note: In this post, I will not going through each step for the setup. I will only be walking through some major steps that can seem quite confusing. Pre-requisites are defined below._
+
+**Pre Requisites (Required knowledge of):**  
+\- NodeJS & TypeScript.  
+\- AWS Lambda & API Gateway.  
+\- Setting up Stripe account, adding products, discounts, setting up development environment.  
+\- Prisma & how to set it up.
+
+***
+
+**Setting up the development environment:**  
+Before we start integrating stripe, you should have already setup the stripe, its webhook environment variables correctly. The environment variable for webhook for local development is different from what stripe provides in the `test mode`. You can get it when creating an endpoint, it will stay active even if you create an endpoint.
+
+_Note: All the webhook secrets start with_`whsec_`_, stripe public key starts with_`pk_`_, similarly, secret key starts with_`sk_`_, so, make sure you grab the correct ones for the correct environment._
+
+**Disclaimer:** In the code snippets below, variables `db` , & `stripe` are defined so that only one instance is created whereas, `HTTP_CODE` is an enum defined for status codes such as `200`, `404` etc…
+
+**Let’s dive in:**  
+Whenever we want to create a subscription, we want the user to trigger that subscription. That trigger creates a checkout session where the potential customer fills in the details and then a subscription is created in the Stripe dashboard. In order to create a checkout session through the code, we use the following snippet:
+
+```typescript
+import { HTTP_CODE } from "@libs/constants";
+import db from "@libs/db";
+import { stripe } from "@libs/stripe";
+import { Tier } from "@prisma/client";
+
+const HOSTNAME = "https://domain.com";
+
+export async function _createCheckoutSession(
+  userId: string,
+  email: string,
+  priceId: string, // priceId is provided when we create a product in stripe dashboard
+  plan: Tier,
+) {
+  try {
+    // custom logic here...
+
+    const session = await stripe.checkout.sessions.create({
+      payment_method_types: ["card", "us_bank_account"], // include more payment methods.
+      line_items: [{ price: priceId, quantity: 1 }], // Item being purchased (id can be found in stripe dashboard -> product catalog)
+      metadata: { userId, email, plan }, // metadata that can be used later.
+      mode: "subscription",
+      success_url: `http://${HOSTNAME}/checkout/success?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `http://${HOSTNAME}/checkout/cancel`,
+      allow_promotion_codes: true, // this shouldn't be defined if `discounts` is defined.
+    });
+
+    return { sessionUrl: session.url, status: HTTP_CODE.OK };
+  } catch (error) {
+    console.error("Error creating checkout session:", error);
+    return {
+      message: "Failed to create checkout session",
+      status: HTTP_CODE.INTERNAL_SERVER_ERROR,
+    };
+  }
+}
+```
+
+Let’s breakdown what the above code snippet does.  
+It basically creates a checkout session for a logged in user, so that we can save and update the user profile later. If the user is not logged in or not found, we simply do not proceed.
+
+This code snippet actually defines how we want to create a checkout session. In it, we are requesting stripe to only include card and US Bank Account as the accepted payment methods. We are also including the selected product’s id priceId, so, if it’s only a single item in the website, we can hardcode it here rather than passing it from the client side.
+
+We have successfully created a checkout session for the user. Now, we want to redirect the user to this checkout page, so we will be redirecting the user to `session.url`, where the user will be able to fill in the details.
+
+Upon success, the user will be prompted to `success_url` that we defined while creating checkout session. So, make sure that the page exists. However, we do not need to process the data in that page.
+
+When the user has successfully subscribed, we want to store the data in our own database for future use, that’s where stripe’s own webhooks come in handy. We will be listening to the local webhook `stripe listen --forward-to <ENTER YOUR WEBHOOK ENDPOINT HERE (http://localhost:4000/webhook)>` . This endpoint will capture all the events triggered by stripe webhook. We will analyse and save the necessary data in our database.
+
+That takes us to webhook code that we need to define:
+
+```typescript
+import { SubscriptionPeriod, Tier } from "@prisma/client";
+import { APIGatewayProxyEventV2 } from "aws-lambda";
+import Stripe from "stripe";
+
+import { HTTP_CODE } from "@libs/constants";
+import db from "@libs/db";
+import { stripe } from "@libs/stripe";
+
+export async function _stripeWebhooksHandler(_event: APIGatewayProxyEventV2) {
+  const stripeSignature = _event.headers["stripe-signature"];
+
+  if (!stripeSignature) {
+    return {
+      status: HTTP_CODE.BAD_REQUEST,
+      message: "No Stripe signature provided",
+    };
+  }
+
+  try {
+    const stripeEvent = await stripe.webhooks.constructEventAsync(
+      // we need to pass the raw body of the event. Converting it into JSON or any other form will break the code.
+      // Luckily, we get raw body in `_event` by default, so, we do not need to do anything extra.
+      _event.body!,
+      stripeSignature,
+      process.env.STRIPE_WEBHOOK_SECRET!,
+    );
+
+    switch (stripeEvent.type) {
+      // For my particular case, I only needed to take into account the following event types.
+      // For you, it might be different. Please refer to https://docs.stripe.com/api/events/types
+      case "customer.subscription.created":
+        return handleSubscriptionEvent(stripeEvent, "created");
+      case "customer.subscription.updated":
+        return handleSubscriptionEvent(stripeEvent, "updated");
+      case "customer.subscription.deleted":
+        return handleSubscriptionEvent(stripeEvent, "deleted");
+      case "invoice.payment_succeeded":
+        return handleInvoiceEvent(stripeEvent, "succeeded");
+      case "invoice.payment_failed":
+        return handleInvoiceEvent(stripeEvent, "failed");
+      case "checkout.session.completed":
+        return handleCheckoutSessionCompleted(stripeEvent);
+      default:
+        return {
+          status: HTTP_CODE.BAD_REQUEST,
+          message: "Unhandled event type",
+        };
+    }
+  } catch (err) {
+    console.error("Error constructing Stripe event:", err);
+    return {
+      status: HTTP_CODE.INTERNAL_SERVER_ERROR,
+      message: "Webhook Error: Invalid Signature",
+    };
+  }
+}
+
+async function handleSubscriptionEvent(
+  event: Stripe.Event,
+  type: "created" | "updated" | "deleted",
+) {
+  const subscription = event.data.object as Stripe.Subscription;
+  const customerEmail = await getCustomerEmail(subscription.customer as string);
+
+  if (!customerEmail) {
+    return {
+      status: HTTP_CODE.BAD_REQUEST,
+      message: "Missing userId, customer email, or plan in subscription",
+    };
+  }
+
+  if (subscription.cancel_at_period_end) {
+    await db.subscriptions
+      .update({
+        where: {
+          subscriptionId: subscription.id,
+        },
+        data: {
+          status: "scheduled_for_cancellation",
+        },
+      })
+      .catch((err) => {
+        console.error("Error updating subscription status: ", err);
+
+        throw {
+          status: HTTP_CODE.INTERNAL_SERVER_ERROR,
+          message: "Error updating subscription status",
+        };
+      });
+
+    return {
+      status: HTTP_CODE.OK,
+      message:
+        "Subscription scheduled to be cancelled at the period end successfully",
+    };
+  } else if (type === "deleted") {
+    const result = await db.subscriptions
+      .update({
+        where: {
+          subscriptionId: subscription.id,
+        },
+        data: {
+          status: "cancelled",
+        },
+      })
+      .catch((err) => {
+        console.error("Error updating subscription status: ", err);
+
+        throw {
+          status: HTTP_CODE.INTERNAL_SERVER_ERROR,
+          message: "Error updating subscription status",
+        };
+      });
+
+    if (result) {
+      await db.user
+        .update({
+          where: {
+            email: customerEmail,
+          },
+          data: {
+            Tier: Tier.Free,
+          },
+        })
+        .catch((err) => {
+          console.error("Error updating user subscription status: ", err);
+
+          throw {
+            status: HTTP_CODE.INTERNAL_SERVER_ERROR,
+            message: "Error updating user subscription status",
+          };
+        });
+    }
+
+    return {
+      status: HTTP_CODE.OK,
+      message: "Subscription cancelled successfully",
+    };
+  } else {
+    const createdAt = new Date(subscription.created * 1000).toISOString();
+
+    const subscriptionData: any = {
+      subscriptionId: subscription.id,
+      stripeUserId: subscription.customer,
+      status: subscription.status,
+      startDate: createdAt,
+      email: customerEmail,
+      planId: subscription.items.data[0]?.price.id,
+      defaultPaymentMethodId: subscription.default_payment_method as string,
+      createdAt,
+    };
+
+    await db.subscriptions
+      .upsert({
+        where: {
+          subscriptionId: subscription.id,
+        },
+        create: subscriptionData,
+        update: subscriptionData,
+      })
+      .catch((err) => {
+        console.error(`Error during subscription ${type}: ${err}`);
+
+        throw {
+          status: HTTP_CODE.INTERNAL_SERVER_ERROR,
+          message: `Error during subscription ${type}`,
+        };
+      });
+
+    return {
+      status: HTTP_CODE.OK,
+      message: "Subscription updated successfully",
+    };
+  }
+}
+
+async function getCustomerEmail(customerId: string) {
+  try {
+    const customer = await stripe.customers.retrieve(customerId);
+    return (customer as Stripe.Customer).email;
+  } catch (error) {
+    console.error("Error fetching customer:", error);
+    return null;
+  }
+}
+
+async function handleInvoiceEvent(
+  event: Stripe.Event,
+  status: "succeeded" | "failed",
+) {
+  const invoice = event.data.object as Stripe.Invoice;
+
+  const customerEmail = await getCustomerEmail(invoice.customer as string);
+
+  if (!customerEmail) {
+    return {
+      status: HTTP_CODE.BAD_REQUEST,
+      message: "Customer email could not be fetched",
+    };
+  }
+
+  try {
+    const invoiceData: any = {
+      invoiceId: invoice.id,
+      subscriptionId: invoice.subscription as string,
+      amountPaid:
+        status === "succeeded" ? (invoice.amount_paid / 100).toString() : "0",
+      amountDue:
+        status === "failed" ? (invoice.amount_due / 100).toString() : "0",
+      currency: invoice.currency,
+      invoiceUrl: invoice.hosted_invoice_url,
+      status,
+    };
+
+    await db.invoices.upsert({
+      where: {
+        invoiceId: invoice.id,
+      },
+      create: invoiceData,
+      update: invoiceData,
+    });
+
+    return {
+      status: HTTP_CODE.OK,
+      message: `Invoice payment ${status}: ${invoiceData.invoiceUrl}`,
+    };
+  } catch (err) {
+    console.error("Error handling invoice event:", err);
+
+    return {
+      status: HTTP_CODE.INTERNAL_SERVER_ERROR,
+      message: "Error handling invoice event",
+    };
+  }
+}
+
+async function handleCheckoutSessionCompleted(event: Stripe.Event) {
+  const session = event.data.object as Stripe.Checkout.Session;
+
+  const metadata = session.metadata;
+  const userId = metadata?.userId;
+  const isMonthly =
+    metadata?.isMonthly === "false"
+      ? SubscriptionPeriod.yearly
+      : SubscriptionPeriod.monthly;
+  const plan = metadata?.plan as Tier;
+
+  const endDate = new Date();
+
+  if (isMonthly === SubscriptionPeriod.monthly) {
+    endDate.setMonth(endDate.getMonth() + 1);
+  } else if (isMonthly === SubscriptionPeriod.yearly) {
+    endDate.setFullYear(endDate.getFullYear() + 1);
+  } else {
+    return {
+      status: HTTP_CODE.BAD_REQUEST,
+      message: "Invalid subscription period",
+    };
+  }
+
+  try {
+    const subscriptionId = session.subscription as string;
+
+    await stripe.subscriptions.update(subscriptionId as string, { metadata });
+
+    await db.subscriptions.update({
+      where: {
+        subscriptionId,
+      },
+      data: {
+        planPeriod: isMonthly,
+        endDate: endDate.toISOString(),
+        plan,
+      },
+    });
+
+    await db.user.update({
+      where: {
+        id: userId,
+      },
+      data: {
+        Tier: plan,
+      },
+    });
+
+    return {
+      status: HTTP_CODE.OK,
+      message: "Subscription metadata updated successfully",
+    };
+  } catch (err) {
+    console.error(`Error handling checkout session: ${err}`);
+
+    return {
+      status: HTTP_CODE.INTERNAL_SERVER_ERROR,
+      message: "Error handling checkout session",
+    };
+  }
+}
+```
+
+This code snippet handles and stores the necessary information of the user and subscription in the database so that it can be used later when necessity arises.
+
+Note that the metadata that we provided while creating checkout session is only returned back to us via the webhook in event type `checkout.session.completed` and not in any other event type, so, we will be updating necessary the user information only in this event.
+
+I am only updating the information that is required for my use case. It might be different for you, so, go through the whole code and make changes accordingly.
+
+Now comes the part where we want to allow the user to cancel the subscription. This part does not require much coding as most of the functionality is handled by stripe. We only need to update a single attribute inside the subscription and stripe will handle everything by itself.
+
+```typescript
+import { HTTP_CODE } from "@libs/constants";
+import db from "@libs/db";
+import { stripe } from "@libs/stripe";
+
+export async function _cancelSubscription(
+  userId: string,
+  _subscriptionId: string,
+) {
+  try {
+    const user = await db.user.findUnique({
+      where: { id: userId },
+      select: { subscriptions: true },
+    });
+
+    if (!user) {
+      return {
+        status: HTTP_CODE.BAD_REQUEST,
+        message: "User not found",
+      };
+    }
+
+    const _subscription = user.subscriptions.find(
+      (sub) => sub.subscriptionId === _subscriptionId,
+    );
+
+    if (!_subscription) {
+      return {
+        status: HTTP_CODE.BAD_REQUEST,
+        message: "Subscription not found",
+      };
+    }
+
+    const _isActive = _subscription?.status === "active";
+
+    if (!_isActive) {
+      return {
+        status: HTTP_CODE.BAD_REQUEST,
+        message: "Subscription is not active",
+      };
+    }
+
+    const _isScheduledForCancellation =
+      _subscription?.status === "scheduled_for_cancellation";
+
+    if (_isScheduledForCancellation) {
+      return {
+        status: HTTP_CODE.OK,
+        message: "Subscription already scheduled for cancellation",
+      };
+    }
+
+    await stripe.subscriptions.update(_subscription.subscriptionId, {
+      cancel_at_period_end: true,
+    });
+
+    return {
+      message: "Subscription scheduled for cancellation",
+      status: HTTP_CODE.OK,
+    };
+  } catch (error) {
+    console.error("Error cancelling subscription:", error);
+    return {
+      message: "Failed to cancel subscription",
+      status: HTTP_CODE.INTERNAL_SERVER_ERROR,
+    };
+  }
+}
+```
+
+This is the only code that we need to trigger whenever a user wants to cancel their subscription, and some functionality will be handled by the webhook events we defined earlier, and some functionality will be handled by stripe.
+
+***
+
+That’s it, that’s all we needed to do to integrate stripe into our project.
+
+Once again, the whole code is written keeping in view my project and its requirements. Your requirements might vary, so, make changes accordingly or go through [stripe docs](https://docs.stripe.com/api) for further documentation.
+
+Now you may use these functions as server actions, call them through an api endpoint or howsoever you want. It should be kept in mind, however, that since most of these these functions directly use database, so, it’s recommended to use them on server rather than on client side.
+
+***
+
+Some parts of the code have been taken from some other developers' code.

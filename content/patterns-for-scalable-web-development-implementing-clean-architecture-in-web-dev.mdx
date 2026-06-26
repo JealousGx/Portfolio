@@ -1,0 +1,185 @@
+---
+title: "Patterns for Scalable Web Development: Implementing Clean Architecture in Web Dev"
+publishedAt: "2024-12-14"
+brief: "In the world of web development, scalability and maintainability are critical concerns. As projects grow in size and complexity, managing dependencies, ensuring testability, and maintaining modularity become increasingly challenging. Clean Architectu..."
+coverImage: "https://cdn.hashnode.com/res/hashnode/image/stock/unsplash/5VM5SHrs_E8/upload/1bff46f98d4ffa02b62f7ee5ed210d86.jpeg"
+readTimeInMinutes: 3
+---
+
+In the world of web development, scalability and maintainability are critical concerns. As projects grow in size and complexity, managing dependencies, ensuring testability, and maintaining modularity become increasingly challenging. Clean Architecture offers a set of principles that guide developers to build robust, scalable systems. This article delves into how Clean Architecture principles can be applied to web development, using Go as the practical language for demonstration.
+
+## What is Clean Architecture?
+
+Clean Architecture, popularized by Robert C. Martin (Uncle Bob), emphasizes the separation of concerns in software design. Its core idea is to divide the system into layers, each with well-defined responsibilities. The key layers include:
+
+1.  **Entities**: Represent core business logic or domain objects.
+2.  **Use Cases**: Contain application-specific business rules.
+3.  **Interface Adapters**: Handle communication between the use cases and external layers (e.g., web controllers, data persistence).
+4.  **Frameworks and Drivers**: Implement frameworks, external libraries, and tools.
+
+## Core Principles of Clean Architecture
+
+- **Dependency Inversion**: High-level modules should not depend on low-level modules; both should depend on abstractions.
+- **Separation of Concerns**: Each layer should have a single responsibility.
+- **Testability**: Layers are decoupled, making individual components easier to test.
+- **Modularity**: The system is divided into independent modules, enhancing maintainability.
+
+---
+
+## Applying Clean Architecture to Web Development
+
+### 1\. Dependency Injection
+
+Dependency Injection (DI) is a design pattern where dependencies are provided to a struct rather than being created within the struct. DI promotes loose coupling and facilitates testing.
+
+#### Example: Implementing a Service Layer with DI
+
+```go
+package service
+
+import (
+	"example.com/project/repository"
+)
+
+type UserService struct {
+	UserRepository repository.UserRepository
+}
+
+func (s *UserService) GetUserDetails(userID int) (*repository.User, error) {
+	return s.UserRepository.FindByID(userID)
+}
+```
+
+```go
+package repository
+
+type User struct {
+	ID   int
+	Name string
+}
+
+type UserRepository interface {
+	FindByID(userID int) (*User, error)
+}
+```
+
+```go
+package main
+
+import (
+	"database/sql"
+	"example.com/project/repository"
+	"example.com/project/service"
+	_ "github.com/go-sql-driver/mysql"
+)
+
+type MySQLUserRepository struct {
+	DB *sql.DB
+}
+
+func (r *MySQLUserRepository) FindByID(userID int) (*repository.User, error) {
+	user := &repository.User{}
+	err := r.DB.QueryRow("SELECT id, name FROM users WHERE id = ?", userID).Scan(&user.ID, &user.Name)
+	if err != nil {
+		return nil, err
+	}
+	return user, nil
+}
+
+func main() {
+	db, err := sql.Open("mysql", "user:password@/dbname")
+	if err != nil {
+		panic(err)
+	}
+	repo := &MySQLUserRepository{DB: db}
+	userService := &service.UserService{UserRepository: repo}
+
+	user, err := userService.GetUserDetails(1)
+	if err != nil {
+		panic(err)
+	}
+
+	fmt.Printf("User: %+v\n", user)
+}
+```
+
+### 2\. Modularity
+
+Modularity ensures that individual components can be developed, tested, and deployed independently. Clean Architecture encourages defining clear boundaries between modules.
+
+#### Example: Modular Folder Structure
+
+```bash
+src/
+├── entities/
+│   ├── user.go
+├── usecases/
+│   ├── get_user_details.go
+├── adapters/
+│   ├── controllers/
+│   │   └── user_controller.go
+│   ├── repositories/
+│       └── mysql_user_repository.go
+├── frameworks/
+    └── database/
+        └── mysql_connection.go
+```
+
+### 3\. Testing Strategies
+
+Clean Architecture makes unit testing straightforward by decoupling layers. Each layer can be tested in isolation.
+
+#### Example: Testing Use Cases
+
+```go
+package usecases
+
+import (
+	"errors"
+	"example.com/project/repository"
+	"testing"
+)
+
+type MockUserRepository struct {
+	Users map[int]*repository.User
+}
+
+func (m *MockUserRepository) FindByID(userID int) (*repository.User, error) {
+	if user, exists := m.Users[userID]; exists {
+		return user, nil
+	}
+	return nil, errors.New("user not found")
+}
+
+func TestGetUserDetails(t *testing.T) {
+	repo := &MockUserRepository{
+		Users: map[int]*repository.User{
+			1: {ID: 1, Name: "John Doe"},
+		},
+	}
+
+	svc := service.UserService{UserRepository: repo}
+
+	user, err := svc.GetUserDetails(1)
+	if err != nil {
+		t.Errorf("unexpected error: %v", err)
+	}
+
+	if user.Name != "John Doe" {
+		t.Errorf("expected John Doe, got %s", user.Name)
+	}
+
+	_, err = svc.GetUserDetails(2)
+	if err == nil || err.Error() != "user not found" {
+		t.Errorf("expected error 'user not found', got %v", err)
+	}
+}
+```
+
+---
+
+## Conclusion
+
+Implementing Clean Architecture in web development promotes scalability, testability, and maintainability. By using principles like Dependency Injection, enforcing modularity, and adopting robust testing strategies, developers can build systems that are easier to manage and evolve.
+
+The examples in this article, implemented in Go, provide a practical starting point. As with any architectural pattern, the key to success lies in adapting Clean Architecture principles to fit the specific needs of your project.

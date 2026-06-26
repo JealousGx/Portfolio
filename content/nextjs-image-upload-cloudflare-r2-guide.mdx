@@ -1,0 +1,476 @@
+---
+title: "Seamless Image Uploads with Next.js, Server Actions, and Cloudflare R2"
+publishedAt: "2025-07-10"
+brief: "In modern web applications, handling file uploads efficiently and securely is crucial. For project, FounderSignal, I needed a robust solution for user-uploaded images. I chose Cloudflare R2 for its S3-compatible API, generous free tier, and zero egre..."
+coverImage: "https://cdn.hashnode.com/res/hashnode/image/stock/unsplash/xrVDYZRGdw4/upload/77e38bd23502209514ae38870e35811c.jpeg"
+readTimeInMinutes: 7
+---
+
+In modern web applications, handling file uploads efficiently and securely is crucial. For project, [FounderSignal](https://foundersignal.app), I needed a robust solution for user-uploaded images. I chose Cloudflare R2 for its S3-compatible API, generous free tier, and zero egress fees, making it a cost-effective and powerful choice for object storage.
+
+In this post, I'll walk you through how I implemented a secure image upload flow using Next.js Server Actions and Cloudflare R2, from the frontend component to the backend logic.
+
+### The Core Idea: Presigned URLs
+
+To avoid exposing sensitive cloud credentials to the client, we'll use a presigned URL strategy. Here's the flow:
+
+1.  The user selects an image in the browser.
+2.  The client-side code calls a Next.js Server Action.
+3.  The Server Action authenticates the user, generates a secure, short-lived URL (a "presigned URL") from Cloudflare R2, and uses it to upload the file.
+4.  The final, public URL of the uploaded image is returned to the client.
+
+This approach keeps our credentials secure on the server and leverages the power of R2 for storage.
+
+### Step 1: Setting Up the R2 Client
+
+First, we need to configure the AWS S3 client to communicate with the R2 API. I created a utility file for all R2-related functions. Note the `'server-only'` directive to ensure this code never leaks to the client bundle.
+
+```typescript
+import "server-only";
+
+import {
+  DeleteObjectCommand,
+  PutObjectCommand,
+  S3Client,
+} from "@aws-sdk/client-s3";
+import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
+
+const R2_ACCOUNT_ID = process.env.R2_ACCOUNT_ID!;
+const R2_ACCESS_KEY_ID = process.env.R2_ACCESS_KEY_ID!;
+const R2_SECRET_ACCESS_KEY = process.env.R2_SECRET_ACCESS_KEY!;
+const R2_BUCKET = process.env.R2_BUCKET!;
+
+const S3 = new S3Client({
+  region: "auto",
+  endpoint: `https://${R2_ACCOUNT_ID}.r2.cloudflarestorage.com`,
+  credentials: {
+    accessKeyId: R2_ACCESS_KEY_ID,
+    secretAccessKey: R2_SECRET_ACCESS_KEY,
+  },
+});
+
+export async function getSignedUrlForUpload(
+  key: string,
+  contentType: string,
+): Promise<string> {
+  const command = new PutObjectCommand({
+    Bucket: R2_BUCKET,
+    Key: key,
+    ContentType: contentType,
+    ACL: "public-read",
+  });
+
+  try {
+    const signedUrl = await getSignedUrl(S3, command, { expiresIn: 3600 });
+    return signedUrl;
+  } catch (error) {
+    console.error("Error generating signed URL:", error);
+    throw error;
+  }
+}
+```
+
+This file initializes the S3 client with our R2 credentials and exports a key function, `getSignedUrlForUpload` , which creates a presigned URL for a `PUT` operation.
+
+### Step 2: The Server Action for Uploading
+
+Next, we create a Server Action that orchestrates the upload process. This action will be called directly from our frontend components.
+
+It takes a base64-encoded string of the image, a unique file key (name), and the content type. It then gets the signed URL from our R2 utility and performs the `PUT` request.
+
+```typescript
+"use server";
+
+import { getSignedUrlForUpload } from "@/lib/r2";
+
+export const uploadImageWithSignedUrl = async (
+  fileString: string,
+  fileKey: string,
+  contentType: string,
+): Promise<{
+  error?: string;
+  uploaded: boolean;
+  imageUrl?: string;
+}> => {
+  try {
+    // if user is not logged in, return error
+    if (!user) {
+      return {
+        error: "User not authenticated",
+        uploaded: false,
+      };
+    }
+
+    const signedUrl = await getSignedUrlForUpload(fileKey, contentType);
+
+    if (!signedUrl) {
+      return {
+        error: "Failed to generate signed URL",
+        uploaded: false,
+      };
+    }
+
+    const binaryData = Buffer.from(fileString, "base64");
+
+    const response = await fetch(signedUrl, {
+      method: "PUT",
+      headers: {
+        "Content-Type": contentType,
+      },
+      body: binaryData,
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error("Error uploading image:", errorText);
+
+      return {
+        error: "Failed to upload image",
+        uploaded: false,
+      };
+    }
+
+    const imageUrl = `${process.env.NEXT_PUBLIC_R2_ENDPOINT}/${fileKey}`;
+
+    return {
+      uploaded: true,
+      imageUrl,
+    };
+  } catch (error) {
+    console.error("Error uploading image:", error);
+
+    return {
+      error: "Failed to generate signed URL",
+      uploaded: false,
+    };
+  }
+};
+```
+
+### Step 3: A Reusable Frontend Component
+
+To provide a great user experience, I built a reusable `ImageUpload` component with support for drag-and-drop, file selection, and loading states.
+
+Here's a simplified look at the component structure. It manages the file state and provides visual feedback for different stages of the upload process.
+
+```typescript
+"use client";
+
+import { cn } from "@/lib/utils";
+import { AlertCircle, Image as ImageIcon, X } from "lucide-react";
+import { useCallback, useEffect, useState } from "react";
+
+import { Button } from "@/components/ui/button";
+import { OptimizedImage } from "@/components/ui/image";
+
+interface ImageUploadProps {
+  value?: string;
+  onChange: (file: File) => void;
+  onRemove: () => void;
+  disabled?: boolean;
+  className?: string;
+  error?: string;
+  isUploading?: boolean;
+}
+
+export function ImageUpload({
+  value,
+  onChange,
+  onRemove,
+  disabled = false,
+  className,
+  error,
+  isUploading = false,
+}: ImageUploadProps) {
+  const [isDragActive, setIsDragActive] = useState(false);
+  const [isDragReject, setIsDragReject] = useState(false);
+  const [previewUrl, setPreviewUrl] = useState<string | null>(value || null);
+
+  const handleFileSelect = useCallback(
+    (file: File) => {
+      if (!file) return;
+      const url = URL.createObjectURL(file);
+      setPreviewUrl((prev) => {
+        if (prev) {
+          URL.revokeObjectURL(prev);
+        }
+
+        return url;
+      });
+
+      onChange(file);
+    },
+    [onChange]
+  );
+
+  const handleInputChange = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      const file = event.target.files?.[0];
+      if (file) {
+        handleFileSelect(file);
+      }
+    },
+    [handleFileSelect]
+  );
+
+  const handleRemove = useCallback(() => {
+    if (previewUrl) {
+      URL.revokeObjectURL(previewUrl);
+      setPreviewUrl(null);
+    }
+
+    onRemove();
+  }, [previewUrl, onRemove]);
+
+  const handleDragEnter = useCallback((e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragActive(true);
+    setIsDragReject(false);
+  }, []);
+
+  const handleDragLeave = useCallback((e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    // Only set drag active to false if we're leaving the drop zone entirely
+    if (!e.currentTarget.contains(e.relatedTarget as Node)) {
+      setIsDragActive(false);
+      setIsDragReject(false);
+    }
+  }, []);
+
+  const handleDragOver = useCallback((e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    // Check if the dragged items are valid files
+    if (e.dataTransfer.items && e.dataTransfer.items.length > 0) {
+      const item = e.dataTransfer.items[0];
+      if (item.kind === "file") {
+        const file = item.getAsFile();
+        if (file) {
+          const allowedTypes = [
+            "image/svg+xml",
+            "image/png",
+            "image/jpeg",
+            "image/webp",
+          ];
+          if (!allowedTypes.includes(file.type)) {
+            setIsDragReject(true);
+          } else {
+            setIsDragReject(false);
+          }
+        }
+      }
+    }
+  }, []);
+
+  const handleDrop = useCallback(
+    (e: React.DragEvent) => {
+      e.preventDefault();
+      e.stopPropagation();
+
+      setIsDragActive(false);
+      setIsDragReject(false);
+
+      const files = Array.from(e.dataTransfer.files);
+      if (files.length === 0) return;
+
+      const file = files[0];
+      handleFileSelect(file);
+    },
+    [handleFileSelect]
+  );
+
+  useEffect(() => {
+    return () => {
+      if (previewUrl) {
+        URL.revokeObjectURL(previewUrl);
+      }
+    };
+  }, [previewUrl]);
+
+  useEffect(() => {
+    if (value && value !== previewUrl) {
+      setPreviewUrl(value);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [value]);
+
+  return (
+    <div className={cn("space-y-4 w-max", className)}>
+      {previewUrl ? (
+        <div className="relative group">
+          <div className="relative w-24 h-24 mx-auto rounded-xl overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100 border-2 border-gray-200">
+            <OptimizedImage
+              src={previewUrl}
+              alt="Product icon"
+              width={96}
+              height={96}
+              objectFit="contain"
+              className="p-2"
+            />
+          </div>
+
+          <Button
+            type="button"
+            variant="destructive"
+            size="icon"
+            className="absolute -top-2 -right-2 h-6 w-6 opacity-0 group-hover:opacity-100 transition-opacity"
+            onClick={handleRemove}
+            disabled={disabled || isUploading}
+          >
+            <X className="h-3 w-3" />
+          </Button>
+        </div>
+      ) : (
+        <div
+          onDragEnter={handleDragEnter}
+          onDragLeave={handleDragLeave}
+          onDragOver={handleDragOver}
+          onDrop={handleDrop}
+          className={cn(
+            "relative border-2 border-dashed rounded-xl p-6 transition-all duration-200 cursor-pointer",
+            "hover:border-primary/50 hover:bg-primary/5",
+            isDragActive && !isDragReject && "border-primary bg-primary/10",
+            isDragReject && "border-destructive bg-destructive/10",
+            disabled && "opacity-50 cursor-not-allowed",
+            isUploading && "pointer-events-none"
+          )}
+        >
+          <label htmlFor="icon-upload" className="block cursor-pointer">
+            <input
+              id="icon-upload"
+              type="file"
+              accept=".svg,.png,.jpg,.jpeg,.webp"
+              className="hidden"
+              onChange={handleInputChange}
+              disabled={disabled || isUploading}
+            />
+
+            <div className="flex flex-col items-center justify-center space-y-3">
+              {isUploading ? (
+                <>
+                  <div className="relative">
+                    <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
+                      <div className="w-6 h-6 border-2 border-primary border-t-transparent rounded-full animate-spin" />
+                    </div>
+                  </div>
+                  <div className="text-center space-y-2">
+                    <p className="text-sm font-medium text-gray-900">
+                      Uploading icon...
+                    </p>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div
+                    className={cn(
+                      "w-12 h-12 rounded-full flex items-center justify-center transition-colors",
+                      isDragActive && !isDragReject
+                        ? "bg-primary/10"
+                        : "bg-gray-50",
+                      isDragReject && "bg-destructive/10"
+                    )}
+                  >
+                    {isDragReject ? (
+                      <AlertCircle className="h-6 w-6 text-destructive" />
+                    ) : (
+                      <ImageIcon className="h-6 w-6 text-gray-400" />
+                    )}
+                  </div>
+
+                  <div className="text-center space-y-1">
+                    <p className="text-sm font-medium text-gray-900">
+                      {isDragActive && !isDragReject
+                        ? "Drop your icon here"
+                        : isDragReject
+                          ? "Invalid file type"
+                          : "Upload product icon"}
+                    </p>
+                    <p className="text-xs text-gray-500">
+                      {isDragReject
+                        ? "Please use SVG, PNG, JPEG, or WebP files"
+                        : "SVG, PNG, JPEG, WebP up to 2MB"}
+                    </p>
+                  </div>
+                </>
+              )}
+            </div>
+          </label>
+        </div>
+      )}
+
+      {error && (
+        <div className="flex items-center space-x-2 text-sm text-destructive">
+          <AlertCircle className="h-4 w-4" />
+          <span>{error}</span>
+        </div>
+      )}
+    </div>
+  );
+}
+```
+
+### Step 4: Tying It All Together in a Form
+
+Finally, let's see how to use the `ImageUpload` component and the server action within a form. In this example from a form to edit an idea's details, the `onSubmit` handler prepares the image data and calls the action.
+
+```typescript
+export default function BasicDetailsForm(props: BasicDetailsFormProps) {
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+
+  async function onSubmit(data: UpdateIdeaFormValues) {
+    try {
+      const formData = new FormData();
+      // ... append other form data
+
+      if (selectedFile) {
+        const fileName = generateIconFileName(selectedFile.name); // a helper to create a unique name
+        const contentType = selectedFile.type || "image/png";
+        const _buff = await selectedFile.arrayBuffer();
+        const base64String = Buffer.from(_buff).toString("base64");
+
+        const uploadResult = await uploadImageWithSignedUrl(
+          base64String,
+          fileName,
+          contentType
+        );
+
+        if (uploadResult.error) {
+          toast.error("Error uploading icon", { description: uploadResult.error });
+          return;
+        }
+
+        if (uploadResult.imageUrl) {
+          formData.append("imageUrl", uploadResult.imageUrl);
+        }
+      }
+
+      // ... proceed with form submission
+    } catch (error) {
+      // ... error handling
+    }
+  }
+
+  return (
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+        <ImageUpload
+          onChange={setSelectedFile}
+          onRemove={() => setSelectedFile(null)}
+          isUploading={isUploading}
+          // ... other props
+        />
+        {/* ... other form fields and submit button ... */}
+      </form>
+    </Form>
+  );
+}
+```
+
+When the form is submitted, we read the selected file, convert it to a base64 string, and pass it to our `uploadImageWithSignedUrl` action. If the upload is successful, we get back the public R2 URL, which we can then save to our database.
+
+### Conclusion
+
+This combination of Cloudflare R2, Next.js Server Actions, and a well-structured React component creates a secure, efficient, and user-friendly image upload system. The server-centric approach simplifies client-side logic and enhances security, while R2 provides a scalable and affordable storage backend.

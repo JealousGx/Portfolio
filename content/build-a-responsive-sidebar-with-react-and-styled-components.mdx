@@ -1,0 +1,741 @@
+---
+title: "Build A Responsive Sidebar with React and Styled Components"
+publishedAt: "2022-08-23"
+brief: "Navigation is the most easiest way to go through the website. The navigation links can be displayed either in Sidebar or Navbar. Both services are widely used by most of the websites."
+coverImage: "https://cdn.hashnode.com/res/hashnode/image/upload/v1661175274534/IT7XBenAm.png"
+readTimeInMinutes: 14
+---
+
+## Why does Sidebar / Navbar exist?
+
+Navigation is the most easiest way to go through the website. The navigation links can be displayed either in Sidebar or Navbar. Both services are widely used by most of the websites.
+
+## What will we be building?
+
+In this article, we will be building a simple yet _responsive sidebar_, step-by-step using [ReactJS](https://reactjs.org), [styled-components](https://styled-components.com), and [React Router DOM](https://reactrouter.com) as our major dependencies. This sidebar will be fully responsive on all devices, a demo of which is [present here](https://jealousgx-sidebar.vercel.app).
+
+_Pro: We will also be learning one of the folder structures in this react app._
+
+## Prerequisites
+
+Before diving into coding this component, you need to make sure you have good knowledge of:
+
+- HTML, CSS, JavaScript
+- ReactJS
+- Styled-components
+- React Router DOM
+
+Moreover, you also need have:
+
+- NodeJS (Stable version)
+- NPM and / or Yarn
+
+## Building the component
+
+In _Command Prompt_, navigate to the directory where you would like to create the project and type:
+
+#### 1\. Install the React App
+
+```python
+# With npm
+npx create-react-app react-sidebar
+
+# With yarn
+yarn create react-app react-sidebar
+```
+
+where **_react-sidebar_** is the project directory name. Now open this project directory in your favorite code editor. I will be using [Visual Studio Code](https://code.visualstudio.com).
+
+Now, keep `index.js`, `App.js` and `App.css` and delete the other files / folders inside `src` folder. This will clean up most of the react app.
+
+Inside `public` folder, keep `index.html` file and delete all other files / folders.
+
+#### 2\. Add the packages to the react app
+
+Install Material UI Icons, React Router DOM, styled-components. Run the following command to get them installed on our react app:
+
+```python
+# With npm
+npm install @mui/icons-material @mui/material @emotion/styled @emotion/react react-router-dom styled-components
+
+# With yarn
+yarn add @mui/material @emotion/react @emotion/styled react-router-dom styled-components
+```
+
+Let's connect the whole app with `react-router-dom` so that its functions / components can be used everywhere. Replace the code in `src/index.js` with the following:
+
+```javascript
+// src/index.js
+import React from "react";
+import { BrowserRouter } from "react-router-dom";
+import ReactDOM from "react-dom/client";
+import App from "./App";
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(
+  <React.StrictMode>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </React.StrictMode>,
+);
+```
+
+First and foremost, we need to use `react-router-dom` to create links to different pages within our app. So, we need to connect the whole app with its parent component which is `BrowserRouter`. This will give us access to use almost all of the components, the said package has to offer.
+
+To do so, at first, we import the parent component and wrap the `App` component inside the parent component. This `App` component covers our whole app and we can use React Router anywhere within our app.
+
+Run the app in your browser using `npm start` or `yarn start` and head to **localhost:3000** to view the changes.
+
+Now, let's create the routes / pages using `react-router-dom`. Replace the code in `src/App.js` with the following code:
+
+```javascript
+// src/App.js
+import { Routes, Route } from "react-router-dom";
+import { DynamicItem, Sidebar, dummyData } from "./components";
+import "./App.css";
+
+function App() {
+  return (
+    <div id="main">
+      <Sidebar>
+        <Routes>
+          <Route path="/" element={<DynamicItem page="homepage" />} />
+          {dummyData &&
+            dummyData.map((item, index) => (
+              <Route
+                key={index}
+                path={item.path}
+                element={<DynamicItem page={item.name} />}
+              />
+            ))}
+        </Routes>
+      </Sidebar>
+    </div>
+  );
+}
+
+export default App;
+```
+
+Here, we are importing `Routes, Route` from `react-router-dom` which will help us create pages within our app. We are also importing the `Sidebar` component, which we will be creating after sometime, `dummyData`, some random data which includes path to our pages, `DynamicItem`, a dummy page which displays the page name as we navigate to it.
+
+Next thing, we need to do is use the `Sidebar` component. This component will be such that it will accept children as props so that it is visible everywhere as we navigate between the pages. Right after that, we need to add `Routes` component, a container which covers our pages / routes as we create them so that the app knows this is a routes container and it contains pages.
+
+Now, the only thing we need to do is add the routes we want. We know that `dummyData` contains the paths to the pages, we can map through the data to get them, and use `Route` component for each of the path. The `Route` component accepts two properties, `path`, where the route will be navigating to, and `element`, which is a component that will be rendered in that page / route.
+
+Now, we need to add the basic styling to our app. These styles only define the layout of our app. Replace the code in `src/App.css` with the following code:
+
+_Note: We can also create some of the styling using styled-components. You can do the styling however you like, but here, I have used css for basic styling._
+
+```css
+/* src/App.css */
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  outline: none;
+  border: none;
+  text-decoration: none;
+
+  font-family:
+    "IBM Plex Sans",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    "Oxygen",
+    "Ubuntu",
+    "Cantarell",
+    "Fira Sans",
+    "Droid Sans",
+    "Helvetica Neue",
+    sans-serif;
+}
+
+#main {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.btn {
+  margin: 1rem 1rem 0 0;
+  padding: 0.25rem 0.5rem;
+  display: flex;
+  gap: 0.25rem;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  outline: none;
+  border: 1px solid #808080;
+  border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  -webkit-transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  -ms-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+}
+
+.btn:hover {
+  background-color: #e4e3e34d;
+}
+
+#page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  text-transform: capitalize;
+  font-size: 1rem;
+  overflow: hidden;
+}
+
+@media screen and (min-width: 468px) {
+  #page {
+    font-size: 3rem;
+  }
+
+  .btn {
+    padding: 0.5rem 0.75rem;
+    gap: 0.5rem;
+  }
+}
+
+.app__brand__text {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #5a8dee;
+  margin-left: 0.5rem;
+}
+
+/* Sidebar toggle button starts */
+.outer__circle {
+  position: relative;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  background-color: #5f97ef;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.outer__circle::after {
+  position: absolute;
+  top: 0.225rem;
+  left: 0.215rem;
+  content: "";
+  width: 1.1rem;
+  height: 1.1rem;
+  border-radius: 50%;
+  background-color: #fff;
+}
+
+.inner__circle {
+  position: relative;
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 50%;
+  background-color: #5f97ef;
+  z-index: 100;
+}
+
+.inner__circle::after {
+  position: absolute;
+  top: 0.125rem;
+  left: 0.15rem;
+  content: "";
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background-color: #fff;
+}
+/* Sidebar toggle button ends */
+```
+
+Here, we are resetting every style in the react app using `*` pseudo selector to configure the whole app the way we want it. Moreover, we are also defining the styles for parent `div` container of app with the class name `main`. We are also defining the styles for a button which will be used later in `DynamicItem` component.
+
+In this global styles file, we are manually making **two circles** button instead of using some library. This button toggles whether or not to display the sidebar as a whole. This could done in many ways, this is just one of them.
+
+Let's create a file which will store the icons which will be used in our react app.
+
+Head to `src` folder and create a new folder inside it under `components` name. Inside `components` folder, create a new file with `Icons.js` name and add the following code to it:
+
+```javascript
+// src/components/Icons.js
+import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
+import WebOutlinedIcon from "@mui/icons-material/WebOutlined";
+import CalendarTodayOutlinedIcon from "@mui/icons-material/CalendarTodayOutlined";
+import CalendarMonthOutlinedIcon from "@mui/icons-material/CalendarMonthOutlined";
+import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
+import SubjectOutlinedIcon from "@mui/icons-material/SubjectOutlined";
+import GppGoodOutlinedIcon from "@mui/icons-material/GppGoodOutlined";
+import AdminPanelSettingsOutlinedIcon from "@mui/icons-material/AdminPanelSettingsOutlined";
+import ListAltOutlinedIcon from "@mui/icons-material/ListAltOutlined";
+import InputOutlinedIcon from "@mui/icons-material/InputOutlined";
+
+import ArrowRightOutlinedIcon from "@mui/icons-material/ArrowRightOutlined";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+
+export {
+  HomeOutlinedIcon as HomeIcon,
+  WebOutlinedIcon as LayoutIcon,
+  CalendarMonthOutlinedIcon as CalendarIcon,
+  PersonOutlineOutlinedIcon as UserIcon,
+  SubjectOutlinedIcon as InvoiceIcon,
+  GppGoodOutlinedIcon as RolesIcon,
+  CalendarTodayOutlinedIcon as PagesIcon,
+  AdminPanelSettingsOutlinedIcon as AuthIcon,
+  ListAltOutlinedIcon as WizardIcon,
+  InputOutlinedIcon as ModalIcon,
+  ArrowBackIcon,
+  ArrowRightOutlinedIcon as ArrowIcon,
+};
+```
+
+In this file, we are importing every icon, that we will be using inside our app, and exporting it from a single file. This will help us to import our icons from a single file instead of using multiple lines to import our icons.
+
+Similarly, we will be creating a new file inside `src/components` folder under the name `Data.js`. This file will contain our dummy data that we will be using in our app. Open `Data.js` file and add the following code to it:
+
+```javascript
+// src/components/Data.js
+import {
+  HomeIcon,
+  LayoutIcon,
+  CalendarIcon,
+  InvoiceIcon,
+  UserIcon,
+  RolesIcon,
+  PagesIcon,
+  AuthIcon,
+  WizardIcon,
+  ModalIcon,
+} from "./Icons";
+
+export const SIDEBAR_DATA = [
+  {
+    id: 1,
+    name: "dashboards",
+    path: "dashboards",
+    icon: <HomeIcon />,
+  },
+  {
+    id: 2,
+    name: "layouts",
+    path: "layouts",
+    icon: <LayoutIcon />,
+  },
+  {
+    id: 3,
+    name: "calendar",
+    path: "calendar",
+    icon: <CalendarIcon />,
+  },
+  {
+    id: 4,
+    name: "invoice",
+    path: "invoice",
+    icon: <InvoiceIcon />,
+  },
+  {
+    id: 5,
+    name: "users",
+    path: "users",
+    icon: <UserIcon />,
+  },
+  {
+    id: 6,
+    name: "roles & permissions",
+    path: "roles",
+    icon: <RolesIcon />,
+  },
+  {
+    id: 7,
+    name: "pages",
+    path: "pages",
+    icon: <PagesIcon />,
+  },
+  {
+    id: 8,
+    name: "authentication",
+    path: "authentication",
+    icon: <AuthIcon />,
+  },
+  {
+    id: 9,
+    name: "wizard examples",
+    path: "wizard",
+    icon: <WizardIcon />,
+  },
+  {
+    id: 10,
+    name: "modal examples",
+    path: "modal",
+    icon: <ModalIcon />,
+  },
+];
+```
+
+Note that we are importing the icons from a single file instead of using multiple lines to import. This way, we can also avoid redundancy.
+
+In this file, we are defining an array of objects each of which contains data for our pages, i.e. an id, name, path, icon. This is the whole data that will be used throughout our app. _Feel free to extend it as much as you want._
+
+Another thing we need to do is create a centralized file which will export all our files, just like `Icons.js` file. Create `index.js` file inside `src/components` folder and add the following code to it:
+
+```javascript
+// src/components/index.js
+export { default as Sidebar } from "./Sidebar";
+export { default as SidebarItems } from "./Sidebar/SidebarItems";
+export { default as DynamicItem } from "./Routes/[item]";
+
+export { SIDEBAR_DATA as dummyData } from "./Data";
+```
+
+In this file, we are following the similar procedure as that of `Icons.js`.
+
+Note that the files exported as default need to be imported as `default` as well but the ones without `default` need to be imported without it.
+
+Now let's create a file that will render the items of a page. You guessed it right! We will be creating `DynamicItem` component. Create a folder inside `src` under the name `Routes` and inside that folder, create a file with `[item].jsx` and add the following code to it:
+
+_If you have worked with NextJS, you know why we are using square brackets. For those who do not know, you can name it anything you want, even without the square brackets._
+
+```javascript
+// src/components/Routes/[item].jsx
+import { Link } from "react-router-dom";
+import { ArrowBackIcon } from "../Icons";
+
+const Item = (props) => {
+  const { page } = props;
+  if (page === "homepage") {
+    return <div id="page">{page}</div>;
+  } else {
+    return (
+      <div id="page">
+        <Link to="/">
+          <button className="btn">
+            <ArrowBackIcon /> Back to Home
+          </button>
+        </Link>
+        {page}
+      </div>
+    );
+  }
+};
+
+export default Item;
+```
+
+We know we have created the routes for the pages that we want. Now we need to make pages that will be rendered.
+
+Here we are importing `Link` component from `react-router-dom`, a back icon from `Icons.js` file. We know there is no other page / route behind it but the homepage contains other pages / routes. So, if the route is `/`, we just need to render the component, else, we also need to render a back button that will take us back to homepage.
+
+We are using `Link` component to navigate back to `homepage` as the page already exists. _Recall that we created routes inside_ `src/App.js`_._
+
+Now comes the main item, the sidebar component. Head to `src` folder and create a new folder inside it under the name `Sidebar` and create a new file inside it with `index.jsx` name. This will be the main file that will consume almost all the files. Add the following code to it:
+
+```javascript
+// src/components/Sidebar/index.jsx
+import React, { useState } from "react";
+
+import {
+  Children,
+  SidebarContainer,
+  SidebarWrapper,
+  SidebarLogoWrapper,
+  SidebarLogo,
+  SidebarBrand,
+  SidebarToggler,
+} from "./SidebarStyles";
+import BrandLogo from "./BrandLogo.svg";
+
+import { SidebarItems } from "..";
+
+const MOBILE_VIEW = window.innerWidth < 468;
+
+export default function Sidebar({ children }) {
+  const [displaySidebar, setDisplaySidebar] = useState(!MOBILE_VIEW);
+
+  const handleSidebarDisplay = (e) => {
+    e.preventDefault();
+    if (window.innerWidth > 468) {
+      setDisplaySidebar(!displaySidebar);
+    } else {
+      setDisplaySidebar(false);
+    }
+  };
+
+  return (
+    <React.Fragment>
+      <SidebarContainer displaySidebar={displaySidebar}>
+        <SidebarWrapper>
+          <SidebarLogoWrapper displaySidebar={displaySidebar}>
+            {/* Logo wrapper starts */}
+            <SidebarLogo href="#">
+              <span className="app-brand-logo demo">
+                <img src={BrandLogo} alt="Brand logo" />
+              </span>
+              <SidebarBrand
+                displaySidebar={displaySidebar}
+                className="app__brand__text"
+              >
+                Frest
+              </SidebarBrand>
+            </SidebarLogo>
+            {/* Logo wrapper ends */}
+            {/* Toggle button */}
+            <SidebarToggler
+              displaySidebar={displaySidebar}
+              onClick={handleSidebarDisplay}
+            >
+              <div className="outer__circle">
+                <div className="inner__circle" />
+              </div>
+            </SidebarToggler>
+          </SidebarLogoWrapper>
+          {/* Render the SidebarItems component */}
+          <SidebarItems displaySidebar={displaySidebar} />
+        </SidebarWrapper>
+      </SidebarContainer>
+      {/* Render the children */}
+      <Children displaySidebar={displaySidebar}>{children}</Children>
+    </React.Fragment>
+  );
+}
+```
+
+This is the file where we will be building `Sidebar`. We are importing state manager `useState` from React to control the view of the sidebar, styles from another file, it will be created within the same directory, a [Brand Logo](https://github.com/JealousGx/snippets/blob/sidebar/src/components/Sidebar/BrandLogo.svg) _Feel free to use whatever logo you want_, `SidebarItems` file that will render our items from the data.
+
+Another thing we are doing here is creating a _global_ variable that will store whether the viewpoint is mobile or not. If the viewpoint is mobile, display a portion of the sidebar otherwise, make the sidebar togglable, using `useState`. Then we are creating an arrow function that will handle whether or not to display the full sidebar.
+
+In the end, we are returning a [React Fragment](https://reactjs.org/docs/fragments.html) and displaying the brand logo, toggle button, the sidebar items, and the children.
+
+_Note that we are creating the styles using_ `styled-components` _that can accept parameters and will help us in displaying the sidebar._
+
+Now let's create a file that will apply all the necessary styling to the sidebar. Head to `src/components/Sidebar` and create a new file under the name `SidebarStyles.js` and add the following code to it:
+
+```javascript
+// src/components/Sidebar/SidebarStyles.js
+import styled from "styled-components";
+
+// Children Component
+export const Children = styled.div`
+  width: 100%;
+  height: 100%;
+  margin-left: ${({ displaySidebar }) => (displaySidebar ? "15rem" : "5rem")};
+  @media (max-width: 468px) {
+    margin-left: 5rem;
+  }
+`;
+
+export const SidebarWrapper = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  font-size: 0.9rem;
+`;
+
+export const SidebarLogoWrapper = styled.div`
+  padding: 0.5rem 1rem;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: ${({ displaySidebar }) =>
+    displaySidebar ? "space-between" : "center"};
+  align-items: center;
+  @media (max-width: 468px) {
+    justify-content: center;
+  }
+`;
+
+export const SidebarLogo = styled.a`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  @media (max-width: 468px) {
+    display: none;
+  }
+`;
+
+export const SidebarBrand = styled.span`
+  display: ${({ displaySidebar }) => (displaySidebar ? "block" : "none")};
+`;
+
+export const SidebarToggler = styled.button`
+  cursor: pointer;
+  display: ${({ displaySidebar }) => (displaySidebar ? "block" : "none")};
+  @media (max-width: 468px) {
+    display: block;
+  }
+`;
+
+// SidebarItem styles
+export const ItemsList = styled.ul`
+  list-style: none;
+`;
+
+export const ItemContainer = styled.li`
+  margin-top: 0.5rem;
+  width: 100%;
+  padding: 0.5rem 0.25rem;
+  border-radius: 0.2rem;
+  cursor: pointer;
+  &:hover {
+    background: #eaeced;
+  }
+  &.active {
+    background-color: #dbe4f3;
+  }
+`;
+
+export const ItemWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  color: #7c7788;
+`;
+
+export const ItemName = styled.span`
+  margin-left: ${({ displaySidebar }) => (displaySidebar ? "0.5rem" : "0")};
+  display: ${({ displaySidebar }) => (displaySidebar ? "block" : "none")};
+  text-transform: capitalize;
+`;
+
+// Sidebar Container
+export const SidebarContainer = styled.div`
+  position: absolute;
+  left: 0;
+  width: ${({ displaySidebar }) => (displaySidebar ? "15rem" : "5rem")};
+  height: 100vh;
+  padding: 0.75rem;
+  background: #f3f4f4;
+  transition: width 350ms ease;
+  border-right: 1px solid #d4d8dd;
+  overflow-x: hidden;
+  ${({ displaySidebar }) =>
+    displaySidebar && "box-shadow: 8px 0px 12px 0px rgba(0,0,0,0.1)"};
+  ${ItemWrapper} {
+    justify-content: ${({ displaySidebar }) => !displaySidebar && "center"};
+  }
+  &:hover {
+    ${({ displaySidebar }) =>
+      !displaySidebar && "box-shadow: 8px 0px 12px 0px rgba(0,0,0,0.1)"};
+    @media (min-width: 468px) {
+      width: ${({ displaySidebar }) => !displaySidebar && "15rem"};
+      ${SidebarLogoWrapper} {
+        justify-content: ${({ displaySidebar }) =>
+          !displaySidebar && "space-between"};
+      }
+      ${SidebarBrand} {
+        display: ${({ displaySidebar }) => !displaySidebar && "block"};
+      }
+      ${SidebarToggler} {
+        display: ${({ displaySidebar }) => !displaySidebar && "block"};
+      }
+      ${ItemWrapper} {
+        justify-content: ${({ displaySidebar }) =>
+          !displaySidebar && "flex-start"};
+      }
+      ${ItemName} {
+        display: ${({ displaySidebar }) => !displaySidebar && "block"};
+        margin-left: ${({ displaySidebar }) => !displaySidebar && "0.5rem"};
+      }
+    }
+  }
+  ::-webkit-scrollbar {
+    width: 4px;
+    height: 3px;
+  }
+  ::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background-color: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: #eaeced;
+    &:hover {
+      background: #d5e0f3;
+    }
+  }
+  @media (max-width: 468px) {
+    width: 5rem;
+  }
+`;
+```
+
+Here we are making the styles according to the state that we created inside `Sidebar.jsx`. Recall that we passed the parameters to these components. We can use those params to display and hide whatever we want.
+
+_Note the hierarchy. In order to control a child component from a parent component, the child component need to be declared before the parent component._
+
+Now then, let's create a file that will render all the items of Sidebar. Inside the same directory, create a new file under the name `SidebarItems.jsx` and add the following code to it:
+
+```javascript
+// src/components/Sidebar/SidebarItems.jsx
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import {
+  ItemsList,
+  ItemContainer,
+  ItemWrapper,
+  ItemName,
+} from "./SidebarStyles";
+
+import { dummyData } from "..";
+
+const SidebarItems = ({ displaySidebar }) => {
+  const [activeItem, setActiveItem] = useState(0);
+
+  return (
+    <ItemsList>
+      {dummyData.map((itemData, index) => (
+        <ItemContainer
+          key={index}
+          onClick={() => setActiveItem(itemData.id)}
+          {/* Adding active class when the user clicks */}
+          className={itemData.id === activeItem ? "active" : ""}
+        >
+          <Link to={itemData.path}>
+            <ItemWrapper>
+              {itemData.icon}
+              <ItemName displaySidebar={displaySidebar}>
+                {itemData.name}
+              </ItemName>
+            </ItemWrapper>
+          </Link>
+        </ItemContainer>
+      ))}
+    </ItemsList>
+  );
+};
+
+export default SidebarItems;
+```
+
+In this file, we are using `useState` to manage the active item of the sidebar, `Link` from React Router to redirect the user to the page, the dummy data from `src/components/index.js`, and the styles from `src/components/Sidebar/SidebarStyles.js`.
+
+Inside the main function, we are creating a list and inside the list, we are mapping through the dummy data and rendering it using the styled components that we have imported. Note that we also created an active pseudo-selector inside `SidebarStyles.js`, that will style the item that is active. The active class is added to the item only if the user clicks it.
+
+Here, we are also using the `Link` component of React Router, for each item, to navigate to the item that the user clicks.
+
+Finally, we have the following output. _Play with the code however you wish and see the changes._
+
+![image.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1661236257044/s8sdKS2zK.png align="left")
+
+This is a simple Sidebar component. You can, however, extend it and make it much more amazing however you demand it.
+
+## Resources:
+
+#### 1\. [Live demo](https://jealousgx-sidebar.vercel.app)
+
+#### 2\. [Source Code](https://github.com/JealousGx/snippets/tree/sidebar)
+
+#### 3\. [styled-components](https://styled-components.com)
+
+#### 4\. [React Router DOM](https://reactrouter.com)
+
+_This is my first blog, so, there will be some mistakes in the script, however, the code works perfect. Kindly share tips that can help me make the articles more organized._

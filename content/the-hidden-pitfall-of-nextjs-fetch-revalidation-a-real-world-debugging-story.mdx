@@ -1,0 +1,100 @@
+---
+title: "The Hidden Pitfall of Next.js Fetch Revalidation: A Real-World Debugging Story"
+publishedAt: "2025-07-13"
+brief: "When building FounderSignal, a platform for startup idea validation, I ran into a subtle but critical issue with Next.js's fetch revalidation that every developer should know about. This post will walk you through the problem, the debugging journey, ..."
+coverImage: "https://cdn.hashnode.com/res/hashnode/image/stock/unsplash/imgCpfIMoRw/upload/54f456e8ec13c86c0f77b1bc312e4626.jpeg"
+readTimeInMinutes: 3
+---
+
+When building [FounderSignal](https://foundersignal.app), a platform for startup idea validation, I ran into a subtle but critical issue with Next.js’s fetch revalidation that every developer should know about. This post will walk you through the problem, the debugging journey, and the solution, with practical code snippets and lessons learned.
+
+---
+
+## The Problem: Stale Data, Strange Headers
+
+I wanted to cache API responses for a long time, ideally, a year, using Next.js’s [fetch revalidation](https://nextjs.org/docs/app/building-your-application/caching#time-based-revalidation). My fetch looked like this:
+
+```typescript
+const response = await fetch("https://api.jsonplaceholder.com/v1/users", {
+  next: { revalidate: 31536000 }, // 1 year in seconds
+});
+```
+
+**It worked locally and on the first deploy.**  
+But after refreshing the page on Vercel, I started seeing this:
+
+- `content-type: text/xml`
+- `content-length: 0`
+- No actual data, even though my API was returning the correct JSON.
+
+## The Debugging Journey
+
+At first, I suspected my API. I checked logs, tested endpoints, and confirmed the API was returning the right data and headers.
+
+But the deployed Next.js app was serving an empty response with the wrong content type. Why?
+
+### The Culprit: Extremely Long or Infinite Revalidation
+
+After hours of debugging, I discovered the issue:  
+Setting `revalidate: 31536000` (1 year) or `Infinity` caused Vercel’s Next.js server to serve a broken cached response after the initial fetch.
+
+Even though [Next.js docs](https://nextjs.org/docs/app/api-reference/functions/fetch#optionsnextrevalidate) mention `Infinity` is supported, in practice, it led to:
+
+- Stale or empty cache entries
+- Wrong content-type headers
+- No data on subsequent requests
+
+## The Fix: Use a Reasonable Revalidation Interval
+
+Switching to a 1-day revalidation fixed everything:
+
+```typescript
+const response = await fetch("https://api.jsonplaceholder.com/v1/users", {
+  next: { revalidate: 86400 }, // 1 day in seconds
+});
+```
+
+Now, every page refresh returns the correct data, and the cache works as expected.
+
+---
+
+## Key Takeaways for Next.js Developers
+
+### 1\. **Don’t Use Extremely Long or Infinite Revalidation**
+
+Even if the docs say `Infinity` is supported, it may not work as expected on all platforms (especially Vercel). Stick to practical intervals like 1 day (`86400` seconds) or less.
+
+### 2\. **Always Check Response Headers**
+
+If you see `content-type: text/xml` or `content-length: 0` from a Next.js route that should return JSON, suspect a caching or revalidation issue.
+
+### 3\. **Debug Both API and Frontend**
+
+Don’t assume the bug is in your API. Sometimes, the frontend framework’s caching layer is the culprit.
+
+### 4\. **Use Tag-Based Revalidation for Manual Control**
+
+If you want to serve stale data until a specific event (like a new user creation), use tag-based revalidation:
+
+```typescript
+// Fetch with tag
+const response = await fetch("https://api.jsonplaceholder.com/v1/users", {
+  next: { tags: ["users"] },
+});
+
+// In your action or API route
+import { revalidateTag } from "next/cache";
+await revalidateTag("users");
+```
+
+---
+
+## Conclusion
+
+Caching and revalidation are powerful features in Next.js, but they can introduce subtle bugs if not configured carefully. If you’re building a project like [FounderSignal](https://foundersignal.app) or any data-driven app, **test your caching strategy in production-like environments** and avoid extremely long revalidation intervals.
+
+**Have you faced similar issues? Share your story or questions below!**
+
+---
+
+_Happy coding, and may your caches always be fresh!_

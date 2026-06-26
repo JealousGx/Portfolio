@@ -1,0 +1,108 @@
+---
+title: "AWS Debugging Nightmare: How a Missing Host Header Led to Chaos and the Quick Solution"
+publishedAt: "2025-02-04"
+brief: "The Problem: Lambda@Edge's Response Size Limit Strikes. Our team was racing against the clock to fix a critical API endpoint that suddenly started failing. The culprit? Lambda@Edge's 1 MB response payload limit. Our endpoint's dataset had grown expone..."
+coverImage: "https://cdn.hashnode.com/res/hashnode/image/stock/unsplash/XJXWbfSo2f0/upload/4ac47a09e35f375434331978c45bb58a.jpeg"
+readTimeInMinutes: 3
+---
+
+### The Problem: Lambda@Edge’s Response Size Limit Strikes
+
+Our team was racing against the clock to fix a critical API endpoint that suddenly started failing. The culprit? **Lambda@Edge’s 1 MB response payload limit**. Our endpoint’s dataset had grown exponentially, and truncating the response wasn’t an option.
+
+**The Plan:**
+
+1.  **Offload Large Data to S3 Conditionally**: On every API call, check the S3 object’s `LastModifiedDate`. **If it’s older than 6 hours or if the object doesn’t exist**, generate and upload a fresh JSON file. If not, do nothing—no redundant writes, no wasted compute.
+2.  **Return Dynamic S3 Object Paths**: Modify the Lambda handler to return paths like `/data/2023-10-01.json` (with date-based filenames) instead of raw data. Clients now fetch directly from S3 via CloudFront.
+3.  **CloudFront to the Rescue**: Configure behaviors to route `/data/*` paths to the S3 bucket, bypassing Lambda’s size limits entirely.
+
+    It seemed foolproof—until it wasn’t.
+
+---
+
+### The Bug That Defied Logs (and Sanity)
+
+After deploying, our testing immediately failed. CloudFront returned cryptic **403 Access Denied, 404 Not Found** errors. No logs explained why. Was it an IAM role misconfiguration? A bucket policy issue? A CORS nightmare? We spent days chasing ghosts:
+
+- Triple-checked bucket permissions ✅
+- Rewrote CORS policies 12 times ✅
+- Even created custom policy for the CloudFront distribution ✅
+
+Nothing worked.
+
+---
+
+### The “Aha!” Moment: Headers Are Not Just Metadata
+
+After a week of frustration, we finally inspected the **raw CloudFront request objects** in Lambda@Edge. That’s when we spotted it:
+
+```javascript
+// The offending header in our Lambda@Edge response:
+"headers": {
+  "host": [{"key": "Host", "value": "api.ourcompany.com"}], // 😱
+  // ...
+}
+```
+
+**The Mistake:**  
+Request contained our API’s domain in the `Host` header. But S3 doesn’t care about your API’s URL—it expects **its own domain name** in the `Host` header to authenticate requests.
+
+---
+
+### The 3-Line Fix That Saved the Day
+
+In Lambda@Edge, we added logic to override the `Host` header dynamically when talking to S3:
+
+```javascript
+exports.handler = async (event) => {
+  const request = event.Records[0].cf.request;
+
+  const response = await getSomeRespone(event);
+
+  // Forward to S3 file;
+  if (response.forwardToOrigin) {
+    request.uri = response.forwardToOrigin;
+
+    // Fix: Override Host header for S3 origins
+    if (request.origin?.s3) {
+      request.headers["host"] = [
+        {
+          key: "Host",
+          value: request.origin.s3.domainName, // e.g., "my-bucket.s3.amazonaws.com"
+        },
+      ];
+    }
+
+    return request;
+  }
+
+  return response;
+};
+```
+
+**Why This Works:**
+
+- CloudFront origins require precise `Host` headers for authentication.
+- `request.origin.s3.domainName` dynamically injects the bucket’s endpoint.
+
+---
+
+### Lessons Learned the Hard Way
+
+1.  **Headers Matter (a Lot)**: AWS services treat `Host` as a security credential, not just metadata.
+2.  **Debugging Tip**: Use CloudFront’s **Lambda@Edge debug logs** to inspect raw request/response objects.
+
+---
+
+### Pro Tips for AWS Serverless Developers
+
+✅ **Test Origin Requests Locally**: Use tools like `curl` to simulate S3 requests with different headers.  
+✅ **Enable Detailed Logging**: CloudFront + Lambda@Edge logs are worth the cost during debugging.  
+✅ **Bookmark the Docs**: The [AWS Origin Header Guide](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/RequestAndResponseBehaviorCustomOrigin.html) could save you hours.
+
+---
+
+**Final Thought:**  
+In serverless architectures, the smallest details—like a single header—can ripple into days of chaos. But as we learned, sometimes the biggest fixes come in the smallest code changes.
+
+_Have you battled AWS headers before? Share your war stories in the comments!_ 🛠️
