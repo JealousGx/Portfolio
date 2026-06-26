@@ -2,11 +2,13 @@ import { Icons } from "@/components/icons";
 import { BookOpenIcon, CodeIcon, HomeIcon, NotebookIcon } from "lucide-react";
 
 import { Docker } from "@/components/ui/svgs/docker";
+import { MongoDB } from "@/components/ui/svgs/mongodb";
 import { NextjsIconDark } from "@/components/ui/svgs/nextjsIconDark";
 import { Nodejs } from "@/components/ui/svgs/nodejs";
 import { Postgresql } from "@/components/ui/svgs/postgresql";
 import { ReactLight } from "@/components/ui/svgs/reactLight";
 import { Typescript } from "@/components/ui/svgs/typescript";
+import { Wordpress } from "@/components/ui/svgs/wordpress";
 
 export const DATA = {
     name: "Abdul Mateen Khilji",
@@ -25,9 +27,9 @@ export const DATA = {
         { name: "TypeScript", icon: Typescript },
         { name: "Node.js", icon: Nodejs },
         { name: "PostgreSQL", icon: Postgresql },
-        { name: "MongoDB", icon: Docker }, // replace with MongoDB icon if available
+        { name: "MongoDB", icon: MongoDB },
+        { name: "WordPress", icon: Wordpress },
         { name: "Docker", icon: Docker },
-        // Add WordPress icon manually if needed
     ],
     navbar: [
         { href: "/", icon: HomeIcon, label: "Home" },
@@ -95,8 +97,62 @@ export const DATA = {
     // FEATURED projects — shown on homepage (keep to 3-4)
     featuredProjects: [
         {
+            title: "Klipse",
+            href: "https://klipse.app",
+            dates: "2026",
+            active: true,
+            description:
+                "AI-powered video creation SaaS. Turns a text idea into a fully produced short-form video — AI script, TTS narration, generated images, FFmpeg encode — and auto-publishes to YouTube.",
+            technologies: ["TanStack Start", "TypeScript", "Cloudflare", "Gemini AI", "FFmpeg"],
+            links: [
+                {
+                    type: "Website",
+                    href: "https://klipse.app",
+                    icon: <Icons.globe className="size-3" />,
+                },
+            ],
+            image: "https://res.cloudinary.com/jealousgx/image/upload/v1782456526/24e2c61b-de34-49bb-937a-83a6af431eff.png",
+            video: "",
+        },
+        {
+            title: "Prospkt",
+            href: "https://prospkt.app",
+            dates: "2026",
+            active: true,
+            description:
+                "Lead discovery and outreach tool for freelancers. Searches Google Places for local businesses, scores them by opportunity potential, and generates AI-powered outreach scripts for 6 channels.",
+            technologies: ["TanStack Start", "TypeScript", "MySQL", "Gemini AI", "Netlify"],
+            links: [
+                {
+                    type: "Website",
+                    href: "https://prospkt.app",
+                    icon: <Icons.globe className="size-3" />,
+                },
+            ],
+            image: "https://res.cloudinary.com/jealousgx/image/upload/v1782456564/0277456d-c73d-40c8-88b9-b4ebf960c822.png",
+            video: "",
+        },
+        {
+            title: "GigScale",
+            href: "https://gigscale.app",
+            dates: "2025",
+            active: true,
+            description:
+                "AI-powered Upwork and Fiverr profile optimizer. Analyzes your profile across visibility, conversion, and trust metrics, then rewrites your headlines, bio, and gig copy for better rankings.",
+            technologies: ["Next.js", "TypeScript", "TiDB", "Drizzle", "Gemini AI"],
+            links: [
+                {
+                    type: "Website",
+                    href: "https://gigscale.app",
+                    icon: <Icons.globe className="size-3" />,
+                },
+            ],
+            image: "https://res.cloudinary.com/jealousgx/image/upload/v1782456542/82fc8c07-3ad5-4895-b180-115b238b803c.png",
+            video: "",
+        },
+        {
             title: "FounderSignal",
-            href: "https://github.com/JealousGx/FounderSignal",
+            href: "https://foundersignal.app",
             dates: "2024",
             active: true,
             description:
@@ -115,77 +171,66 @@ export const DATA = {
                 },
             ],
             image: "https://raw.githubusercontent.com/JealousGx/FounderSignal/refs/heads/main/web/public/assets/og-image.png",
-            video: "https://www.youtube.com/watch?v=DrhSM3VJu9A",
-        },
-        {
-            title: "Vala",
-            href: "http://vala.scaleredesign.com",
-            dates: "2023",
-            active: true,
-            description:
-                "An asset management solution built for Scalere Design. Pixel-perfect implementation from Figma designs with full responsiveness.",
-            technologies: ["Next.js", "TypeScript", "TailwindCSS"],
-            links: [
-                {
-                    type: "Website",
-                    href: "http://vala.scaleredesign.com",
-                    icon: <Icons.globe className="size-3" />,
-                },
-            ],
-            image: "https://res.cloudinary.com/jealousgx/image/upload/v1728193613/vala.jpg",
             video: "",
-            badges: ["Client Work"],
-        },
-        {
-            title: "Airbnb Clone",
-            href: "https://jealous-airbnb-clone.vercel.app",
-            dates: "2023",
-            active: true,
-            description:
-                "Full-featured Airbnb clone — search, view, book, and manage accommodations. Built to demonstrate full-stack capability with authentication, database integration, and real-time features.",
-            technologies: ["Next.js", "TypeScript", "MongoDB", "TailwindCSS"],
-            links: [
-                {
-                    type: "Website",
-                    href: "https://jealous-airbnb-clone.vercel.app",
-                    icon: <Icons.globe className="size-3" />,
-                },
-                {
-                    type: "Source",
-                    href: "https://github.com/JealousGx/airbnb-clone",
-                    icon: <Icons.github className="size-3" />,
-                },
-            ],
-            image: "https://res.cloudinary.com/jealousgx/image/upload/v1728148274/Airbnb.jpg",
-            video: "",
-        },
-        {
-            title: "eCommerce Phone Store",
-            href: "https://jealous-phone-store.netlify.app",
-            dates: "2021",
-            active: true,
-            description:
-                "An e-commerce storefront for buying and selling second-hand smartphones. Product listings, filtering, and cart functionality.",
-            technologies: ["React", "JavaScript", "CSS"],
-            links: [
-                {
-                    type: "Website",
-                    href: "https://jealous-phone-store.netlify.app",
-                    icon: <Icons.globe className="size-3" />,
-                },
-                {
-                    type: "Source",
-                    href: "https://github.com/JealousGx/react-phone-store",
-                    icon: <Icons.github className="size-3" />,
-                },
-            ],
-            image: "https://raw.githubusercontent.com/JealousGx/FounderSignal/refs/heads/main/web/public/assets/og-image.png",
-            video: "https://www.youtube.com/watch?v=DrhSM3VJu9A",
         },
     ],
 
     // ALL projects — shown on /projects page
     projects: [
+        {
+            title: "Klipse",
+            href: "https://klipse.app",
+            dates: "2026",
+            active: true,
+            description:
+                "AI-powered video creation SaaS. Turns a text idea into a fully produced short-form video — AI script, TTS narration, generated images, FFmpeg encode — and auto-publishes to YouTube.",
+            technologies: ["TanStack Start", "TypeScript", "Cloudflare", "Gemini AI", "FFmpeg", "Drizzle", "Polar"],
+            links: [
+                {
+                    type: "Website",
+                    href: "https://klipse.app",
+                    icon: <Icons.globe className="size-3" />,
+                },
+            ],
+            image: "https://res.cloudinary.com/jealousgx/image/upload/v1782456526/24e2c61b-de34-49bb-937a-83a6af431eff.png",
+            video: "",
+        },
+        {
+            title: "Prospkt",
+            href: "https://prospkt.app",
+            dates: "2026",
+            active: true,
+            description:
+                "Lead discovery and outreach tool for freelancers. Searches Google Places for local businesses, scores them by opportunity potential, and generates AI-powered outreach scripts for 6 channels.",
+            technologies: ["TanStack Start", "TypeScript", "MySQL", "Drizzle", "Gemini AI", "Netlify"],
+            links: [
+                {
+                    type: "Website",
+                    href: "https://prospkt.app",
+                    icon: <Icons.globe className="size-3" />,
+                },
+            ],
+            image: "https://res.cloudinary.com/jealousgx/image/upload/v1782456564/0277456d-c73d-40c8-88b9-b4ebf960c822.png",
+            video: "",
+        },
+        {
+            title: "GigScale",
+            href: "https://gigscale.app",
+            dates: "2025",
+            active: true,
+            description:
+                "AI-powered Upwork and Fiverr profile optimizer. Analyzes profiles across visibility, conversion, and trust metrics, then rewrites headlines, bio, and gig copy for better rankings.",
+            technologies: ["Next.js", "TypeScript", "TiDB", "Drizzle", "Gemini AI", "Better Auth", "Polar"],
+            links: [
+                {
+                    type: "Website",
+                    href: "https://gigscale.app",
+                    icon: <Icons.globe className="size-3" />,
+                },
+            ],
+            image: "https://res.cloudinary.com/jealousgx/image/upload/v1782456542/82fc8c07-3ad5-4895-b180-115b238b803c.png",
+            video: "",
+        },
         {
             title: "FounderSignal",
             href: "https://foundersignal.app",
@@ -206,7 +251,7 @@ export const DATA = {
                     icon: <Icons.github className="size-3" />,
                 },
             ],
-            image: "https://res.cloudinary.com/jealousgx/image/upload/v1728193613/foundersignal.jpg",
+            image: "https://raw.githubusercontent.com/JealousGx/FounderSignal/refs/heads/main/web/public/assets/og-image.png",
             video: "",
         },
         {
@@ -229,7 +274,7 @@ export const DATA = {
                     icon: <Icons.github className="size-3" />,
                 },
             ],
-            image: "",
+            image: "https://res.cloudinary.com/jealousgx/image/upload/v1782456246/Screenshot_2026-06-26_at_11.43.50_AM_ziwtua.png",
             video: "",
         },
         {
