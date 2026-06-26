@@ -233,4 +233,47 @@
   .prose :where(tbody tr:last-child td):not(:where([class~="not-prose"] *)) {
     @apply border-b-0;
   }
+
+  /* rehype-pretty-code */
+  [data-rehype-pretty-code-figure] {
+    @apply my-4;
+  }
+
+  [data-rehype-pretty-code-figure] pre {
+    @apply overflow-x-auto rounded-xl border border-border py-4 text-sm leading-relaxed;
+  }
+
+  [data-rehype-pretty-code-figure] code {
+    @apply grid;
+  }
+
+  [data-rehype-pretty-code-figure] .line {
+    @apply px-4;
+  }
+
+  [data-rehype-pretty-code-figure] [data-highlighted-line] {
+    @apply bg-muted/60 border-l-2 border-primary pl-3.5;
+  }
+
+  /* title bar above code block */
+  [data-rehype-pretty-code-title] {
+    @apply rounded-t-xl border border-b-0 border-border bg-muted px-4 py-2 text-xs font-medium text-muted-foreground;
+  }
+
+  [data-rehype-pretty-code-title] + pre {
+    @apply rounded-t-none;
+  }
+
+  /* rehype-pretty-code v0.13+ dual-theme via CSS vars */
+  code[data-theme*=" "],
+  code[data-theme*=" "] span {
+    color: var(--shiki-light);
+    background-color: var(--shiki-light-bg);
+  }
+
+  .dark code[data-theme*=" "],
+  .dark code[data-theme*=" "] span {
+    color: var(--shiki-dark);
+    background-color: var(--shiki-dark-bg);
+  }
 }
