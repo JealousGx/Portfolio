@@ -1,0 +1,44 @@
+# Abdul Mateen Khilji — jealous.dev
+
+## Who I am
+
+Abdul Mateen Khilji is a full stack web developer with 3+ years of experience building fast, scalable web applications for startups and businesses. Based in Pakistan, available for freelance projects worldwide.
+
+## Specializations
+
+- Next.js (App Router, SSR, SSG, ISR)
+- TypeScript, React
+- Node.js, REST APIs, GraphQL
+- PostgreSQL, MongoDB
+- WordPress, Docker
+- SaaS product development
+- Landing pages and e-commerce
+
+## Services
+
+- Freelance web development (full stack)
+- SaaS product development from scratch
+- Landing page and marketing site development
+- E-commerce store development
+- WordPress custom development
+- API development and integration
+
+## Key Pages
+
+- Homepage: https://jealous.dev
+- Projects: https://jealous.dev/projects
+- Blog: https://jealous.dev/blog
+- Contact: contact@jealous.dev
+
+## Blog
+
+Technical writing on Next.js, Node.js, Go, TypeScript, web architecture, SaaS, and full stack development. 25+ articles covering practical guides, tutorials, and engineering insights.
+
+Topics covered: Next.js, micro-frontends, API design, WebSockets, PostgreSQL, MongoDB, Docker, WordPress, Stripe payments, AWS, and startup/SaaS tips.
+
+## Contact
+
+- Email: contact@jealous.dev
+- GitHub: https://github.com/JealousGx
+- LinkedIn: https://www.linkedin.com/in/jealous/
+- Twitter/X: https://x.com/jealousgx
