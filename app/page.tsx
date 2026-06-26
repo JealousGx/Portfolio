@@ -16,9 +16,42 @@ import { DATA } from "@/data/resume";
 
 const BLUR_FADE_DELAY = 0.04;
 
+const personJsonLd = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: DATA.name,
+  url: DATA.url,
+  image: `${DATA.url}/me.webp`,
+  jobTitle: "Full Stack Web Developer",
+  description: DATA.description,
+  email: DATA.contact.email,
+  sameAs: [
+    DATA.contact.social.GitHub.url,
+    DATA.contact.social.LinkedIn.url,
+    DATA.contact.social.X.url,
+  ],
+  knowsAbout: [
+    "Next.js",
+    "React",
+    "TypeScript",
+    "Node.js",
+    "PostgreSQL",
+    "MongoDB",
+    "WordPress",
+    "Docker",
+    "Full Stack Web Development",
+    "SaaS Development",
+  ],
+}).replace(/</g, "\\u003c");
+
 export default function Page() {
   return (
     <main className="min-h-dvh flex flex-col gap-14 relative">
+      <script
+        type="application/ld+json"
+        suppressHydrationWarning
+        dangerouslySetInnerHTML={{ __html: personJsonLd }}
+      />
       <section id="hero">
         <div className="mx-auto w-full max-w-2xl space-y-8">
           <div className="gap-2 gap-y-6 flex flex-col md:flex-row justify-between">
