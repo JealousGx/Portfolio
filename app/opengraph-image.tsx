@@ -16,10 +16,10 @@ const getFontData = async () => {
     try {
         const [cabinetGrotesk, clashDisplay] = await Promise.all([
             fetch(
-                new URL("../../public/fonts/CabinetGrotesk-Medium.ttf", import.meta.url)
+                new URL("/fonts/CabinetGrotesk-Medium.ttf", process.env.NEXT_PUBLIC_SITE_URL)
             ).then((res) => res.arrayBuffer()),
             fetch(
-                new URL("../../public/fonts/ClashDisplay-Semibold.ttf", import.meta.url)
+                new URL("/fonts/ClashDisplay-Semibold.ttf", process.env.NEXT_PUBLIC_SITE_URL)
             ).then((res) => res.arrayBuffer()),
         ]);
         return { cabinetGrotesk, clashDisplay };
