@@ -17,7 +17,7 @@ export const DATA = {
     location: "Pakistan",
     locationLink: "https://www.google.com/maps/place/Pakistan",
     description:
-        "Full Stack Web Developer. I build fast, clean websites and web apps for businesses and founders.",
+        "Freelance Full Stack Web Developer specializing in Next.js, TypeScript, and Node.js. I build fast, scalable websites and web apps for startups and businesses.",
     summary:
         "I'm a full stack web developer with 3+ years of experience building dynamic, scalable web applications. I've worked with startups and businesses to bring their ideas to life — from landing pages and e-commerce stores to full SaaS products. I specialize in [Next.js](https://nextjs.org), TypeScript, and Node.js, and I'm available for freelance projects.",
     avatarUrl: "/me.webp",
