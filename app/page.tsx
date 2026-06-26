@@ -5,8 +5,9 @@ import Markdown from "react-markdown";
 import BlurFade from "@/components/magicui/blur-fade";
 import BlurFadeText from "@/components/magicui/blur-fade-text";
 import ContactSection from "@/components/section/contact-section";
-import HackathonsSection from "@/components/section/hackathons-section";
 import ProjectsSection from "@/components/section/projects-section";
+import ServicesSection from "@/components/section/services-section";
+import TestimonialsSection from "@/components/section/testimonials-section";
 import WorkSection from "@/components/section/work-section";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
@@ -25,7 +26,7 @@ export default function Page() {
                 delay={BLUR_FADE_DELAY}
                 className="text-3xl font-semibold tracking-tighter sm:text-4xl lg:text-5xl"
                 yOffset={8}
-                text={`Hi, I'm ${DATA.name.split(" ")[0]}`}
+                text={`Hi, I'm ${DATA.name}`}
               />
               <BlurFadeText
                 className="text-muted-foreground max-w-150 md:text-lg lg:text-xl"
@@ -131,14 +132,19 @@ export default function Page() {
           </div>
         </div>
       </section>
-      <section id="projects">
+      <section id="services">
         <BlurFade delay={BLUR_FADE_DELAY * 11}>
-          <ProjectsSection />
+          <ServicesSection />
         </BlurFade>
       </section>
-      <section id="hackathons">
+      <section id="projects">
         <BlurFade delay={BLUR_FADE_DELAY * 13}>
-          <HackathonsSection />
+          <ProjectsSection projects={DATA.featuredProjects} showViewAll />
+        </BlurFade>
+      </section>
+      <section id="testimonials">
+        <BlurFade delay={BLUR_FADE_DELAY * 15}>
+          <TestimonialsSection />
         </BlurFade>
       </section>
       <section id="contact">
