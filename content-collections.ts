@@ -8,7 +8,7 @@ import { remarkCodeMeta } from "./lib/remark-code-meta";
 
 const posts = defineCollection({
   name: "posts",
-  directory: "content",
+  directory: "posts",
   include: "**/*.mdx",
   schema: z.object({
     title: z.string(),
