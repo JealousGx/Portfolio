@@ -5,22 +5,32 @@ import Link from "next/link";
 import { allPosts } from "content-collections";
 
 import BlurFade from "@/components/magicui/blur-fade";
+import { DATA } from "@/data/resume";
 import { normalizePage, paginate } from "@/lib/pagination";
 import { formatDate } from "@/lib/utils";
 
 export const metadata: Metadata = {
     title: "Blog",
-    description: "Thoughts on software development, life, and more.",
+    description: "Technical articles on Next.js, TypeScript, Node.js, Go, and full stack web development by Abdul Mateen Khilji.",
     openGraph: {
-        title: "Blog",
-        description: "Thoughts on software development, life, and more.",
+        title: "Blog — Abdul Mateen Khilji",
+        description: "Technical articles on Next.js, TypeScript, Node.js, Go, and full stack web development by Abdul Mateen Khilji.",
     },
     twitter: {
         card: "summary_large_image",
-        title: "Blog",
-        description: "Thoughts on software development, life, and more.",
+        title: "Blog — Abdul Mateen Khilji",
+        description: "Technical articles on Next.js, TypeScript, Node.js, Go, and full stack web development by Abdul Mateen Khilji.",
     },
 };
+
+const breadcrumbJsonLd = JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Home", item: DATA.url },
+        { "@type": "ListItem", position: 2, name: "Blog", item: `${DATA.url}/blog` },
+    ],
+}).replace(/</g, "\\u003c");
 
 const PAGE_SIZE = 5;
 const BLUR_FADE_DELAY = 0.04;
@@ -44,6 +54,11 @@ export default async function BlogPage({
 
     return (
         <section id="blog">
+            <script
+                type="application/ld+json"
+                suppressHydrationWarning
+                dangerouslySetInnerHTML={{ __html: breadcrumbJsonLd }}
+            />
             <BlurFade delay={BLUR_FADE_DELAY * 0.5}>
                 <Link
                     href="/"
