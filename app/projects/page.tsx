@@ -20,9 +20,9 @@ export default function ProjectsPage() {
                 <div className="flex flex-col gap-y-2">
                     <Link
                         href="/"
-                        className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors w-fit"
+                        className="text-sm text-muted-foreground hover:text-foreground transition-colors border border-border rounded-lg px-2 py-1 inline-flex items-center gap-1 w-fit group"
                     >
-                        <ArrowLeft className="size-3.5" />
+                        <ArrowLeft className="size-3 group-hover:-translate-x-px transition-transform" />
                         Back to home
                     </Link>
                     <h1 className="text-2xl font-semibold tracking-tight mt-2">
