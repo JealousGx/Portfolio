@@ -4,6 +4,26 @@ publishedAt: "2024-12-09"
 brief: "As modern applications demand ultra-fast performance, developers often find themselves choosing frameworks that can handle millions of requests per second. Two standout options for API development are Fiber (Golang) and Fastify (Node.js). Both promis..."
 coverImage: "https://cdn.hashnode.com/res/hashnode/image/stock/unsplash/mZnx9429i94/upload/9474a2d9e7cbd6643748b9df505ce645.jpeg"
 readTimeInMinutes: 4
+summary: "Golang's Fiber and Node.js's Fastify are both built for raw API throughput. Fiber has lower memory usage and faster raw benchmarks due to Go's compiled nature and fasthttp, while Fastify wins on ecosystem maturity and developer experience for JavaScript teams. Choose Fiber for maximum performance, Fastify when staying in the Node.js stack."
+keyStats:
+  - stat: "Fastify can handle over 76,000 requests per second in benchmarks, making it the fastest Node.js web framework."
+    source: "Fastify Benchmarks"
+    sourceUrl: "https://fastify.dev/benchmarks/"
+  - stat: "Golang's Fiber framework benchmarks at over 300,000 requests per second on standard hardware."
+    source: "TechEmpower Framework Benchmarks"
+    sourceUrl: "https://www.techempower.com/benchmarks/"
+  - stat: "Go programs use significantly less memory than Node.js equivalents, often 5–10x less under load."
+    source: "TechEmpower Framework Benchmarks"
+    sourceUrl: "https://www.techempower.com/benchmarks/"
+faqs:
+  - question: "Is Fiber faster than Fastify?"
+    answer: "Yes. Golang's Fiber consistently outperforms Fastify in raw throughput benchmarks due to Go's compiled execution and fasthttp's zero-allocation HTTP engine. Fastify is the fastest option within Node.js but cannot match Fiber's raw numbers."
+  - question: "When should I use Fastify instead of Express?"
+    answer: "Use Fastify when you need better performance than Express, built-in schema validation, and a more structured plugin architecture. Fastify is 2–3x faster than Express in typical workloads."
+  - question: "What is fasthttp in Golang?"
+    answer: "fasthttp is a high-performance HTTP engine for Go that avoids standard library allocations. Fiber is built on top of it, which is the primary reason for Fiber's exceptional throughput numbers."
+  - question: "Can Fastify handle production workloads?"
+    answer: "Yes. Fastify is production-ready and used by companies including Microsoft, Netlify, and others. It supports plugins, hooks, TypeScript, and has a large ecosystem."
 ---
 
 As modern applications demand ultra-fast performance, developers often find themselves choosing frameworks that can handle millions of requests per second. Two standout options for API development are **Fiber** (Golang) and **Fastify** (Node.js). Both promise high throughput, but their underlying architectures and ecosystems cater to different kinds of developers. This post explores these frameworks with practical examples, advanced optimizations, and tips to maximize performance.
