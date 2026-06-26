@@ -27,12 +27,14 @@ export async function generateMetadata({
     return {
         title: post.title,
         description: post.brief,
+        authors: [{ name: DATA.name, url: DATA.url }],
         openGraph: {
             title: post.title,
             description: post.brief,
             type: "article",
             publishedTime: post.publishedAt,
             url: `${DATA.url}/blog/${slug}`,
+            authors: [DATA.name],
             ...(post.coverImage && { images: [{ url: post.coverImage }] }),
         },
         twitter: {
