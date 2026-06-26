@@ -1,6 +1,8 @@
 "use client";
 
 import Giscus from "@giscus/react";
+import { ArrowLeft } from "lucide-react";
+import Link from "next/link";
 import { useTheme } from "next-themes";
 
 export default function GuestbookClient() {
@@ -8,6 +10,13 @@ export default function GuestbookClient() {
     return (
         <div className="flex flex-col gap-8">
             <div className="flex flex-col gap-y-2">
+                <Link
+                    href="/"
+                    className="text-sm text-muted-foreground hover:text-foreground transition-colors border border-border rounded-lg px-2 py-1 inline-flex items-center gap-1 mb-2 w-fit group"
+                >
+                    <ArrowLeft className="size-3 group-hover:-translate-x-px transition-transform" />
+                    Back to home
+                </Link>
                 <h1 className="text-2xl font-semibold tracking-tight">Guestbook</h1>
                 <p className="text-sm text-muted-foreground">Leave a message 😃</p>
             </div>
