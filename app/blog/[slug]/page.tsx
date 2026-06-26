@@ -63,17 +63,33 @@ export default async function BlogPost({
     const previousPost = currentIndex > 0 ? sortedPosts[currentIndex - 1] : null;
     const nextPost = currentIndex < sortedPosts.length - 1 ? sortedPosts[currentIndex + 1] : null;
 
-    const jsonLd = JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "BlogPosting",
-        headline: post.title,
-        datePublished: post.publishedAt,
-        dateModified: post.publishedAt,
-        description: post.brief,
-        image: post.coverImage ?? `${DATA.url}/blog/${slug}/opengraph-image`,
-        url: `${DATA.url}/blog/${slug}`,
-        author: { "@type": "Person", name: DATA.name },
-    }).replace(/</g, "\\u003c");
+    const schemas: object[] = [
+        {
+            "@context": "https://schema.org",
+            "@type": "BlogPosting",
+            headline: post.title,
+            datePublished: post.publishedAt,
+            dateModified: post.publishedAt,
+            description: post.brief,
+            image: post.coverImage ?? `${DATA.url}/blog/${slug}/opengraph-image`,
+            url: `${DATA.url}/blog/${slug}`,
+            author: { "@type": "Person", name: DATA.name, url: DATA.url },
+        },
+    ];
+
+    if (post.faqs && post.faqs.length > 0) {
+        schemas.push({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: post.faqs.map((faq) => ({
+                "@type": "Question",
+                name: faq.question,
+                acceptedAnswer: { "@type": "Answer", text: faq.answer },
+            })),
+        });
+    }
+
+    const jsonLd = JSON.stringify(schemas.length === 1 ? schemas[0] : schemas).replace(/</g, "\\u003c");
 
     return (
         <section id="blog">
@@ -115,9 +131,62 @@ export default async function BlogPost({
                     }}
                 />
             </div>
+
+            {post.summary && (
+                <div className="mb-8 rounded-xl border border-border bg-accent/30 px-5 py-4">
+                    <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-1">TL;DR</p>
+                    <p className="text-sm leading-relaxed">{post.summary}</p>
+                </div>
+            )}
+
+            {post.keyStats && post.keyStats.length > 0 && (
+                <div className="mb-8 flex flex-wrap gap-3">
+                    {post.keyStats.map((item, i) => (
+                        <div key={i} className="flex-1 min-w-[180px] rounded-xl border border-border bg-card px-4 py-3">
+                            <p className="text-sm font-semibold leading-snug">{item.stat}</p>
+                            {item.sourceUrl ? (
+                                <a
+                                    href={item.sourceUrl}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="mt-1 text-xs text-muted-foreground hover:text-foreground transition-colors"
+                                >
+                                    {item.source}
+                                </a>
+                            ) : (
+                                <p className="mt-1 text-xs text-muted-foreground">{item.source}</p>
+                            )}
+                        </div>
+                    ))}
+                </div>
+            )}
+
             <article className="prose max-w-full text-pretty font-sans leading-relaxed text-muted-foreground dark:prose-invert">
                 <MDXContent code={post.mdx} />
             </article>
+
+            {post.faqs && post.faqs.length > 0 && (
+                <div className="mt-12">
+                    <div className="mb-4 flex w-full items-center">
+                        <div
+                            className="flex-1 h-px bg-border"
+                            style={{
+                                maskImage: "linear-gradient(90deg, transparent, black 8%, black 92%, transparent)",
+                                WebkitMaskImage: "linear-gradient(90deg, transparent, black 8%, black 92%, transparent)",
+                            }}
+                        />
+                    </div>
+                    <h2 className="text-lg font-semibold tracking-tight mb-4">Frequently Asked Questions</h2>
+                    <div className="flex flex-col gap-4">
+                        {post.faqs.map((faq, i) => (
+                            <div key={i} className="rounded-xl border border-border bg-card px-5 py-4">
+                                <p className="text-sm font-semibold mb-1">{faq.question}</p>
+                                <p className="text-sm text-muted-foreground leading-relaxed">{faq.answer}</p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            )}
 
             <nav className="mt-12 pt-8 max-w-2xl">
                 <div className="flex flex-col sm:flex-row justify-between gap-4">
