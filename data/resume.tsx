@@ -18,7 +18,7 @@ export const DATA = {
         "Full Stack Web Developer. I build fast, clean websites and web apps for businesses and founders.",
     summary:
         "I'm a full stack web developer with 3+ years of experience building dynamic, scalable web applications. I've worked with startups and businesses to bring their ideas to life — from landing pages and e-commerce stores to full SaaS products. I specialize in [Next.js](https://nextjs.org), TypeScript, and Node.js, and I'm available for freelance projects.",
-    avatarUrl: "/me.png",
+    avatarUrl: "/me.webp",
     skills: [
         { name: "React", icon: ReactLight },
         { name: "Next.js", icon: NextjsIconDark },
@@ -86,7 +86,7 @@ export const DATA = {
             school: "Sukkur IBA University",
             href: "https://iba-suk.edu.pk",
             degree: "Bachelor of Engineering",
-            logoUrl: "/sukkur-iba.png", // add logo to /public if available
+            logoUrl: "/iba-suk.png", // add logo to /public if available
             start: "2019",
             end: "2023",
         },
@@ -114,8 +114,8 @@ export const DATA = {
                     icon: <Icons.github className="size-3" />,
                 },
             ],
-            image: "", // add screenshot if you have one
-            video: "",
+            image: "https://raw.githubusercontent.com/JealousGx/FounderSignal/refs/heads/main/web/public/assets/og-image.png",
+            video: "https://www.youtube.com/watch?v=DrhSM3VJu9A",
         },
         {
             title: "Vala",
@@ -132,7 +132,7 @@ export const DATA = {
                     icon: <Icons.globe className="size-3" />,
                 },
             ],
-            image: "",
+            image: "https://res.cloudinary.com/jealousgx/image/upload/v1728193613/vala.jpg",
             video: "",
             badges: ["Client Work"],
         },
@@ -156,7 +156,7 @@ export const DATA = {
                     icon: <Icons.github className="size-3" />,
                 },
             ],
-            image: "",
+            image: "https://res.cloudinary.com/jealousgx/image/upload/v1728148274/Airbnb.jpg",
             video: "",
         },
         {
@@ -179,8 +179,8 @@ export const DATA = {
                     icon: <Icons.github className="size-3" />,
                 },
             ],
-            image: "",
-            video: "",
+            image: "https://raw.githubusercontent.com/JealousGx/FounderSignal/refs/heads/main/web/public/assets/og-image.png",
+            video: "https://www.youtube.com/watch?v=DrhSM3VJu9A",
         },
     ],
 
@@ -206,7 +206,7 @@ export const DATA = {
                     icon: <Icons.github className="size-3" />,
                 },
             ],
-            image: "",
+            image: "https://res.cloudinary.com/jealousgx/image/upload/v1728193613/foundersignal.jpg",
             video: "",
         },
         {
@@ -247,7 +247,7 @@ export const DATA = {
                     icon: <Icons.globe className="size-3" />,
                 },
             ],
-            image: "",
+            image: "https://res.cloudinary.com/jealousgx/image/upload/v1728193613/vala.jpg",
             video: "",
             badges: ["Client Work"],
         },
@@ -271,7 +271,7 @@ export const DATA = {
                     icon: <Icons.github className="size-3" />,
                 },
             ],
-            image: "",
+            image: "https://res.cloudinary.com/jealousgx/image/upload/v1728148274/Airbnb.jpg",
             video: "",
         },
         {
@@ -294,7 +294,7 @@ export const DATA = {
                     icon: <Icons.github className="size-3" />,
                 },
             ],
-            image: "",
+            image: "https://res.cloudinary.com/jealousgx/image/upload/v1659676866/jealous-phone-store.netlify.app__oj5gbc.png",
             video: "",
         },
         {
@@ -317,7 +317,7 @@ export const DATA = {
                     icon: <Icons.github className="size-3" />,
                 },
             ],
-            image: "",
+            image: "https://res.cloudinary.com/jealousgx/image/upload/v1659676866/jealous-covid19.netlify.app__aatxzf.png",
             video: "",
         },
         {
@@ -340,7 +340,7 @@ export const DATA = {
                     icon: <Icons.github className="size-3" />,
                 },
             ],
-            image: "",
+            image: "https://res.cloudinary.com/jealousgx/image/upload/v1659676866/jealous-exp-tracker.netlify.app__g3robb.png",
             video: "",
         },
         {
@@ -362,7 +362,7 @@ export const DATA = {
                     icon: <Icons.github className="size-3" />,
                 },
             ],
-            image: "",
+            image: "https://res.cloudinary.com/jealousgx/image/upload/v1659676866/jealous-ai-news.netlify.app__cczti8.png",
             video: "",
         },
         {
@@ -384,7 +384,7 @@ export const DATA = {
                     icon: <Icons.github className="size-3" />,
                 },
             ],
-            image: "",
+            image: "https://res.cloudinary.com/jealousgx/image/upload/v1659676866/jealous-otto-page.netlify.app__nrzxx2.png",
             video: "",
         },
     ],
@@ -394,21 +394,21 @@ export const DATA = {
             name: "Elijah Scalere",
             role: "CEO @ Scalere Design",
             avatarUrl:
-                "https://media.licdn.com/dms/image/v2/D4E03AQFqtaJjSC4CZA/profile-displayphoto-shrink_800_800/B4EZcOZMhfHsAc-/0/1748293176352",
+                "/clients/elijah.jpeg",
             body: "They were able to produce a product nearly identical to my design files. I would be working with them in the future due to their responsiveness and cooperation.",
         },
         {
             name: "Uzair Sultan",
             role: "UX Designer @ VentureDrive",
             avatarUrl:
-                "https://media.licdn.com/dms/image/v2/D4D03AQGzDHGH9vr_wQ/profile-displayphoto-shrink_800_800/B4DZfo1qqrGYAg-/0/1751958073581",
+                "/clients/uzair-sultan.jpeg",
             body: "I have had the pleasure of working closely with Mateen for more than a year, and I can confidently say that he is one of the most talented developers I have ever worked with. His technical expertise, problem-solving skills, and dedication to excellence are truly exceptional.",
         },
         {
             name: "Naqcho Ali Mehdi",
             role: "AI & ML Engineer",
             avatarUrl:
-                "https://media.licdn.com/dms/image/v2/D4D03AQFVcsDlrfb6MQ/profile-displayphoto-crop_800_800/B4DZjPUqysHwAM-/0/1755824982996",
+                "/clients/naqcho.jpeg",
             body: "I'm super excited to work on my newly launched website. Abdul Mateen has shown marvelous professionalism and great deal of work. The site is very responsive and aesthetically appealing which makes my requirements fulfilled.",
         },
     ],
