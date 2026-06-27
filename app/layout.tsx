@@ -58,6 +58,9 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
     return (
         <html lang="en" suppressHydrationWarning>
+            <head>
+                <link rel="me" href="https://mastodon.social/@jealousgx" />
+            </head>
             <body
                 className={cn(
                     "min-h-screen bg-background font-sans antialiased relative",
