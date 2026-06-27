@@ -59,6 +59,18 @@ export const DATA = {
                 icon: Icons.x,
                 navbar: true,
             },
+            YouTube: {
+                name: "YouTube",
+                url: "https://www.youtube.com/@jealousgx",
+                icon: Icons.youtube,
+                navbar: false,
+            },
+            Instagram: {
+                name: "Instagram",
+                url: "https://www.instagram.com/jealousdev",
+                icon: Icons.instagram,
+                navbar: false,
+            },
             email: {
                 name: "Send Email",
                 url: "mailto:contact@jealous.dev",
