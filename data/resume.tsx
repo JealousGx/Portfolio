@@ -57,7 +57,7 @@ export const DATA = {
                 name: "X",
                 url: "https://x.com/jealousgx",
                 icon: Icons.x,
-                navbar: true,
+                navbar: false,
             },
             YouTube: {
                 name: "YouTube",
@@ -69,7 +69,7 @@ export const DATA = {
                 name: "Instagram",
                 url: "https://www.instagram.com/jealousdev",
                 icon: Icons.instagram,
-                navbar: false,
+                navbar: true,
             },
             email: {
                 name: "Send Email",
