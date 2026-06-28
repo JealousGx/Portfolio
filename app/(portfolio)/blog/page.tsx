@@ -9,19 +9,33 @@ import { DATA } from "@/data/resume";
 import { normalizePage, paginate } from "@/lib/pagination";
 import { formatDate } from "@/lib/utils";
 
-export const metadata: Metadata = {
-    title: "Blog",
-    description: "Technical articles on Next.js, TypeScript, Node.js, Go, and full stack web development by Abdul Mateen Khilji.",
-    openGraph: {
-        title: "Blog — Abdul Mateen Khilji",
+export async function generateMetadata({
+    searchParams,
+}: {
+    searchParams: Promise<{ page?: string }>;
+}): Promise<Metadata> {
+    const { page } = await searchParams;
+    const canonicalUrl = `${DATA.url}/blog`;
+
+    return {
+        title: "Blog",
         description: "Technical articles on Next.js, TypeScript, Node.js, Go, and full stack web development by Abdul Mateen Khilji.",
-    },
-    twitter: {
-        card: "summary_large_image",
-        title: "Blog — Abdul Mateen Khilji",
-        description: "Technical articles on Next.js, TypeScript, Node.js, Go, and full stack web development by Abdul Mateen Khilji.",
-    },
-};
+        alternates: {
+            canonical: canonicalUrl,
+        },
+        openGraph: {
+            title: "Blog — Abdul Mateen Khilji",
+            description: "Technical articles on Next.js, TypeScript, Node.js, Go, and full stack web development by Abdul Mateen Khilji.",
+            url: canonicalUrl,
+        },
+        twitter: {
+            card: "summary_large_image",
+            title: "Blog — Abdul Mateen Khilji",
+            description: "Technical articles on Next.js, TypeScript, Node.js, Go, and full stack web development by Abdul Mateen Khilji.",
+        },
+        ...(page && page !== "1" && { robots: { index: false, follow: true } }),
+    };
+}
 
 const breadcrumbJsonLd = JSON.stringify({
     "@context": "https://schema.org",
