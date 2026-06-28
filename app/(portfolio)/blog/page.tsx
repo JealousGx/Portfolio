@@ -1,4 +1,4 @@
-import { ArrowLeft, ArrowUpRight } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import type { Metadata } from "next";
 import Link from "next/link";
 
@@ -117,15 +117,6 @@ export default async function BlogPage({
                                                 <p className="text-xs text-muted-foreground">
                                                     {formatDate(post.publishedAt)}{post.readTimeInMinutes ? ` · ${post.readTimeInMinutes} min read` : ""}
                                                 </p>
-                                                <Link
-                                                    href={`https://blog.jealous.dev/${post.slug}`}
-                                                    target="_blank"
-                                                    rel="noopener noreferrer"
-                                                    className="mt-1 inline-flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground transition-colors w-fit"
-                                                >
-                                                    Read on blog
-                                                    <ArrowUpRight className="size-3" />
-                                                </Link>
                                             </div>
                                         </div>
                                     </BlurFade>
