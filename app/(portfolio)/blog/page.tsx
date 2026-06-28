@@ -103,7 +103,7 @@ export default async function BlogPage({
                                 return (
                                     <BlurFade delay={BLUR_FADE_DELAY * 3 + id * 0.05} key={post.slug}>
                                         <div className="flex items-start gap-x-2">
-                                            <span className="text-xs font-mono tabular-nums font-medium mt-[5px]">
+                                            <span className="text-xs font-mono tabular-nums font-medium mt-1.25">
                                                 {String(indexNumber).padStart(2, "0")}.
                                             </span>
                                             <div className="flex flex-col gap-y-1 flex-1">
