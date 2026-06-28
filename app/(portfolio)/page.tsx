@@ -16,6 +16,29 @@ import { DATA } from "@/data/resume";
 
 const BLUR_FADE_DELAY = 0.04;
 
+const serviceJsonLd = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  name: "Web Development Services by Abdul Mateen Khilji",
+  url: DATA.url,
+  itemListElement: DATA.services.map((service, index) => ({
+    "@type": "ListItem",
+    position: index + 1,
+    item: {
+      "@type": "Service",
+      name: service.title,
+      description: service.description,
+      provider: {
+        "@type": "Person",
+        name: DATA.name,
+        url: DATA.url,
+      },
+      areaServed: "Worldwide",
+      serviceType: "Web Development",
+    },
+  })),
+}).replace(/</g, "\\u003c");
+
 const personJsonLd = JSON.stringify({
   "@context": "https://schema.org",
   "@type": "Person",
@@ -51,6 +74,11 @@ export default function Page() {
         type="application/ld+json"
         suppressHydrationWarning
         dangerouslySetInnerHTML={{ __html: personJsonLd }}
+      />
+      <script
+        type="application/ld+json"
+        suppressHydrationWarning
+        dangerouslySetInnerHTML={{ __html: serviceJsonLd }}
       />
       <section id="hero">
         <div className="mx-auto w-full max-w-2xl space-y-8">
