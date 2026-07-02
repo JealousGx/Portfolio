@@ -4,6 +4,8 @@ const isDev =
     process.env.NODE_ENV === "development" ||
     !process.env.KEYSTATIC_GITHUB_CLIENT_ID;
 
+console.log("Keystatic mode:", isDev ? "local" : "github");
+
 export default config({
     storage: isDev
         ? { kind: "local" }
