@@ -1,0 +1,129 @@
+---
+title: 5 Backend Mistakes That Will Kill Your App When Traffic Spikes
+publishedAt: 2026-07-02
+brief: >-
+  Five backend mistakes that look fine at low traffic but take down your app at
+  scale: no connection pooling, no caching, N+1 queries, missing rate limiting,
+  and synchronous long-running tasks.
+coverImage: >-
+  https://images.unsplash.com/photo-1760548425425-e42e77fa38f1?q=80&w=1412&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D
+readTimeInMinutes: 4
+summary: >-
+  Most backends only get tested at current load, not real scale. Connection
+  pooling, caching, N+1 query fixes, rate limiting, and async task queues are
+  five well-understood problems with well-understood fixes — that almost always
+  get skipped until the outage that can't be ignored.
+keyStats:
+  - stat: >-
+      Bots now account for over 31% of all HTTP requests globally, making
+      unprotected APIs a constant target.
+    source: Cloudflare Radar / TechnologyChecker
+    sourceUrl: https://technologychecker.io/blog/web-traffic-statistics
+  - stat: >-
+      42% of API breaches stem from fraud, abuse, and misuse — yet only 15% of
+      organizations feel confident detecting API-based attacks.
+    source: 2024 State of API Security Report (Financial Services)
+    sourceUrl: https://datadome.co/bot-management-protection/what-is-api-rate-limiting/
+  - stat: ' In 2024, nearly 44% of advanced bot traffic targeted API endpoints, compared to just 10% for traditional web apps.'
+    source: Cyber Press / Imperva
+    sourceUrl: https://cyberpress.org/ai-driven-bad-bots-now-make-up/
+  - stat: >-
+      Website conversion rates drop by an average of 4.42% for each additional
+      second of load time — a direct cost of slow, unoptimized backends.
+    source: Illustrate Digital Global Page Speed Report 2024
+    sourceUrl: https://illustrate.digital/reports/global-page-speed-2023/
+faqs:
+  - question: What is connection pooling in backend development?
+    answer: >-
+      Connection pooling keeps a fixed set of database connections open and
+      reuses them across requests, instead of opening and closing a new
+      connection every time. Without it, your app hits the database's connection
+      limit under concurrent load and starts throwing errors.
+  - question: What are N+1 queries and how do you fix them?
+    answer: >-
+      An N+1 query happens when you fetch a list of items and then run a
+      separate database query for each item's related data — turning one query
+      into hundreds. Fix it with a JOIN or a batched WHERE id IN (...) query, or
+      use your ORM's eager-loading feature.
+  - question: When should I use a job queue instead of handling tasks synchronously?
+    answer: >-
+      Any task that takes noticeable time — sending emails, generating PDFs,
+      processing images, calling slow external APIs — should go into a queue.
+      Handling them inline blocks the request thread and ties up a server
+      connection for the full duration of the task.
+  - question: How does Redis caching reduce database load?
+    answer: >-
+      Redis stores query results in memory so repeated requests for the same
+      data skip the database entirely. For data that doesn't change per-user or
+      changes infrequently, even a short cache TTL can cut database queries by
+      orders of magnitude under real traffic.
+  - question: How do I add rate limiting to a Node.js API?
+    answer: >-
+      The simplest approach is middleware like express-rate-limit for per-IP or
+      per-user caps, applied at the route or gateway level. For production,
+      enforce it at the API gateway (AWS API Gateway, Cloudflare, nginx) so it
+      runs before requests even hit your app server.
+---
+Your backend works fine right now. It handles your current traffic without complaint. That’s exactly the problem, “works fine at current traffic” and “works fine at scale” are two completely different claims, and most backends only get tested against the first one.
+
+Here are five mistakes that don’t show up in development, don’t show up in your first hundred users, and then take the whole system down the moment things actually take off.
+
+---
+
+### 1. No Connection Pooling
+
+Every request opens a new database connection. At 10 users, nobody notices. At 500 concurrent users, you hit your database’s connection limit and every new request starts failing, not because your code is wrong, but because you’ve run out of connections to hand out.
+
+The fix is a connection pool: a fixed set of database connections that get reused across requests instead of opened and closed every time. Most ORMs and database clients support this out of the box (Prisma, Drizzle, `pg-pool` for raw Postgres). The default pool size is usually too small for production, check it, don't assume it.
+
+---
+
+### 2. No Caching
+
+The same data gets fetched from the database on every single request. Your homepage hits the DB ten thousand times an hour, serving the exact same content every time.
+
+A basic caching layer eliminates most of that load instantly. It doesn’t need to be complicated:
+
+* **Redis** for shared cache across instances
+* **In-memory cache** for single-instance apps
+* **HTTP caching headers** (`Cache-Control`, `ETag`) for anything that doesn't change per-user
+
+The point isn’t to cache everything. It’s to stop re-fetching data that hasn’t changed since the last request.
+
+---
+
+### 3. N+1 Queries
+
+You fetch a list of 100 items, then run a separate query for each item’s related data. That’s 101 queries where one would do.
+
+At small scale this is invisible, 101 fast queries still feels instant. At real scale, with real traffic, it’s a disaster: your database spends all its time doing the same repetitive lookups instead of serving new requests.
+
+The fix is almost always a join, or a batched query (`WHERE id IN (...)`) instead of a loop that queries per item. Most ORMs have a way to eager-load relations, use it. This is one of the most common and most avoidable failures in backend code.
+
+---
+
+### 4. No Rate Limiting
+
+No protection against traffic spikes, bots, or a single user hammering your API. One bad actor, or a successful product launch, can take down an unprotected backend in minutes.
+
+Rate limiting doesn’t need to be sophisticated to be effective. Even a basic per-IP or per-user request cap, enforced at the API gateway or middleware level, stops the most common failure mode: one client accidentally or intentionally sending far more requests than your system can handle.
+
+---
+
+### 5. Synchronous Everything
+
+Long-running tasks blocking the main thread. File uploads, sending emails, generating PDFs, processing images, none of these should happen synchronously inside a request-response cycle.
+
+When a task takes 3 seconds and your API is handling it inline, that’s 3 seconds where a request handler and a connection are tied up doing nothing but waiting. Move it to a queue (even a simple one). Your API response time drops immediately, and slow tasks stop being able to block fast ones.
+
+---
+
+### The Pattern Behind All Five
+
+None of these mistakes are hard to fix. Individually, they’re small, well-understood problems with well-understood solutions. What makes them dangerous is that they’re easy to skip when you’re moving fast to ship, and they don’t cost you anything until the exact moment you can least afford it: when traffic actually shows up.
+
+The time to fix them is before you need to, not during the outage.
+
+---
+
+I build backends that don’t break when things get real, NodeJS, Go, AWS. If you’re scaling and want a second pair of eyes on your architecture, find me on [LinkedIn](https://www.linkedin.com/in/jealous/) or check out my work at [jealous.dev](https://jealous.dev).
