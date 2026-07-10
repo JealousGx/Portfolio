@@ -1,5 +1,5 @@
 import { Icons } from "@/components/icons";
-import { BookOpenIcon, CodeIcon, HomeIcon, NotebookIcon } from "lucide-react";
+import { BookOpenIcon, CalendarClockIcon, CodeIcon, HomeIcon, NotebookIcon } from "lucide-react";
 
 import { Docker } from "@/components/ui/svgs/docker";
 import { MongoDB } from "@/components/ui/svgs/mongodb";
@@ -10,10 +10,13 @@ import { ReactLight } from "@/components/ui/svgs/reactLight";
 import { Typescript } from "@/components/ui/svgs/typescript";
 import { Wordpress } from "@/components/ui/svgs/wordpress";
 
+const BOOKING_URL = "https://cal.com/jealous/30min";
+
 export const DATA = {
     name: "Abdul Mateen Khilji",
     initials: "AM",
     url: "https://jealous.dev",
+    bookingUrl: BOOKING_URL,
     location: "Pakistan",
     locationLink: "https://www.google.com/maps/place/Pakistan",
     description:
@@ -35,6 +38,7 @@ export const DATA = {
         { href: "/", icon: HomeIcon, label: "Home" },
         { href: "/projects", icon: CodeIcon, label: "Projects" },
         { href: "/blog", icon: NotebookIcon, label: "Blog" },
+        { href: BOOKING_URL, icon: CalendarClockIcon, label: "Book a Call" },
         { href: "/guestbook", icon: BookOpenIcon, label: "Guestbook" },
     ],
     contact: {
