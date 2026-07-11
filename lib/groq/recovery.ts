@@ -38,7 +38,21 @@ export type MinimalMessage = { content: string | null; tool_calls?: Groq.Chat.Co
 export async function createWithToolRecovery(params: ChatCompletionCreateParamsNonStreaming): Promise<MinimalMessage> {
     try {
         const response = await groq.chat.completions.create(params);
-        return response.choices[0]?.message ?? { content: "" };
+        const message = response.choices[0]?.message ?? { content: "" };
+
+        // Sometimes the malformed pseudo-XML tool call doesn't trigger a 400 at
+        // all — it just streams through as ordinary text content in an
+        // otherwise-successful response, with no tool_calls array. Catch that
+        // case too, or it leaks straight into the visitor-facing reply.
+        if ((!message.tool_calls || message.tool_calls.length === 0) && message.content) {
+            const recovered = recoverToolCalls(message.content);
+            if (recovered) {
+                console.warn("Recovered malformed tool call from successful response content:", message.content);
+                return { content: null, tool_calls: recovered };
+            }
+        }
+
+        return message;
     } catch (err) {
         const failedGeneration = extractFailedGeneration(err);
         const recovered = failedGeneration ? recoverToolCalls(failedGeneration) : null;
