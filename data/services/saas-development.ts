@@ -73,5 +73,17 @@ export const saasDevelopment: ServicePageData = {
             question: "Is this custom-built or a template?",
             answer: "Custom, built around your product's actual logic, not a generic boilerplate.",
         },
+        {
+            question: "I'm a founder with an idea, not a developer. Can you build my SaaS from scratch?",
+            answer: "Yes. I've done this for my own products too, so I can guide the technical decisions without you needing to already know the answers.",
+        },
+        {
+            question: "Do you build SaaS products from scratch, or only add features to existing ones?",
+            answer: "Both. Full builds from scratch and ongoing feature work on an existing SaaS.",
+        },
+        {
+            question: "Do you only work with clients in certain countries?",
+            answer: "No. I work with serious clients wherever they're based, remote, across time zones.",
+        },
     ],
 };

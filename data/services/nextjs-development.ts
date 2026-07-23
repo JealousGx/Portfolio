@@ -67,5 +67,21 @@ export const nextjsDevelopment: ServicePageData = {
             question: "What if I already have an existing site on a different stack?",
             answer: "That's fine. I can build alongside it, migrate incrementally, or start fresh, depending on what makes sense for your situation.",
         },
+        {
+            question: "Do you work as a Next.js consultant, or only full builds?",
+            answer: "Both. If you just need consulting on an existing Next.js project, an architecture review, a performance audit, or a specific problem, that's just as welcome as a full build.",
+        },
+        {
+            question: "Are you a Next.js SEO developer, or just a builder?",
+            answer: "Both. SEO is built into how I structure Next.js projects from the start, not an afterthought, so you're not paying separately for an SEO pass later.",
+        },
+        {
+            question: "Can you migrate an existing React app to Next.js?",
+            answer: "Yes. This is usually done incrementally, page by page, rather than a single risky rewrite.",
+        },
+        {
+            question: "Do you only work with clients in certain countries?",
+            answer: "No. I work with serious clients wherever they're based, remote, across time zones.",
+        },
     ],
 };

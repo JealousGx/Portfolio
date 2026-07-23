@@ -73,5 +73,17 @@ export const mvpDevelopment: ServicePageData = {
             question: "Can you help me hire a developer for a startup, or do you only build solo?",
             answer: "I typically work solo end-to-end, but I'm open to contract-to-hire if your startup is looking to bring someone on longer-term.",
         },
+        {
+            question: "I'm not technical. Can you still help me build an MVP?",
+            answer: "Yes, that's actually a common starting point. I'll ask the right questions to understand what you need, and you won't need to know the technical details to work with me.",
+        },
+        {
+            question: "Are you available as a freelance MVP developer for a startup?",
+            answer: "Yes, this is a core part of what I do, including my own self-built products.",
+        },
+        {
+            question: "Do you only work with clients in certain countries?",
+            answer: "No. I work with serious clients wherever they're based, remote, across time zones.",
+        },
     ],
 };

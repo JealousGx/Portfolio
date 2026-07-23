@@ -86,5 +86,17 @@ export const golangDevelopment: ServicePageData = {
             question: "Do you only work with clients in certain countries?",
             answer: "No. I work with serious clients wherever they're based, remote, across time zones.",
         },
+        {
+            question: "Are you available as a dedicated Go backend developer?",
+            answer: "Yes, FounderSignal's backend (linked above) is a real example of that work.",
+        },
+        {
+            question: "Do you build Go APIs specifically?",
+            answer: "Yes, that's exactly what FounderSignal's backend is, a Gin-based API.",
+        },
+        {
+            question: "Do you build Go microservices?",
+            answer: "I write about microservices architecture in Go regularly (linked above), though I don't yet have a named client project specifically for a microservices system. Happy to be upfront about that on a call.",
+        },
     ],
 };

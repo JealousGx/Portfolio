@@ -54,5 +54,13 @@ export const vueDevelopment: ServicePageData = {
             question: "Do you only work with clients in certain countries?",
             answer: "No. I work with serious clients wherever they're based, remote, across time zones.",
         },
+        {
+            question: "Are you available for hire as a Vue.js developer?",
+            answer: "Yes, though most of my recent Vue work has been an internal tool rather than client work. Happy to discuss whether it's a fit on a call.",
+        },
+        {
+            question: "Do you offer Vue consulting on an existing project, or only new builds?",
+            answer: "Yes, reviewing or advising on an existing Vue project is work I take on too.",
+        },
     ],
 };

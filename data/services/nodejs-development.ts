@@ -62,5 +62,13 @@ export const nodejsDevelopment: ServicePageData = {
             question: "Can you work alongside our existing backend team?",
             answer: "Yes. Direct contract or contract-to-hire, whichever fits how your team is structured.",
         },
+        {
+            question: "Do you build Node.js APIs specifically, or only full backends?",
+            answer: "Yes, API-only work is common. Not every project needs a full backend rebuild.",
+        },
+        {
+            question: "Do you work with startups needing a Node.js backend?",
+            answer: "Yes. Startup backend work is a regular part of what I do, including scoping it down to what you actually need for launch.",
+        },
     ],
 };

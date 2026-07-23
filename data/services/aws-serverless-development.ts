@@ -68,5 +68,13 @@ export const awsServerlessDevelopment: ServicePageData = {
             question: "Can you migrate an existing app to serverless?",
             answer: "Yes. This is usually done incrementally rather than all at once, to avoid downtime.",
         },
+        {
+            question: "Do you work as a dedicated Lambda developer, or only full serverless builds?",
+            answer: "Yes. Focused Lambda function work, not just full end-to-end serverless builds, is something I take on too.",
+        },
+        {
+            question: "Can you help optimize AWS costs on an existing setup?",
+            answer: "Yes. A lot of AWS cost problems come from resources left running or scaled wrong, not from serverless itself, so I can review an existing setup and flag what's actually driving the bill.",
+        },
     ],
 };

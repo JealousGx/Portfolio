@@ -66,5 +66,9 @@ export const fullStackDeveloper: ServicePageData = {
             question: "Do you work solo, or can you join an existing team?",
             answer: "Both. I've worked solo on end-to-end ownership and alongside existing teams.",
         },
+        {
+            question: "Are you available as a freelance, end-to-end full stack developer for a startup?",
+            answer: "Yes, that's a regular part of my work, taking a startup's idea and owning the build end to end rather than just one layer of it.",
+        },
     ],
 };

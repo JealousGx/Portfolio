@@ -62,5 +62,13 @@ export const mernStackDevelopment: ServicePageData = {
             question: "Do you only work with clients in certain countries?",
             answer: "No. I work with serious clients wherever they're based, remote, across time zones.",
         },
+        {
+            question: "Are you available for hire as a MERN stack developer?",
+            answer: "Yes, direct contract, project-based, or contract-to-hire.",
+        },
+        {
+            question: "Do you work across the full MongoDB, Express, React, and Node combination, or just parts of it?",
+            answer: "The full combination. I've shipped a real MERN project end to end, not just individual pieces of the stack.",
+        },
     ],
 };

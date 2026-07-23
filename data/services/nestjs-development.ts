@@ -66,5 +66,17 @@ export const nestjsDevelopment: ServicePageData = {
             question: "Do you work on contract or contract-to-hire?",
             answer: "Yes, both. Happy to discuss what fits.",
         },
+        {
+            question: "Are you available as a dedicated NestJS backend developer?",
+            answer: "Yes, direct contract, project-based, or contract-to-hire.",
+        },
+        {
+            question: "Do you build NestJS APIs specifically, or only full backends?",
+            answer: "Yes. Focused API work, not just full backend builds, is something I take on too.",
+        },
+        {
+            question: "Do you only work with clients in certain countries?",
+            answer: "No. I work with serious clients wherever they're based, remote, across time zones.",
+        },
     ],
 };

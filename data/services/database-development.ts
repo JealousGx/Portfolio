@@ -75,5 +75,13 @@ export const databaseDevelopment: ServicePageData = {
             question: "How do you handle migrating an existing database?",
             answer: "Carefully. I plan the migration path before touching production data, usually with a rollback plan.",
         },
+        {
+            question: "Do you work with DynamoDB specifically?",
+            answer: "Yes, used in production backend systems handling real client traffic.",
+        },
+        {
+            question: "Do you only work with clients in certain countries?",
+            answer: "No. I work with serious clients wherever they're based, remote, across time zones.",
+        },
     ],
 };

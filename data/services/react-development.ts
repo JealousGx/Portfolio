@@ -66,5 +66,17 @@ export const reactDevelopment: ServicePageData = {
             question: "Do you take enterprise-scale React projects?",
             answer: "Yes, depending on scope and timeline. Let's talk about what you need.",
         },
+        {
+            question: "Do you work as a React consultant on an existing project?",
+            answer: "Yes. Reviewing an existing React codebase or advising on architecture is work I take on, not just full builds.",
+        },
+        {
+            question: "Can you optimize the performance of an existing React app?",
+            answer: "Yes. Slow React apps are usually down to a specific, findable cause, unnecessary re-renders, unoptimized images, oversized bundles, and I can audit for that.",
+        },
+        {
+            question: "Do you only work with clients in certain countries?",
+            answer: "No. I work with serious clients wherever they're based, remote, across time zones.",
+        },
     ],
 };

@@ -61,5 +61,17 @@ export const javascriptDevelopment: ServicePageData = {
             question: "Can you work with my existing JavaScript codebase?",
             answer: "Yes. Send over what you have and I'll assess it before quoting anything.",
         },
+        {
+            question: "Do you work as a vanilla JavaScript developer, without a framework?",
+            answer: "Yes. Plenty of projects don't need a framework at all, and I'll build in plain JavaScript when that's genuinely the better fit.",
+        },
+        {
+            question: "Can you fix a bug in my existing JavaScript code, or only full builds?",
+            answer: "Yes. Bug fixes and small jobs are welcome, not just full builds.",
+        },
+        {
+            question: "Do you only work with clients in certain countries?",
+            answer: "No. I work with serious clients wherever they're based, remote, across time zones.",
+        },
     ],
 };

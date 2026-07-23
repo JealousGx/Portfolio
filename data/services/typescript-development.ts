@@ -73,5 +73,13 @@ export const typescriptDevelopment: ServicePageData = {
             question: "Do you take on contract or contract-to-hire roles?",
             answer: "Yes, both. Happy to discuss what structure works for your team.",
         },
+        {
+            question: "Do you offer TypeScript consulting on an existing codebase, or only new builds?",
+            answer: "Both. If you want a codebase reviewed or an incremental migration plan rather than a fresh build, that's consulting work I take on too.",
+        },
+        {
+            question: "Do you only work with clients in certain countries?",
+            answer: "No. I work with serious clients wherever they're based, remote, across time zones.",
+        },
     ],
 };
