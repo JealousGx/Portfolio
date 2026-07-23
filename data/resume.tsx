@@ -1,5 +1,21 @@
 import { Icons } from "@/components/icons";
-import { BookOpenIcon, CalendarClockIcon, CodeIcon, HomeIcon, NotebookIcon } from "lucide-react";
+import {
+    Blocks,
+    BookOpenIcon,
+    Braces,
+    CalendarClockIcon,
+    Cloud,
+    CodeIcon,
+    Database,
+    Gauge,
+    HomeIcon,
+    Layers,
+    NotebookIcon,
+    Rocket,
+    Server,
+    Sparkles,
+    Triangle,
+} from "lucide-react";
 
 import { Docker } from "@/components/ui/svgs/docker";
 import { MongoDB } from "@/components/ui/svgs/mongodb";
@@ -25,14 +41,24 @@ export const DATA = {
         "I'm a full stack web developer with 3+ years of experience building dynamic, scalable web applications. I've worked with startups and businesses to bring their ideas to life — from landing pages and e-commerce stores to full SaaS products. I specialize in [Next.js](https://nextjs.org), TypeScript, and Node.js, and I'm available for freelance projects.",
     avatarUrl: "/me.webp",
     skills: [
-        { name: "React", icon: ReactLight },
-        { name: "Next.js", icon: NextjsIconDark },
-        { name: "TypeScript", icon: Typescript },
-        { name: "Node.js", icon: Nodejs },
+        { name: "React", icon: ReactLight, href: "/react-development" },
+        { name: "Next.js", icon: NextjsIconDark, href: "/nextjs-development" },
+        { name: "TypeScript", icon: Typescript, href: "/typescript-development" },
+        { name: "JavaScript", icon: Braces, href: "/javascript-development" },
+        { name: "Node.js", icon: Nodejs, href: "/nodejs-development" },
         { name: "PostgreSQL", icon: Postgresql },
         { name: "MongoDB", icon: MongoDB },
         { name: "WordPress", icon: Wordpress },
         { name: "Docker", icon: Docker },
+        { name: "Databases", icon: Database, href: "/database-development" },
+        { name: "AWS", icon: Cloud, href: "/aws-serverless-development" },
+        { name: "Full-Stack", icon: Blocks, href: "/full-stack-developer" },
+        { name: "MERN Stack", icon: Layers, href: "/mern-stack-development" },
+        { name: "MVP Development", icon: Rocket, href: "/mvp-development" },
+        { name: "SaaS Development", icon: Sparkles, href: "/saas-development" },
+        { name: "NestJS", icon: Server, href: "/nestjs-development" },
+        { name: "Vue", icon: Triangle, href: "/vue-development" },
+        { name: "Go", icon: Gauge, href: "/golang-development" },
     ],
     navbar: [
         { href: "/", icon: HomeIcon, label: "Home" },
@@ -173,7 +199,7 @@ export const DATA = {
             active: true,
             description:
                 "Validate ideas. Build smarter. Helps founders stop building products no one wants by validating ideas with real signals before writing a single line of code.",
-            technologies: ["Next.js", "TypeScript", "PostgreSQL", "TailwindCSS"],
+            technologies: ["Next.js", "TypeScript", "Go", "Gin", "PostgreSQL", "TailwindCSS"],
             links: [
                 {
                     type: "Website",
@@ -254,7 +280,7 @@ export const DATA = {
             active: true,
             description:
                 "Validate ideas. Build smarter. Helps founders stop building products no one wants.",
-            technologies: ["Next.js", "TypeScript", "PostgreSQL", "TailwindCSS"],
+            technologies: ["Next.js", "TypeScript", "Go", "Gin", "PostgreSQL", "TailwindCSS"],
             links: [
                 {
                     type: "Website",
