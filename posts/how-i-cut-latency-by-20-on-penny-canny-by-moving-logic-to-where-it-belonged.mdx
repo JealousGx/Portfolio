@@ -1,0 +1,108 @@
+---
+title: How I Cut Latency by 20% on PennyCanny by Moving Logic to Where It Belonged
+publishedAt: 2026-07-23
+brief: >-
+  A 20% latency reduction on PennyCanny, no new infra, no rewrite. Just
+  identifying which logic belonged on the server vs. the client, and moving it
+  accordingly.
+coverImage: >-
+  https://miro.medium.com/v2/resize:fit:1400/format:webp/1*yLIX224UL9oqFT5l8FRbww.png
+readTimeInMinutes: 3
+summary: >-
+  PennyCanny was running client-side logic, UI computation with no dependency on
+  server data, inside the server-rendered template on every request. Moving it
+  to the client where it belonged cut response latency by 20% with no new
+  infrastructure, no framework migration, and no rewrite.
+keyStats:
+  - stat: >-
+      Every 100ms of added latency costs Amazon approximately 1% in sales — a
+      figure that projects to billions annually at their current revenue scale.
+    source: Amazon Engineering (2006)
+    sourceUrl: https://www.sitebuilderreport.com/website-speed-statistics
+  - stat: A 1-second delay reduces conversion rates by 7% on average.
+    source: Akamai / Convert.com
+    sourceUrl: >-
+      https://www.convert.com/blog/optimization/infographic-the-interesting-effect-of-speed-on-conversion-rates/
+  - stat: >-
+      Every 0.1-second improvement in load speed increases conversions by 8% in
+      retail and 10% in travel.
+    source: Google & Deloitte — "Milliseconds Make Millions"
+    sourceUrl: https://ighenatt.es/en/resources/velocidad-web/tiempo-carga-conversion/
+  - stat: 53% of mobile users abandon a site that takes more than 3 seconds to load.
+    source: Google
+    sourceUrl: https://blueaspenmarketing.com/how-website-speed-impacts-conversions/
+faqs:
+  - question: >-
+      What is the difference between server-side and client-side logic in web
+      apps?
+    answer: >-
+      Server-side logic runs before the response is sent, data fetching,
+      authentication, business rules. Client-side logic runs in the browser
+      after the page loads, UI interactions, display-only computation, anything
+      that depends on browser state. Mixing these up means the server does work
+      it doesn't need to do on every request.
+  - question: How does misplaced server-side logic cause latency?
+    answer: >-
+      If the server is running UI-only computation, logic that has no dependency
+      on data or business rules, it's adding processing time to every request
+      before anything reaches the user. That cost compounds across every user,
+      every page load.
+  - question: Do you need new infrastructure to reduce backend latency?
+    answer: >-
+      Not always. A significant portion of latency problems are architectural,
+      not capacity problems. Moving work to the right layer, server or client,
+      can cut response times without touching your infrastructure, as the
+      PennyCanny case shows.
+  - question: What is the performance cost of unnecessary server-side rendering?
+    answer: >-
+      Every piece of extra logic running server-side adds to the time before the
+      first byte reaches the user. At scale, even small per-request overhead
+      compounds into measurable latency and, according to industry research,
+      real conversion loss.
+  - question: How do you identify which logic belongs on the server vs. the client?
+    answer: >-
+      Ask whether the logic depends on trusted data, business rules, or anything
+      that must be centralized, that belongs on the server. If it only depends
+      on browser state, user input, or UI concerns with no data dependency, it
+      belongs on the client. When in doubt, ask: does this need to run before
+      the page reaches the user?
+---
+When I started looking into PennyCanny's performance, the instinct was to expect a big fix, a caching layer, a database problem, something structural. That's usually where slowness hides.
+
+It wasn't that. The problem was simpler and, honestly, more common than people think: a chunk of the logic was running in the wrong place.
+
+---
+
+## The Setup
+
+PennyCanny runs on NodeJS and TypeScript, with Handlebars for templating and plain CSS, no frontend framework, no client-side JS framework carrying the UI. AWS handles the infrastructure.
+
+With a setup like this, it's easy for the line between "server work" and "client work" to blur. Handlebars renders on the server, so there's a natural pull to just keep piling logic into the server-rendered template, even logic that has nothing to do with data fetching or business rules. It's the path of least resistance, right up until it starts costing you.
+
+## The Problem
+
+Digging into the request lifecycle, a pattern showed up: work that depended entirely on the browser, client-side state, UI-only computation, things that had zero business being resolved before the page even reached the user, was happening server-side anyway.
+
+Every request was doing extra work it didn't need to do, before the response ever left the server. That's latency you're paying for on every single request, whether the client needed that computation immediately or not.
+
+## The Fix
+
+Nothing complicated. No new tools, no framework migration, no infrastructure change.
+
+I went through the server-side logic and separated what actually belonged there, data fetching, business rules, anything that needed to be trusted or centralized, from what didn't. The second category moved to the client, where it belonged in the first place.
+
+The server got lighter. It stopped doing work that had nothing to do with its job. The client picked up exactly what it should have been handling all along.
+
+## The Result
+
+**20% latency reduction.** That was the headline number, but it wasn't the only thing that improved. Once the server stopped carrying work it shouldn't have had, a few other rough edges around response consistency cleaned up as a side effect, the kind of small wins that show up once you stop masking a structural issue with raw server effort.
+
+## The Actual Lesson
+
+This wasn't a hard technical problem. It was a boundary problem, knowing what belongs on the server and what belongs on the client, and being disciplined enough to keep it that way as a codebase grows. Frameworks and templating engines don't enforce that boundary for you. Someone has to.
+
+The biggest performance wins aren't always about adding something, better caching, more infrastructure, a faster database. Sometimes they're about removing work you never needed to be doing there in the first place.
+
+---
+
+*I work on NodeJS, TypeScript, and AWS, usually the unglamorous performance problems, not the flashy ones. If your app is doing more work than it needs to, [let's talk](https://jealous.dev).*
