@@ -23,6 +23,7 @@ export default function ServiceSiblings({ currentSlug }: Props) {
                     <Link
                         key={page.slug}
                         href={`/${page.slug}`}
+                        aria-label={`${page.label} development services`}
                         className="border bg-background border-border rounded-xl h-8 px-4 flex items-center text-sm font-medium hover:bg-accent transition-colors"
                     >
                         {page.label}
