@@ -2,6 +2,7 @@
 "use client";
 
 import { ArrowUpRight } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import Markdown from "react-markdown";
@@ -14,14 +15,16 @@ function ProjectImage({ src, alt }: { src: string; alt: string }) {
     const [imageError, setImageError] = useState(false);
 
     if (!src || imageError) {
-        return <div className="w-full h-48 bg-muted" />;
+        return <div className="w-full h-full bg-muted" />;
     }
 
     return (
-        <img
+        <Image
             src={src}
             alt={alt}
-            className="w-full h-48 object-cover"
+            fill
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px"
+            className="object-cover"
             onError={() => setImageError(true)}
         />
     );
@@ -70,7 +73,7 @@ export function ProjectCard({
                 className="absolute inset-0 z-0"
                 aria-label={title}
             />
-            <div className="relative shrink-0">
+            <div className="relative shrink-0 w-full h-48">
                 {video ? (
                     <video
                         src={video}
@@ -78,12 +81,12 @@ export function ProjectCard({
                         loop
                         muted
                         playsInline
-                        className="w-full h-48 object-cover"
+                        className="w-full h-full object-cover"
                     />
                 ) : image ? (
                     <ProjectImage src={image} alt={title} />
                 ) : (
-                    <div className="w-full h-48 bg-muted" />
+                    <div className="w-full h-full bg-muted" />
                 )}
                 {links && links.length > 0 && (
                     <div className="absolute top-2 right-2 flex flex-wrap gap-2 z-10">
