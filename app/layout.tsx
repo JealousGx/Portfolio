@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 
-import { ChatWidget } from "@/components/chat-widget";
+import { ChatWidgetButton } from "@/components/chat-widget-button";
 
 import { DATA } from "@/data/resume";
 
@@ -71,7 +71,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 )}
             >
                 {children}
-                <ChatWidget />
+                <ChatWidgetButton />
             </body>
         </html>
     );
