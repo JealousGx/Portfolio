@@ -14,6 +14,8 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 import { DATA } from "@/data/resume";
 
+import { cn } from "@/lib/utils";
+
 const BLUR_FADE_DELAY = 0.04;
 
 const serviceJsonLd = JSON.stringify({
@@ -183,14 +185,28 @@ export default function Page() {
             <h2 className="text-xl font-bold">Skills</h2>
           </BlurFade>
           <div className="flex flex-wrap gap-2">
-            {DATA.skills.map((skill, id) => (
-              <BlurFade key={skill.name} delay={BLUR_FADE_DELAY * 10 + id * 0.05}>
-                <div className="border bg-background border-border ring-2 ring-border/20 rounded-xl h-8 w-fit px-4 flex items-center gap-2">
+            {DATA.skills.map((skill, id) => {
+              const chipClassName =
+                "border bg-background border-border ring-2 ring-border/20 rounded-xl h-8 w-fit px-4 flex items-center gap-2";
+              const content = (
+                <>
                   {skill.icon && <skill.icon className="size-4 rounded overflow-hidden object-contain" />}
                   <span className="text-foreground text-sm font-medium">{skill.name}</span>
-                </div>
-              </BlurFade>
-            ))}
+                </>
+              );
+
+              return (
+                <BlurFade key={skill.name} delay={BLUR_FADE_DELAY * 10 + id * 0.05}>
+                  {"href" in skill && skill.href ? (
+                    <Link href={skill.href} className={cn(chipClassName, "hover:ring-2 hover:ring-muted transition-all")}>
+                      {content}
+                    </Link>
+                  ) : (
+                    <div className={chipClassName}>{content}</div>
+                  )}
+                </BlurFade>
+              );
+            })}
           </div>
         </div>
       </section>
