@@ -1,0 +1,105 @@
+---
+title: 'Case Study: Cutting a Client''s Load Time by 75%'
+publishedAt: 2026-08-13
+brief: >-
+  A client's site took 8+ seconds to load. No redesign, no rebuild, just
+  CloudFront, Lambda, and NeonDB in the right places. Load time dropped to 2
+  seconds. Here's exactly what changed and why.
+coverImage: >-
+  https://cdn.hashnode.com/uploads/covers/62eaa89216f9480a9dac6560/1dc6f28b-0628-4b1f-819f-5e75d89d7d9b.png
+readTimeInMinutes: 3
+summary: >-
+  A site taking 8 seconds to load dropped to 2 seconds, a 75% reduction, without
+  touching the design or content. The fix was infrastructure: CloudFront as a
+  CDN layer, Lambda for compute-heavy paths, and NeonDB replacing a slow
+  database setup. Right tools on the right bottlenecks, nothing more.
+keyStats:
+  - stat: >-
+      The BBC loses 10% of its audience for every additional second of page load
+      time.
+    source: BBC Engineering (via Searchlab / Hostinger)
+    sourceUrl: https://www.hostinger.com/tutorials/website-load-time-statistics
+  - stat: >-
+      71% of top-performing websites use a CDN, which reduces load time by an
+      average of 52% and delivers content 3.8x faster.
+    source: Searchlab (via Google, Cloudflare, HTTP Archive data)
+    sourceUrl: >-
+      https://searchlab.nl/en/statistics/website-speed-performance-statistics-2026
+  - stat: >-
+      Pages loading in 1 second have a 3.05% conversion rate; pages loading in 6
+      seconds drop to 1.08%, nearly a third of the conversions.
+    source: Portent (via Searchlab)
+    sourceUrl: >-
+      https://searchlab.nl/en/statistics/website-speed-performance-statistics-2026
+  - stat: >-
+      About 40% of websites still take more than 5 seconds to load on 4G mobile
+      connections.
+    source: World Metrics / HTTP Archive (2023 data)
+    sourceUrl: https://worldmetrics.org/website-loading-time-statistics/
+faqs:
+  - question: How much does a slow website affect conversions?
+    answer: >-
+      Pages loading in 1 second convert at roughly 3x the rate of pages loading
+      in 6 seconds. A single additional second of delay cuts conversions by
+      around 7%, and the BBC has reported losing 10% of its audience for every
+      extra second of load time.
+  - question: What is CloudFront and how does it speed up a website?
+    answer: >-
+      CloudFront is AWS's CDN (content delivery network). Instead of every
+      visitor's request travelling to your origin server, CloudFront serves
+      cached content from edge locations physically closer to the user. The
+      result is lower latency on every request, especially for returning
+      visitors and static assets.
+  - question: When should you use AWS Lambda instead of a traditional server?
+    answer: >-
+      When you have compute needs that vary with traffic rather than running
+      constantly. A fixed server strains under spikes and sits idle at low load.
+      Lambda scales automatically per request, so compute-heavy paths only use
+      resources when they're actually needed.
+  - question: Do you need to rebuild a slow website to make it faster?
+    answer: >-
+      Usually not. Most performance problems live in the infrastructure layer,
+      how content is served, cached, and computed, not in the design or the code
+      customers see. Fixing the right layer is faster, cheaper, and leaves
+      everything visible to customers completely unchanged.
+  - question: What is NeonDB and why is it good for serverless apps?
+    answer: >-
+      NeonDB is a serverless Postgres database built for fast connection and
+      disconnection cycles. Traditional databases hold open connections, which
+      is expensive for serverless functions that spin up and tear down on every
+      request. NeonDB handles that pattern efficiently, removing a common
+      cold-start bottleneck in serverless architectures.
+---
+A client came to me with a site that worked, it just made people wait too long to see it work. Pages took over 8 seconds to load. By the time anything appeared on screen, a good chunk of visitors had already left.
+
+The design didn't need to change. The content didn't need to change. What needed to change was everything happening behind the scenes before any of that ever reached the visitor.
+
+## The Result First
+
+Load time dropped by 75%. What used to take 8 seconds now takes about 2. No redesign, no rebuild, the same site, just no longer standing in its own way.
+
+That's the number that matters if you're a business owner reading this. If you want the technical breakdown of how, that's below. If not, that's the whole story: a slow site got fast, without anyone having to touch the parts customers actually see.
+
+---
+
+## The Technical Breakdown
+
+For anyone curious about the actual mechanics, here's what changed.
+
+**CloudFront in front of everything.** Static assets, images, and cacheable responses were being served directly from the origin server on every request. Adding CloudFront as a CDN layer meant repeat visitors, and even first-time visitors hitting cached content, got served from an edge location close to them, instead of round-tripping to the origin every time.
+
+**Lambda for the compute-heavy paths.** Instead of a single server handling every request regardless of load, the parts of the app that actually needed compute moved to Lambda, scaling automatically with traffic instead of a fixed server straining under a spike.
+
+**NeonDB replacing a slower, more traditional database setup.** Cold starts on serverless compute are only as fast as the database connection behind them. NeonDB's connection model is built for exactly this pattern, serverless functions that need to connect, query, and disconnect quickly, without the overhead a traditional always-on database connection carries.
+
+None of these were exotic choices. They're common, well-documented pieces of AWS infrastructure. The work wasn't picking clever tools, it was correctly diagnosing where the actual bottleneck was, and applying the right piece to the right problem instead of throwing infrastructure at the whole system and hoping something stuck.
+
+## Why This Kind of Fix Gets Missed
+
+A lot of slow sites don't get fixed because the instinct is to rebuild, new framework, new design, new everything. That's expensive, slow, and often unnecessary. Most performance problems live in the infrastructure layer, not the code or the design. Fixing that layer is faster, cheaper, and doesn't touch anything the client or their customers actually see.
+
+The site looked exactly the same after this project. It just stopped making people wait to see it.
+
+---
+
+*I work on performance problems like this, NodeJS, TypeScript, AWS. If your site feels slow and you're not sure why, [let's talk](https://jealous.dev).*
