@@ -194,7 +194,7 @@ export const DATA = {
         },
         {
             title: "FounderSignal",
-            href: "https://foundersignal.app",
+            href: "#",
             dates: "2024",
             active: true,
             description:
@@ -203,7 +203,7 @@ export const DATA = {
             links: [
                 {
                     type: "Website",
-                    href: "https://foundersignal.app",
+                    href: "#",
                     icon: <Icons.globe className="size-3" />,
                 },
                 {
@@ -275,7 +275,7 @@ export const DATA = {
         },
         {
             title: "FounderSignal",
-            href: "https://foundersignal.app",
+            href: "#",
             dates: "2024",
             active: true,
             description:
@@ -284,7 +284,7 @@ export const DATA = {
             links: [
                 {
                     type: "Website",
-                    href: "https://foundersignal.app",
+                    href: "#",
                     icon: <Icons.globe className="size-3" />,
                 },
                 {
@@ -321,7 +321,7 @@ export const DATA = {
         },
         {
             title: "Vala",
-            href: "http://vala.scaleredesign.com",
+            href: "#",
             dates: "2023",
             active: true,
             description:
@@ -330,7 +330,7 @@ export const DATA = {
             links: [
                 {
                     type: "Website",
-                    href: "http://vala.scaleredesign.com",
+                    href: "#",
                     icon: <Icons.globe className="size-3" />,
                 },
             ],
