@@ -1,4 +1,5 @@
-import { Code, Globe, Layout, ShoppingCart } from "lucide-react";
+import { ArrowRight, Code, Globe, Layout, ShoppingCart } from "lucide-react";
+import Link from "next/link";
 
 import { DATA } from "@/data/resume";
 
@@ -27,10 +28,11 @@ export default function ServicesSection() {
                     </p>
                 </div>
             </div>
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 max-w-[800px] mx-auto w-full">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 max-w-200 mx-auto w-full">
                 {DATA.services.map((service) => {
                     const Icon = iconMap[service.icon as keyof typeof iconMap];
                     const mailtoSubject = encodeURIComponent(`I need a ${service.title}`);
+                    const href = "href" in service ? service.href : undefined;
                     return (
                         <div
                             key={service.title}
@@ -38,15 +40,34 @@ export default function ServicesSection() {
                         >
                             <div className="flex items-center gap-3">
                                 {Icon && <Icon className="size-5 text-muted-foreground" />}
-                                <h3 className="font-semibold">{service.title}</h3>
+                                <h3 className="font-semibold">
+                                    {href ? (
+                                        <Link href={href} className="hover:underline underline-offset-4">
+                                            {service.title}
+                                        </Link>
+                                    ) : (
+                                        service.title
+                                    )}
+                                </h3>
                             </div>
                             <p className="text-sm text-muted-foreground flex-1 leading-relaxed">{service.description}</p>
-                            <a
-                                href={`mailto:${process.env.NEXT_PUBLIC_CONTACT_EMAIL}?subject=${mailtoSubject}`}
-                                className="inline-flex items-center justify-center h-9 px-4 text-sm font-medium border border-border rounded-lg hover:bg-accent transition-colors w-fit"
-                            >
-                                {service.cta}
-                            </a>
+                            <div className="flex flex-wrap items-center gap-2">
+                                <a
+                                    href={`mailto:${process.env.NEXT_PUBLIC_CONTACT_EMAIL}?subject=${mailtoSubject}`}
+                                    className="inline-flex items-center justify-center h-9 px-4 text-sm font-medium border border-border rounded-lg hover:bg-accent transition-colors w-fit"
+                                >
+                                    {service.cta}
+                                </a>
+                                {href && (
+                                    <Link
+                                        href={href}
+                                        className="inline-flex items-center gap-1 h-9 px-3 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors w-fit group"
+                                    >
+                                        Learn more
+                                        <ArrowRight className="size-3.5 group-hover:translate-x-px transition-transform" />
+                                    </Link>
+                                )}
+                            </div>
                         </div>
                     );
                 })}

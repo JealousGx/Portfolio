@@ -508,6 +508,7 @@ export const DATA = {
                 "A clean, fast, mobile-first website for your business. Built to rank on Google and convert visitors into customers.",
             icon: "globe", // use a lucide icon name
             cta: "Get a website",
+            href: "/small-business-website-development",
         },
         {
             title: "E-commerce Store",
@@ -522,6 +523,7 @@ export const DATA = {
                 "Have a startup idea? I'll build your MVP fast — full-stack, production-ready, and scalable from day one.",
             icon: "code",
             cta: "Start building",
+            href: "/mvp-development",
         },
         {
             title: "Landing Page",
