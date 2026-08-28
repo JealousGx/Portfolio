@@ -115,6 +115,7 @@ Notable articles:
 - [Full Stack Development](https://jealous.dev/full-stack-developer)
 - [MERN Stack Development](https://jealous.dev/mern-stack-development)
 - [MVP Development](https://jealous.dev/mvp-development)
+- [Small Business Website Development](https://jealous.dev/small-business-website-development)
 - [SaaS Development](https://jealous.dev/saas-development)
 - [NestJS Development](https://jealous.dev/nestjs-development)
 - [Vue Development](https://jealous.dev/vue-development)

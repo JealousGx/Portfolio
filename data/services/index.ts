@@ -10,6 +10,7 @@ import { nextjsDevelopment } from "./nextjs-development";
 import { nodejsDevelopment } from "./nodejs-development";
 import { reactDevelopment } from "./react-development";
 import { saasDevelopment } from "./saas-development";
+import { smallBusinessWebsiteDevelopment } from "./small-business-website-development";
 import { typescriptDevelopment } from "./typescript-development";
 import type { ServicePageData } from "./types";
 import { vueDevelopment } from "./vue-development";
@@ -25,6 +26,7 @@ export const servicePages: ServicePageData[] = [
     fullStackDeveloper,
     mernStackDevelopment,
     mvpDevelopment,
+    smallBusinessWebsiteDevelopment,
     saasDevelopment,
     nestjsDevelopment,
     vueDevelopment,
