@@ -1,0 +1,119 @@
+---
+title: The Bug Wasn't a Bug. It Was Just Work in the Wrong Place.
+publishedAt: 2026-09-17
+brief: >-
+  PennyCanny felt slow for months with no clear cause. No broken code, no errors
+  — just work that had quietly accumulated on the server that never belonged
+  there. Here's what I found and how I fixed it.
+coverImage: >-
+  https://cdn.hashnode.com/uploads/covers/62eaa89216f9480a9dac6560/c6dba115-0345-43d0-be98-c62809a77d98.png
+readTimeInMinutes: 4
+summary: >-
+  PennyCanny wasn't broken — it was just doing server-side work that belonged on
+  the client. No rewrite, no new infrastructure. Going through the request
+  lifecycle slowly enough to notice where the boundary had blurred cut load time
+  by 20%, with other rough edges cleaning up as a side effect.
+keyStats:
+  - stat: >-
+      The BBC loses 10% of its audience for every additional second of page load
+      time.
+    source: BBC Engineering (via Hostinger)
+    sourceUrl: https://www.hostinger.com/tutorials/website-load-time-statistics
+  - stat: >-
+      71% of top-performing websites use a CDN, which reduces load time by an
+      average of 52%.
+    source: Searchlab (via Google, Cloudflare, HTTP Archive data)
+    sourceUrl: >-
+      https://searchlab.nl/en/statistics/website-speed-performance-statistics-2026
+  - stat: >-
+      Pages loading in 1 second convert at nearly 3x the rate of pages loading
+      in 6 seconds.
+    source: Portent (via Searchlab)
+    sourceUrl: >-
+      https://searchlab.nl/en/statistics/website-speed-performance-statistics-2026
+  - stat: >-
+      53% of mobile visitors abandon a page that takes longer than 3 seconds to
+      load.
+    source: Google
+    sourceUrl: >-
+      https://huckabuy.com/20-important-page-speed-bounce-rate-and-conversion-rate-statistics/
+faqs:
+  - question: Why does a Node.js app feel slow even when nothing is broken?
+    answer: >-
+      Often because work is happening in the wrong place. Logic that depends
+      only on browser state or UI concerns has no reason to run on the server —
+      but in server-rendered setups like Handlebars, it's easy for that boundary
+      to blur over time. The result is extra processing on every request that
+      nobody explicitly decided to add.
+  - question: >-
+      What is the difference between server-side and client-side rendering in
+      performance terms?
+    answer: >-
+      Server-side rendering runs before the response leaves the server — adding
+      to the time before the user sees anything. Client-side rendering runs
+      after the page loads, in the browser. Work that only depends on browser
+      state costs you latency if it runs server-side, and nothing if it runs
+      client-side where it belongs.
+  - question: How do you diagnose a slow Node.js app with no obvious errors?
+    answer: >-
+      Go through the request lifecycle piece by piece without a theory first —
+      just watch where time is actually going. Profiling tools, request timing
+      logs, and tracing each step manually will surface patterns that guessing
+      won't. In many cases the bottleneck isn't a bug; it's accumulated work
+      that never needed to be there.
+  - question: Can you improve app performance without rewriting it?
+    answer: >-
+      Yes, and it's usually the right first move. Most performance problems are
+      in a specific layer — misplaced logic, missing caching, unoptimized
+      queries — not in the overall architecture. Identifying and fixing that
+      layer is faster, cheaper, and lower risk than a rewrite, and often
+      produces bigger gains.
+  - question: What causes server-client boundary drift in web apps?
+    answer: >-
+      Convenience, mostly. In a server-rendered setup, the path of least
+      resistance is to keep adding logic to the server-rendered template — even
+      logic that has nothing to do with data or business rules. Nobody decides
+      to do it wrong; it just accumulates one small addition at a time until
+      it's costing real latency.
+---
+I used to think performance problems were always something dramatic. A missing index. A memory leak. Something you'd find and immediately understand, the kind of bug that makes a good story because it has a clear villain.
+
+PennyCanny wasn't like that. Nothing was broken. Nothing was throwing errors. It just felt slow, and had felt slow for a while, in that vague way where everyone notices but nobody can point at the exact cause.
+
+## Going In Without a Theory
+
+When I started looking into it, I didn't have a theory yet. The stack was plain enough: Node.js and TypeScript on the backend, Handlebars for templating, plain CSS, no frontend framework carrying the UI. AWS underneath all of it. Nothing exotic, nothing that screamed "this is where your problem lives."
+
+I went through the request lifecycle piece by piece, trying to see where time was actually going. Not guessing, just watching. And a pattern started showing up that I hadn't expected.
+
+## What I Actually Found
+
+Work that had nothing to do with the server was happening on the server anyway.
+
+Things that depended entirely on what the browser already knew, client-side state, UI-only computation, logic that should have resolved the moment the page hit the user's screen, were instead being resolved before the response even left the server. Every request was doing extra work it didn't need to do, on every single visit, regardless of whether it was needed right away.
+
+It wasn't a bug in the sense of something broken. It was more like a habit that had built up over time. Handlebars renders server-side, so there's a natural pull to just keep adding logic to the server-rendered template, even logic that has nothing to do with fetching data or enforcing business rules. It's the easy path. Nobody decided to do this on purpose. It just accumulated, one small addition at a time, until it was costing real latency on every request.
+
+## Fixing It Without Fixing Anything Big
+
+This is the part that still surprises me a little. The fix wasn't a rewrite. Wasn't a new framework, wasn't new infrastructure, wasn't anything that would show up as an impressive line item in a project summary.
+
+I went through the server logic and separated what actually belonged there, data fetching, business rules, anything that needed to be centralized or trusted, from what didn't. The part that didn't belong moved to the client, where it should have lived from the start.
+
+That's it. The server stopped carrying work that wasn't its job. The client picked up what it should have been handling all along.
+
+## The Number, and the Thing Under the Number
+
+Load time dropped 20%. That's the number I'd lead with if someone asked what happened. But the thing I actually think about more is what it took to get there, which wasn't cleverness, it was just going slowly enough to notice where the boundary between server and client had quietly blurred.
+
+A few other rough edges cleaned up as a side effect too, once the server stopped masking a structural issue with raw effort. That part wasn't planned. It just happened once the actual cause got fixed instead of worked around.
+
+## What I Keep Coming Back To
+
+I used to think the biggest performance wins came from adding something, better caching, more infrastructure, a faster database. This one taught me the opposite. Sometimes the win is just noticing work that never needed to happen in that place at all, and moving it back to where it belonged.
+
+No framework enforces that boundary for you. Nothing warns you when it starts drifting. Someone has to actually go look.
+
+---
+
+*I work on Node.js, TypeScript, and AWS, usually the quiet performance problems, not the dramatic ones. If your app feels slow and nobody can say exactly why, [I'd be glad to take a look](https://jealous.dev).*
