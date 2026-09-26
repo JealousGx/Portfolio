@@ -90,12 +90,12 @@ export default function Page() {
                 delay={BLUR_FADE_DELAY}
                 className="text-3xl font-semibold tracking-tighter sm:text-4xl lg:text-5xl"
                 yOffset={8}
-                text={`Hi, I'm ${DATA.name}`}
+                text={`Hi, I'm ${DATA.name}, a full stack developer.`}
               />
               <BlurFadeText
                 className="text-muted-foreground max-w-150 md:text-lg lg:text-xl"
                 delay={BLUR_FADE_DELAY}
-                text={DATA.description}
+                text={DATA.heroDescription}
               />
             </div>
             <BlurFade delay={BLUR_FADE_DELAY} className="order-1 md:order-2">
@@ -183,6 +183,11 @@ export default function Page() {
         <div className="flex min-h-0 flex-col gap-y-4">
           <BlurFade delay={BLUR_FADE_DELAY * 9}>
             <h2 className="text-xl font-bold">Skills</h2>
+          </BlurFade>
+          <BlurFade delay={BLUR_FADE_DELAY * 9.5}>
+            <p className="text-muted-foreground">
+              The tools I use to get this done. Not technical? Don&apos;t worry about this part, I&apos;ll explain what you need on the call.
+            </p>
           </BlurFade>
           <div className="flex flex-wrap gap-2">
             {DATA.skills.map((skill, id) => {
