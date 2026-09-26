@@ -7,7 +7,7 @@ const PRICING = [
     { label: "Landing page", value: "From $800" },
     { label: "MVP", value: "From $4,000" },
     { label: "SaaS product", value: "From $8,000" },
-    { label: "Ongoing work", value: "$40 to $70/hr" },
+    { label: "Ongoing work", value: "Monthly retainer, starting at $1,200/mo" },
 ] as const;
 
 export default function ContactSection() {
