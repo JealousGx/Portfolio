@@ -36,9 +36,11 @@ export const DATA = {
     location: "Pakistan",
     locationLink: "https://www.google.com/maps/place/Pakistan",
     description:
-        "Freelance Full Stack Web Developer specializing in Next.js, TypeScript, and Node.js. I build fast, scalable websites and web apps for startups and businesses.",
+        "I build websites, MVPs, and web apps that businesses actually use to grow, not just portfolio pieces. Full stack developer specializing in Next.js and Node.js.",
+    heroDescription:
+        "I build websites and web apps that businesses actually use to grow, not just portfolio pieces. If you need a site, an MVP, or a full product built right, that's what I do.",
     summary:
-        "I'm a full stack web developer with 3+ years of experience building dynamic, scalable web applications. I've worked with startups and businesses to bring their ideas to life — from landing pages and e-commerce stores to full SaaS products. I specialize in [Next.js](https://nextjs.org), TypeScript, and Node.js, and I'm available for freelance projects.",
+        "I've been building software for 3+ years now, everything from small business sites to full SaaS products with real users. I used to think being a good developer just meant writing clean code. Then I started building and launching my own products and realized the code is the easy part. The hard part is understanding what actually needs to get built, and why. That's what I bring to a project: I think about the outcome first, then the code.",
     avatarUrl: "/me.webp",
     skills: [
         { name: "React", icon: ReactLight, href: "/react-development" },
@@ -202,11 +204,6 @@ export const DATA = {
             technologies: ["Next.js", "TypeScript", "Go", "Gin", "PostgreSQL", "TailwindCSS"],
             links: [
                 {
-                    type: "Website",
-                    href: "#",
-                    icon: <Icons.globe className="size-3" />,
-                },
-                {
                     type: "Source",
                     href: "https://github.com/JealousGx/FounderSignal",
                     icon: <Icons.github className="size-3" />,
@@ -282,11 +279,6 @@ export const DATA = {
                 "Validate ideas. Build smarter. Helps founders stop building products no one wants.",
             technologies: ["Next.js", "TypeScript", "Go", "Gin", "PostgreSQL", "TailwindCSS"],
             links: [
-                {
-                    type: "Website",
-                    href: "#",
-                    icon: <Icons.globe className="size-3" />,
-                },
                 {
                     type: "Source",
                     href: "https://github.com/JealousGx/FounderSignal",
