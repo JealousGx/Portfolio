@@ -1,6 +1,8 @@
+import { GoogleAnalytics } from "@next/third-parties/google";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 
+import AnalyticsEvents from "@/components/analytics-events";
 import { ChatWidgetButton } from "@/components/chat-widget-button";
 
 import { DATA } from "@/data/resume";
@@ -9,6 +11,7 @@ import { cn } from "@/lib/utils";
 
 import "./globals.css";
 
+const GA_ID = process.env.NODE_ENV === "production" ? process.env.NEXT_PUBLIC_GA_ID : undefined;
 const SITE_NAME = "JealousGx";
 const HOME_TITLE = "Freelance Web Developer for Startups and Small Businesses | JealousGx";
 
@@ -55,8 +58,7 @@ export const metadata: Metadata = {
         card: "summary_large_image",
     },
     verification: {
-        google: "",
-        yandex: "",
+        google: process.env.NEXT_PUBLIC_GSC_VERIFICATION || undefined,
     },
 };
 
@@ -75,7 +77,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             >
                 {children}
                 <ChatWidgetButton />
+                {GA_ID && <AnalyticsEvents />}
             </body>
+            {GA_ID && <GoogleAnalytics gaId={GA_ID} />}
         </html>
     );
 }
