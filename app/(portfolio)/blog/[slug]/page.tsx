@@ -165,7 +165,7 @@ export default async function BlogPost({
             )}
 
             <article className="prose max-w-full text-pretty font-sans leading-relaxed text-muted-foreground dark:prose-invert">
-                <MDXContent code={post.mdx} />
+                <MDXContent code={post.mdx} components={{ h1: (props) => <h2 {...props} /> }} />
             </article>
 
             {post.faqs && post.faqs.length > 0 && (
