@@ -1,4 +1,4 @@
-import { GoogleAnalytics } from "@next/third-parties/google";
+import { GoogleTagManager } from "@next/third-parties/google";
 import type { Metadata } from "next";
 import Script from "next/script";
 import { Geist, Geist_Mono } from "next/font/google";
@@ -12,8 +12,8 @@ import { cn } from "@/lib/utils";
 
 import "./globals.css";
 
-const GA_ID = process.env.NODE_ENV === "production" ? process.env.NEXT_PUBLIC_GA_ID : undefined;
-// Google Consent Mode: analytics storage stays denied unless the visitor already accepted.
+const GTM_ID = process.env.NODE_ENV === "production" ? process.env.NEXT_PUBLIC_GTM_ID : undefined;
+// Google Consent Mode (read by Tag Manager): analytics storage stays denied unless the visitor already accepted.
 const CONSENT_DEFAULT = `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}var g="denied";try{if(localStorage.getItem("analytics-consent")==="granted")g="granted"}catch(e){}gtag("consent","default",{analytics_storage:g,ad_storage:"denied",ad_user_data:"denied",ad_personalization:"denied"});`;
 const SITE_NAME = "JealousGx";
 const HOME_TITLE = "Freelance Web Developer for Startups and Small Businesses | JealousGx";
@@ -70,7 +70,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <html lang="en" suppressHydrationWarning>
             <head>
                 <link rel="me" href="https://mastodon.social/@jealousgx" />
-                {GA_ID && (
+                {GTM_ID && (
                     <Script id="consent-default" strategy="beforeInteractive">
                         {CONSENT_DEFAULT}
                     </Script>
@@ -85,9 +85,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             >
                 {children}
                 <ChatWidgetButton />
-                {GA_ID && <ConsentAnalytics />}
+                {GTM_ID && <ConsentAnalytics />}
             </body>
-            {GA_ID && <GoogleAnalytics gaId={GA_ID} />}
+            {GTM_ID && <GoogleTagManager gtmId={GTM_ID} />}
         </html>
     );
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { sendGAEvent } from "@next/third-parties/google";
+import { sendGTMEvent } from "@next/third-parties/google";
 import { useEffect, useState } from "react";
 
 const STORAGE_KEY = "analytics-consent";
@@ -32,7 +32,7 @@ function updateConsent(value: Exclude<Consent, null>) {
     });
 }
 
-// The GA4 tag is always in the page (see app/layout.tsx) but Consent Mode keeps analytics
+// The Tag Manager container is always in the page (see app/layout.tsx) but Consent Mode keeps analytics
 // storage denied until the visitor accepts. This renders the banner and tracks cal.com and
 // email clicks with one delegated listener so no individual link needs wiring.
 export default function ConsentAnalytics() {
@@ -51,9 +51,9 @@ export default function ConsentAnalytics() {
             if (!href) return;
 
             if (href.startsWith("mailto:")) {
-                sendGAEvent("event", "email_click", { page_path: window.location.pathname });
+                sendGTMEvent({ event: "email_click", page_path: window.location.pathname });
             } else if (href.includes("cal.com/")) {
-                sendGAEvent("event", "scoping_call_click", { page_path: window.location.pathname });
+                sendGTMEvent({ event: "scoping_call_click", page_path: window.location.pathname });
             }
         };
         document.addEventListener("click", onClick);
