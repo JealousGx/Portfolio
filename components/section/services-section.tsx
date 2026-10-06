@@ -36,17 +36,6 @@ export default function ServicesSection() {
                         [
                             `Hi, I'm interested in: ${service.title}`,
                             "",
-                            "What I'm building:",
-                            "Who it's for:",
-                            "Rough timeline:",
-                            "Budget range:",
-                            "Link to anything relevant (current site, examples):",
-                        ].join("\n")
-                    );
-                    const mailtoBody = encodeURIComponent(
-                        [
-                            `Hi, I'm interested in: ${service.title}`,
-                            "",
                             "What I want to sell or offer:",
                             "Who it's for (my customers or users):",
                             "The main goal (sales, leads, signups, launch, etc.):",
