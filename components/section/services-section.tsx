@@ -32,6 +32,32 @@ export default function ServicesSection() {
                 {DATA.services.map((service) => {
                     const Icon = iconMap[service.icon as keyof typeof iconMap];
                     const mailtoSubject = encodeURIComponent(`I need a ${service.title}`);
+                    const mailtoBody = encodeURIComponent(
+                        [
+                            `Hi, I'm interested in: ${service.title}`,
+                            "",
+                            "What I'm building:",
+                            "Who it's for:",
+                            "Rough timeline:",
+                            "Budget range:",
+                            "Link to anything relevant (current site, examples):",
+                        ].join("\n")
+                    );
+                    const mailtoBody = encodeURIComponent(
+                        [
+                            `Hi, I'm interested in: ${service.title}`,
+                            "",
+                            "What I want to sell or offer:",
+                            "Who it's for (my customers or users):",
+                            "The main goal (sales, leads, signups, launch, etc.):",
+                            "Current website, store, or platform (if any):",
+                            "Must-have features:",
+                            "Do I already have a logo, branding, or content?",
+                            "Rough timeline / launch date:",
+                            "Budget range:",
+                            "Links to anything relevant (current site, examples I like):",
+                        ].join("\n")
+                    );
                     const href = "href" in service ? service.href : undefined;
                     return (
                         <div
@@ -53,7 +79,7 @@ export default function ServicesSection() {
                             <p className="text-sm text-muted-foreground flex-1 leading-relaxed">{service.description}</p>
                             <div className="flex flex-wrap items-center gap-2">
                                 <a
-                                    href={`mailto:${process.env.NEXT_PUBLIC_CONTACT_EMAIL}?subject=${mailtoSubject}`}
+                                    href={`mailto:${process.env.NEXT_PUBLIC_CONTACT_EMAIL}?subject=${mailtoSubject}&body=${mailtoBody}`}
                                     className="inline-flex items-center justify-center h-9 px-4 text-sm font-medium border border-border rounded-lg hover:bg-accent transition-colors w-fit"
                                 >
                                     {service.cta}
