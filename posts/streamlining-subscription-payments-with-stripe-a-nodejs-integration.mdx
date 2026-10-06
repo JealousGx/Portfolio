@@ -25,6 +25,8 @@ faqs:
     answer: "Test mode keys (sk_test_, pk_test_) and webhook secrets (whsec_ from local CLI) simulate payments without real charges. Live mode keys (sk_live_, pk_live_) process real transactions. The webhook secret for local testing via the Stripe CLI differs from the one you set in the dashboard for production."
   - question: "How do I handle duplicate Stripe webhook events?"
     answer: "Store the event ID in your database and check for it before processing. Stripe guarantees at-least-once delivery, so the same event can arrive more than once; idempotent handlers prevent double-crediting or double-provisioning."
+postType: tutorial
+primaryService: saas-development
 ---
 
 ***

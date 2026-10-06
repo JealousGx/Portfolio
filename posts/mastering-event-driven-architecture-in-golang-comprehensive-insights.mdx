@@ -25,6 +25,8 @@ faqs:
     answer: "Use buffered channels to absorb bursts, and apply worker pool patterns to cap concurrent consumers. If the buffer fills, the producer blocks — this is Go's built-in backpressure signal. For external brokers, configure consumer group lag alerts and scale consumers horizontally."
   - question: "What are common performance bottlenecks in event-driven Go applications?"
     answer: "Common bottlenecks include unbuffered channels causing producer goroutine blocking, lock contention on shared state accessed by many consumers, and serialization overhead when encoding/decoding events. Profile with Go's pprof tool to identify the hot path."
+postType: tutorial
+primaryService: golang-development
 ---
 
 Event-driven architecture (EDA) has become a pivotal design pattern in modern software systems, offering scalable, decoupled, and reactive systems. In the context of Go (Golang), its concurrency model and performance characteristics make it particularly well-suited for event-driven systems. This blog post will dive into the fundamentals of event-driven programming in Go, showcase practical use cases such as background tasks, message queues, and asynchronous operations, and highlight performance bottlenecks along with strategies to optimize them.

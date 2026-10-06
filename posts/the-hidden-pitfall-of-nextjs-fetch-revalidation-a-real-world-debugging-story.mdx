@@ -21,6 +21,8 @@ faqs:
     answer: "It usually means the fetch cache returned a corrupted or empty cached entry. This can happen when extremely long revalidation windows are set and the underlying cache entry is malformed."
   - question: "How do I debug Next.js fetch caching issues?"
     answer: "Check the x-nextjs-cache response header (HIT, MISS, STALE) and add logging around your fetch calls. Compare local and deployed behavior to identify cache-related discrepancies."
+postType: tutorial
+primaryService: nextjs-development
 ---
 
 When building [FounderSignal](https://foundersignal.app), a platform for startup idea validation, I ran into a subtle but critical issue with Next.js’s fetch revalidation that every developer should know about. This post will walk you through the problem, the debugging journey, and the solution, with practical code snippets and lessons learned.

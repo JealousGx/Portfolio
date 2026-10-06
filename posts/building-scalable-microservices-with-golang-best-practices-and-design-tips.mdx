@@ -26,6 +26,8 @@ faqs:
     answer: "Each microservice should own exactly one bounded context or business capability — for example, user authentication, order processing, or payment. This makes services independently deployable, testable, and scalable without affecting others."
   - question: "How do I deploy Go microservices with Docker?"
     answer: "Build a minimal Docker image using a multi-stage Dockerfile: compile the Go binary in a builder stage and copy only the binary into a scratch or alpine base image. The resulting image is typically under 20 MB, which makes it fast to push and pull."
+postType: tutorial
+primaryService: golang-development
 ---
 
 In the world of modern software architecture, microservices have emerged as a game-changer. The need to break away from monolithic, monolithic applications has never been more pressing. But as we embrace microservices, the question becomes: **How do we build microservices that are efficient, scalable, and maintainable?**

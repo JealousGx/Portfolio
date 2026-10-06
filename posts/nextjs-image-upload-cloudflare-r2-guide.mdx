@@ -24,6 +24,8 @@ faqs:
     answer: "A presigned URL is a time-limited, pre-authenticated URL that grants temporary write access to a specific storage object. It lets the client upload directly to storage without ever seeing your credentials."
   - question: "How do I make R2 objects publicly accessible?"
     answer: "Set ACL: 'public-read' on the PutObjectCommand, or enable a public bucket domain in the R2 dashboard. The public URL follows the pattern https://pub-<hash>.r2.dev/<key>."
+postType: tutorial
+primaryService: nextjs-development
 ---
 
 In modern web applications, handling file uploads efficiently and securely is crucial. For project, [FounderSignal](https://foundersignal.app), I needed a robust solution for user-uploaded images. I chose Cloudflare R2 for its S3-compatible API, generous free tier, and zero egress fees, making it a cost-effective and powerful choice for object storage.

@@ -25,6 +25,8 @@ faqs:
     answer: "Set short MaxAge values on access-token cookies and use a separate long-lived HttpOnly refresh-token cookie. On expiry, the server validates the refresh token and issues a new access token, revoking the old refresh token to limit replay attacks."
   - question: "What is cookie signing and when should you use it?"
     answer: "Cookie signing appends an HMAC to the cookie value so the server can verify it has not been tampered with. Use it whenever you store any user-controlled data or identifiers in cookies, as it prevents forgery without full encryption overhead."
+postType: tutorial
+primaryService: nodejs-development
 ---
 
 In modern web development, cookies play a pivotal role in managing user sessions, preferences, and state across web applications. This guide dives deep into cookies' advanced usage in **Node.js** and **Go**, providing practical examples, best practices, and pro-level tips to handle cookies securely and efficiently.

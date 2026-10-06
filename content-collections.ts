@@ -18,6 +18,10 @@ const posts = defineCollection({
     brief: z.string(),
     coverImage: z.string().optional(),
     readTimeInMinutes: z.number().optional(),
+    // Commercial pathway: which service a post leads to (slugs from data/services)
+    postType: z.enum(["buyer", "tutorial", "story"]).optional(),
+    primaryService: z.string().optional(),
+    relatedServices: z.array(z.string()).optional(),
     // SEO fields — all optional so existing posts aren't broken
     summary: z.string().optional(),
     keyStats: z

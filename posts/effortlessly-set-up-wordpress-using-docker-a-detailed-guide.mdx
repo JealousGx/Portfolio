@@ -24,6 +24,8 @@ faqs:
     answer: "No, phpMyAdmin is optional. It provides a browser-based GUI for managing your MySQL database, which is convenient during development but not required for WordPress to function."
   - question: "How do I persist WordPress data between Docker container restarts?"
     answer: "Mount named volumes for the MySQL data directory and the WordPress wp-content folder in your docker-compose.yml. Without volumes, data is lost every time containers are removed."
+postType: tutorial
+primaryService: small-business-website-development
 ---
 
 WordPress is one of the most popular content management systems (CMS) in the world. Setting it up traditionally can sometimes involve manual installation steps like configuring the database, installing plugins, and setting up themes. However, with Docker, you can automate the entire process and create a reproducible, isolated environment that ensures consistency across different setups.

@@ -26,6 +26,8 @@ faqs:
     answer: "Capture a CPU profile with pprof, then use go tool pprof with the -http flag to open an interactive browser UI that includes a flamegraph view. Tools like Brendan Gregg's FlameGraph scripts also work with pprof output."
   - question: "How do I debug a Go app running in production?"
     answer: "Start Delve in headless mode with dlv debug --headless --listen=:2345 on the remote server, then connect your local IDE or Delve client to that port. For lower-impact profiling, use the pprof HTTP endpoint instead."
+postType: tutorial
+primaryService: golang-development
 ---
 
 Debugging is a critical skill for any developer, and mastering advanced debugging techniques is especially important when working with complex systems. In Golang, a statically-typed and compiled language known for its efficiency and concurrency, debugging takes on unique challenges and opportunities. This post explores powerful debugging tools and techniques, focusing on advanced strategies like using the Delve debugger, diagnosing memory leaks, profiling performance bottlenecks, and troubleshooting distributed systems. We'll also delve into sophisticated tools like flamegraphs and tracing to uncover deeper insights into application behavior.

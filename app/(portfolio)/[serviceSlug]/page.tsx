@@ -9,6 +9,8 @@ import ContactSection from "@/components/section/contact-section";
 import ServiceSiblings from "@/components/section/service-siblings";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
+import { allPosts } from "content-collections";
+
 import { servicePages, servicePagesBySlug } from "@/data/services";
 import { PROCESS_STEPS } from "@/data/services/process";
 import { DATA } from "@/data/resume";
@@ -59,6 +61,9 @@ export default async function ServicePage({
     const page = servicePagesBySlug[serviceSlug];
     if (!page) notFound();
 
+    const relatedPosts = allPosts
+        .filter((post) => post.primaryService === page.slug)
+        .sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime());
     const canonical = `${DATA.url}/${page.slug}`;
     const testimonial = page.testimonial
         ? DATA.testimonials.find((t) => t.name === page.testimonial)
@@ -192,6 +197,26 @@ export default async function ServicePage({
                     </div>
                 </div>
             </section>
+
+            {relatedPosts.length > 0 && (
+                <section id="related-reading">
+                    <div className="flex flex-col gap-y-4">
+                        <h2 className="text-xl font-bold">Related reading</h2>
+                        <ul className="flex flex-col gap-2">
+                            {relatedPosts.map((post) => (
+                                <li key={post.slug}>
+                                    <Link
+                                        href={`/blog/${post.slug}`}
+                                        className="text-sm underline underline-offset-4 hover:text-foreground"
+                                    >
+                                        {post.title}
+                                    </Link>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                </section>
+            )}
 
             <section id="process">
                 <div className="flex flex-col gap-y-6">

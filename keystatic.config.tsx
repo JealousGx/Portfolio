@@ -45,6 +45,26 @@ export default config({
                 coverImage: fields.url({ label: "Cover Image URL" }),
                 readTimeInMinutes: fields.number({ label: "Read Time (minutes)" }),
 
+                // Commercial pathway
+                postType: fields.select({
+                    label: "Post type",
+                    description: "Controls the call-to-action wording at the end of the post.",
+                    options: [
+                        { label: "Buyer intent", value: "buyer" },
+                        { label: "Developer tutorial", value: "tutorial" },
+                        { label: "Story", value: "story" },
+                    ],
+                    defaultValue: "tutorial",
+                }),
+                primaryService: fields.text({
+                    label: "Primary service slug",
+                    description: "Slug of a service page, e.g. mvp-development. Leave empty for none.",
+                }),
+                relatedServices: fields.array(fields.text({ label: "Service slug" }), {
+                    label: "Related service slugs",
+                    itemLabel: (props) => props.value || "Service",
+                }),
+
                 // SEO fields
                 summary: fields.text({
                     label: "Summary (TL;DR)",

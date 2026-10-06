@@ -6,6 +6,7 @@ import { notFound } from "next/navigation";
 import { MDXContent } from "@content-collections/mdx/react";
 import { allPosts } from "content-collections";
 
+import ServiceCta from "@/components/section/service-cta";
 import { DATA } from "@/data/resume";
 import { formatDate } from "@/lib/utils";
 
@@ -189,6 +190,12 @@ export default async function BlogPost({
                     </div>
                 </div>
             )}
+
+            <ServiceCta
+                postType={post.postType}
+                primaryService={post.primaryService}
+                relatedServices={post.relatedServices}
+            />
 
             <nav className="mt-12 pt-8 max-w-2xl">
                 <div className="flex flex-col sm:flex-row justify-between gap-4">

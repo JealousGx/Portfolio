@@ -25,6 +25,8 @@ faqs:
     answer: "Implement a heartbeat (ping/pong) mechanism where the server sends a ping every N seconds and terminates connections that do not pong back. Clients should use exponential back-off reconnection logic to avoid thundering-herd reconnect storms after a server restart."
   - question: "When should you use Socket.IO vs the raw ws library?"
     answer: "Use the raw 'ws' library when you need maximum performance and full control over the protocol, and when all your clients are modern browsers or Node.js. Use Socket.IO when you need rooms, namespaces, automatic reconnection, and a fallback to polling for environments where WebSocket is blocked."
+postType: tutorial
+primaryService: nodejs-development
 ---
 
 WebSockets have emerged as a key technology for real-time web applications, enabling bidirectional communication between clients and servers over a single, persistent connection. While WebSockets are not new, their potential is still vastly underutilized. In this blog post, we’ll explore the advanced usage of WebSockets in Node.js, why WebSockets are beneficial for certain types of applications, and how you can leverage their power to build scalable, real-time systems.
