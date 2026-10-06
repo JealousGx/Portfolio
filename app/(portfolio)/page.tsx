@@ -104,21 +104,34 @@ export default function Page() {
                 text="I build websites, MVPs, and web apps that help businesses grow"
               />
               <BlurFadeText
-                className="text-lg font-medium"
+                className="text-lg font-medium md:text-xl"
                 delay={BLUR_FADE_DELAY}
-                text={`Hi, I'm ${DATA.name}, a full stack developer.`}
+                text="Freelance full stack developer for startups and small businesses."
               />
               <BlurFadeText
-                className="text-muted-foreground max-w-150 md:text-lg lg:text-xl"
+                className="text-muted-foreground max-w-150 md:text-lg"
                 delay={BLUR_FADE_DELAY}
                 text={DATA.heroDescription}
               />
+              <BlurFade delay={BLUR_FADE_DELAY} className="mt-2">
+                <Link
+                  href={DATA.bookingUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center h-9 px-4 text-sm font-medium border border-border rounded-lg hover:bg-accent transition-colors bg-background"
+                >
+                  Book a free scoping call
+                </Link>
+              </BlurFade>
             </div>
-            <BlurFade delay={BLUR_FADE_DELAY} className="order-1 md:order-2">
+            <BlurFade delay={BLUR_FADE_DELAY} className="order-1 md:order-2 flex flex-col items-start md:items-center gap-2 md:w-32">
               <Avatar className="size-24 md:size-32 border rounded-full shadow-lg ring-4 ring-muted">
                 <AvatarImage alt={DATA.name} src={DATA.avatarUrl} />
                 <AvatarFallback>{DATA.initials}</AvatarFallback>
               </Avatar>
+              <p className="text-xs text-muted-foreground md:text-center">
+                {`Hi, I'm ${DATA.name}, a full stack developer.`}
+              </p>
             </BlurFade>
           </div>
         </div>
