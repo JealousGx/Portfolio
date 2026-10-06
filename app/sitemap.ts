@@ -15,7 +15,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
     const servicePagesEntries = servicePages.map((page) => ({
         url: `${DATA.url}/${page.slug}`,
-        lastModified: new Date(),
         changeFrequency: "monthly" as const,
         priority: 0.8,
     }));
@@ -23,20 +22,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
     return [
         {
             url: DATA.url,
-            lastModified: new Date(),
-            changeFrequency: "weekly",
+                changeFrequency: "weekly",
             priority: 1,
         },
         {
             url: `${DATA.url}/projects`,
-            lastModified: new Date(),
-            changeFrequency: "monthly",
+                changeFrequency: "monthly",
             priority: 0.8,
         },
         {
             url: `${DATA.url}/blog`,
-            lastModified: new Date(),
-            changeFrequency: "weekly",
+                changeFrequency: "weekly",
             priority: 0.9,
         },
         ...servicePagesEntries,
