@@ -8,6 +8,7 @@ import { allPosts } from "content-collections";
 
 import ServiceCta from "@/components/section/service-cta";
 import { DATA } from "@/data/resume";
+import { PERSON_ID, breadcrumbList } from "@/lib/schema";
 import { formatDate } from "@/lib/utils";
 
 export const dynamicParams = false;
@@ -76,9 +77,17 @@ export default async function BlogPost({
             description: post.brief,
             image: post.coverImage ?? `${DATA.url}/blog/${slug}/opengraph-image`,
             url: `${DATA.url}/blog/${slug}`,
-            author: { "@type": "Person", name: DATA.name, url: DATA.url },
+            author: { "@type": "Person", "@id": PERSON_ID, name: DATA.name, url: DATA.url },
         },
     ];
+
+    schemas.push(
+        breadcrumbList([
+            { name: "Home", path: "/" },
+            { name: "Blog", path: "/blog" },
+            { name: post.title, path: `/blog/${slug}` },
+        ])
+    );
 
     if (post.faqs && post.faqs.length > 0) {
         schemas.push({

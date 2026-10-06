@@ -15,6 +15,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 import { DATA } from "@/data/resume";
 
+import { BUSINESS_ID, PERSON_ID, WEBSITE_ID } from "@/lib/schema";
 import { cn } from "@/lib/utils";
 
 const BLUR_FADE_DELAY = 0.04;
@@ -28,54 +29,68 @@ export const metadata: Metadata = {
   twitter: { title: HOME_TITLE },
 };
 
-const serviceJsonLd = JSON.stringify({
+const homeJsonLd = JSON.stringify({
   "@context": "https://schema.org",
-  "@type": "ItemList",
-  name: "Web Development Services by Abdul Mateen Khilji",
-  url: DATA.url,
-  itemListElement: DATA.services.map((service, index) => ({
-    "@type": "ListItem",
-    position: index + 1,
-    item: {
-      "@type": "Service",
-      name: service.title,
-      description: service.description,
-      provider: {
-        "@type": "Person",
-        name: DATA.name,
-        url: DATA.url,
-      },
-      areaServed: "Worldwide",
-      serviceType: "Web Development",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": WEBSITE_ID,
+      url: DATA.url,
+      name: "JealousGx",
+      publisher: { "@id": PERSON_ID },
     },
-  })),
-}).replace(/</g, "\\u003c");
-
-const personJsonLd = JSON.stringify({
-  "@context": "https://schema.org",
-  "@type": "Person",
-  name: DATA.name,
-  url: DATA.url,
-  image: `${DATA.url}/me.webp`,
-  jobTitle: "Full Stack Web Developer",
-  description: DATA.description,
-  email: DATA.contact.email,
-  sameAs: [
-    DATA.contact.social.GitHub.url,
-    DATA.contact.social.LinkedIn.url,
-    DATA.contact.social.X.url,
-  ],
-  knowsAbout: [
-    "Next.js",
-    "React",
-    "TypeScript",
-    "Node.js",
-    "PostgreSQL",
-    "MongoDB",
-    "WordPress",
-    "Docker",
-    "Full Stack Web Development",
-    "SaaS Development",
+    {
+      "@type": "Person",
+      "@id": PERSON_ID,
+      name: DATA.name,
+      url: DATA.url,
+      image: `${DATA.url}/me.webp`,
+      jobTitle: "Full Stack Web Developer",
+      description: DATA.description,
+      email: DATA.contact.email,
+      sameAs: [
+        DATA.contact.social.GitHub.url,
+        DATA.contact.social.LinkedIn.url,
+        DATA.contact.social.X.url,
+      ],
+      knowsAbout: [
+        "Next.js",
+        "React",
+        "TypeScript",
+        "Node.js",
+        "PostgreSQL",
+        "MongoDB",
+        "WordPress",
+        "Docker",
+        "Full Stack Web Development",
+        "SaaS Development",
+      ],
+    },
+    {
+      "@type": "ProfessionalService",
+      "@id": BUSINESS_ID,
+      name: "JealousGx",
+      url: DATA.url,
+      areaServed: "Worldwide",
+      founder: { "@id": PERSON_ID },
+    },
+    {
+      "@type": "ItemList",
+      name: "Web Development Services by Abdul Mateen Khilji",
+      url: DATA.url,
+      itemListElement: DATA.services.map((service, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        item: {
+          "@type": "Service",
+          name: service.title,
+          description: service.description,
+          provider: { "@id": BUSINESS_ID },
+          areaServed: "Worldwide",
+          serviceType: "Web Development",
+        },
+      })),
+    },
   ],
 }).replace(/</g, "\\u003c");
 
@@ -85,12 +100,7 @@ export default function Page() {
       <script
         type="application/ld+json"
         suppressHydrationWarning
-        dangerouslySetInnerHTML={{ __html: personJsonLd }}
-      />
-      <script
-        type="application/ld+json"
-        suppressHydrationWarning
-        dangerouslySetInnerHTML={{ __html: serviceJsonLd }}
+        dangerouslySetInnerHTML={{ __html: homeJsonLd }}
       />
       <section id="hero">
         <div className="mx-auto w-full max-w-2xl space-y-8">

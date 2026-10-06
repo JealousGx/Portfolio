@@ -14,6 +14,7 @@ import { allPosts } from "content-collections";
 import { servicePages, servicePagesBySlug } from "@/data/services";
 import { PROCESS_STEPS } from "@/data/services/process";
 import { DATA } from "@/data/resume";
+import { BUSINESS_ID, breadcrumbList } from "@/lib/schema";
 
 export const dynamicParams = false;
 
@@ -75,11 +76,15 @@ export default async function ServicePage({
             "@type": "Service",
             name: page.title,
             description: page.description,
-            provider: { "@type": "Person", name: DATA.name, url: DATA.url },
+            provider: { "@type": "ProfessionalService", "@id": BUSINESS_ID, name: "JealousGx", url: DATA.url },
             areaServed: "Worldwide",
             serviceType: "Web Development",
             url: canonical,
         },
+        breadcrumbList([
+            { name: "Home", path: "/" },
+            { name: page.title, path: `/${page.slug}` },
+        ]),
         {
             "@context": "https://schema.org",
             "@type": "FAQPage",
