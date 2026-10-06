@@ -17,6 +17,7 @@ interface BlurFadeTextProps {
     delay?: number;
     yOffset?: number;
     animateByCharacter?: boolean;
+    as?: "div" | "h1";
 }
 const BlurFadeText = ({
     text,
@@ -27,6 +28,7 @@ const BlurFadeText = ({
     delay = 0,
     yOffset = 8,
     animateByCharacter = false,
+    as: Tag = "div",
 }: BlurFadeTextProps) => {
     const defaultVariants: Variants = {
         hidden: { y: -yOffset, opacity: 0, filter: "blur(8px)" },
@@ -37,7 +39,7 @@ const BlurFadeText = ({
 
     if (animateByCharacter) {
         return (
-            <div className="flex">
+            <Tag className="flex">
                 {characters.map((char, i) => {
                     const charVariants: Variants = {
                         hidden: { y: -yOffset, opacity: 0, filter: "blur(8px)" },
@@ -61,12 +63,12 @@ const BlurFadeText = ({
                         </motion.span>
                     );
                 })}
-            </div>
+            </Tag>
         );
     }
 
     return (
-        <div className="flex">
+        <Tag className="flex">
             <motion.span
                 initial="hidden"
                 animate="visible"
@@ -80,7 +82,7 @@ const BlurFadeText = ({
             >
                 {text}
             </motion.span>
-        </div>
+        </Tag>
     );
 };
 

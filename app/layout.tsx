@@ -9,6 +9,9 @@ import { cn } from "@/lib/utils";
 
 import "./globals.css";
 
+const SITE_NAME = "JealousGx";
+const HOME_TITLE = "Freelance Web Developer for Startups and Small Businesses | JealousGx";
+
 const geist = Geist({
     subsets: ["latin"],
     variable: "--font-sans",
@@ -24,15 +27,15 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
     metadataBase: new URL(DATA.url),
     title: {
-        default: DATA.name,
-        template: `%s | ${DATA.name}`,
+        default: HOME_TITLE,
+        template: `%s | ${SITE_NAME}`,
     },
     description: DATA.description,
     openGraph: {
-        title: `${DATA.name}`,
+        title: HOME_TITLE,
         description: DATA.description,
         url: DATA.url,
-        siteName: `${DATA.name}`,
+        siteName: SITE_NAME,
         locale: "en_US",
         type: "website",
     },
@@ -48,7 +51,7 @@ export const metadata: Metadata = {
         },
     },
     twitter: {
-        title: `${DATA.name}`,
+        title: HOME_TITLE,
         card: "summary_large_image",
     },
     verification: {

@@ -28,10 +28,12 @@ export async function generateMetadata({
         title: post.title,
         description: post.brief,
         authors: [{ name: DATA.name, url: DATA.url }],
+        alternates: { canonical: `${DATA.url}/blog/${slug}` },
         openGraph: {
             title: post.title,
             description: post.brief,
             type: "article",
+            siteName: "JealousGx",
             publishedTime: post.publishedAt,
             url: `${DATA.url}/blog/${slug}`,
             authors: [DATA.name],

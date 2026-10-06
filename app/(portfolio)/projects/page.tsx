@@ -9,6 +9,8 @@ import { DATA } from "@/data/resume";
 export const metadata: Metadata = {
     title: "Projects",
     description: "Everything I've built — side projects, client work, and experiments.",
+    alternates: { canonical: `${DATA.url}/projects` },
+    openGraph: { title: "Projects | JealousGx", description: "Everything I've built — side projects, client work, and experiments.", url: `${DATA.url}/projects`, siteName: "JealousGx", type: "website" },
 };
 
 const BLUR_FADE_DELAY = 0.04;

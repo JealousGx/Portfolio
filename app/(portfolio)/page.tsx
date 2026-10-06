@@ -1,4 +1,5 @@
 import { ArrowUpRight } from "lucide-react";
+import type { Metadata } from "next";
 import Link from "next/link";
 import Markdown from "react-markdown";
 
@@ -17,6 +18,15 @@ import { DATA } from "@/data/resume";
 import { cn } from "@/lib/utils";
 
 const BLUR_FADE_DELAY = 0.04;
+
+const HOME_TITLE = "Freelance Web Developer for Startups and Small Businesses | JealousGx";
+
+export const metadata: Metadata = {
+  title: { absolute: HOME_TITLE },
+  alternates: { canonical: "/" },
+  openGraph: { title: HOME_TITLE, url: "/", siteName: "JealousGx", locale: "en_US", type: "website" },
+  twitter: { title: HOME_TITLE },
+};
 
 const serviceJsonLd = JSON.stringify({
   "@context": "https://schema.org",
@@ -87,9 +97,15 @@ export default function Page() {
           <div className="gap-2 gap-y-6 flex flex-col md:flex-row justify-between">
             <div className="gap-2 flex flex-col order-2 md:order-1">
               <BlurFadeText
+                as="h1"
                 delay={BLUR_FADE_DELAY}
                 className="text-3xl font-semibold tracking-tighter sm:text-4xl lg:text-5xl"
                 yOffset={8}
+                text="I build websites, MVPs, and web apps that help businesses grow"
+              />
+              <BlurFadeText
+                className="text-lg font-medium"
+                delay={BLUR_FADE_DELAY}
                 text={`Hi, I'm ${DATA.name}, a full stack developer.`}
               />
               <BlurFadeText
