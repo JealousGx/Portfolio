@@ -1,6 +1,6 @@
 "use client";
 
-import { GoogleAnalytics, sendGAEvent } from "@next/third-parties/google";
+import { sendGAEvent } from "@next/third-parties/google";
 import { useEffect, useState } from "react";
 
 const STORAGE_KEY = "analytics-consent";
@@ -22,9 +22,20 @@ function saveConsent(value: Exclude<Consent, null>) {
     } catch {}
 }
 
-// Loads GA4 only after the visitor accepts, and tracks cal.com and email clicks
-// with one delegated listener so no individual link needs wiring.
-export default function ConsentAnalytics({ gaId }: { gaId: string }) {
+function updateConsent(value: Exclude<Consent, null>) {
+    const gtag = (window as unknown as { gtag?: (...args: unknown[]) => void }).gtag;
+    gtag?.("consent", "update", {
+        analytics_storage: value,
+        ad_storage: "denied",
+        ad_user_data: "denied",
+        ad_personalization: "denied",
+    });
+}
+
+// The GA4 tag is always in the page (see app/layout.tsx) but Consent Mode keeps analytics
+// storage denied until the visitor accepts. This renders the banner and tracks cal.com and
+// email clicks with one delegated listener so no individual link needs wiring.
+export default function ConsentAnalytics() {
     const [consent, setConsent] = useState<Consent>(null);
     const [ready, setReady] = useState(false);
 
@@ -34,8 +45,6 @@ export default function ConsentAnalytics({ gaId }: { gaId: string }) {
     }, []);
 
     useEffect(() => {
-        if (consent !== "granted") return;
-
         const onClick = (event: MouseEvent) => {
             const link = (event.target as Element | null)?.closest?.("a");
             const href = link?.getAttribute("href");
@@ -49,16 +58,16 @@ export default function ConsentAnalytics({ gaId }: { gaId: string }) {
         };
         document.addEventListener("click", onClick);
         return () => document.removeEventListener("click", onClick);
-    }, [consent]);
+    }, []);
 
     const choose = (value: Exclude<Consent, null>) => {
         saveConsent(value);
+        updateConsent(value);
         setConsent(value);
     };
 
     return (
         <>
-            {consent === "granted" && <GoogleAnalytics gaId={gaId} />}
             {ready && consent === null && (
                 <div
                     role="dialog"
