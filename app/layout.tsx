@@ -1,9 +1,8 @@
-import { GoogleAnalytics } from "@next/third-parties/google";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 
-import AnalyticsEvents from "@/components/analytics-events";
 import { ChatWidgetButton } from "@/components/chat-widget-button";
+import ConsentAnalytics from "@/components/consent-analytics";
 
 import { DATA } from "@/data/resume";
 
@@ -77,9 +76,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             >
                 {children}
                 <ChatWidgetButton />
-                {GA_ID && <AnalyticsEvents />}
+                {GA_ID && <ConsentAnalytics gaId={GA_ID} />}
             </body>
-            {GA_ID && <GoogleAnalytics gaId={GA_ID} />}
         </html>
     );
 }
