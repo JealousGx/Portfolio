@@ -1,4 +1,3 @@
-import { GoogleTagManager } from "@next/third-parties/google";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 
@@ -11,9 +10,15 @@ import { cn } from "@/lib/utils";
 
 import "./globals.css";
 
-const GTM_ID = process.env.NODE_ENV === "production" ? process.env.NEXT_PUBLIC_GTM_ID : undefined;
+const ANALYTICS_ENABLED = process.env.NODE_ENV === "production";
 // Google Consent Mode (read by Tag Manager): analytics storage stays denied unless the visitor already accepted.
 const CONSENT_DEFAULT = `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}var g="denied";try{if(localStorage.getItem("analytics-consent")==="granted")g="granted"}catch(e){}gtag("consent","default",{analytics_storage:g,ad_storage:"denied",ad_user_data:"denied",ad_personalization:"denied"});`;
+// Google Tag Manager snippet, exactly as provided by Tag Manager (container GTM-N3PKPPB5).
+const GTM_HEAD_SCRIPT = `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-N3PKPPB5');`;
 const SITE_NAME = "JealousGx";
 const HOME_TITLE = "Freelance Web Developer for Startups and Small Businesses | JealousGx";
 
@@ -69,9 +74,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <html lang="en" suppressHydrationWarning>
             <head>
                 <link rel="me" href="https://mastodon.social/@jealousgx" />
-                {GTM_ID && <script dangerouslySetInnerHTML={{ __html: CONSENT_DEFAULT }} />}
+                {ANALYTICS_ENABLED && (
+                    <>
+                        {/* Consent defaults must run before the Tag Manager snippet */}
+                        <script dangerouslySetInnerHTML={{ __html: CONSENT_DEFAULT }} />
+                        {/* Google Tag Manager */}
+                        <script dangerouslySetInnerHTML={{ __html: GTM_HEAD_SCRIPT }} />
+                        {/* End Google Tag Manager */}
+                    </>
+                )}
             </head>
-            {GTM_ID && <GoogleTagManager gtmId={GTM_ID} />}
             <body
                 className={cn(
                     "min-h-screen bg-background font-sans antialiased relative",
@@ -79,9 +91,19 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                     geistMono.variable
                 )}
             >
+                {ANALYTICS_ENABLED && (
+                    <noscript>
+                        <iframe
+                            src="https://www.googletagmanager.com/ns.html?id=GTM-N3PKPPB5"
+                            height="0"
+                            width="0"
+                            style={{ display: "none", visibility: "hidden" }}
+                        />
+                    </noscript>
+                )}
                 {children}
                 <ChatWidgetButton />
-                {GTM_ID && <ConsentAnalytics />}
+                {ANALYTICS_ENABLED && <ConsentAnalytics />}
             </body>
         </html>
     );
