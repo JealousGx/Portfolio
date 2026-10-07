@@ -6,6 +6,12 @@ import { projectPages } from "@/data/projects";
 import { servicePages } from "@/data/services";
 import { DATA } from "@/data/resume";
 
+// Real last-change dates (not build time). Update these when the page content changes.
+// Service pages: every one gained links to the new landing page and e-commerce pages on 2026-10-07.
+const SERVICE_PAGES_LASTMOD = new Date("2026-10-07");
+const HOME_LASTMOD = new Date("2026-10-07"); // project cards and services links changed
+const PROJECTS_LASTMOD = new Date("2026-10-07"); // detail pages and case study link added
+
 export default function sitemap(): MetadataRoute.Sitemap {
     const blogPosts = allPosts.map((post) => ({
         url: `${DATA.url}/blog/${post.slug}`,
@@ -16,6 +22,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
     const servicePagesEntries = servicePages.map((page) => ({
         url: `${DATA.url}/${page.slug}`,
+        lastModified: SERVICE_PAGES_LASTMOD,
         changeFrequency: "monthly" as const,
         priority: 0.8,
     }));
@@ -32,17 +39,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
     return [
         {
             url: DATA.url,
-                changeFrequency: "weekly",
+            lastModified: HOME_LASTMOD,
+            changeFrequency: "weekly",
             priority: 1,
         },
         {
             url: `${DATA.url}/projects`,
-                changeFrequency: "monthly",
+            lastModified: PROJECTS_LASTMOD,
+            changeFrequency: "monthly",
             priority: 0.8,
         },
         {
             url: `${DATA.url}/blog`,
-                changeFrequency: "weekly",
+            lastModified: new Date(Math.max(...allPosts.map((post) => new Date(post.publishedAt).getTime()))),
+            changeFrequency: "weekly",
             priority: 0.9,
         },
         ...projectEntries,

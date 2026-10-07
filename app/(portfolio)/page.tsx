@@ -15,7 +15,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 import { DATA } from "@/data/resume";
 
-import { BUSINESS_ID, PERSON_ID, WEBSITE_ID } from "@/lib/schema";
+import { BUSINESS_ID, PERSON_ID, SOCIAL_IMAGE, WEBSITE_ID } from "@/lib/schema";
 import { cn } from "@/lib/utils";
 
 const BLUR_FADE_DELAY = 0.04;
@@ -25,8 +25,8 @@ const HOME_TITLE = "Freelance Web Developer for Startups and Small Businesses | 
 export const metadata: Metadata = {
   title: { absolute: HOME_TITLE },
   alternates: { canonical: "/" },
-  openGraph: { title: HOME_TITLE, url: "/", siteName: "JealousGx", locale: "en_US", type: "website" },
-  twitter: { title: HOME_TITLE },
+  openGraph: { title: HOME_TITLE, url: "/", siteName: "JealousGx", locale: "en_US", type: "website", images: [SOCIAL_IMAGE] },
+  twitter: { title: HOME_TITLE, images: [SOCIAL_IMAGE.url] },
 };
 
 const homeJsonLd = JSON.stringify({

@@ -7,7 +7,7 @@ import ServiceCta from "@/components/section/service-cta";
 import { DATA } from "@/data/resume";
 import { projectPages, projectPagesBySlug } from "@/data/projects";
 import { servicePagesBySlug } from "@/data/services";
-import { PERSON_ID, breadcrumbList, toJsonLd } from "@/lib/schema";
+import { PERSON_ID, SOCIAL_IMAGE, breadcrumbList, toJsonLd } from "@/lib/schema";
 
 export const dynamicParams = false;
 
@@ -39,13 +39,13 @@ export async function generateMetadata({
             siteName: "JealousGx",
             locale: "en_US",
             type: "website",
-            images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: "JealousGx" }],
+            images: [SOCIAL_IMAGE],
         },
         twitter: {
             card: "summary_large_image",
             title: fullTitle,
             description: project.metaDescription,
-            images: ["/opengraph-image"],
+            images: [SOCIAL_IMAGE.url],
         },
     };
 }

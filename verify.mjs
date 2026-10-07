@@ -63,6 +63,18 @@ for (const slug of slugs) {
     check(!body.includes("/_next/image") || /alt="[^"]+"/.test(body), `${path} images have alt text`);
 }
 
+for (const path of ["/landing-page-development", "/ecommerce-website-development"]) {
+    const { status, body } = await get(path);
+    const desc = body.match(/<meta name="description" content="([^"]*)"/)?.[1] ?? "";
+    check(status === 200, `${path} returns 200 (got ${status})`);
+    check((body.match(/<h1[\s>]/g) || []).length === 1, `${path} has exactly one H1`);
+    check(desc.length >= 120 && desc.length <= 160, `${path} description length ${desc.length}`);
+    check(body.includes(`<link rel="canonical" href="${SITE}${path}"`), `${path} self-referencing canonical`);
+    check(body.includes("https://jealous.dev/#business") && body.includes("Worldwide"), `${path} Service schema provider and areaServed`);
+    check(body.includes("cal.com/jealous/30min") && body.includes('href="/projects"'), `${path} CTA and /projects link`);
+    check(sitemap.body.includes(`<loc>${SITE}${path}</loc>`), `${path} in sitemap`);
+}
+
 const missing = await get("/projects/does-not-exist");
 check(missing.status === 404, `/projects/does-not-exist returns 404 (got ${missing.status})`);
 

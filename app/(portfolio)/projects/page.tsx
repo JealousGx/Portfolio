@@ -5,12 +5,14 @@ import Link from "next/link";
 import BlurFade from "@/components/magicui/blur-fade";
 import { ProjectCard } from "@/components/project-card";
 import { DATA } from "@/data/resume";
+import { SOCIAL_IMAGE } from "@/lib/schema";
 
 export const metadata: Metadata = {
     title: "Projects",
     description: "Everything I've built — side projects, client work, and experiments.",
     alternates: { canonical: `${DATA.url}/projects` },
-    openGraph: { title: "Projects | JealousGx", description: "Everything I've built — side projects, client work, and experiments.", url: `${DATA.url}/projects`, siteName: "JealousGx", type: "website" },
+    openGraph: { title: "Projects | JealousGx", description: "Everything I've built — side projects, client work, and experiments.", url: `${DATA.url}/projects`, siteName: "JealousGx", type: "website", images: [SOCIAL_IMAGE] },
+    twitter: { card: "summary_large_image", images: [SOCIAL_IMAGE.url] },
 };
 
 const BLUR_FADE_DELAY = 0.04;

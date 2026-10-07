@@ -15,7 +15,7 @@ import { projectPages } from "@/data/projects";
 import { servicePages, servicePagesBySlug } from "@/data/services";
 import { PROCESS_STEPS } from "@/data/services/process";
 import { DATA } from "@/data/resume";
-import { BUSINESS_ID, breadcrumbList } from "@/lib/schema";
+import { BUSINESS_ID, SOCIAL_IMAGE, breadcrumbList } from "@/lib/schema";
 
 export const dynamicParams = false;
 
@@ -45,11 +45,13 @@ export async function generateMetadata({
             siteName: "JealousGx",
             locale: "en_US",
             type: "website",
+            images: [SOCIAL_IMAGE],
         },
         twitter: {
             card: "summary_large_image",
             title: page.title,
             description: page.description,
+            images: [SOCIAL_IMAGE.url],
         },
     };
 }
