@@ -7,6 +7,8 @@ const MAIN_SERVICES = [
     "mvp-development",
     "saas-development",
     "full-stack-developer",
+    "landing-page-development",
+    "ecommerce-website-development",
 ]
     .map((slug) => servicePagesBySlug[slug])
     .filter(Boolean);

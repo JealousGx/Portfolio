@@ -84,6 +84,16 @@ export default async function ServicePage({
             areaServed: "Worldwide",
             serviceType: "Web Development",
             url: canonical,
+            ...(page.details?.startingPrice && {
+                offers: {
+                    "@type": "Offer",
+                    priceSpecification: {
+                        "@type": "PriceSpecification",
+                        minPrice: page.details.startingPrice.amount,
+                        priceCurrency: page.details.startingPrice.currency,
+                    },
+                },
+            }),
         },
         breadcrumbList([
             { name: "Home", path: "/" },
@@ -127,6 +137,63 @@ export default async function ServicePage({
                 </div>
             </section>
 
+            {page.details && (
+                <section id="details">
+                    <div className="flex flex-col gap-y-6">
+                        <div className="flex flex-col gap-y-2">
+                            <h2 className="text-xl font-bold">Who this is for</h2>
+                            <p className="text-muted-foreground leading-relaxed">{page.details.audience}</p>
+                        </div>
+                        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                            <div className="flex flex-col gap-2 rounded-xl border border-border bg-card px-5 py-4">
+                                <h2 className="text-base font-bold">What is included</h2>
+                                <ul className="list-disc pl-5 text-sm text-muted-foreground leading-relaxed flex flex-col gap-1">
+                                    {page.details.included.map((item) => (
+                                        <li key={item}>{item}</li>
+                                    ))}
+                                </ul>
+                            </div>
+                            <div className="flex flex-col gap-2 rounded-xl border border-border bg-card px-5 py-4">
+                                <h2 className="text-base font-bold">What is not included</h2>
+                                <ul className="list-disc pl-5 text-sm text-muted-foreground leading-relaxed flex flex-col gap-1">
+                                    {page.details.notIncluded.map((item) => (
+                                        <li key={item}>{item}</li>
+                                    ))}
+                                </ul>
+                            </div>
+                        </div>
+                        <div className="flex flex-col gap-y-2">
+                            <h2 className="text-xl font-bold">Timeline and tools</h2>
+                            <p className="text-muted-foreground leading-relaxed">
+                                <span className="font-semibold text-foreground">Timeline:</span> {page.details.timeline}
+                            </p>
+                            <p className="text-muted-foreground leading-relaxed">
+                                <span className="font-semibold text-foreground">Tools:</span> {page.details.tools}
+                            </p>
+                        </div>
+                        <div className="flex flex-col gap-y-2">
+                            <h2 className="text-xl font-bold">Price</h2>
+                            <p className="text-muted-foreground leading-relaxed">
+                                {page.details.startingPrice && (
+                                    <span className="font-semibold text-foreground">
+                                        From ${page.details.startingPrice.amount}.{" "}
+                                    </span>
+                                )}
+                                {page.details.priceNote}
+                            </p>
+                        </div>
+                        <p className="text-sm text-muted-foreground leading-relaxed">
+                            Want to see what I have built?{" "}
+                            <Link href="/projects" className="underline underline-offset-4 hover:text-foreground">
+                                See my projects
+                            </Link>
+                            .
+                        </p>
+                    </div>
+                </section>
+            )}
+
+            {page.reasons && (
             <section id="reasons">
                 <div className="flex flex-col gap-y-6">
                     <h2 className="text-xl font-bold">What This Means for Your Project</h2>
@@ -140,20 +207,25 @@ export default async function ServicePage({
                     </div>
                 </div>
             </section>
+            )}
 
-            <section id="objection">
-                <div className="rounded-xl border border-border bg-card px-5 py-4">
-                    <p className="text-sm font-semibold mb-1">{page.objection.question}</p>
-                    <p className="text-sm text-muted-foreground leading-relaxed">{page.objection.answer}</p>
-                </div>
-            </section>
+            {page.objection && (
+                <section id="objection">
+                    <div className="rounded-xl border border-border bg-card px-5 py-4">
+                        <p className="text-sm font-semibold mb-1">{page.objection.question}</p>
+                        <p className="text-sm text-muted-foreground leading-relaxed">{page.objection.answer}</p>
+                    </div>
+                </section>
+            )}
 
-            <section id="experience">
-                <div className="flex flex-col gap-y-4">
-                    <h2 className="text-xl font-bold">My Experience</h2>
-                    <p className="text-muted-foreground leading-relaxed">{page.experience}</p>
-                </div>
-            </section>
+            {page.experience && (
+                <section id="experience">
+                    <div className="flex flex-col gap-y-4">
+                        <h2 className="text-xl font-bold">My Experience</h2>
+                        <p className="text-muted-foreground leading-relaxed">{page.experience}</p>
+                    </div>
+                </section>
+            )}
 
             {builtProjects.length > 0 && (
                 <section id="built-by-me">

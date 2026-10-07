@@ -346,6 +346,7 @@ export const DATA = {
                 "A full online store with product listings, cart, checkout, and payment integration. Start selling online in days, not months.",
             icon: "shoppingCart",
             cta: "Build my store",
+            href: "/ecommerce-website-development",
         },
         {
             title: "Web App / MVP",
@@ -361,6 +362,7 @@ export const DATA = {
                 "A high-converting landing page for your product, campaign, or service. Fast, SEO-optimized, and designed to convert.",
             icon: "layout",
             cta: "Get a landing page",
+            href: "/landing-page-development",
         },
     ],
 } as const;

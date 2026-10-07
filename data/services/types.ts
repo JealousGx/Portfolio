@@ -16,9 +16,19 @@ export type ServicePageData = {
     description: string;
     h1: string;
     intro: string;
-    reasons: { title: string; body: string }[];
-    objection: { question: string; answer: string };
-    experience: string;
+    reasons?: { title: string; body: string }[];
+    objection?: { question: string; answer: string };
+    experience?: string;
+    details?: {
+        audience: string;
+        included: string[];
+        notIncluded: string[];
+        timeline: string;
+        tools: string;
+        /** Only set when the owner has approved a starting price */
+        startingPrice?: { amount: number; currency: string };
+        priceNote: string;
+    };
     caseStudies?: CaseStudy[];
     proofNote?: string;
     proofLinks?: { label: string; href: string }[];

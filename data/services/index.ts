@@ -1,8 +1,10 @@
 import { awsServerlessDevelopment } from "./aws-serverless-development";
 import { databaseDevelopment } from "./database-development";
+import { ecommerceWebsiteDevelopment } from "./ecommerce-website-development";
 import { fullStackDeveloper } from "./full-stack-developer";
 import { golangDevelopment } from "./golang-development";
 import { javascriptDevelopment } from "./javascript-development";
+import { landingPageDevelopment } from "./landing-page-development";
 import { mernStackDevelopment } from "./mern-stack-development";
 import { mvpDevelopment } from "./mvp-development";
 import { nestjsDevelopment } from "./nestjs-development";
@@ -31,6 +33,8 @@ export const servicePages: ServicePageData[] = [
     nestjsDevelopment,
     vueDevelopment,
     golangDevelopment,
+    landingPageDevelopment,
+    ecommerceWebsiteDevelopment,
 ];
 
 export const servicePagesBySlug: Record<string, ServicePageData> = Object.fromEntries(

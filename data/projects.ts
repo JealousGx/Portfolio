@@ -27,6 +27,8 @@ export type ProjectPageData = {
     linksNote?: string;
     service: { slug: string; anchor: string };
     secondaryService?: { slug: string; anchor: string };
+    /** Extra section for work that continued after launch, using only wording from the linked post */
+    afterLaunch?: { text: string; quote: string; href: string; label: string };
     /** Approved learning copy. Leave undefined until the owner approves it. */
     learning?: string;
     schema: {
@@ -56,7 +58,7 @@ export const projectPages: ProjectPageData[] = [
         status: "Live",
         origin: "own",
         summary:
-            "Klipse turns a video idea into a finished short video with sound, then publishes it to YouTube. It is made for content creators who want to go from an idea to a published video without editing anything by hand.",
+            "Klipse turns a video idea into a finished short video with sound, then publishes it to YouTube. You go from an idea to a published video without editing anything by hand.",
         originStatement:
             "Klipse is my own product. I designed, built and shipped it myself, and it is not client work.",
         role: "Design, development and launch, all done by me.",
@@ -93,13 +95,15 @@ export const projectPages: ProjectPageData[] = [
         ],
         links: [{ label: "Visit Klipse", href: "https://klipse.app", kind: "live" }],
         linksNote: "There is no public source code for this project.",
+        learning:
+            "I started with separate steps for script, images, voice and video encoding. Moving to one video model call that makes video and audio together removed three provider integrations. I also found that loading model weights lazily from cloud storage stalled the first job of each run for about 30 minutes, so I baked the weights into the container image.",
         service: { slug: "saas-development", anchor: "SaaS development for startups and founders" },
         schema: { type: "SoftwareApplication", applicationCategory: "MultimediaApplication" },
         lastModified: "2026-10-07",
         complete: true,
         card: {
             description:
-                "AI video creation and publishing for content creators. Turns a text idea into a short video with synchronized audio in one model call, then publishes it to YouTube.",
+                "AI video creation and publishing. Turns a text idea into a short video with synchronized audio in one model call, then publishes it to YouTube.",
             technologies: ["TanStack Start", "TypeScript", "Cloudflare", "Gemini AI", "FFmpeg", "Drizzle", "Polar"],
             image: "https://res.cloudinary.com/jealousgx/image/upload/v1782456526/24e2c61b-de34-49bb-937a-83a6af431eff.png",
         },
@@ -147,6 +151,8 @@ export const projectPages: ProjectPageData[] = [
         ],
         links: [{ label: "Visit Prospkt", href: "https://prospkt.app", kind: "live" }],
         linksNote: "There is no public source code for this project.",
+        learning:
+            "Server functions that keep working after the response is sent break on some serverless platforms. I put the long-running work on Netlify Background Functions and wrote the warning into the README so I would not repeat the mistake.",
         service: { slug: "saas-development", anchor: "SaaS development for startups and founders" },
         schema: { type: "SoftwareApplication", applicationCategory: "BusinessApplication" },
         lastModified: "2026-10-07",
@@ -196,6 +202,8 @@ export const projectPages: ProjectPageData[] = [
         ],
         links: [{ label: "Visit GigScale", href: "https://gigscale.app", kind: "live" }],
         linksNote: "There is no public source code for this project.",
+        learning:
+            "A profile score means little unless it comes with a clear next step. I built the analysis to produce a short list of prioritized fixes and a rewrite for each one, so the user never has to guess what to change first.",
         service: { slug: "saas-development", anchor: "SaaS development for startups and founders" },
         schema: { type: "SoftwareApplication", applicationCategory: "BusinessApplication" },
         lastModified: "2026-10-07",
@@ -240,6 +248,8 @@ export const projectPages: ProjectPageData[] = [
         ],
         linksNote:
             "I archived this project. The backend ran on the free tier of a paid platform, the free tier expired, and there were not enough active users. There is no live website.",
+        learning:
+            "I archived FounderSignal because the free hosting expired and I could not get enough active users. Next time I would find the first users before building more of the product, and I would pick hosting I can leave running at near zero cost.",
         service: { slug: "mvp-development", anchor: "MVP development for founders" },
         schema: { type: "SoftwareSourceCode" },
         lastModified: "2026-10-07",
@@ -295,6 +305,8 @@ export const projectPages: ProjectPageData[] = [
             { label: "Live demo (may go offline)", href: "https://askkkdoc.vercel.app", kind: "live" },
             { label: "Source code on GitHub", href: "https://github.com/JealousGx/askkkdoc", kind: "code" },
         ],
+        learning:
+            "Handling PDFs, Word files and images taught me to treat file processing as its own pipeline: store the file, turn it into text, turn the text into vectors, then answer from those vectors. Keeping each step separate made failures easy to find.",
         service: { slug: "mvp-development", anchor: "MVP development for founders" },
         schema: { type: "SoftwareApplication", applicationCategory: "BusinessApplication" },
         lastModified: "2026-10-07",
@@ -333,6 +345,14 @@ export const projectPages: ProjectPageData[] = [
         ],
         links: [],
         linksNote: "This is private client work, so there is no public website or source code.",
+        afterLaunch: {
+            text: "I built Vala from scratch and kept improving it after the first deployment. I wrote up one round of that work as a case study.",
+            quote: "Load time dropped by 75%. What used to take 8 seconds now takes about 2.",
+            href: "/blog/case-study-cutting-a-client-s-load-time-by-75",
+            label: "Case study: cutting a client's load time by 75%",
+        },
+        learning:
+            "I kept each API endpoint as a thin handler that calls core logic in a separate model file, so every new feature followed the same pattern and was easy to find.",
         service: { slug: "full-stack-developer", anchor: "full stack developer for hire" },
         secondaryService: { slug: "saas-development", anchor: "SaaS development" },
         schema: { type: "SoftwareApplication", applicationCategory: "BusinessApplication" },

@@ -214,6 +214,26 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                 </section>
             )}
 
+            {project.afterLaunch && (
+                <section aria-labelledby="after-launch">
+                    <h2 id="after-launch" className="text-xl font-bold mb-3">
+                        After the first deployment
+                    </h2>
+                    <p className="text-muted-foreground leading-relaxed">{project.afterLaunch.text}</p>
+                    <blockquote className="mt-3 border-l-2 border-border pl-4 text-muted-foreground leading-relaxed">
+                        {project.afterLaunch.quote}
+                    </blockquote>
+                    <p className="mt-3 text-sm">
+                        <Link
+                            href={project.afterLaunch.href}
+                            className="underline underline-offset-4 hover:text-foreground"
+                        >
+                            {project.afterLaunch.label}
+                        </Link>
+                    </p>
+                </section>
+            )}
+
             <section aria-labelledby="related">
                 <h2 id="related" className="text-xl font-bold mb-3">
                     Want something like this built?
