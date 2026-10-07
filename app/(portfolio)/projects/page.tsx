@@ -5,19 +5,57 @@ import Link from "next/link";
 import BlurFade from "@/components/magicui/blur-fade";
 import { ProjectCard } from "@/components/project-card";
 import { DATA } from "@/data/resume";
+import { SOCIAL_IMAGE, breadcrumbList, toJsonLd } from "@/lib/schema";
+
+const DESCRIPTION = `${DATA.projects.length} projects I've built, including my own products, side projects and client work. Browse them to see what each one does.`;
 
 export const metadata: Metadata = {
     title: "Projects",
-    description: "Everything I've built — side projects, client work, and experiments.",
+    description: DESCRIPTION,
     alternates: { canonical: `${DATA.url}/projects` },
-    openGraph: { title: "Projects | JealousGx", description: "Everything I've built — side projects, client work, and experiments.", url: `${DATA.url}/projects`, siteName: "JealousGx", type: "website" },
+    openGraph: {
+        title: "Projects | JealousGx",
+        description: DESCRIPTION,
+        url: `${DATA.url}/projects`,
+        siteName: "JealousGx",
+        type: "website",
+        images: [SOCIAL_IMAGE],
+    },
+    twitter: {
+        card: "summary_large_image",
+        title: "Projects | JealousGx",
+        description: DESCRIPTION,
+        images: [SOCIAL_IMAGE.url],
+    },
 };
+
+const jsonLd = toJsonLd([
+    breadcrumbList([
+        { name: "Home", path: "/" },
+        { name: "Projects", path: "/projects" },
+    ]),
+    {
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        itemListElement: DATA.projects.map((project, index) => ({
+            "@type": "ListItem",
+            position: index + 1,
+            name: project.title,
+            url: project.href.startsWith("/") ? `${DATA.url}${project.href}` : project.href,
+        })),
+    },
+]);
 
 const BLUR_FADE_DELAY = 0.04;
 
 export default function ProjectsPage() {
     return (
         <section id="projects" className="flex flex-col gap-y-8">
+            <script
+                type="application/ld+json"
+                suppressHydrationWarning
+                dangerouslySetInnerHTML={{ __html: jsonLd }}
+            />
             <BlurFade delay={BLUR_FADE_DELAY}>
                 <div className="flex flex-col gap-y-2">
                     <Link
