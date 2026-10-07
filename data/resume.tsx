@@ -17,6 +17,7 @@ import {
     Triangle,
 } from "lucide-react";
 
+import { projectPagesBySlug } from "@/data/projects";
 import { Docker } from "@/components/ui/svgs/docker";
 import { MongoDB } from "@/components/ui/svgs/mongodb";
 import { NextjsIconDark } from "@/components/ui/svgs/nextjsIconDark";
@@ -27,6 +28,29 @@ import { Typescript } from "@/components/ui/svgs/typescript";
 import { Wordpress } from "@/components/ui/svgs/wordpress";
 
 const BOOKING_URL = "https://cal.com/jealous/30min";
+
+function projectCard(slug: string) {
+    const p = projectPagesBySlug[slug];
+    return {
+        title: p.name,
+        href: `/projects/${p.slug}`,
+        dates: p.year,
+        active: true,
+        description: p.card.description,
+        technologies: p.card.technologies,
+        links: p.links
+            .filter((l) => l.kind !== "video")
+            .map((l) => ({
+                type: l.kind === "live" ? "Visit site" : "Code",
+                href: l.href,
+                icon: l.kind === "live" ? <Icons.globe className="size-3" /> : <Icons.github className="size-3" />,
+            })),
+        image: p.card.image,
+        video: "",
+        badges: p.origin === "client" ? ["Client Work"] : [],
+    };
+}
+
 
 export const DATA = {
     name: "Abdul Mateen Khilji",
@@ -138,198 +162,12 @@ export const DATA = {
         },
     ],
 
-    // FEATURED projects — shown on homepage (keep to 3-4)
-    featuredProjects: [
-        {
-            title: "Klipse",
-            href: "https://klipse.app",
-            dates: "2026",
-            active: true,
-            description:
-                "AI-powered video creation SaaS. Turns a text idea into a fully produced short-form video — AI script, TTS narration, generated images, FFmpeg encode — and auto-publishes to YouTube.",
-            technologies: ["TanStack Start", "TypeScript", "Cloudflare", "Gemini AI", "FFmpeg"],
-            links: [
-                {
-                    type: "Website",
-                    href: "https://klipse.app",
-                    icon: <Icons.globe className="size-3" />,
-                },
-            ],
-            image: "https://res.cloudinary.com/jealousgx/image/upload/v1782456526/24e2c61b-de34-49bb-937a-83a6af431eff.png",
-            video: "",
-        },
-        {
-            title: "Prospkt",
-            href: "https://prospkt.app",
-            dates: "2026",
-            active: true,
-            description:
-                "Lead discovery and outreach tool for freelancers. Searches Google Places for local businesses, scores them by opportunity potential, and generates AI-powered outreach scripts for 6 channels.",
-            technologies: ["TanStack Start", "TypeScript", "MySQL", "Gemini AI", "Netlify"],
-            links: [
-                {
-                    type: "Website",
-                    href: "https://prospkt.app",
-                    icon: <Icons.globe className="size-3" />,
-                },
-            ],
-            image: "https://res.cloudinary.com/jealousgx/image/upload/v1782456564/0277456d-c73d-40c8-88b9-b4ebf960c822.png",
-            video: "",
-        },
-        {
-            title: "GigScale",
-            href: "https://gigscale.app",
-            dates: "2025",
-            active: true,
-            description:
-                "AI-powered Upwork and Fiverr profile optimizer. Analyzes your profile across visibility, conversion, and trust metrics, then rewrites your headlines, bio, and gig copy for better rankings.",
-            technologies: ["Next.js", "TypeScript", "TiDB", "Drizzle", "Gemini AI"],
-            links: [
-                {
-                    type: "Website",
-                    href: "https://gigscale.app",
-                    icon: <Icons.globe className="size-3" />,
-                },
-            ],
-            image: "https://res.cloudinary.com/jealousgx/image/upload/v1782456542/82fc8c07-3ad5-4895-b180-115b238b803c.png",
-            video: "",
-        },
-        {
-            title: "FounderSignal",
-            href: "#",
-            dates: "2024",
-            active: true,
-            description:
-                "Validate ideas. Build smarter. Helps founders stop building products no one wants by validating ideas with real signals before writing a single line of code.",
-            technologies: ["Next.js", "TypeScript", "Go", "Gin", "PostgreSQL", "TailwindCSS"],
-            links: [
-                {
-                    type: "Source",
-                    href: "https://github.com/JealousGx/FounderSignal",
-                    icon: <Icons.github className="size-3" />,
-                },
-            ],
-            image: "https://raw.githubusercontent.com/JealousGx/FounderSignal/refs/heads/main/web/public/assets/og-image.png",
-            video: "",
-        },
-    ],
+    // FEATURED projects (homepage). Facts come from data/projects.ts
+    featuredProjects: ["klipse", "prospkt", "gigscale", "foundersignal"].map(projectCard),
 
-    // ALL projects — shown on /projects page
+    // ALL projects (/projects page). The first six are detail pages from data/projects.ts
     projects: [
-        {
-            title: "Klipse",
-            href: "https://klipse.app",
-            dates: "2026",
-            active: true,
-            description:
-                "AI-powered video creation SaaS. Turns a text idea into a fully produced short-form video — AI script, TTS narration, generated images, FFmpeg encode — and auto-publishes to YouTube.",
-            technologies: ["TanStack Start", "TypeScript", "Cloudflare", "Gemini AI", "FFmpeg", "Drizzle", "Polar"],
-            links: [
-                {
-                    type: "Website",
-                    href: "https://klipse.app",
-                    icon: <Icons.globe className="size-3" />,
-                },
-            ],
-            image: "https://res.cloudinary.com/jealousgx/image/upload/v1782456526/24e2c61b-de34-49bb-937a-83a6af431eff.png",
-            video: "",
-        },
-        {
-            title: "Prospkt",
-            href: "https://prospkt.app",
-            dates: "2026",
-            active: true,
-            description:
-                "Lead discovery and outreach tool for freelancers. Searches Google Places for local businesses, scores them by opportunity potential, and generates AI-powered outreach scripts for 6 channels.",
-            technologies: ["TanStack Start", "TypeScript", "MySQL", "Drizzle", "Gemini AI", "Netlify"],
-            links: [
-                {
-                    type: "Website",
-                    href: "https://prospkt.app",
-                    icon: <Icons.globe className="size-3" />,
-                },
-            ],
-            image: "https://res.cloudinary.com/jealousgx/image/upload/v1782456564/0277456d-c73d-40c8-88b9-b4ebf960c822.png",
-            video: "",
-        },
-        {
-            title: "GigScale",
-            href: "https://gigscale.app",
-            dates: "2025",
-            active: true,
-            description:
-                "AI-powered Upwork and Fiverr profile optimizer. Analyzes profiles across visibility, conversion, and trust metrics, then rewrites headlines, bio, and gig copy for better rankings.",
-            technologies: ["Next.js", "TypeScript", "TiDB", "Drizzle", "Gemini AI", "Better Auth", "Polar"],
-            links: [
-                {
-                    type: "Website",
-                    href: "https://gigscale.app",
-                    icon: <Icons.globe className="size-3" />,
-                },
-            ],
-            image: "https://res.cloudinary.com/jealousgx/image/upload/v1782456542/82fc8c07-3ad5-4895-b180-115b238b803c.png",
-            video: "",
-        },
-        {
-            title: "FounderSignal",
-            href: "#",
-            dates: "2024",
-            active: true,
-            description:
-                "Validate ideas. Build smarter. Helps founders stop building products no one wants.",
-            technologies: ["Next.js", "TypeScript", "Go", "Gin", "PostgreSQL", "TailwindCSS"],
-            links: [
-                {
-                    type: "Source",
-                    href: "https://github.com/JealousGx/FounderSignal",
-                    icon: <Icons.github className="size-3" />,
-                },
-            ],
-            image: "https://raw.githubusercontent.com/JealousGx/FounderSignal/refs/heads/main/web/public/assets/og-image.png",
-            video: "",
-        },
-        {
-            title: "AskkkDoc",
-            href: "https://askkkdoc.vercel.app",
-            dates: "2024",
-            active: true,
-            description:
-                "Empower your documents to speak volumes. Upload a document and ask questions — AI-powered answers from your own files.",
-            technologies: ["Next.js", "TypeScript", "OpenAI", "TailwindCSS"],
-            links: [
-                {
-                    type: "Website",
-                    href: "https://askkkdoc.vercel.app",
-                    icon: <Icons.globe className="size-3" />,
-                },
-                {
-                    type: "Source",
-                    href: "https://github.com/JealousGx/askkkdoc",
-                    icon: <Icons.github className="size-3" />,
-                },
-            ],
-            image: "https://res.cloudinary.com/jealousgx/image/upload/v1782456246/Screenshot_2026-06-26_at_11.43.50_AM_ziwtua.png",
-            video: "",
-        },
-        {
-            title: "Vala",
-            href: "#",
-            dates: "2023",
-            active: true,
-            description:
-                "Asset management solution built for Scalere Design. Pixel-perfect Figma implementation.",
-            technologies: ["Next.js", "TypeScript", "TailwindCSS"],
-            links: [
-                {
-                    type: "Website",
-                    href: "#",
-                    icon: <Icons.globe className="size-3" />,
-                },
-            ],
-            image: "https://res.cloudinary.com/jealousgx/image/upload/v1728193613/vala.jpg",
-            video: "",
-            badges: ["Client Work"],
-        },
+        ...["klipse", "prospkt", "gigscale", "foundersignal", "askkkdoc", "vala"].map(projectCard),
         {
             title: "Airbnb Clone",
             href: "https://jealous-airbnb-clone.vercel.app",

@@ -58,6 +58,17 @@ export default function ProjectsPage() {
                     </BlurFade>
                 ))}
             </div>
+            <BlurFade delay={BLUR_FADE_DELAY * 2 + DATA.projects.length * 0.05 + 0.05}>
+                <p className="text-sm text-muted-foreground text-center">
+                    Read the case study:{" "}
+                    <Link
+                        href="/blog/case-study-cutting-a-client-s-load-time-by-75"
+                        className="underline underline-offset-4 hover:text-foreground"
+                    >
+                        cutting a client&apos;s load time by 75%
+                    </Link>
+                </p>
+            </BlurFade>
             <BlurFade delay={BLUR_FADE_DELAY * 2 + DATA.projects.length * 0.05 + 0.1}>
                 <div className="flex justify-center pt-4">
                     <Link

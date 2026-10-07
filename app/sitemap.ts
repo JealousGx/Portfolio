@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 
 import { allPosts } from "content-collections";
 
+import { projectPages } from "@/data/projects";
 import { servicePages } from "@/data/services";
 import { DATA } from "@/data/resume";
 
@@ -19,6 +20,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
         priority: 0.8,
     }));
 
+    const projectEntries = projectPages
+        .filter((project) => project.complete)
+        .map((project) => ({
+            url: `${DATA.url}/projects/${project.slug}`,
+            lastModified: new Date(project.lastModified),
+            changeFrequency: "monthly" as const,
+            priority: 0.6,
+        }));
+
     return [
         {
             url: DATA.url,
@@ -35,6 +45,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
                 changeFrequency: "weekly",
             priority: 0.9,
         },
+        ...projectEntries,
         ...servicePagesEntries,
         ...blogPosts,
     ];

@@ -1,7 +1,7 @@
 
 "use client";
 
-import { ArrowUpRight } from "lucide-react";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
@@ -66,13 +66,19 @@ export function ProjectCard({
                 className
             )}
         >
-            <Link
-                href={href || "#"}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="absolute inset-0 z-0"
-                aria-label={title}
-            />
+            {href?.startsWith("/") ? (
+                <Link href={href} className="absolute inset-0 z-0">
+                    <span className="sr-only">{title} project details</span>
+                </Link>
+            ) : (
+                <Link
+                    href={href || "#"}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="absolute inset-0 z-0"
+                    aria-label={title}
+                />
+            )}
             <div className="relative shrink-0 w-full h-48">
                 {video ? (
                     <video
@@ -115,7 +121,11 @@ export function ProjectCard({
                         <h3 className="font-semibold">{title}</h3>
                         <time className="text-xs text-muted-foreground">{dates}</time>
                     </div>
-                    <ArrowUpRight className="h-4 w-4 text-muted-foreground" aria-hidden />
+                    {href?.startsWith("/") ? (
+                        <ArrowRight className="h-4 w-4 text-muted-foreground" aria-hidden />
+                    ) : (
+                        <ArrowUpRight className="h-4 w-4 text-muted-foreground" aria-hidden />
+                    )}
                 </div>
                 <div className="text-xs flex-1 prose max-w-full text-pretty font-sans leading-relaxed text-muted-foreground dark:prose-invert">
                     <Markdown>{description}</Markdown>

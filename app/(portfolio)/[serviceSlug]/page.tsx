@@ -11,6 +11,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 import { allPosts } from "content-collections";
 
+import { projectPages } from "@/data/projects";
 import { servicePages, servicePagesBySlug } from "@/data/services";
 import { PROCESS_STEPS } from "@/data/services/process";
 import { DATA } from "@/data/resume";
@@ -66,6 +67,9 @@ export default async function ServicePage({
         .filter((post) => post.primaryService === page.slug)
         .sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime());
     const canonical = `${DATA.url}/${page.slug}`;
+    const builtProjects = projectPages.filter(
+        (p) => p.complete && (p.service.slug === page.slug || p.secondaryService?.slug === page.slug)
+    );
     const testimonial = page.testimonial
         ? DATA.testimonials.find((t) => t.name === page.testimonial)
         : undefined;
@@ -150,6 +154,26 @@ export default async function ServicePage({
                     <p className="text-muted-foreground leading-relaxed">{page.experience}</p>
                 </div>
             </section>
+
+            {builtProjects.length > 0 && (
+                <section id="built-by-me">
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                        <span className="font-semibold text-foreground">Built by me:</span>{" "}
+                        {builtProjects.map((p, i) => (
+                            <span key={p.slug}>
+                                {i > 0 && ", "}
+                                <Link
+                                    href={`/projects/${p.slug}`}
+                                    className="underline underline-offset-4 hover:text-foreground"
+                                >
+                                    {p.name}, {p.descriptor}
+                                </Link>
+                            </span>
+                        ))}
+                        .
+                    </p>
+                </section>
+            )}
 
             {(page.caseStudies || page.proofLinks) && (
                 <section id="proof">
