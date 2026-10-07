@@ -41,7 +41,7 @@ export const DATA = {
         "If you need a site, an MVP, or a full product built right, that's what I do.",
     summary:
         "I've been building software for 3+ years now, everything from small business sites to full SaaS products with real users. I used to think being a good developer just meant writing clean code. Then I started building and launching my own products and realized the code is the easy part. The hard part is understanding what actually needs to get built, and why. That's what I bring to a project: I think about the outcome first, then the code.",
-    avatarUrl: "/me.webp",
+    avatarUrl: "/me-avatar.webp",
     skills: [
         { name: "React", icon: ReactLight, href: "/react-development" },
         { name: "Next.js", icon: NextjsIconDark, href: "/nextjs-development" },
@@ -119,7 +119,7 @@ export const DATA = {
             badges: ["Remote"],
             location: "Remote",
             title: "Software Engineer",
-            logoUrl: "/zamidev.png", // add logo to /public if available
+            logoUrl: "/zamidev-96.png", // add logo to /public if available
             start: "Nov 2022",
             end: "Present",
             description:
