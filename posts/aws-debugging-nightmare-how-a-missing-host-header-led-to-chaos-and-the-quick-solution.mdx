@@ -2,7 +2,7 @@
 title: "AWS Debugging Nightmare: How a Missing Host Header Led to Chaos and the Quick Solution"
 publishedAt: "2025-02-04"
 brief: "The Problem: Lambda@Edge's Response Size Limit Strikes. Our team was racing against the clock to fix a critical API endpoint that suddenly started failing. The culprit? Lambda@Edge's 1 MB response payload limit. Our endpoint's dataset had grown expone..."
-coverImage: "/blog-covers/aws-debugging-nightmare-how-a-missing-host-header-led-to-chaos-and-the-quick-solution.jpeg"
+coverImage: "https://cdn.hashnode.com/res/hashnode/image/stock/unsplash/XJXWbfSo2f0/upload/4ac47a09e35f375434331978c45bb58a.jpeg"
 readTimeInMinutes: 3
 summary: "A Lambda@Edge function was forwarding the wrong Host header to S3, causing CloudFront to return 403 and 404 errors despite correct bucket permissions. The fix was a three-line override in the Lambda handler to replace the API domain with the S3 bucket domain before forwarding requests."
 keyStats:

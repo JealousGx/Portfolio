@@ -2,7 +2,7 @@
 title: "The Hidden Pitfall of Next.js Fetch Revalidation: A Real-World Debugging Story"
 publishedAt: "2025-07-13"
 brief: "When building FounderSignal, a platform for startup idea validation, I ran into a subtle but critical issue with Next.js's fetch revalidation that every developer should know about. This post will walk you through the problem, the debugging journey, ..."
-coverImage: "/blog-covers/the-hidden-pitfall-of-nextjs-fetch-revalidation-a-real-world-debugging-story.jpeg"
+coverImage: "https://cdn.hashnode.com/res/hashnode/image/stock/unsplash/imgCpfIMoRw/upload/54f456e8ec13c86c0f77b1bc312e4626.jpeg"
 readTimeInMinutes: 3
 summary: "Setting Next.js fetch revalidation to very large values like 31536000 (1 year) or Infinity on Vercel causes the server to serve a broken cached response with wrong headers and no data after the first deploy. The fix is to cap revalidate at a reasonable value, typically 3600 seconds or less."
 keyStats:

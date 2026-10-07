@@ -8,11 +8,8 @@ import { allPosts } from "content-collections";
 
 import ServiceCta from "@/components/section/service-cta";
 import { DATA } from "@/data/resume";
-import coverSizesJson from "@/data/cover-sizes.json";
-import { PERSON_ID, SOCIAL_IMAGE, breadcrumbList } from "@/lib/schema";
+import { PERSON_ID, breadcrumbList } from "@/lib/schema";
 import { formatDate } from "@/lib/utils";
-
-const coverSizes: Record<string, number[]> = coverSizesJson;
 
 export const dynamicParams = false;
 
@@ -29,9 +26,6 @@ export async function generateMetadata({
     const post = allPosts.find((p) => p.slug === slug);
     if (!post) return undefined;
 
-    // Only self-hosted covers are used for social images. Others fall back to the generated image.
-    const socialImage = post.coverImage?.startsWith("/") ? post.coverImage : SOCIAL_IMAGE.url;
-
     return {
         title: post.title,
         description: post.brief,
@@ -45,13 +39,13 @@ export async function generateMetadata({
             publishedTime: post.publishedAt,
             url: `${DATA.url}/blog/${slug}`,
             authors: [DATA.name],
-            images: [{ url: socialImage }],
+            ...(post.coverImage && { images: [{ url: post.coverImage }] }),
         },
         twitter: {
             card: "summary_large_image",
             title: post.title,
             description: post.brief,
-            images: [socialImage],
+            ...(post.coverImage && { images: [post.coverImage] }),
         },
     };
 }
@@ -81,7 +75,7 @@ export default async function BlogPost({
             datePublished: post.publishedAt,
             dateModified: post.publishedAt,
             description: post.brief,
-            image: post.coverImage?.startsWith("/") ? `${DATA.url}${post.coverImage}` : `${DATA.url}${SOCIAL_IMAGE.url}`,
+            image: post.coverImage ?? `${DATA.url}/blog/${slug}/opengraph-image`,
             url: `${DATA.url}/blog/${slug}`,
             author: { "@type": "Person", "@id": PERSON_ID, name: DATA.name, url: DATA.url },
         },
@@ -130,8 +124,6 @@ export default async function BlogPost({
                     <img
                         src={post.coverImage}
                         alt={post.title}
-                        width={coverSizes[post.coverImage]?.[0]}
-                        height={coverSizes[post.coverImage]?.[1]}
                         className="w-full rounded-xl object-cover max-h-80 mb-2"
                     />
                 )}
