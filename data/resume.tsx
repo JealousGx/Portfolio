@@ -343,7 +343,7 @@ export const DATA = {
         {
             title: "E-commerce Store",
             description:
-                "A full online store with product listings, cart, checkout, and payment integration. Start selling online in days, not months.",
+                "A full online store with product listings, cart, checkout, and payment integration.",
             icon: "shoppingCart",
             cta: "Build my store",
             href: "/ecommerce-website-development",

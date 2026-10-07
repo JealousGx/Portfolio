@@ -38,7 +38,7 @@ export const landingPageDevelopment: ServicePageData = {
         { question: "How much does a landing page cost?", answer: "Landing pages start from $800. That is a starting point, not a fixed quote. Book a free scoping call for a real number." },
         { question: "How long does it take?", answer: "About 1 to 2 weeks after I have your content." },
         { question: "Do I own the page?", answer: "It's your choice. You can own and manage the page yourself, or I can manage it for you. We agree which of the two before work starts, on the scoping call." },
-        { question: "Can't I just use a page builder instead?", answer: "For some projects, honestly, yes, and I'll tell you if that's your situation. Where builders fall short is speed, limits on SEO and every page looking like the same template. If the page is a real part of how you get enquiries, a properly built one tends to pay for itself. If it's a short-lived placeholder, a builder might be all you need." },
+        { question: "Can't I just use a page builder instead?", answer: "Sometimes, yes. If you need a short-lived placeholder, a page builder can be enough, and I'll tell you if that's your case. A custom-built page gives you full control over speed, page metadata, structure and design, while some builders restrict parts of this depending on the tool and plan. If the page is a main source of enquiries, that control is worth considering." },
         { question: "What happens after launch?", answer: "Ongoing work is a monthly retainer, starting at $1,200/mo." },
         { question: "Next.js or WordPress?", answer: "Next.js, or WordPress when you want to edit the page yourself. I choose based on who will maintain it after launch." },
     ],

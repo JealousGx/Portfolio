@@ -36,6 +36,7 @@ export const ecommerceWebsiteDevelopment: ServicePageData = {
         { question: "How much does an online store cost?", answer: "Book a free scoping call for a real number." },
         { question: "Which platform do you use?", answer: "A custom build with Next.js, WordPress with WooCommerce, or Shopify." },
         { question: "Which payment methods can my store take?", answer: "Stripe, PayPal, and other providers depending on your country." },
+        { question: "Can I manage products myself?", answer: "Yes. On Shopify and WooCommerce you add and edit products in the store's own dashboard. On a custom build, I set up how you manage products and walk you through it at handover." },
         { question: "How long does it take?", answer: "It depends on catalog size and integrations. I give you a firm date after the scoping call." },
     ],
 };

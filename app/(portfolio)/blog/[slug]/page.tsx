@@ -8,8 +8,11 @@ import { allPosts } from "content-collections";
 
 import ServiceCta from "@/components/section/service-cta";
 import { DATA } from "@/data/resume";
+import coverSizesJson from "@/data/cover-sizes.json";
 import { PERSON_ID, SOCIAL_IMAGE, breadcrumbList } from "@/lib/schema";
 import { formatDate } from "@/lib/utils";
+
+const coverSizes: Record<string, number[]> = coverSizesJson;
 
 export const dynamicParams = false;
 
@@ -127,8 +130,8 @@ export default async function BlogPost({
                     <img
                         src={post.coverImage}
                         alt={post.title}
-                        width={post.coverImage.startsWith("/") ? 1500 : undefined}
-                        height={post.coverImage.startsWith("/") ? 750 : undefined}
+                        width={coverSizes[post.coverImage]?.[0]}
+                        height={coverSizes[post.coverImage]?.[1]}
                         className="w-full rounded-xl object-cover max-h-80 mb-2"
                     />
                 )}
