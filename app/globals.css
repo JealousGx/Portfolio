@@ -210,7 +210,7 @@
 
   .prose :where(th):not(:where([class~="not-prose"] *)),
   .prose :where(td):not(:where([class~="not-prose"] *)) {
-    @apply px-6 py-4 align-middle m-0 whitespace-nowrap;
+    @apply px-6 py-4 align-middle m-0;
   }
 
   .prose tr {
