@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import { mdxComponents } from "@/components/mdx-components";
 import { MDXContent } from "@content-collections/mdx/react";
 import { allPosts } from "content-collections";
 
@@ -174,7 +175,7 @@ export default async function BlogPost({
             )}
 
             <article className="prose max-w-full text-pretty font-sans leading-relaxed text-muted-foreground dark:prose-invert">
-                <MDXContent code={post.mdx} components={{ h1: (props) => <h2 {...props} /> }} />
+                <MDXContent code={post.mdx} components={{ h1: (props) => <h2 {...props} />, table: mdxComponents.table }} />
             </article>
 
             {post.faqs && post.faqs.length > 0 && (
